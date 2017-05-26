@@ -5,7 +5,7 @@
         Common,
         Acid,
         Aura,
-        BlackHole,
+        Carrier,
         Bomb,
         DamageOverTime,
         DroneControl,
@@ -31,5 +31,6 @@
         UnguidedRocket,
         IonBeam,
         AcidRocket,
+        BlackHole,
     }
 }

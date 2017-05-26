@@ -4,7 +4,7 @@
     <StartWorkingDirectory>E:\Unity\Projects\GameDatabase\Database\</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <StartWorkingDirectory>E:\Unity\Projects\GameDatabase\Database\</StartWorkingDirectory>
+    <StartWorkingDirectory>G:\EventHorizon\Main\Starship\Assets\Resources\Database\</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup>
     <PublishUrlHistory>publish\</PublishUrlHistory>

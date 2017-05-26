@@ -126,7 +126,7 @@ namespace GameDatabase
             var widePen = new Pen(Color.Black, 3);
             foreach (var barrel in _barrels)
             {
-                var x = BorderSize + (1 + barrel.X) * size / 2;
+                var x = BorderSize + (1 - barrel.X) * size / 2;
                 var y = BorderSize + (1 - barrel.Y) * size / 2;
 
                 var offset = barrel.Offset*size/2;
