@@ -12,6 +12,6 @@
   "ActivationType": 1,
   "Color": "#C0FFFF80",
   "Sound": "launch_01",
-  "EffectPrefab": "Flash",
+  "EffectPrefab": "Flicker",
   "ControlButtonIcon": "controls_boost"
 }

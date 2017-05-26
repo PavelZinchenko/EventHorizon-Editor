@@ -6,7 +6,7 @@
   "Power": 1.0,
   "Range": 20.0,
   "Size": 3.0,
-  "Cooldown": 1.0,
+  "Cooldown": 3.0,
   "ActivationType": 1,
   "Color": "#264526",
   "Sound": "hit_01",

@@ -4,6 +4,7 @@
   "ItemId": 144,
   "Faction": 8,
   "Price": 5,
+  "Hidden": true,
   "Dependencies": [
     200
   ]

@@ -9,7 +9,7 @@
     "x": 0.5
   },
   "AreaOfEffect": 4.0,
-  "Damage": 50.0,
+  "Damage": 2.5,
   "Range": 20.0,
   "Velocity": 15.0,
   "LifeTime": 5.0,

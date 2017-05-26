@@ -3,7 +3,7 @@
   "Id": 87,
   "AmmunitionClass": 22,
   "DamageType": 1,
-  "Size": 4.0,
+  "Size": 2.0,
   "Damage": 15.0,
   "Range": 16.0,
   "LifeTime": 0.05,

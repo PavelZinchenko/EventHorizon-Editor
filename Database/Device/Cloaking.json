@@ -5,7 +5,7 @@
   "EnergyConsumption": 6.0,
   "PassiveEnergyConsumption": 2.0,
   "Power": 1.0,
-  "Size": 1.0,
+  "Size": 3.0,
   "Cooldown": 5.0,
   "Lifetime": 60.0,
   "ActivationType": 1,

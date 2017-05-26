@@ -4,11 +4,11 @@
   "AmmunitionClass": 2,
   "DamageType": 2,
   "Size": 1.0,
-  "AreaOfEffect": 4.0,
+  "AreaOfEffect": 5.0,
   "Damage": 10.0,
   "LifeTime": 2.0,
   "EnergyCost": 4.0,
   "Color": "#DCFFCF3C",
   "FireSound": "flux_01",
-  "BulletPrefab": "Bomb2"
+  "BulletPrefab": "EnergyField1"
 }

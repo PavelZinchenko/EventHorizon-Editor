@@ -5,7 +5,7 @@
   "Weight": 0.2,
   "Size": 0.4,
   "AreaOfEffect": 10.0,
-  "Damage": 120.0,
+  "Damage": 6.0,
   "Range": 50.0,
   "Velocity": 6.0,
   "LifeTime": 5.0,

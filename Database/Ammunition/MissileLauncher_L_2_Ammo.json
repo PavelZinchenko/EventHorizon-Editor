@@ -8,7 +8,7 @@
   "InitialPosition": {
     "x": 0.5
   },
-  "AreaOfEffect": 10.0,
+  "AreaOfEffect": 8.0,
   "Damage": 50.0,
   "Range": 100.0,
   "Velocity": 12.0,

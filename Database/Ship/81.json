@@ -9,9 +9,10 @@
   "ModelImage": "drone8",
   "ModelScale": 0.7,
   "EnginePosition": {
-    "x": -0.4
+    "x": -0.8
   },
   "EngineColor": "#40FFB7B7",
+  "EngineSize": 0.1,
   "BuiltinDevices": [],
   "Layout": "040242515",
   "Barrels": [

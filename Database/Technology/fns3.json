@@ -4,5 +4,6 @@
   "Type": 1,
   "ItemId": 71,
   "Price": 10,
+  "Hidden": true,
   "Dependencies": []
 }

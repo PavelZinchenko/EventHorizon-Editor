@@ -3,8 +3,8 @@
   "Id": 18,
   "DeviceClass": 14,
   "Power": 5.0,
-  "Size": 5.0,
-  "Lifetime": 2.0,
+  "Size": 1.0,
+  "Lifetime": 4.0,
   "Color": "#80BE945D",
   "ObjectPrefab": "CloudEffect",
   "ControlButtonIcon": "controls_gear"

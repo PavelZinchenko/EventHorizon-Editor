@@ -4,5 +4,5 @@
   "Type": 1,
   "EnergyRechargeRate": 0.6,
   "Weight": 100.0,
-  "EnergyResistance": 36.0
+  "ThermalResistance": 36.0
 }

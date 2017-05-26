@@ -3,7 +3,7 @@
   "Id": 5,
   "EnergyConsumption": 5.0,
   "PassiveEnergyConsumption": 5.0,
-  "Range": 10.0,
+  "Range": 20.0,
   "DamageMultiplier": 1.0,
   "DefenseMultiplier": 1.0,
   "SpeedMultiplier": 1.0,

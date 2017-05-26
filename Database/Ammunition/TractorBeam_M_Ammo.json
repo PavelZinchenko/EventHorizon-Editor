@@ -7,8 +7,7 @@
   "Range": 12.0,
   "LifeTime": 0.05,
   "EnergyCost": 1.0,
-  "Color": "#C0208020",
+  "Color": "#208020",
   "FireSound": "flux_06",
-  "HitEffectPrefab": "FlashAdditive",
-  "BulletPrefab": "EnergyBeam"
+  "BulletPrefab": "TractorBeam"
 }
