@@ -1,0 +1,19 @@
+{
+  "ItemType": 1,
+  "Id": 52,
+  "Name": "$DroneFactory_S",
+  "DisplayCategory": 5,
+  "Availability": 1,
+  "ComponentStatsId": 52,
+  "Faction": 3,
+  "Level": 30,
+  "Icon": "drone_replicator1",
+  "Color": "#FFFFFF",
+  "Layout": "1111",
+  "CellType": "2",
+  "WeaponSlotType": "",
+  "PossibleModifications": [
+    1,
+    2
+  ]
+}

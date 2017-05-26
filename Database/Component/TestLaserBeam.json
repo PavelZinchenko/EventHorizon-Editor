@@ -1,0 +1,22 @@
+{
+  "ItemType": 1,
+  "Id": 85,
+  "Name": "TestLaserBeam",
+  "DisplayCategory": 1,
+  "ComponentStatsId": 1,
+  "Faction": 7,
+  "Icon": "laser2",
+  "Color": "#FFFFFF",
+  "Layout": "1",
+  "CellType": "4",
+  "WeaponId": 82,
+  "AmmunitionId": 82,
+  "WeaponSlotType": "",
+  "PossibleModifications": [
+    16,
+    5,
+    2,
+    7,
+    1
+  ]
+}

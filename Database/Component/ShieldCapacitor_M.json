@@ -1,0 +1,19 @@
+{
+  "ItemType": 1,
+  "Id": 180,
+  "Name": "$ShieldCapacitor_M",
+  "DisplayCategory": 2,
+  "Availability": 1,
+  "ComponentStatsId": 180,
+  "Faction": -1,
+  "Level": 50,
+  "Icon": "shield_capacitor2",
+  "Color": "#FFFFFF",
+  "Layout": "1111",
+  "CellType": "1",
+  "WeaponSlotType": "",
+  "PossibleModifications": [
+    1,
+    3
+  ]
+}

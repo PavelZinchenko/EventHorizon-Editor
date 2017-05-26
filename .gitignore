@@ -1,0 +1,8 @@
+**/.vs/
+**/obj/
+**/bin/Debug/*.*
+**/bin/Release/*.*
+!GameDatabase.exe
+!Cyotek.Windows.Forms.ColorPicker.dll
+!Newtonsoft.Json.dll
+

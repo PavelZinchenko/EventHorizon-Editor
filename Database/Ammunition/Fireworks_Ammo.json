@@ -1,0 +1,17 @@
+{
+  "ItemType": 4,
+  "Id": 18,
+  "AmmunitionClass": 12,
+  "DamageType": 2,
+  "Size": 0.5,
+  "AreaOfEffect": 3.0,
+  "Damage": 1.0,
+  "Range": 15.0,
+  "Velocity": 5.0,
+  "LifeTime": 1.5,
+  "IgnoresShipVelocity": true,
+  "EnergyCost": 3.0,
+  "Color": "#FFFFFF",
+  "HitSound": "hit_09",
+  "BulletPrefab": "Energy1"
+}

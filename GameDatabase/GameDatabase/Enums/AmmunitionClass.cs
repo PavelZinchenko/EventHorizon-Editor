@@ -1,0 +1,35 @@
+﻿namespace GameDatabase.Enums
+{
+    public enum AmmunitionClass
+    {
+        Common,
+        Acid,
+        Aura,
+        BlackHole,
+        Bomb,
+        DamageOverTime,
+        DroneControl,
+        Emp,
+        EmpMissile,
+        EnergyBeam,
+        EnergySiphon,
+        Explosion,
+        Fireworks,
+        FragBomb,
+        Fragment,
+        HomingImmobilizer,
+        HomingTorpedo,
+        Immobilizer,
+        LaserBeam,
+        Rocket,
+        Singularity,
+        TractorBeam,
+        VampiricRay,
+        SmallVampiricRay,
+        RepairRay,
+        PlasmaWeb,
+        UnguidedRocket,
+        IonBeam,
+        AcidRocket,
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "ItemType": 4,
+  "Id": 75,
+  "AmmunitionClass": 19,
+  "DamageType": 2,
+  "Weight": 0.1,
+  "Size": 0.3,
+  "InitialPosition": {
+    "x": 0.5
+  },
+  "AreaOfEffect": 1.5,
+  "Damage": 1.0,
+  "Range": 15.0,
+  "Velocity": 20.0,
+  "HitPoints": 1,
+  "EnergyCost": 1.0,
+  "Color": "#C3C3C3",
+  "FireSound": "shot_01",
+  "HitSound": "explosion_02",
+  "BulletPrefab": "SatelliteRocket"
+}

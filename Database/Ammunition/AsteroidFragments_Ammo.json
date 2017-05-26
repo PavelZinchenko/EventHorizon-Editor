@@ -1,0 +1,14 @@
+{
+  "ItemType": 4,
+  "Id": 5,
+  "AmmunitionClass": 14,
+  "Weight": 0.1,
+  "Size": 0.4,
+  "Range": 10.0,
+  "Velocity": 8.0,
+  "LifeTime": 1.6,
+  "Color": "#FFFFFF",
+  "HitSound": "explosion_08",
+  "HitEffectPrefab": "OrbAdditive",
+  "BulletPrefab": "Fragment"
+}

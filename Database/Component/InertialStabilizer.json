@@ -1,0 +1,18 @@
+{
+  "ItemType": 1,
+  "Id": 71,
+  "Name": "$InertialStabilizer",
+  "DisplayCategory": 6,
+  "Availability": 1,
+  "ComponentStatsId": 71,
+  "Faction": 6,
+  "Level": 90,
+  "Icon": "intertial_damper2",
+  "Color": "#FFFFFF",
+  "Layout": "1111",
+  "CellType": "2",
+  "WeaponSlotType": "",
+  "PossibleModifications": [
+    2
+  ]
+}

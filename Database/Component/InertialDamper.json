@@ -1,0 +1,18 @@
+{
+  "ItemType": 1,
+  "Id": 69,
+  "Name": "$InertialDamper",
+  "DisplayCategory": 6,
+  "Availability": 1,
+  "ComponentStatsId": 69,
+  "Faction": -1,
+  "Level": 30,
+  "Icon": "intertial_damper1",
+  "Color": "#FFFFFF",
+  "Layout": "1",
+  "CellType": "2",
+  "WeaponSlotType": "",
+  "PossibleModifications": [
+    2
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "ItemType": 4,
+  "Id": 90,
+  "DamageType": 2,
+  "Weight": 0.5,
+  "Size": 0.1,
+  "Damage": 3.0,
+  "Range": 10.0,
+  "Velocity": 10.0,
+  "LifeTime": 1.0,
+  "Color": "#FFA400",
+  "HitEffectPrefab": "OrbAdditive",
+  "BulletPrefab": "VolcanoBomb"
+}
