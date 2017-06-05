@@ -1,7 +1,8 @@
 {
   "ItemType": 4,
   "Id": 65,
-  "Weight": 0.001,
+  "Impulse": 0.001,
+  "Recoil": 0.001,
   "Size": 0.7,
   "Damage": 2.0,
   "Range": 8.0,

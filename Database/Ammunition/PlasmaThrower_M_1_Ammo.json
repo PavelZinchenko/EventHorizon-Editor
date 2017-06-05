@@ -4,7 +4,7 @@
   "AmmunitionClass": 5,
   "DamageType": 2,
   "Size": 2.0,
-  "Damage": 10.0,
+  "Damage": 30.0,
   "Range": 5.0,
   "Velocity": 5.0,
   "LifeTime": 1.0,

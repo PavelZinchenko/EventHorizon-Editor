@@ -9,8 +9,8 @@
   "Cooldown": 0.3,
   "Lifetime": 0.1,
   "ActivationType": 2,
-  "Color": "#C0FFFFFF",
-  "Sound": "shot_03",
+  "Color": "#FF8080",
+  "Sound": "shot_11",
   "EffectPrefab": "Lightning",
   "ControlButtonIcon": "controls_shield"
 }

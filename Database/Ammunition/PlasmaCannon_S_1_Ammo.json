@@ -2,6 +2,7 @@
   "ItemType": 4,
   "Id": 48,
   "DamageType": 2,
+  "Impulse": 0.01,
   "Size": 0.5,
   "Damage": 1.0,
   "Range": 6.0,

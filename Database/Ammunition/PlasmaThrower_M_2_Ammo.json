@@ -4,7 +4,7 @@
   "AmmunitionClass": 5,
   "DamageType": 2,
   "Size": 2.0,
-  "Damage": 5.0,
+  "Damage": 15.0,
   "Velocity": 0.5,
   "LifeTime": 4.0,
   "IgnoresShipVelocity": true,

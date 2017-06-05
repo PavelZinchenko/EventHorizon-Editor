@@ -3,7 +3,7 @@
   "Id": 13,
   "AmmunitionClass": 7,
   "DamageType": 1,
-  "Weight": 0.1,
+  "Impulse": 0.1,
   "Size": 0.7,
   "AreaOfEffect": 7.0,
   "Damage": 20.0,

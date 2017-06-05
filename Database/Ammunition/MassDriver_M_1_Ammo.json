@@ -1,7 +1,8 @@
 {
   "ItemType": 4,
   "Id": 35,
-  "Weight": 0.2,
+  "Impulse": 0.05,
+  "Recoil": 0.1,
   "Size": 0.4,
   "InitialPosition": {
     "x": 0.5

@@ -12,7 +12,8 @@ namespace GameDatabase.EditorModel
             ItemId = new ItemId<Ammunition>(ammunition.Id, ammunition.FileName);
             AmmunitionClass = ammunition.AmmunitionClass;
             DamageType = ammunition.DamageType;
-            Weight = new NumericValue<float>(ammunition.Weight, 0, 1000);
+            Impulse = new NumericValue<float>(ammunition.Impulse, 0, 10);
+            Recoil = new NumericValue<float>(ammunition.Recoil, 0, 10);
             Size = new NumericValue<float>(ammunition.Size, 0, 1000);
             InitialPosition = ammunition.InitialPosition;
             AreaOfEffect = new NumericValue<float>(ammunition.AreaOfEffect, 0, 1000);
@@ -39,7 +40,8 @@ namespace GameDatabase.EditorModel
         {
             serializable.AmmunitionClass = AmmunitionClass;
             serializable.DamageType = DamageType;
-            serializable.Weight = Weight.Value;
+            serializable.Impulse = Impulse.Value;
+            serializable.Recoil = Recoil.Value;
             serializable.Size = Size.Value;
             serializable.InitialPosition = InitialPosition;
             serializable.AreaOfEffect = AreaOfEffect.Value;
@@ -62,7 +64,8 @@ namespace GameDatabase.EditorModel
 
         public AmmunitionClass AmmunitionClass;
         public DamageType DamageType;
-        public NumericValue<float> Weight;
+        public NumericValue<float> Impulse;
+        public NumericValue<float> Recoil;
         public NumericValue<float> Size;
         public Vector2 InitialPosition;
         public NumericValue<float> AreaOfEffect;

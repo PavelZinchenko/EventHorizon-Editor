@@ -3,7 +3,7 @@
   "Id": 43,
   "AmmunitionClass": 19,
   "DamageType": 2,
-  "Weight": 0.2,
+  "Impulse": 0.05,
   "Size": 0.3,
   "InitialPosition": {
     "x": 0.5

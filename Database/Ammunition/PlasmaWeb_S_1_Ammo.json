@@ -4,7 +4,7 @@
   "AmmunitionClass": 25,
   "DamageType": 2,
   "Size": 0.4,
-  "AreaOfEffect": 6.0,
+  "AreaOfEffect": 3.0,
   "Damage": 6.0,
   "Range": 15.0,
   "Velocity": 15.0,

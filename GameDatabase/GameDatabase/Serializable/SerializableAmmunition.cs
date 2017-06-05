@@ -10,7 +10,8 @@ namespace GameDatabase.Serializable
     {
         public AmmunitionClass AmmunitionClass;
         public DamageType DamageType;
-        public float Weight;
+        public float Impulse;
+        public float Recoil;
         public float Size;
         public Vector2 InitialPosition;
         public float AreaOfEffect;
