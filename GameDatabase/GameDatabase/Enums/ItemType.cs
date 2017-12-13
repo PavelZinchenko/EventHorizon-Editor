@@ -15,6 +15,7 @@
         Technology = 10,
         ComponentStats = 11,
         ComponentMod = 12,
+        Skill = 13,
 
         ShipBuilderSettings = 100,
     }

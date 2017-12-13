@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using GameDatabase.EditorModel;
 using GameDatabase.Enums;
+using GameDatabase.Model;
 using GameDatabase.Serializable;
 using Newtonsoft.Json;
 
@@ -68,6 +69,13 @@ namespace GameDatabase
                 _selectedItem = new SerializableItem();
                 EditButton.Enabled = false;
 
+                if (Directory.Exists(path))
+                {
+                    ItemTypeText.Text = @"Directory";
+                    structDataView1.Data = GetDirectoryInfo(path);
+                    return;
+                }
+
                 var data = File.ReadAllText(path);
                 var name = Helpers.FileName(path);
                 var item = JsonConvert.DeserializeObject<SerializableItem>(data);
@@ -87,6 +95,47 @@ namespace GameDatabase
             {
                 //MessageBox.Show(e.Message);
             }
+        }
+
+        private struct DirectoryInfoData
+        {
+            public NumericValue<int> FilesCount;
+            public ItemType ItemTypes;
+            public NumericValue<int> LastItemId;
+        }
+
+        private DirectoryInfoData GetDirectoryInfo(string path)
+        {
+            DirectoryInfoData data = new DirectoryInfoData
+            {
+                FilesCount = new NumericValue<int>(0, 0, int.MaxValue),
+                LastItemId = new NumericValue<int>(0, 0, int.MaxValue),
+                ItemTypes = ItemType.Undefined
+            };
+
+            try
+            {
+                foreach (var file in Directory.EnumerateFiles(path, "*.json", SearchOption.TopDirectoryOnly))
+                {
+                    var text = File.ReadAllText(file);
+                    var item = JsonConvert.DeserializeObject<SerializableItem>(text);
+
+                    data.FilesCount.Value++;
+
+                    if (item.ItemType == ItemType.Undefined)
+                        continue;
+
+                    if (data.ItemTypes == ItemType.Undefined)
+                        data.ItemTypes = item.ItemType;
+                    if (item.Id > data.LastItemId.Value)
+                        data.LastItemId.Value = item.Id;
+                }
+            }
+            catch (Exception e)
+            {
+            }
+
+            return data;
         }
 
         private void DatabaseTreeView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -139,6 +188,8 @@ namespace GameDatabase
                     return _database.GetSatelliteBuild(_selectedItem.Id);
                 case ItemType.Technology:
                     return _database.GetTechnology(_selectedItem.Id);
+                case ItemType.Skill:
+                    return _database.GetSkill(_selectedItem.Id);
                 case ItemType.ComponentStats:
                     return _database.GetComponentStats(_selectedItem.Id);
                 case ItemType.ComponentMod:

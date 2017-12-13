@@ -117,6 +117,7 @@
     <Compile Include="GameDatabase\EditorModel\Ship.cs" />
     <Compile Include="GameDatabase\EditorModel\ShipBuild.cs" />
     <Compile Include="GameDatabase\EditorModel\ShipBuilderSettings.cs" />
+    <Compile Include="GameDatabase\EditorModel\Skill.cs" />
     <Compile Include="GameDatabase\EditorModel\Technology.cs" />
     <Compile Include="GameDatabase\EditorModel\Weapon.cs" />
     <Compile Include="GameDatabase\Enums\ActivationType.cs" />
@@ -132,9 +133,11 @@
     <Compile Include="GameDatabase\Enums\PlatformType.cs" />
     <Compile Include="GameDatabase\Enums\ShipCategory.cs" />
     <Compile Include="GameDatabase\Enums\SizeClass.cs" />
+    <Compile Include="GameDatabase\Enums\SkillType.cs" />
     <Compile Include="GameDatabase\Enums\TechType.cs" />
     <Compile Include="GameDatabase\Enums\WeaponClass.cs" />
     <Compile Include="GameDatabase\Enums\WeaponSlotType.cs" />
+    <Compile Include="GameDatabase\Model\HexPosition.cs" />
     <Compile Include="GameDatabase\Model\ItemId.cs" />
     <Compile Include="GameDatabase\Model\Layout.cs" />
     <Compile Include="GameDatabase\Model\NumericValue.cs" />
@@ -156,6 +159,7 @@
     <Compile Include="GameDatabase\Serializable\SerializableShip.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableShipBuild.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableShipBuilderSettings.cs" />
+    <Compile Include="GameDatabase\Serializable\SerializableSkill.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableTechnology.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableWeapon.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableInstalledComponent.cs" />

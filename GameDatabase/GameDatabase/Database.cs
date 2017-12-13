@@ -53,6 +53,8 @@ namespace GameDatabase
                 item.Value.Save(_jsonDatabase.GetSatelliteBuild(item.Key));
             foreach (var item in _technologies)
                 item.Value.Save(_jsonDatabase.GetTechnology(item.Key));
+            foreach (var item in _skills)
+                item.Value.Save(_jsonDatabase.GetSkill(item.Key));
             foreach (var item in _componentStats)
                 item.Value.Save(_jsonDatabase.GetComponentStats(item.Key));
             foreach (var item in _componentMods)
@@ -73,6 +75,7 @@ namespace GameDatabase
         public Satellite GetSatellite(int id) { return GetItem(id, _satellites, _jsonDatabase.GetSatellite(id)); }
         public SatelliteBuild GetSatelliteBuild(int id) { return GetItem(id, _satelliteBuilds, _jsonDatabase.GetSatelliteBuild(id)); }
         public Technology GetTechnology(int id) { return GetItem(id, _technologies, _jsonDatabase.GetTechnology(id)); }
+        public Skill GetSkill(int id) { return GetItem(id, _skills, _jsonDatabase.GetSkill(id)); }
         public ComponentStats GetComponentStats(int id) { return GetItem(id, _componentStats, _jsonDatabase.GetComponentStats(id)); }
         public ComponentMod GetComponentMods(int id) { return GetItem(id, _componentMods, _jsonDatabase.GetComponentMod(id)); }
         public ShipBuilderSettings GetShipBuilderSettings(int id) { return GetItem(id, _shipBuilderSettings, _jsonDatabase.GetShipBuilderSettings(id)); }
@@ -87,10 +90,12 @@ namespace GameDatabase
         public IEnumerable<ItemId<Satellite>> SatelliteIds { get { return _jsonDatabase.Satellites.Select(item => new ItemId<Satellite>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<SatelliteBuild>> SatelliteBuildIds { get { return _jsonDatabase.SatelliteBuilds.Select(item => new ItemId<SatelliteBuild>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<Technology>> TechnologyIds { get { return _jsonDatabase.Technologies.Select(item => new ItemId<Technology>(item.Id, item.FileName)); } }
+        public IEnumerable<ItemId<Skill>> SkillIds { get { return _jsonDatabase.Skills.Select(item => new ItemId<Skill>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<ComponentStats>> ComponentStatsIds { get { return _jsonDatabase.ComponentStats.Select(item => new ItemId<ComponentStats>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<ComponentMod>> ComponentModIds { get { return _jsonDatabase.ComponentMods.Select(item => new ItemId<ComponentMod>(item.Id, item.FileName)); } }
 
         public ItemId<Technology> GetTechnologyId(int id) { return new ItemId<Technology>(id, _jsonDatabase.GetTechnology(id).FileName); }
+        public ItemId<Skill> GetSkillId(int id) { return new ItemId<Skill>(id, _jsonDatabase.GetSkill(id).FileName); }
         public ItemId<ComponentMod> GetComponentModId(int id) { return new ItemId<ComponentMod>(id, _jsonDatabase.GetComponentMod(id).FileName); }
 
         private T GetItem<T,U>(int id, Dictionary<int, T> cache, U source) where T : class
@@ -115,6 +120,7 @@ namespace GameDatabase
         private readonly Dictionary<int, Satellite> _satellites = new Dictionary<int, Satellite>();
         private readonly Dictionary<int, SatelliteBuild> _satelliteBuilds = new Dictionary<int, SatelliteBuild>();
         private readonly Dictionary<int, Technology> _technologies = new Dictionary<int, Technology>();
+        private readonly Dictionary<int, Skill> _skills = new Dictionary<int, Skill>();
         private readonly Dictionary<int, ComponentStats> _componentStats = new Dictionary<int, ComponentStats>();
         private readonly Dictionary<int, ComponentMod> _componentMods = new Dictionary<int, ComponentMod>();
         private readonly Dictionary<int, ShipBuilderSettings> _shipBuilderSettings = new Dictionary<int, ShipBuilderSettings>();

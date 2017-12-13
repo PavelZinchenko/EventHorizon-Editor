@@ -14,5 +14,8 @@ namespace GameDatabase.Serializable
         public PlatformType PlatformType;
         [DefaultValue("")]
         public string WeaponClass;
+        [DefaultValue("")]
+        public string Image;
+        public float Size;
     }
 }

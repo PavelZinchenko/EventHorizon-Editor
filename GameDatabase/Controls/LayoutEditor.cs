@@ -138,7 +138,7 @@ namespace GameDatabase
                 e.Graphics.DrawLine(pen, x - length, y, x + length, y);
                 e.Graphics.DrawLine(pen, x, y - length, x, y + length);
 
-                var dir = RotationHelpers.Direction(barrel.Rotation);
+                var dir = RotationHelpers.Direction(-barrel.Rotation);
                 var p0 = new Point((int)(x + dir.x*offset), (int)(y + dir.y*offset));
                 var p1 = new Point((int)(x + dir.x*(offset + cellSize)), (int)(y + dir.y*(offset + cellSize)));
                 var d = new Point((int)(dir.x * cellSize / 2f), (int)(dir.y * cellSize / 2f));

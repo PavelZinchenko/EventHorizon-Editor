@@ -20,6 +20,7 @@ namespace GameDatabase.Serializable
         public float BaseEnergyRechargeRate;
         public float EnergyRechargeCooldown;
 
+        public float BaseShieldRechargeRate;
         public float ShieldRechargeCooldown;
 
         public float MaxVelocity;

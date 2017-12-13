@@ -21,6 +21,8 @@ namespace GameDatabase.EditorModel
             Offset = new NumericValue<float>(barrel.Offset, 0f, 1f);
             PlatformType = barrel.PlatformType;
             WeaponClass = barrel.WeaponClass;
+            ImageId = new IconId(barrel.Image);
+            Size = new NumericValue<float>(barrel.Size, 0, 1f);
         }
 
         public SerializableBarrel Serialize()
@@ -32,6 +34,8 @@ namespace GameDatabase.EditorModel
                 Offset = Offset.Value,
                 PlatformType = PlatformType,
                 WeaponClass = WeaponClass,
+                Image = ImageId.Id,
+                Size = Size.Value
             };
         }
 
@@ -40,6 +44,8 @@ namespace GameDatabase.EditorModel
         public NumericValue<float> Offset;
         public PlatformType PlatformType;
         public string WeaponClass;
+        public IconId ImageId;
+        public NumericValue<float> Size;
 
         public override string ToString()
         {

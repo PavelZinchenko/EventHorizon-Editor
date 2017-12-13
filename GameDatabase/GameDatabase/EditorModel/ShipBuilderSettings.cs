@@ -22,6 +22,7 @@ namespace GameDatabase.EditorModel
             BaseEnergyRechargeRate = new NumericValue<float>(settings.BaseEnergyRechargeRate, 0, 100);
             EnergyRechargeCooldown = new NumericValue<float>(settings.EnergyRechargeCooldown, 0, 60);
 
+            BaseShieldRechargeRate = new NumericValue<float>(settings.BaseShieldRechargeRate, 0, 100);
             ShieldRechargeCooldown = new NumericValue<float>(settings.ShieldRechargeCooldown, 0, 60);
 
             MaxVelocity = new NumericValue<float>(settings.MaxVelocity, 5, 30);
@@ -45,6 +46,7 @@ namespace GameDatabase.EditorModel
             serializable.BaseEnergyRechargeRate = BaseEnergyRechargeRate.Value;
             serializable.EnergyRechargeCooldown = EnergyRechargeCooldown.Value;
 
+            serializable.BaseShieldRechargeRate = BaseShieldRechargeRate.Value;
             serializable.ShieldRechargeCooldown = ShieldRechargeCooldown.Value;
 
             serializable.MaxVelocity = MaxVelocity.Value;
@@ -66,6 +68,7 @@ namespace GameDatabase.EditorModel
         public NumericValue<float> BaseEnergyRechargeRate;
         public NumericValue<float> EnergyRechargeCooldown;
 
+        public NumericValue<float> BaseShieldRechargeRate;
         public NumericValue<float> ShieldRechargeCooldown;
 
         public NumericValue<float> MaxVelocity;

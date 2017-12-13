@@ -70,6 +70,9 @@ namespace GameDatabase
                     case ItemType.Technology:
                         deserializedObject = DeserializeItem(data, name, _technologies);
                         break;
+                    case ItemType.Skill:
+                        deserializedObject = DeserializeItem(data, name, _skills);
+                        break;
                     case ItemType.ComponentStats:
                         deserializedObject = DeserializeItem(data, name, _componentStats);
                         break;
@@ -141,6 +144,7 @@ namespace GameDatabase
         public IEnumerable<SerializableSatelliteBuild> SatelliteBuilds { get { return _satelliteBuilds.Values; } }
         public IEnumerable<SerializableDroneBay> DroneBays { get { return _droneBays.Values; } }
         public IEnumerable<SerializableTechnology> Technologies { get { return _technologies.Values; } }
+        public IEnumerable<SerializableSkill> Skills { get { return _skills.Values; } }
         public IEnumerable<SerializableComponent> Components { get { return _components.Values; } }
         public IEnumerable<SerializableComponentStats> ComponentStats { get { return _componentStats.Values; } }
         public IEnumerable<SerializableComponentMod> ComponentMods { get { return _componentMods.Values; } }
@@ -155,6 +159,7 @@ namespace GameDatabase
         public SerializableSatelliteBuild GetSatelliteBuild(int id) { return GetItem(id, _satelliteBuilds); }
         public SerializableDroneBay GetDroneBay(int id) { return GetItem(id, _droneBays); }
         public SerializableTechnology GetTechnology(int id) { return GetItem(id, _technologies); }
+        public SerializableSkill GetSkill(int id) { return GetItem(id, _skills); }
         public SerializableComponent GetComponent(int id) { return GetItem(id, _components); }
         public SerializableComponentStats GetComponentStats(int id) { return GetItem(id, _componentStats); }
         public SerializableComponentMod GetComponentMod(int id) { return GetItem(id, _componentMods); }
@@ -218,6 +223,7 @@ namespace GameDatabase
         private readonly Dictionary<int, SerializableSatelliteBuild> _satelliteBuilds = new Dictionary<int, SerializableSatelliteBuild>();
         private readonly Dictionary<int, SerializableDroneBay> _droneBays = new Dictionary<int, SerializableDroneBay>();
         private readonly Dictionary<int, SerializableTechnology> _technologies = new Dictionary<int, SerializableTechnology>();
+        private readonly Dictionary<int, SerializableSkill> _skills = new Dictionary<int, SerializableSkill>();
         private readonly Dictionary<int, SerializableComponent> _components = new Dictionary<int, SerializableComponent>();
         private readonly Dictionary<int, SerializableComponentStats> _componentStats = new Dictionary<int, SerializableComponentStats>();
         private readonly Dictionary<int, SerializableComponentMod> _componentMods = new Dictionary<int, SerializableComponentMod>();
