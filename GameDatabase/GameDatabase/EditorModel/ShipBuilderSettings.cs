@@ -25,6 +25,8 @@ namespace GameDatabase.EditorModel
             BaseShieldRechargeRate = new NumericValue<float>(settings.BaseShieldRechargeRate, 0, 100);
             ShieldRechargeCooldown = new NumericValue<float>(settings.ShieldRechargeCooldown, 0, 60);
 
+            BaseDroneReconstructionSpeed = new NumericValue<float>(settings.BaseDroneReconstructionSpeed, 0, 1);
+
             MaxVelocity = new NumericValue<float>(settings.MaxVelocity, 5, 30);
             MaxTurnRate = new NumericValue<float>(settings.MaxTurnRate, 5, 30);
         }
@@ -49,6 +51,8 @@ namespace GameDatabase.EditorModel
             serializable.BaseShieldRechargeRate = BaseShieldRechargeRate.Value;
             serializable.ShieldRechargeCooldown = ShieldRechargeCooldown.Value;
 
+            serializable.BaseDroneReconstructionSpeed = BaseDroneReconstructionSpeed.Value;
+
             serializable.MaxVelocity = MaxVelocity.Value;
             serializable.MaxTurnRate = MaxTurnRate.Value;
         }
@@ -70,6 +74,8 @@ namespace GameDatabase.EditorModel
 
         public NumericValue<float> BaseShieldRechargeRate;
         public NumericValue<float> ShieldRechargeCooldown;
+
+        public NumericValue<float> BaseDroneReconstructionSpeed;
 
         public NumericValue<float> MaxVelocity;
         public NumericValue<float> MaxTurnRate;

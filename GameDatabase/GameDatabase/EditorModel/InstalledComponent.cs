@@ -31,6 +31,7 @@ namespace GameDatabase.EditorModel
             {
                 ComponentId = ComponentId.Id,
                 Modification = Modification,
+                Quality = Quality,
                 Locked = Locked,
                 X = X,
                 Y = Y,

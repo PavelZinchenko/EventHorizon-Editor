@@ -17,5 +17,6 @@
         SuperStealth,
         Fortification,
         ToxicWaste,
+        WormTail,
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using GameDatabase.EditorModel;
 using GameDatabase.Enums;
@@ -102,6 +104,7 @@ namespace GameDatabase
             public NumericValue<int> FilesCount;
             public ItemType ItemTypes;
             public NumericValue<int> LastItemId;
+            public NumericValue<int> FirstUnusedId;
         }
 
         private DirectoryInfoData GetDirectoryInfo(string path)
@@ -109,12 +112,14 @@ namespace GameDatabase
             DirectoryInfoData data = new DirectoryInfoData
             {
                 FilesCount = new NumericValue<int>(0, 0, int.MaxValue),
+                ItemTypes = ItemType.Undefined,
                 LastItemId = new NumericValue<int>(0, 0, int.MaxValue),
-                ItemTypes = ItemType.Undefined
+                FirstUnusedId = new NumericValue<int>(0, 0, int.MaxValue),
             };
 
             try
             {
+                var ids = new List<bool> { true };
                 foreach (var file in Directory.EnumerateFiles(path, "*.json", SearchOption.TopDirectoryOnly))
                 {
                     var text = File.ReadAllText(file);
@@ -125,11 +130,17 @@ namespace GameDatabase
                     if (item.ItemType == ItemType.Undefined)
                         continue;
 
+                    if (ids.Count <= item.Id)
+                        ids.AddRange(Enumerable.Repeat(false, item.Id - ids.Count + 1));
+                    ids[item.Id] = true;
+
                     if (data.ItemTypes == ItemType.Undefined)
                         data.ItemTypes = item.ItemType;
-                    if (item.Id > data.LastItemId.Value)
-                        data.LastItemId.Value = item.Id;
                 }
+
+                data.LastItemId.Value = ids.Count - 1;
+                var index = ids.IndexOf(false);
+                data.FirstUnusedId.Value = index > 0 ? index : ids.Count;
             }
             catch (Exception e)
             {
@@ -166,7 +177,7 @@ namespace GameDatabase
 
         private object GetItem()
         {
-            switch ((ItemType)_selectedItem.ItemType)
+            switch (_selectedItem.ItemType)
             {
                 case ItemType.Component:
                     return _database.GetComponent(_selectedItem.Id);

@@ -40,6 +40,8 @@ namespace GameDatabase.EditorModel
             EnginePower = new NumericValue<float>(stats.EnginePower, 0, 20);
             TurnRate = new NumericValue<float>(stats.TurnRate, 0, 20);
 
+            Autopilot = stats.Autopilot;
+
             DroneDamageModifier = new NumericValue<float>(stats.DroneDamageModifier, -5, 5);
             DroneRangeModifier = new NumericValue<float>(stats.DroneRangeModifier, -5, 5);
             DroneDefenseModifier = new NumericValue<float>(stats.DroneDefenseModifier, -5, 5);
@@ -133,6 +135,8 @@ namespace GameDatabase.EditorModel
 
         public NumericValue<float> EnginePower;
         public NumericValue<float> TurnRate;
+
+        public bool Autopilot;
         
         public NumericValue<float> DroneRangeModifier;
         public NumericValue<float> DroneDamageModifier;

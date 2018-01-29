@@ -36,6 +36,8 @@ namespace GameDatabase.Serializable
         public float EnginePower;
         public float TurnRate;
 
+        public bool Autopilot;
+
         public float DroneRangeModifier;
         public float DroneDamageModifier;
         public float DroneDefenseModifier;
