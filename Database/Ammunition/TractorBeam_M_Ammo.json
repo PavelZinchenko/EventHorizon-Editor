@@ -8,6 +8,6 @@
   "LifeTime": 0.05,
   "EnergyCost": 1.0,
   "Color": "#208020",
-  "FireSound": "flux_06",
+  "FireSound": "*flux_06",
   "BulletPrefab": "TractorBeam"
 }

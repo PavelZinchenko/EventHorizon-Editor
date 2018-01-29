@@ -1,0 +1,18 @@
+{
+  "ItemType": 1,
+  "Id": 218,
+  "Name": "$WormTailDevice",
+  "DisplayCategory": 6,
+  "ComponentStatsId": 3,
+  "Level": 65,
+  "Icon": "pointdefense",
+  "Color": "#3C3C3C",
+  "Layout": "1111",
+  "CellType": "2",
+  "DeviceId": 21,
+  "WeaponSlotType": "",
+  "PossibleModifications": [
+    2,
+    1
+  ]
+}

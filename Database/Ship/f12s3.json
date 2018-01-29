@@ -2,6 +2,7 @@
   "ItemType": 6,
   "Id": 69,
   "Name": "$fn_Destroyer",
+  "Faction": 12,
   "SizeClass": 2,
   "IconImage": "fns4",
   "IconScale": 1.0,

@@ -9,6 +9,6 @@
   "LifeTime": 2.0,
   "EnergyCost": 6.0,
   "Color": "#F0E5A5",
-  "FireSound": "flux_03",
+  "FireSound": "*flux_03",
   "BulletPrefab": "EnergyField2"
 }

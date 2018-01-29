@@ -11,7 +11,7 @@
   },
   "ActivationType": 1,
   "Color": "#C0FFFF80",
-  "Sound": "launch_01",
+  "Sound": "explosion_08",
   "EffectPrefab": "Flicker",
   "ControlButtonIcon": "controls_boost"
 }

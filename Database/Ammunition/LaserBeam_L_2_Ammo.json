@@ -9,7 +9,7 @@
   "LifeTime": 0.1,
   "EnergyCost": 20.0,
   "Color": "#FFA040",
-  "FireSound": "flux_01",
+  "FireSound": "*flux_01",
   "HitEffectPrefab": "FlashAdditive",
   "BulletPrefab": "Laser"
 }
