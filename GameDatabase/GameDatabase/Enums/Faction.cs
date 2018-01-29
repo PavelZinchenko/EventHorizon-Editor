@@ -16,5 +16,6 @@
         Faction9,
         Faction10,
         Faction11,
+        Faction12,
     }
 }
