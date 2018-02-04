@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using GameDatabase.EditorModel;
 using GameDatabase.Model;
@@ -93,6 +94,8 @@ namespace GameDatabase
         public IEnumerable<ItemId<Skill>> SkillIds { get { return _jsonDatabase.Skills.Select(item => new ItemId<Skill>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<ComponentStats>> ComponentStatsIds { get { return _jsonDatabase.ComponentStats.Select(item => new ItemId<ComponentStats>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<ComponentMod>> ComponentModIds { get { return _jsonDatabase.ComponentMods.Select(item => new ItemId<ComponentMod>(item.Id, item.FileName)); } }
+
+        public Image GetImage(string name) { return _jsonDatabase.GetImage(name); }
 
         public ItemId<Technology> GetTechnologyId(int id) { return new ItemId<Technology>(id, _jsonDatabase.GetTechnology(id).FileName); }
         public ItemId<Skill> GetSkillId(int id) { return new ItemId<Skill>(id, _jsonDatabase.GetSkill(id).FileName); }

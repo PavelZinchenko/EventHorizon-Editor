@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using GameDatabase.Enums;
 using GameDatabase.Serializable;
 using Newtonsoft.Json;
@@ -79,12 +81,17 @@ namespace GameDatabase
                     case ItemType.ComponentMod:
                         deserializedObject = DeserializeItem(data, name, _componentMods);
                         break;
-                    case ItemType.ShipBuilderSettings:                        deserializedObject = DeserializeItem(data, name, _shipBuilderSettings);                        break;                    default:
+                    case ItemType.ShipBuilderSettings:
+                        deserializedObject = DeserializeItem(data, name, _shipBuilderSettings);
+                        break;
+                    default:
                         throw new ArgumentOutOfRangeException();
                 }
 
                 _fileNames.Add(deserializedObject, file.Substring(path.Length));
             }
+
+            LoadImages(Path.Combine(path, _imagesFolder));
         }
 
         public void SaveData(string path)
@@ -163,7 +170,14 @@ namespace GameDatabase
         public SerializableComponent GetComponent(int id) { return GetItem(id, _components); }
         public SerializableComponentStats GetComponentStats(int id) { return GetItem(id, _componentStats); }
         public SerializableComponentMod GetComponentMod(int id) { return GetItem(id, _componentMods); }
-        public SerializableShipBuilderSettings GetShipBuilderSettings(int id) { return GetItem(id, _shipBuilderSettings); }
+        public SerializableShipBuilderSettings GetShipBuilderSettings(int id) { return GetItem(id, _shipBuilderSettings); }
+
+        public Image GetImage(string name)
+        {
+            Image image;
+            return _images.TryGetValue(name, out image) ? image : null;
+        }
+
         private void Serialize(object item, string path)
         {
             if (item == null)
@@ -212,6 +226,34 @@ namespace GameDatabase
             return item;
         }
 
+        private void LoadImages(string path)
+        {
+            var info = new DirectoryInfo(path);
+            if (!info.Exists)
+                return;
+
+            foreach (var fileInfo in info.GetFiles())
+            {
+                Image image;
+                try
+                {
+                    image = Image.FromFile(fileInfo.FullName);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    continue;
+                }
+
+                if (image.Width != image.Height)
+                    continue;
+
+                image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+
+                _images.Add(fileInfo.Name, image);
+            }
+        }
+
         private JsonSerializerSettings Settings { get; set; }
 
         private readonly Dictionary<int, SerializableWeapon> _weapons = new Dictionary<int, SerializableWeapon>();
@@ -229,6 +271,7 @@ namespace GameDatabase
         private readonly Dictionary<int, SerializableComponentMod> _componentMods = new Dictionary<int, SerializableComponentMod>();
         private readonly Dictionary<int, SerializableShipBuilderSettings> _shipBuilderSettings = new Dictionary<int, SerializableShipBuilderSettings>();
 
+        private readonly Dictionary<string, Image> _images = new Dictionary<string, Image>();
         private readonly Dictionary<object, string> _fileNames = new Dictionary<object, string>();
 
         private class BaseFirstContractResolver : DefaultContractResolver
@@ -246,6 +289,8 @@ namespace GameDatabase
                 return properties;
             }
         }
+
+        private const string _imagesFolder = "Images";
     }
 
     public static class TypeExtensions

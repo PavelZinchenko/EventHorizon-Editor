@@ -1,0 +1,29 @@
+{
+  "ItemType": 6,
+  "Id": 100,
+  "ShipCategory": 3,
+  "Name": "Space Invader",
+  "SizeClass": 1,
+  "IconImage": "test.png",
+  "IconScale": 0.5,
+  "ModelImage": "test.png",
+  "ModelScale": 1.0,
+  "EnginePosition": {
+    "x": -0.7
+  },
+  "EngineColor": "#40FFFFFF",
+  "EngineSize": 0.3,
+  "EnergyResistance": 1.0,
+  "KineticResistance": 1.0,
+  "HeatResistance": 1.0,
+  "Regeneration": true,
+  "BuiltinDevices": [],
+  "Layout": "000004400000000224422000000224422000000224422000000222222000000222222000000001100000000001100000011111111110011111111110000055550000000055550000",
+  "Barrels": [
+    {
+      "Position": {
+        "x": 0.9
+      }
+    }
+  ]
+}

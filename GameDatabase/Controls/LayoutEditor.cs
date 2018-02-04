@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Conrols;
+using GameDatabase.Enums;
 
 namespace GameDatabase
 {
@@ -22,6 +23,9 @@ namespace GameDatabase
 
         [Description("Layout"), Category("Margins")]
         public int BorderSize { get; set; }
+
+        [Description("Image"), Category("Data")]
+        public Image Image { get; set; }
 
         [Description("Layout"), Category("Data")]
         public string Layout
@@ -95,14 +99,23 @@ namespace GameDatabase
             var size = Math.Min(Width, Height) - BorderSize*2 - 1;
             var cellSize = size/layoutSize + (size % layoutSize > 0 ? 1 : 0);
 
+            e.Graphics.FillRectangle(GetBrush(_categories[(char)CellType.Empty]), new Rectangle(BorderSize, BorderSize, size, size));
+
+            if (Image != null)
+                e.Graphics.DrawImage(Image, new Rectangle(BorderSize, BorderSize, size, size));
+
             for (var i = 0; i < layoutSize; ++i)
             {
                 for (var j = 0; j < layoutSize; ++j)
                 {
-                    var x = BorderSize + j*size/layoutSize;
-                    var y = BorderSize + i*size/layoutSize;
+                    var x = BorderSize + j * size / layoutSize;
+                    var y = BorderSize + i * size / layoutSize;
 
-                    var cell = _layout[i*layoutSize + j];
+                    var cell = _layout[i * layoutSize + j];
+
+                    if (cell == (char) CellType.Empty)
+                        continue;
+
                     Color color;
                     if (!_categories.TryGetValue(cell, out color))
                         color = Color.Black;

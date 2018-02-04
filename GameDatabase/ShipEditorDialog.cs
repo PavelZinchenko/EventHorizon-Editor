@@ -31,24 +31,28 @@ namespace GameDatabase
             structDataEditor1.Data = _item;
             layoutEditor1.Colors.Clear();
             layoutEditor1.Colors.Add((char)CellType.Empty, Color.LightGray);
-            layoutEditor1.Colors.Add((char)CellType.Engine, Color.Yellow);
-            layoutEditor1.Colors.Add((char)CellType.Weapon, Color.Red);
-            layoutEditor1.Colors.Add((char)CellType.Inner, Color.Lime);
-            layoutEditor1.Colors.Add((char)CellType.InnerOuter, Color.Aqua);
-            layoutEditor1.Colors.Add((char)CellType.Outer, Color.RoyalBlue);
+            layoutEditor1.Colors.Add((char)CellType.Engine, Color.FromArgb(192, 255,255,0));
+            layoutEditor1.Colors.Add((char)CellType.Weapon, Color.FromArgb(192, 255, 0, 0));
+            layoutEditor1.Colors.Add((char)CellType.Inner, Color.FromArgb(192, 0, 255, 0));
+            layoutEditor1.Colors.Add((char)CellType.InnerOuter, Color.FromArgb(192, 0, 255, 255));
+            layoutEditor1.Colors.Add((char)CellType.Outer, Color.FromArgb(192, 0, 128, 255));
 
             barrelCollection.Database = _database;
 
             Layout layout;
             if (_item is Ship)
             {
-                layout = ((Ship)_item).Layout;
-                barrelCollection.Data = ((Ship) _item).Barrels;
+                var ship = (Ship)_item;
+                layout = ship.Layout;
+                barrelCollection.Data = ship.Barrels;
+                layoutEditor1.Image = _database.GetImage(ship.ModelImage);
             }
             else if (_item is Satellite)
             {
-                layout = ((Satellite) _item).Layout;
-                barrelCollection.Data = ((Satellite)_item).Barrels;
+                var satellite = (Satellite)_item;
+                layout = satellite.Layout;
+                barrelCollection.Data = satellite.Barrels;
+                layoutEditor1.Image = _database.GetImage(satellite.ModelImage);
             }
             else
                 throw new ArgumentException();
