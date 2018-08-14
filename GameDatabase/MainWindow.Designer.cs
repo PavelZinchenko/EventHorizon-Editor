@@ -30,7 +30,6 @@
         {
             this.DatabaseTreeView = new System.Windows.Forms.TreeView();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.structDataView1 = new GameDatabase.Controls.StructDataView();
             this.EditButton = new System.Windows.Forms.Button();
             this.ItemTypeText = new System.Windows.Forms.Label();
             this.ItemTypeLabel = new System.Windows.Forms.Label();
@@ -40,6 +39,9 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.createSignatureMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.structDataView1 = new GameDatabase.Controls.StructDataView();
+            this.createModMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -82,22 +84,6 @@
             this.splitContainer.SplitterDistance = 393;
             this.splitContainer.SplitterWidth = 6;
             this.splitContainer.TabIndex = 1;
-            // 
-            // structDataView1
-            // 
-            this.structDataView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.structDataView1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.structDataView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.structDataView1.Data = null;
-            this.structDataView1.Database = null;
-            this.structDataView1.ForeColor = System.Drawing.Color.DimGray;
-            this.structDataView1.Location = new System.Drawing.Point(4, 41);
-            this.structDataView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.structDataView1.Name = "structDataView1";
-            this.structDataView1.Size = new System.Drawing.Size(389, 483);
-            this.structDataView1.TabIndex = 5;
             // 
             // EditButton
             // 
@@ -151,7 +137,9 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadMenuItem,
             this.saveToolStripMenuItem,
-            this.saveAsMenuItem});
+            this.saveAsMenuItem,
+            this.createSignatureMenuItem,
+            this.createModMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -159,23 +147,53 @@
             // loadMenuItem
             // 
             this.loadMenuItem.Name = "loadMenuItem";
-            this.loadMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.loadMenuItem.Size = new System.Drawing.Size(182, 22);
             this.loadMenuItem.Text = "Load";
             this.loadMenuItem.Click += new System.EventHandler(this.loadMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsMenuItem
             // 
             this.saveAsMenuItem.Name = "saveAsMenuItem";
-            this.saveAsMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.saveAsMenuItem.Size = new System.Drawing.Size(182, 22);
             this.saveAsMenuItem.Text = "Save As...";
             this.saveAsMenuItem.Click += new System.EventHandler(this.saveAsMenuItem_Click);
+            // 
+            // createSignatureMenuItem
+            // 
+            this.createSignatureMenuItem.Name = "createSignatureMenuItem";
+            this.createSignatureMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.createSignatureMenuItem.Text = "Create Signature File";
+            this.createSignatureMenuItem.Click += new System.EventHandler(this.createSignatureMenuItem_Click);
+            // 
+            // structDataView1
+            // 
+            this.structDataView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.structDataView1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.structDataView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.structDataView1.Data = null;
+            this.structDataView1.Database = null;
+            this.structDataView1.ForeColor = System.Drawing.Color.DimGray;
+            this.structDataView1.Location = new System.Drawing.Point(4, 41);
+            this.structDataView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.structDataView1.Name = "structDataView1";
+            this.structDataView1.Size = new System.Drawing.Size(387, 483);
+            this.structDataView1.TabIndex = 5;
+            // 
+            // createModMenuItem
+            // 
+            this.createModMenuItem.Name = "createModMenuItem";
+            this.createModMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.createModMenuItem.Text = "Create Mod";
+            this.createModMenuItem.Click += new System.EventHandler(this.createModMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -218,6 +236,8 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private Controls.StructDataView structDataView1;
+        private System.Windows.Forms.ToolStripMenuItem createSignatureMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createModMenuItem;
     }
 }
 

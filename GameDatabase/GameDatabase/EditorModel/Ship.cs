@@ -13,7 +13,7 @@ namespace GameDatabase.EditorModel
             ItemId = new ItemId<Ship>(ship.Id, ship.FileName);
             ShipCategory = ship.ShipCategory;
             Name = ship.Name;
-            Faction = ship.Faction;
+            FactionId = database.GetFaction(ship.Faction).Id;
             SizeClass = ship.SizeClass;
             IconImage = ship.IconImage;
             IconScale = new NumericValue<float>(ship.IconScale, 0.1f, 100);
@@ -37,7 +37,7 @@ namespace GameDatabase.EditorModel
         {
             serializable.ShipCategory = ShipCategory;
             serializable.Name = Name;
-            serializable.Faction = Faction;
+            serializable.Faction = FactionId.Id;
             serializable.SizeClass = SizeClass;
             serializable.IconImage = IconImage;
             serializable.IconScale = IconScale.Value;
@@ -62,7 +62,7 @@ namespace GameDatabase.EditorModel
         public ShipCategory ShipCategory;
 
         public string Name;
-        public Faction Faction;
+        public ItemId<Faction> FactionId;
         public SizeClass SizeClass;
         public string IconImage;
         public NumericValue<float> IconScale;

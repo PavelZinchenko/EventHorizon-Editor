@@ -11,7 +11,7 @@ namespace GameDatabase.Serializable
         public ShipCategory ShipCategory;
 
         public string Name;
-        public Faction Faction;
+        public int Faction;
         public SizeClass SizeClass;
         [DefaultValue("")]
         public string IconImage;

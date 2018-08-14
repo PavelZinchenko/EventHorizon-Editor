@@ -9,7 +9,7 @@ namespace GameDatabase.Serializable
         public int ShipId;
         public bool NotAvailableInGame;
         public DifficultyClass DifficultyClass;
-        public Faction BuildFaction;
+        public int BuildFaction;
         public SerializableInstalledComponent[] Components;
     }
 }

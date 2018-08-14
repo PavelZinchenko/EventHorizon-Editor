@@ -26,9 +26,10 @@ namespace GameDatabase
                 _satellites = _jsonDatabase.Satellites.ToDictionary(item => item.Id, item => new Satellite(item, this));
                 _satelliteBuilds = _jsonDatabase.SatelliteBuilds.ToDictionary(item => item.Id, item => new SatelliteBuild(item, this));
                 _technologies = _jsonDatabase.Technologies.ToDictionary(item => item.Id, item => new Technology(item, this));
+                _skills = _jsonDatabase.Skills.ToDictionary(item => item.Id, item => new Skill(item, this));
                 _componentStats = _jsonDatabase.ComponentStats.ToDictionary(item => item.Id, item => new ComponentStats(item, this));
                 _componentMods = _jsonDatabase.ComponentMods.ToDictionary(item => item.Id, item => new ComponentMod(item, this));
-                _shipBuilderSettings = _jsonDatabase.ShipBuilderSettings.ToDictionary(item => item.Id, item => new ShipBuilderSettings(item, this));
+                _factions = _jsonDatabase.Factions.ToDictionary(item => item.Id, item => new Faction(item, this));
             }
         }
 
@@ -60,11 +61,17 @@ namespace GameDatabase
                 item.Value.Save(_jsonDatabase.GetComponentStats(item.Key));
             foreach (var item in _componentMods)
                 item.Value.Save(_jsonDatabase.GetComponentMod(item.Key));
-            foreach (var item in _shipBuilderSettings)
-                item.Value.Save(_jsonDatabase.GetShipBuilderSettings(item.Key));
+            foreach (var item in _factions)
+                item.Value.Save(_jsonDatabase.GetFaction(item.Key));
+
+            ShipSettings.Save(_jsonDatabase.ShipSettings);
+            GalaxySettings.Save(_jsonDatabase.GalaxySettings);
 
             _jsonDatabase.SaveData(path);
         }
+
+        public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = new ShipSettings(_jsonDatabase.ShipSettings, this));
+        public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = new GalaxySettings(_jsonDatabase.GalaxySettings, this));
 
         public Component GetComponent(int id) { return GetItem(id, _components, _jsonDatabase.GetComponent(id)); }
         public Device GetDevice(int id) { return GetItem(id, _devices, _jsonDatabase.GetDevice(id)); }
@@ -79,7 +86,7 @@ namespace GameDatabase
         public Skill GetSkill(int id) { return GetItem(id, _skills, _jsonDatabase.GetSkill(id)); }
         public ComponentStats GetComponentStats(int id) { return GetItem(id, _componentStats, _jsonDatabase.GetComponentStats(id)); }
         public ComponentMod GetComponentMods(int id) { return GetItem(id, _componentMods, _jsonDatabase.GetComponentMod(id)); }
-        public ShipBuilderSettings GetShipBuilderSettings(int id) { return GetItem(id, _shipBuilderSettings, _jsonDatabase.GetShipBuilderSettings(id)); }
+        public Faction GetFaction(int id) { return id == Faction.Neutral.Id.Id ? Faction.Neutral : GetItem(id, _factions, _jsonDatabase.GetFaction(id)) ?? Faction.Undefined; }
 
         public IEnumerable<ItemId<Component>> ComponentIds { get { return _jsonDatabase.Components.Select(item => new ItemId<Component>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<Device>> DeviceIds { get { return _jsonDatabase.Devices.Select(item => new ItemId<Device>(item.Id, item.FileName)); } }
@@ -94,8 +101,10 @@ namespace GameDatabase
         public IEnumerable<ItemId<Skill>> SkillIds { get { return _jsonDatabase.Skills.Select(item => new ItemId<Skill>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<ComponentStats>> ComponentStatsIds { get { return _jsonDatabase.ComponentStats.Select(item => new ItemId<ComponentStats>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<ComponentMod>> ComponentModIds { get { return _jsonDatabase.ComponentMods.Select(item => new ItemId<ComponentMod>(item.Id, item.FileName)); } }
+        public IEnumerable<ItemId<Faction>> Factions { get { return new[] { Faction.Undefined.Id, Faction.Neutral.Id }.Concat(_jsonDatabase.Factions.Select(item => new ItemId<Faction>(item.Id, item.FileName))); } }
 
         public Image GetImage(string name) { return _jsonDatabase.GetImage(name); }
+        public string GetLocalization(string language) { return _jsonDatabase.GetLocalization(language); }
 
         public ItemId<Technology> GetTechnologyId(int id) { return new ItemId<Technology>(id, _jsonDatabase.GetTechnology(id).FileName); }
         public ItemId<Skill> GetSkillId(int id) { return new ItemId<Skill>(id, _jsonDatabase.GetSkill(id).FileName); }
@@ -113,6 +122,9 @@ namespace GameDatabase
             return item;
         }
 
+        private ShipSettings _shipSettings;
+        private GalaxySettings _galaxySettings;
+
         private readonly Dictionary<int, Component> _components = new Dictionary<int, Component>();
         private readonly Dictionary<int, Device> _devices = new Dictionary<int, Device>();
         private readonly Dictionary<int, Weapon> _weapons = new Dictionary<int, Weapon>();
@@ -126,7 +138,7 @@ namespace GameDatabase
         private readonly Dictionary<int, Skill> _skills = new Dictionary<int, Skill>();
         private readonly Dictionary<int, ComponentStats> _componentStats = new Dictionary<int, ComponentStats>();
         private readonly Dictionary<int, ComponentMod> _componentMods = new Dictionary<int, ComponentMod>();
-        private readonly Dictionary<int, ShipBuilderSettings> _shipBuilderSettings = new Dictionary<int, ShipBuilderSettings>();
+        private readonly Dictionary<int, Faction> _factions = new Dictionary<int, Faction>();
 
         private readonly JsonDatabase _jsonDatabase;
     }

@@ -9,7 +9,7 @@ namespace GameDatabase.Serializable
         public TechType Type;
         public int ItemId;
 
-        public Faction Faction;
+        public int Faction;
         public int Price;
         public bool Hidden;
 

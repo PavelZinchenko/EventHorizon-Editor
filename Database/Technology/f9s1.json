@@ -5,5 +5,7 @@
   "ItemId": 59,
   "Faction": 11,
   "Price": 5,
-  "Dependencies": []
+  "Dependencies": [
+    43
+  ]
 }

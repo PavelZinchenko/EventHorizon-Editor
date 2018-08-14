@@ -29,66 +29,86 @@ namespace GameDatabase
         {
             Clear();
 
-            foreach (var file in Directory.EnumerateFiles(path, "*.json", SearchOption.AllDirectories))
+            var info = new DirectoryInfo(path);
+            foreach (var fileInfo in info.GetFiles("*", SearchOption.AllDirectories))
             {
-                var data = File.ReadAllText(file);
-                var item = JsonConvert.DeserializeObject<SerializableItem>(data);
-                var type = item.ItemType;
-
-                var name = Helpers.FileName(file);
-                object deserializedObject;
-
-                switch (type)
+                var file = fileInfo.FullName;
+                if (fileInfo.Extension == ".png" || fileInfo.Extension == ".jpg" || fileInfo.Extension == ".jpeg")
                 {
-                    case ItemType.Undefined:
-                        continue;
-                    case ItemType.Component:
-                        deserializedObject = DeserializeItem(data, name, _components);
-                        break;
-                    case ItemType.Device:
-                        deserializedObject = DeserializeItem(data, name, _devices);
-                        break;
-                    case ItemType.Weapon:
-                        deserializedObject = DeserializeItem(data, name, _weapons);
-                        break;
-                    case ItemType.Ammunition:
-                        deserializedObject = DeserializeItem(data, name, _ammunitions);
-                        break;
-                    case ItemType.DroneBay:
-                        deserializedObject = DeserializeItem(data, name, _droneBays);
-                        break;
-                    case ItemType.Ship:
-                        deserializedObject = DeserializeItem(data, name, _ships);
-                        break;
-                    case ItemType.Satellite:
-                        deserializedObject = DeserializeItem(data, name, _satellites);
-                        break;
-                    case ItemType.ShipBuild:
-                        deserializedObject = DeserializeItem(data, name, _shipBuilds);
-                        break;
-                    case ItemType.SatelliteBuild:
-                        deserializedObject = DeserializeItem(data, name, _satelliteBuilds);
-                        break;
-                    case ItemType.Technology:
-                        deserializedObject = DeserializeItem(data, name, _technologies);
-                        break;
-                    case ItemType.Skill:
-                        deserializedObject = DeserializeItem(data, name, _skills);
-                        break;
-                    case ItemType.ComponentStats:
-                        deserializedObject = DeserializeItem(data, name, _componentStats);
-                        break;
-                    case ItemType.ComponentMod:
-                        deserializedObject = DeserializeItem(data, name, _componentMods);
-                        break;
-                    case ItemType.ShipBuilderSettings:
-                        deserializedObject = DeserializeItem(data, name, _shipBuilderSettings);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    LoadImage(fileInfo);
                 }
+                else if (fileInfo.Extension == ".xml")
+                {
+                    var xmlData = File.ReadAllText(file);
+                    _localizations.Add(Path.GetFileNameWithoutExtension(file), xmlData);
+                }
+                else if (fileInfo.Extension == ".json")
+                {
+                    var data = File.ReadAllText(file);
+                    var item = JsonConvert.DeserializeObject<SerializableItem>(data);
+                    var type = item.ItemType;
 
-                _fileNames.Add(deserializedObject, file.Substring(path.Length));
+                    var name = Helpers.FileName(file);
+                    object deserializedObject;
+
+                    switch (type)
+                    {
+                        case ItemType.Undefined:
+                            continue;
+                        case ItemType.Component:
+                            deserializedObject = DeserializeItem(data, name, _components);
+                            break;
+                        case ItemType.Device:
+                            deserializedObject = DeserializeItem(data, name, _devices);
+                            break;
+                        case ItemType.Weapon:
+                            deserializedObject = DeserializeItem(data, name, _weapons);
+                            break;
+                        case ItemType.Ammunition:
+                            deserializedObject = DeserializeItem(data, name, _ammunitions);
+                            break;
+                        case ItemType.DroneBay:
+                            deserializedObject = DeserializeItem(data, name, _droneBays);
+                            break;
+                        case ItemType.Ship:
+                            deserializedObject = DeserializeItem(data, name, _ships);
+                            break;
+                        case ItemType.Satellite:
+                            deserializedObject = DeserializeItem(data, name, _satellites);
+                            break;
+                        case ItemType.ShipBuild:
+                            deserializedObject = DeserializeItem(data, name, _shipBuilds);
+                            break;
+                        case ItemType.SatelliteBuild:
+                            deserializedObject = DeserializeItem(data, name, _satelliteBuilds);
+                            break;
+                        case ItemType.Technology:
+                            deserializedObject = DeserializeItem(data, name, _technologies);
+                            break;
+                        case ItemType.Skill:
+                            deserializedObject = DeserializeItem(data, name, _skills);
+                            break;
+                        case ItemType.ComponentStats:
+                            deserializedObject = DeserializeItem(data, name, _componentStats);
+                            break;
+                        case ItemType.ComponentMod:
+                            deserializedObject = DeserializeItem(data, name, _componentMods);
+                            break;
+                        case ItemType.Faction:
+                            deserializedObject = DeserializeItem(data, name, _factions);
+                            break;
+                        case ItemType.ShipSettings:
+                            deserializedObject = ShipSettings = DeserializeItem<SerializableShipSettings>(data, name);
+                            break;
+                        case ItemType.GalaxySettings:
+                            deserializedObject = GalaxySettings = DeserializeItem<SerializableGalaxySettings>(data, name);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+
+                    _fileNames.Add(deserializedObject, file.Substring(path.Length));
+                }
             }
 
             LoadImages(Path.Combine(path, _imagesFolder));
@@ -114,14 +134,19 @@ namespace GameDatabase
                 Serialize(item, path);
             foreach (var item in _technologies.Values)
                 Serialize(item, path);
+            foreach (var item in _skills.Values)
+                Serialize(item, path);
             foreach (var item in _components.Values)
                 Serialize(item, path);
             foreach (var item in _componentStats.Values)
                 Serialize(item, path);
             foreach (var item in _componentMods.Values)
                 Serialize(item, path);
-            foreach (var item in _shipBuilderSettings.Values)
+            foreach (var item in _factions.Values)
                 Serialize(item, path);
+
+            Serialize(ShipSettings, path);
+            Serialize(GalaxySettings, path);
         }
 
         public void Clear()
@@ -138,9 +163,17 @@ namespace GameDatabase
             _components.Clear();
             _componentStats.Clear();
             _componentMods.Clear();
-            _shipBuilderSettings.Clear();
+
             _fileNames.Clear();
+            _images.Clear();
+            _localizations.Clear();
+
+            ShipSettings = new SerializableShipSettings();
+            GalaxySettings = new SerializableGalaxySettings();
         }
+
+        public SerializableShipSettings ShipSettings { get; private set; }
+        public SerializableGalaxySettings GalaxySettings { get; private set; }
 
         public IEnumerable<SerializableWeapon> Weapons { get { return _weapons.Values; } }
         public IEnumerable<SerializableAmmunition> Ammunitions { get { return _ammunitions.Values; } }
@@ -155,7 +188,7 @@ namespace GameDatabase
         public IEnumerable<SerializableComponent> Components { get { return _components.Values; } }
         public IEnumerable<SerializableComponentStats> ComponentStats { get { return _componentStats.Values; } }
         public IEnumerable<SerializableComponentMod> ComponentMods { get { return _componentMods.Values; } }
-        public IEnumerable<SerializableShipBuilderSettings> ShipBuilderSettings { get { return _shipBuilderSettings.Values; } }
+        public IEnumerable<SerializableFaction> Factions { get { return _factions.Values; } }
 
         public SerializableWeapon GetWeapon(int id) { return GetItem(id, _weapons); }
         public SerializableAmmunition GetAmmunition(int id) { return GetItem(id, _ammunitions); }
@@ -170,12 +203,18 @@ namespace GameDatabase
         public SerializableComponent GetComponent(int id) { return GetItem(id, _components); }
         public SerializableComponentStats GetComponentStats(int id) { return GetItem(id, _componentStats); }
         public SerializableComponentMod GetComponentMod(int id) { return GetItem(id, _componentMods); }
-        public SerializableShipBuilderSettings GetShipBuilderSettings(int id) { return GetItem(id, _shipBuilderSettings); }
+        public SerializableFaction GetFaction(int id) { return GetItem(id, _factions); }
 
         public Image GetImage(string name)
         {
             Image image;
             return _images.TryGetValue(name, out image) ? image : null;
+        }
+
+        public string GetLocalization(string language)
+        {
+            string data;
+            return _localizations.TryGetValue(language, out data) ? data : null;
         }
 
         private void Serialize(object item, string path)
@@ -254,6 +293,27 @@ namespace GameDatabase
             }
         }
 
+        private void LoadImage(FileInfo file)
+        {
+            Image image;
+            try
+            {
+                image = Image.FromFile(file.FullName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return;
+            }
+
+            if (image.Width != image.Height)
+                return;
+
+            image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            _images.Add(file.Name, image);
+        }
+
+
         private JsonSerializerSettings Settings { get; set; }
 
         private readonly Dictionary<int, SerializableWeapon> _weapons = new Dictionary<int, SerializableWeapon>();
@@ -269,9 +329,10 @@ namespace GameDatabase
         private readonly Dictionary<int, SerializableComponent> _components = new Dictionary<int, SerializableComponent>();
         private readonly Dictionary<int, SerializableComponentStats> _componentStats = new Dictionary<int, SerializableComponentStats>();
         private readonly Dictionary<int, SerializableComponentMod> _componentMods = new Dictionary<int, SerializableComponentMod>();
-        private readonly Dictionary<int, SerializableShipBuilderSettings> _shipBuilderSettings = new Dictionary<int, SerializableShipBuilderSettings>();
+        private readonly Dictionary<int, SerializableFaction> _factions = new Dictionary<int, SerializableFaction>();
 
         private readonly Dictionary<string, Image> _images = new Dictionary<string, Image>();
+        private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<object, string> _fileNames = new Dictionary<object, string>();
 
         private class BaseFirstContractResolver : DefaultContractResolver

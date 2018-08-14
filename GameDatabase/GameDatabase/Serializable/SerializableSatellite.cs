@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using GameDatabase.Enums;
 
 namespace GameDatabase.Serializable
 {
@@ -9,6 +10,7 @@ namespace GameDatabase.Serializable
         public string Name;
         public string ModelImage;
         public float ModelScale;
+        public SizeClass SizeClass;
 
         [DefaultValue("")]
         public string Layout;

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using GameDatabase.Enums;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -15,6 +16,7 @@ namespace GameDatabase.EditorModel
             ModelScale = new NumericValue<float>(satellite.ModelScale, 0.1f, 100);
             Layout = new Layout(satellite.Layout);
             Barrels = satellite.Barrels.Select(item => new Barrel(item)).ToArray();
+            SizeClass = satellite.SizeClass;
         }
 
         public void Save(SerializableSatellite serializable)
@@ -24,6 +26,7 @@ namespace GameDatabase.EditorModel
             serializable.ModelScale = ModelScale.Value;
             serializable.Layout = Layout.Data;
             serializable.Barrels = Barrels.Select(item => item.Serialize()).ToArray();
+            serializable.SizeClass = SizeClass;
         }
 
         public ItemId<Satellite> ItemId;
@@ -31,6 +34,7 @@ namespace GameDatabase.EditorModel
         public string Name;
         public string ModelImage;
         public NumericValue<float> ModelScale;
+        public SizeClass SizeClass;
 
         public Layout Layout;
         public Barrel[] Barrels;

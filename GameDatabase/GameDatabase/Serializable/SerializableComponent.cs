@@ -17,7 +17,7 @@ namespace GameDatabase.Serializable
 
         public int ComponentStatsId;
 
-        public Faction Faction;
+        public int Faction;
         public int Level;
 
         [DefaultValue("")]

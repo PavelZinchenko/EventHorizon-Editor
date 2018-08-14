@@ -12,7 +12,7 @@ namespace GameDatabase.EditorModel
             ItemId = new ItemId<Technology>(technology.Id, technology.FileName);
 
             Type = technology.Type;
-            Faction = technology.Faction;
+            FactionId = database.GetFaction(technology.Faction).Id;
             Price = new NumericValue<int>(technology.Price, 0, 1000);
             Hidden = technology.Hidden;
             Dependencies = technology.Dependencies.Select(item => new TechWrapper { Technology = database.GetTechnologyId(item) }).ToArray();
@@ -29,7 +29,7 @@ namespace GameDatabase.EditorModel
         {
             serializable.Type = Type;
             serializable.ItemId = LinkedItem.Id;
-            serializable.Faction = Faction;
+            serializable.Faction = FactionId.Id;
             serializable.Price = Price.Value;
             serializable.Hidden = Hidden;
             serializable.Dependencies = Dependencies.Select(item => item.Technology.Id).ToArray();
@@ -40,7 +40,7 @@ namespace GameDatabase.EditorModel
         public TechType Type;
         public IItemId LinkedItem;
 
-        public Faction Faction;
+        public ItemId<Faction> FactionId;
         public NumericValue<int> Price;
         public bool Hidden;
 

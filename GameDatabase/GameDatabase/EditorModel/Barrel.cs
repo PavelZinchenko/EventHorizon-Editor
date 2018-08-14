@@ -22,7 +22,7 @@ namespace GameDatabase.EditorModel
             PlatformType = barrel.PlatformType;
             WeaponClass = barrel.WeaponClass;
             ImageId = new IconId(barrel.Image);
-            Size = new NumericValue<float>(barrel.Size, 0, 1f);
+            Size = new NumericValue<float>(barrel.Size, 0, 10f);
         }
 
         public SerializableBarrel Serialize()

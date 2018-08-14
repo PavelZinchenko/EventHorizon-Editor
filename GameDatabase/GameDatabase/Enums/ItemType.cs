@@ -16,7 +16,10 @@
         ComponentStats = 11,
         ComponentMod = 12,
         Skill = 13,
+        Faction = 14,
+        Quest = 15,
 
-        ShipBuilderSettings = 100,
+        ShipSettings = 100,
+        GalaxySettings = 101,
     }
 }

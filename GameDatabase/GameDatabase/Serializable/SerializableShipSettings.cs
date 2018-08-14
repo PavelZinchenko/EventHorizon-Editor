@@ -3,14 +3,10 @@
 namespace GameDatabase.Serializable
 {
     [Serializable]
-    public class SerializableShipBuilderSettings : SerializableItem
+    public class SerializableShipSettings : SerializableItem
     {
         public float DefaultWeightPerCell;
         public float MinimumWeightPerCell;
-
-        public float BaseHullPoints;
-        public float HullPointsPerCell;
-        public float HullRepairCooldown;
 
         public float BaseArmorPoints;
         public float ArmorPointsPerCell;

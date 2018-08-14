@@ -15,7 +15,7 @@ namespace GameDatabase.EditorModel
             ShipId = database.GetShip(shipBuild.ShipId).ItemId;
             NotAvailableInGame = shipBuild.NotAvailableInGame;
             DifficultyClass = shipBuild.DifficultyClass;
-            BuildFaction = shipBuild.BuildFaction;
+            BuildFactionId = database.GetFaction(shipBuild.BuildFaction).Id;
             Components = shipBuild.Components.Select(item => new InstalledComponent(item, database)).ToArray();
         }
 
@@ -24,7 +24,7 @@ namespace GameDatabase.EditorModel
             serializable.ShipId = ShipId.Id;
             serializable.NotAvailableInGame = NotAvailableInGame;
             serializable.DifficultyClass = DifficultyClass;
-            serializable.BuildFaction = BuildFaction;
+            serializable.BuildFaction = BuildFactionId.Id;
             serializable.Components = Components.Select(item => item.Serialize()).ToArray();
         }
 
@@ -33,7 +33,7 @@ namespace GameDatabase.EditorModel
         public ItemId<Ship> ShipId;
         public bool NotAvailableInGame;
         public DifficultyClass DifficultyClass;
-        public Faction BuildFaction;
+        public ItemId<Faction> BuildFactionId;
         public InstalledComponent[] Components;
     }
 }

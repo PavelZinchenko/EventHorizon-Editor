@@ -15,7 +15,7 @@ namespace GameDatabase.EditorModel
             Description = component.Description;
             DisplayCategory = component.DisplayCategory;
             Availability = component.Availability;
-            Faction = component.Faction;
+            FactionId = database.GetFaction(component.Faction).Id;
             Level = new NumericValue<int>(component.Level,0,500);
             Color = Helpers.ColorFromString(component.Color);
             Layout = new Layout(component.Layout);
@@ -62,7 +62,7 @@ namespace GameDatabase.EditorModel
             serializable.DisplayCategory = DisplayCategory;
             serializable.Availability = Availability;
             serializable.ComponentStatsId = StatsId.Id;
-            serializable.Faction = Faction;
+            serializable.Faction = FactionId.Id;
             serializable.Level = Level.Value;
             serializable.Icon = IconId.Id;
             serializable.Color = Helpers.ColorToString(Color);
@@ -81,7 +81,7 @@ namespace GameDatabase.EditorModel
         public ItemId<Component> ItemId;
         public string Name;
         public string Description;
-        public Faction Faction;
+        public ItemId<Faction> FactionId;
         public NumericValue<int> Level;
         public Availability Availability;
 

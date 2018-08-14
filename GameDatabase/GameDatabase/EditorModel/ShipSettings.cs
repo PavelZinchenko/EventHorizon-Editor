@@ -3,16 +3,12 @@ using GameDatabase.Serializable;
 
 namespace GameDatabase.EditorModel
 {
-    public class ShipBuilderSettings
+    public class ShipSettings
     {
-        public ShipBuilderSettings(SerializableShipBuilderSettings settings, Database database)
+        public ShipSettings(SerializableShipSettings settings, Database database)
         {
             DefaultWeightPerCell = new NumericValue<float>(settings.DefaultWeightPerCell, 1, 1000);
             MinimumWeightPerCell = new NumericValue<float>(settings.MinimumWeightPerCell, 1, 1000);
-
-            BaseHullPoints = new NumericValue<float>(settings.BaseHullPoints, 0, 10000);
-            HullPointsPerCell = new NumericValue<float>(settings.HullPointsPerCell, 0, 10000);
-            HullRepairCooldown = new NumericValue<float>(settings.HullRepairCooldown, 0, 60);
 
             BaseArmorPoints = new NumericValue<float>(settings.BaseArmorPoints, 0, 10000);
             ArmorPointsPerCell = new NumericValue<float>(settings.ArmorPointsPerCell, 0, 10000);
@@ -31,14 +27,10 @@ namespace GameDatabase.EditorModel
             MaxTurnRate = new NumericValue<float>(settings.MaxTurnRate, 5, 30);
         }
 
-        public void Save(SerializableShipBuilderSettings serializable)
+        public void Save(SerializableShipSettings serializable)
         {
             serializable.DefaultWeightPerCell = DefaultWeightPerCell.Value;
             serializable.MinimumWeightPerCell = MinimumWeightPerCell.Value;
-
-            serializable.BaseHullPoints = BaseHullPoints.Value;
-            serializable.HullPointsPerCell = HullPointsPerCell.Value;
-            serializable.HullRepairCooldown = HullRepairCooldown.Value;
 
             serializable.BaseArmorPoints = BaseArmorPoints.Value;
             serializable.ArmorPointsPerCell = ArmorPointsPerCell.Value;

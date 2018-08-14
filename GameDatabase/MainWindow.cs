@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -205,8 +206,12 @@ namespace GameDatabase
                     return _database.GetComponentStats(_selectedItem.Id);
                 case ItemType.ComponentMod:
                     return _database.GetComponentMods(_selectedItem.Id);
-                case ItemType.ShipBuilderSettings:
-                    return _database.GetShipBuilderSettings(_selectedItem.Id);
+                case ItemType.ShipSettings:
+                    return _database.ShipSettings;
+                case ItemType.GalaxySettings:
+                    return _database.GalaxySettings;
+                case ItemType.Faction:
+                    return _database.GetFaction(_selectedItem.Id);
                 default:
                     return null;
             }
@@ -235,6 +240,63 @@ namespace GameDatabase
         {
             if (!string.IsNullOrWhiteSpace(_lastDatabasePath))
                 _database.SaveAs(_lastDatabasePath);
+        }
+
+        private void createSignatureMenuItem_Click(object sender, EventArgs e)
+        {
+            if (new DirectoryInfo(_lastDatabasePath).EnumerateFiles("signature").Any())
+            {
+                MessageBox.Show("Signature file already exists");
+                return;
+            }
+
+            try
+            {
+                var process = new System.Diagnostics.Process();
+                var startInfo = new System.Diagnostics.ProcessStartInfo();
+                var executablePath = new FileInfo(Application.ExecutablePath);
+                startInfo.FileName = "cmd.exe";
+                startInfo.Arguments = "/C \"" + executablePath.DirectoryName + "\\KeyGenerator.exe" + "\" & pause";
+                startInfo.WorkingDirectory = _lastDatabasePath;
+                process.StartInfo = startInfo;
+                process.Start();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void createModMenuItem_Click(object sender, EventArgs e)
+        {
+            var signatureFilesCount = new DirectoryInfo(_lastDatabasePath).GetFiles("signature").Length;
+            if (signatureFilesCount == 0)
+            {
+                MessageBox.Show("Signature file not found.");
+                return;
+            }
+
+            if (signatureFilesCount > 1)
+            {
+                MessageBox.Show("More than one signature file found. Delete them and try again.");
+                return;
+            }
+
+            try
+            {
+                var process = new System.Diagnostics.Process();
+                var startInfo = new System.Diagnostics.ProcessStartInfo();
+                var executablePath = new FileInfo(Application.ExecutablePath);
+                startInfo.FileName = "cmd.exe";
+                startInfo.Arguments = "/C \"" + executablePath.DirectoryName + "\\Builder.exe" + "\" & pause";
+                startInfo.WorkingDirectory = _lastDatabasePath;
+                process.StartInfo = startInfo;
+                process.Start();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private string _lastDatabasePath;
