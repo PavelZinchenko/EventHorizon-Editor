@@ -2,13 +2,13 @@
 
 ## How to use:
 
-1. Download the binary files here: https://github.com/PavelZinchenko/EventHorizon-Editor/tree/master/GameDatabase/bin/Release
-2. Donwload the database here: https://github.com/PavelZinchenko/EventHorizon-Editor/tree/master/Database
-3. After editing the database, copy it to the folder "\<Game Installation Folder\>/Database" for PC or "Android/data/com.ZipasGames.EventHorizon/files/Database" for Android
-4. Open the game settings and push "Load External Database" button
+1. Download and extract Release.zip.
+2. Run GameDatabase.exe and open the database.
+3. Click Create Signature File. Enter name and password.
+4. Click Create Mod. Enter the same password that you used to create signature file.
+4. Copy the Mod file to the folder "\<Game Installation Folder\>/Mods" for PC or "Android/data/com.ZipasGames.EventHorizon/files/Mods" for Android.
+5. Open the game settings and select your Mod.
 
 ## Images
 
-- All images must be in Database/Images/ folder.
-- They must be a square size - 128x128, 256x256, 512x512, 1024x1024 etc.
-- Only PNG and JPEG formats are supported.
+Images can be placed anywere in the /Database/ folder. They must be a square size - 128x128, 256x256, 512x512, 1024x1024 etc. Only PNG and JPEG formats are supported.
