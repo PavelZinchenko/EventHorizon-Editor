@@ -1,5 +1,10 @@
 {
   "ItemType": 101,
   "AbandonedStarbaseFaction": 9,
-  "AlienLifeformFaction": 12
+  "AlienLifeformFaction": 12,
+  "StartingShipBuilds": [
+    39,
+    45,
+    51
+  ]
 }

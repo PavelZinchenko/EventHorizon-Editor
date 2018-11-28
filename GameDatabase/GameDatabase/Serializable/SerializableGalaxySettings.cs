@@ -7,5 +7,6 @@ namespace GameDatabase.Serializable
     {
         public int AbandonedStarbaseFaction;
         public int AlienLifeformFaction;
+        public int[] StartingShipBuilds;
     }
 }

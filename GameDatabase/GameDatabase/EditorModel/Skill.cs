@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using GameDatabase.Enums;
-using GameDatabase.Model;
+﻿using GameDatabase.Model;
 using GameDatabase.Serializable;
 
 namespace GameDatabase.EditorModel
@@ -9,27 +7,38 @@ namespace GameDatabase.EditorModel
     {
         public void Save(SerializableSkill serializable)
         {
-            serializable.Type = (int)Type;
-            serializable.Detail = Detail.Value;
-            serializable.Price = Price.Value;
-            serializable.Position = Position;
-            serializable.Dependencies = Dependencies.Select(item => item.Skill.Id).ToArray();
+            serializable.Name = Name;
+            serializable.Description = Description;
+            serializable.Icon = Icon;
+            serializable.BaseRequirement = BaseRequirement.Value;
+            serializable.RequirementPerLevel = RequirementPerLevel.Value;
+            serializable.BasePrice = BasePrice.Value;
+            serializable.PricePerLevel = PricePerLevel.Value;
+            serializable.MaxLevel = MaxLevel.Value;
         }
 
         public Skill(SerializableSkill skill, Database database)
         {
-            Type = (SkillType)skill.Type;
-            Price = new NumericValue<int>(skill.Price, 0, 100);
-            Detail = new NumericValue<int>(skill.Detail, 0, 1000);
-            Position = new HexPosition(skill.Position);
-            Dependencies = skill.Dependencies.Select(item => new SkillWrapper { Skill = database.GetSkillId(item) }).ToArray();
+            ItemId = new ItemId<Skill>(skill.Id, skill.FileName);
+            Name = skill.Name;
+            Description = skill.Description;
+            Icon = skill.Icon;
+            BaseRequirement = new NumericValue<float>(skill.BaseRequirement, 0, 100);
+            RequirementPerLevel = new NumericValue<float>(skill.RequirementPerLevel, 0, 100);
+            BasePrice = new NumericValue<float>(skill.BasePrice, 0, 100);
+            PricePerLevel = new NumericValue<float>(skill.PricePerLevel, 0, 100);
+            MaxLevel = new NumericValue<int>(skill.MaxLevel, 1, 1000);
         }
 
-        public SkillType Type;
-        public NumericValue<int> Detail;
-        public NumericValue<int> Price;
-        public HexPosition Position;
-        public SkillWrapper[] Dependencies;
+        public ItemId<Skill> ItemId;
+        public string Name;
+        public string Icon;
+        public string Description;
+        public NumericValue<float> BaseRequirement;
+        public NumericValue<float> RequirementPerLevel;
+        public NumericValue<float> BasePrice;
+        public NumericValue<float> PricePerLevel;
+        public NumericValue<int> MaxLevel;
     }
 
     public class SkillWrapper

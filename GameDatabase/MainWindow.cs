@@ -217,9 +217,6 @@ namespace GameDatabase
             }
         }
 
-        private SerializableItem _selectedItem;
-        private Database _database;
-
         private void loadMenuItem_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -242,56 +239,32 @@ namespace GameDatabase
                 _database.SaveAs(_lastDatabasePath);
         }
 
-        private void createSignatureMenuItem_Click(object sender, EventArgs e)
-        {
-            if (new DirectoryInfo(_lastDatabasePath).EnumerateFiles("signature").Any())
-            {
-                MessageBox.Show("Signature file already exists");
-                return;
-            }
-
-            try
-            {
-                var process = new System.Diagnostics.Process();
-                var startInfo = new System.Diagnostics.ProcessStartInfo();
-                var executablePath = new FileInfo(Application.ExecutablePath);
-                startInfo.FileName = "cmd.exe";
-                startInfo.Arguments = "/C \"" + executablePath.DirectoryName + "\\KeyGenerator.exe" + "\" & pause";
-                startInfo.WorkingDirectory = _lastDatabasePath;
-                process.StartInfo = startInfo;
-                process.Start();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-        }
-
         private void createModMenuItem_Click(object sender, EventArgs e)
         {
-            var signatureFilesCount = new DirectoryInfo(_lastDatabasePath).GetFiles("signature").Length;
-            if (signatureFilesCount == 0)
-            {
-                MessageBox.Show("Signature file not found.");
+            if (string.IsNullOrWhiteSpace(_lastDatabasePath))
                 return;
-            }
-
-            if (signatureFilesCount > 1)
-            {
-                MessageBox.Show("More than one signature file found. Delete them and try again.");
-                return;
-            }
 
             try
             {
-                var process = new System.Diagnostics.Process();
-                var startInfo = new System.Diagnostics.ProcessStartInfo();
-                var executablePath = new FileInfo(Application.ExecutablePath);
-                startInfo.FileName = "cmd.exe";
-                startInfo.Arguments = "/C \"" + executablePath.DirectoryName + "\\Builder.exe" + "\" & pause";
-                startInfo.WorkingDirectory = _lastDatabasePath;
-                process.StartInfo = startInfo;
-                process.Start();
+                string name, guid;
+                if (!ModBuilder.TryReadSignature(_lastDatabasePath, out name, out guid))
+                {
+                    var dialog = new NameForm();
+                    if (dialog.ShowDialog() != DialogResult.OK || string.IsNullOrWhiteSpace(dialog.Name))
+                        return;
+
+                    name = dialog.Name;
+                    guid = Guid.NewGuid().ToString();
+
+                    File.WriteAllText(Path.Combine(_lastDatabasePath, ModBuilder.SignatureFileName), name + '\n' + guid );
+                }
+
+                if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                _database.SaveAs(_lastDatabasePath);
+                var builder = ModBuilder.Create(_lastDatabasePath);
+                builder.Build((FileStream)saveFileDialog.OpenFile());
             }
             catch (Exception exception)
             {
@@ -299,6 +272,8 @@ namespace GameDatabase
             }
         }
 
+        private SerializableItem _selectedItem;
+        private Database _database;
         private string _lastDatabasePath;
     }
 }

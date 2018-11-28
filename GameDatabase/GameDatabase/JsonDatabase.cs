@@ -110,8 +110,6 @@ namespace GameDatabase
                     _fileNames.Add(deserializedObject, file.Substring(path.Length));
                 }
             }
-
-            LoadImages(Path.Combine(path, _imagesFolder));
         }
 
         public void SaveData(string path)
@@ -265,34 +263,6 @@ namespace GameDatabase
             return item;
         }
 
-        private void LoadImages(string path)
-        {
-            var info = new DirectoryInfo(path);
-            if (!info.Exists)
-                return;
-
-            foreach (var fileInfo in info.GetFiles())
-            {
-                Image image;
-                try
-                {
-                    image = Image.FromFile(fileInfo.FullName);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    continue;
-                }
-
-                if (image.Width != image.Height)
-                    continue;
-
-                image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-
-                _images.Add(fileInfo.Name, image);
-            }
-        }
-
         private void LoadImage(FileInfo file)
         {
             Image image;
@@ -350,8 +320,6 @@ namespace GameDatabase
                 return properties;
             }
         }
-
-        private const string _imagesFolder = "Images";
     }
 
     public static class TypeExtensions

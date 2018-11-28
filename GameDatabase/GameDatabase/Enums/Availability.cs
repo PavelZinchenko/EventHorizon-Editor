@@ -4,7 +4,8 @@
     {
         None = 0,
         Common = 1,
-        ArenaOnly = 2,
-        SpecialOnly = 3,
+        Rare = 2,
+        Special = 3,
+        Hidden = 4,
     }
 }

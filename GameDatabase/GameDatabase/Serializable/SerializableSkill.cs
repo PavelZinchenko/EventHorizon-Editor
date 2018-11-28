@@ -5,11 +5,13 @@ namespace GameDatabase.Serializable
     [Serializable]
     public class SerializableSkill : SerializableItem
     {
-        public int Type;
-        public int Detail;
-        public int Price;
-        public int Position;
-
-        public int[] Dependencies;
+        public string Name;
+        public string Icon;
+        public string Description;
+        public float BaseRequirement;
+        public float RequirementPerLevel;
+        public float BasePrice;
+        public float PricePerLevel;
+        public int MaxLevel;
     }
 }
