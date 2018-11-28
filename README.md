@@ -4,10 +4,11 @@
 
 1. Download and extract Release.zip.
 2. Run GameDatabase.exe and open the database.
-3. Click Create Signature File. Enter name and password.
-4. Click Create Mod. Enter the same password that you used to create signature file.
+3. Click Create Mod and enter the name.
 4. Copy the Mod file to the folder "\<Game Installation Folder\>/Mods" for PC or "Android/data/com.ZipasGames.EventHorizon/files/Mods" for Android.
 5. Open the game settings and select your Mod.
+
+Since 0.15.3 you can also put the whole database into the Mods folder. This allows you to edit your ship builds in game editor.
 
 ## Images
 
