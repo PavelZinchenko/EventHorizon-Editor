@@ -16,7 +16,7 @@ Images can be placed anywere in the /Database/ folder. They must be a square siz
 
 ## Localization
 
-Localization files should be named according to the language - <language>.xml (e.g. English.xml, Russian.xml)
+Localization files should be named according to the language - \<language\>.xml (e.g. English.xml, Russian.xml)
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
