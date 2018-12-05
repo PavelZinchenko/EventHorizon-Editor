@@ -18,8 +18,10 @@ Images can be placed anywere in the /Database/ folder. They must be a square siz
 
 Localization files should be named according to the language - <language>.xml (e.g. English.xml, Russian.xml)
 
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 <string name="Module1">Small bomb</string>
 <string name="Module2">Big bomb</string>
 </resources>
+```
