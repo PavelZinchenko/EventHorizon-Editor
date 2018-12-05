@@ -109,6 +109,7 @@ namespace GameDatabase
         public ItemId<Technology> GetTechnologyId(int id) { return new ItemId<Technology>(id, _jsonDatabase.GetTechnology(id).FileName); }
         public ItemId<Skill> GetSkillId(int id) { return new ItemId<Skill>(id, _jsonDatabase.GetSkill(id).FileName); }
         public ItemId<ComponentMod> GetComponentModId(int id) { return new ItemId<ComponentMod>(id, _jsonDatabase.GetComponentMod(id).FileName); }
+        public ItemId<ShipBuild> GetShipBuildId(int id) { return new ItemId<ShipBuild>(id, _jsonDatabase.GetShipBuild(id).FileName); }
 
         private T GetItem<T,U>(int id, Dictionary<int, T> cache, U source) where T : class
         {
