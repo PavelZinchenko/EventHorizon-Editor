@@ -95,7 +95,7 @@ namespace GameDatabase
 
                 var value = item.Value.GetValue(_data);
 
-                var control = CreateControls(item.Key, value, rowId);
+                var control = CreateControls(item.Key, value, item.Value.FieldType, rowId);
                 if (control != null)
                     _binding.Add(control, item.Value);
                 else
@@ -109,89 +109,80 @@ namespace GameDatabase
             tableLayoutPanel.ResumeLayout();
         }
 
-        private object CreateControls(string name, object value, int rowId)
+        private object CreateControls(string name, object value, Type type, int rowId)
         {
             CreateLabel(name, 0, rowId);
 
-            if (value == null)
-                return null;
-
-            var valueType = value.GetType();
-            if (valueType.IsEnum)
+            if (type.IsEnum)
             {
-                var items = Enum.GetValues(valueType).OfType<object>();
+                var items = Enum.GetValues(type).OfType<object>();
                 return CreateComboBox(items, value, 1, rowId);
             }
 
-            if (valueType == typeof(NumericValue<int>))
+            if (type == typeof(NumericValue<int>))
             {
                 var numeric = (NumericValue<int>)value;
                 return CreateNumericContol(numeric.Value, numeric.Min, numeric.Max, 1, 0, 1, rowId);
             }
 
-            if (valueType == typeof(NumericValue<float>))
+            if (type == typeof(NumericValue<float>))
             {
                 var numeric = (NumericValue<float>)value;
                 return CreateNumericContol((decimal)numeric.Value, (decimal)numeric.Min, (decimal)numeric.Max, (decimal)0.1f, 5, 1, rowId);
             }
 
-            if (valueType == typeof(bool))
-            {
-                return CreateCheckBox((bool)value, 1, rowId);
-            }
+            if (type == typeof(string))
+                return CreateTextBox((string)value, 1, rowId);
 
-            if (valueType == typeof(Color))
+            if (type == typeof(bool))
+                return CreateCheckBox((bool)value, 1, rowId);
+
+            if (type == typeof(Color))
                 return CreateColorButton((Color)value, 1, rowId);
 
-            if (valueType == typeof(IconId))
-            {
-                return CreateLabel(((IconId)value).Id, 1, rowId);
-            }
+            if (type == typeof(Layout))
+                return CreateLayout((Layout)value ?? new Layout(null), 1, rowId);
 
-            if (valueType == typeof(Layout))
-                return CreateLayout((Layout) value, 1, rowId);
+            if (type.IsArray)
+                return CreateCollection((Array)value ?? (Array)Activator.CreateInstance(type, 0), 1, rowId);
 
-            if (valueType.IsArray)
-                return CreateCollection((Array)value, 1, rowId);
-
-            if (valueType == typeof(Vector2))
+            if (type == typeof(Vector2))
                 return CreateVectorEditor((Vector2)value, 1, rowId);
 
             object result;
-            if ((result = TryCreateIdItem(value, _database.ComponentIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.ComponentIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.WeaponIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.WeaponIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.DeviceIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.DeviceIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.AmmunitionIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.AmmunitionIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.DroneBayIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.DroneBayIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.ShipIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.ShipIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.ShipBuildIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.ShipBuildIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.SatelliteIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.SatelliteIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.SatelliteBuildIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.SatelliteBuildIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.TechnologyIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.TechnologyIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.ComponentStatsIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.ComponentStatsIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, _database.ComponentModIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.ComponentModIds, 1, rowId)) != null)
                 return result;
-
-            if (valueType == typeof(string))
-                return CreateTextBox((string)value, 1, rowId);
+            if ((result = TryCreateIdItem(value, type, _database.Factions, 1, rowId)) != null)
+                return result;
 
             return null;
         }
 
-        private object TryCreateIdItem<T>(object value, IEnumerable<ItemId<T>> items, int column, int row)
+        private object TryCreateIdItem<T>(object value, Type type, IEnumerable<ItemId<T>> items, int column, int row)
         {
-            if (value.GetType() != typeof(ItemId<T>))
+            if (type != typeof(ItemId<T>))
                 return null;
 
             if (_data.GetType() == typeof(T))
@@ -221,7 +212,7 @@ namespace GameDatabase
             {
                 Text = text,
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left,
-                BorderStyle = BorderStyle.None,
+                BorderStyle = BorderStyle.FixedSingle,
                 Dock = DockStyle.Fill,
             };
 
@@ -437,7 +428,8 @@ namespace GameDatabase
         {
             if (_ignoreEvents) return;
 
-            _binding[sender].SetValue(_data, ((TextBox)sender).Text);
+            var newValue = ((TextBox)sender).Text;
+            _binding[sender].SetValue(_data, string.IsNullOrWhiteSpace(newValue) ? null : newValue);
 
             if (DataChanged != null) DataChanged.Invoke(this, EventArgs.Empty);
         }

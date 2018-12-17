@@ -45,14 +45,4 @@ namespace GameDatabase.Model
 
         public static readonly ItemId<T> Empty = new ItemId<T>(0, string.Empty);
     }
-
-    public struct IconId
-    {
-        public IconId(string id)
-        {
-            Id = id;
-        }
-
-        public string Id { get; }
-    }
 }

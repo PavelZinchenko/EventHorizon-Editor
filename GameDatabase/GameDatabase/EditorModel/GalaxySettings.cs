@@ -10,14 +10,16 @@ namespace GameDatabase.EditorModel
         {
             AbandonedStarbaseFaction = database.GetFaction(settings.AbandonedStarbaseFaction).Id;
             AlienLifeformFaction = database.GetFaction(settings.AlienLifeformFaction).Id;
-            StartingShipBuilds = settings.StartingShipBuilds.Select(item => new ShipBuildWrapper { ShipBuild = database.GetShipBuildId(item) }).ToArray();
+            if (settings.StartingShipBuilds != null)
+                StartingShipBuilds = settings.StartingShipBuilds.Select(item => new ShipBuildWrapper { ShipBuild = database.GetShipBuildId(item) }).ToArray();
         }
 
         public void Save(SerializableGalaxySettings serializable)
         {
             serializable.AbandonedStarbaseFaction = AbandonedStarbaseFaction.Id;
             serializable.AlienLifeformFaction = AlienLifeformFaction.Id;
-            serializable.StartingShipBuilds = StartingShipBuilds.Select(item => item.ShipBuild.Id).ToArray();
+            if (StartingShipBuilds != null)
+                serializable.StartingShipBuilds = StartingShipBuilds.Select(item => item.ShipBuild.Id).ToArray();
         }
 
         public ItemId<Faction> AbandonedStarbaseFaction;

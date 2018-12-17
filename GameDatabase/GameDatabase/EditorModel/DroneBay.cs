@@ -20,6 +20,7 @@ namespace GameDatabase.EditorModel
             LaunchSound = droneBay.LaunchSound;
             LaunchEffectPrefab = droneBay.LaunchEffectPrefab;
             ControlButtonIcon = droneBay.ControlButtonIcon;
+            ImprovedAi = droneBay.ImprovedAi;
         }
 
         public void Save(SerializableDroneBay serializable)
@@ -35,6 +36,7 @@ namespace GameDatabase.EditorModel
             serializable.LaunchSound = LaunchSound;
             serializable.LaunchEffectPrefab = LaunchEffectPrefab;
             serializable.ControlButtonIcon = ControlButtonIcon;
+            serializable.ImprovedAi = ImprovedAi;
         }
 
         public ItemId<DroneBay> ItemId;
@@ -46,6 +48,7 @@ namespace GameDatabase.EditorModel
         public NumericValue<float> DefenseMultiplier;
         public NumericValue<float> SpeedMultiplier;
         public NumericValue<int> Capacity;
+        public bool ImprovedAi;
 
         public ActivationType ActivationType;
 

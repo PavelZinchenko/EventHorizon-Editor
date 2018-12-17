@@ -28,7 +28,7 @@ namespace GameDatabase
         public Image Image { get; set; }
 
         [Description("Layout"), Category("Data")]
-        public string Layout
+        public new string Layout
         {
             get { return _layout.ToString(); }
             set

@@ -20,7 +20,7 @@ namespace GameDatabase.EditorModel
             Color = Helpers.ColorFromString(component.Color);
             Layout = new Layout(component.Layout);
             CellType = string.IsNullOrEmpty(component.CellType) ? CellType.Empty : (CellType)component.CellType.First();
-            IconId = new IconId(component.Icon);
+            IconId = component.Icon;
 
             var stats = database.GetComponentStats(component.ComponentStatsId);
             if (stats != null)
@@ -64,7 +64,7 @@ namespace GameDatabase.EditorModel
             serializable.ComponentStatsId = StatsId.Id;
             serializable.Faction = FactionId.Id;
             serializable.Level = Level.Value;
-            serializable.Icon = IconId.Id;
+            serializable.Icon = IconId;
             serializable.Color = Helpers.ColorToString(Color);
             serializable.Layout = Layout.Data;
             serializable.CellType = CellType == CellType.Empty ? string.Empty : ((char)CellType).ToString();
@@ -101,7 +101,7 @@ namespace GameDatabase.EditorModel
         public ItemId<DroneBay> DroneBayId = ItemId<DroneBay>.Empty;
         public ItemId<ShipBuild> DroneId = ItemId<ShipBuild>.Empty;
 
-        public IconId IconId;
+        public string IconId;
         public Color Color;
 
         public ComponentModWrapper[] PossibleModification;

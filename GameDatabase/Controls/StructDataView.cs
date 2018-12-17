@@ -105,9 +105,6 @@ namespace GameDatabase.Controls
             if (valueType == typeof (Color))
                 return CreateLabel(Helpers.ColorToString((Color)value), 1, rowId);
 
-            if (valueType == typeof(IconId))
-                return CreateLabel(((IconId)value).Id, 1, rowId);
-
             if (valueType == typeof (Layout))
                 return null;//CreateLayout((Layout)value, 1, rowId);
 
