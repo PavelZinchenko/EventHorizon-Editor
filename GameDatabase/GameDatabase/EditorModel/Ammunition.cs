@@ -60,7 +60,7 @@ namespace GameDatabase.EditorModel
             serializable.BulletPrefab = BulletPrefab;
         }
 
-        public ItemId<Ammunition> ItemId;
+        public readonly ItemId<Ammunition> ItemId;
 
         public AmmunitionClass AmmunitionClass;
         public DamageType DamageType;

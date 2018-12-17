@@ -39,7 +39,7 @@ namespace GameDatabase.EditorModel
             serializable.ImprovedAi = ImprovedAi;
         }
 
-        public ItemId<DroneBay> ItemId;
+        public readonly ItemId<DroneBay> ItemId;
 
         public NumericValue<float> EnergyConsumption;
         public NumericValue<float> PassiveEnergyConsumption;

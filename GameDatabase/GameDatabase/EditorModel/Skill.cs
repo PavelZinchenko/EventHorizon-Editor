@@ -30,7 +30,7 @@ namespace GameDatabase.EditorModel
             MaxLevel = new NumericValue<int>(skill.MaxLevel, 1, 1000);
         }
 
-        public ItemId<Skill> ItemId;
+        public readonly ItemId<Skill> ItemId;
         public string Name;
         public string Icon;
         public string Description;

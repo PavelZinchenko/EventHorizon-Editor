@@ -17,7 +17,7 @@ namespace GameDatabase.EditorModel
             serializable.Type = Type;
         }
 
-        public ItemId<ComponentMod> ItemId;
+        public readonly ItemId<ComponentMod> ItemId;
 
         public ComponentModType Type;
     }

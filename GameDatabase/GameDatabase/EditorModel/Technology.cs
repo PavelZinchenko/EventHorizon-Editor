@@ -35,7 +35,7 @@ namespace GameDatabase.EditorModel
             serializable.Dependencies = Dependencies.Select(item => item.Technology.Id).ToArray();
         }
 
-        public ItemId<Technology> ItemId;
+        public readonly ItemId<Technology> ItemId;
 
         public TechType Type;
         public IItemId LinkedItem;

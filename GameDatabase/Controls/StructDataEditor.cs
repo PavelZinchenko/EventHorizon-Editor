@@ -93,13 +93,14 @@ namespace GameDatabase
                 if (_exclusions.Contains(item.Key))
                     continue;
 
-                var value = item.Value.GetValue(_data);
+                CreateLabel(item.Key, 0, rowId);
 
-                var control = CreateControls(item.Key, value, item.Value.FieldType, rowId);
+                var value = item.Value.GetValue(_data);
+                var control = item.Value.IsInitOnly ? null : CreateControl(value, item.Value.FieldType, rowId);
                 if (control != null)
                     _binding.Add(control, item.Value);
                 else
-                    CreateLabel(value != null ? value.ToString() : "null", 1, rowId);
+                    CreateLabel(value != null ? value.ToString() : "[empty]", 1, rowId);
 
                 rowId++;
             }
@@ -109,10 +110,8 @@ namespace GameDatabase
             tableLayoutPanel.ResumeLayout();
         }
 
-        private object CreateControls(string name, object value, Type type, int rowId)
+        private Control CreateControl(object value, Type type, int rowId)
         {
-            CreateLabel(name, 0, rowId);
-
             if (type.IsEnum)
             {
                 var items = Enum.GetValues(type).OfType<object>();
@@ -149,7 +148,7 @@ namespace GameDatabase
             if (type == typeof(Vector2))
                 return CreateVectorEditor((Vector2)value, 1, rowId);
 
-            object result;
+            Control result;
             if ((result = TryCreateIdItem(value, type, _database.ComponentIds, 1, rowId)) != null)
                 return result;
             if ((result = TryCreateIdItem(value, type, _database.WeaponIds, 1, rowId)) != null)
@@ -180,13 +179,10 @@ namespace GameDatabase
             return null;
         }
 
-        private object TryCreateIdItem<T>(object value, Type type, IEnumerable<ItemId<T>> items, int column, int row)
+        private Control TryCreateIdItem<T>(object value, Type type, IEnumerable<ItemId<T>> items, int column, int row)
         {
             if (type != typeof(ItemId<T>))
                 return null;
-
-            if (_data.GetType() == typeof(T))
-                return CreateLabel(((ItemId<T>)value).Id.ToString(), column, row);
 
             return CreateComboBox(items.Cast<object>(), value, column, row);
         }
@@ -311,7 +307,7 @@ namespace GameDatabase
             return layoutEditor;
         }
 
-        private object CreateCollection(Array value, int column, int row)
+        private Control CreateCollection(Array value, int column, int row)
         {
             if (value.Length > 15)
             {

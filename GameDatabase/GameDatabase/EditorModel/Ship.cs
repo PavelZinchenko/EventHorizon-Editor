@@ -57,7 +57,7 @@ namespace GameDatabase.EditorModel
             serializable.Barrels = Barrels.Select(item => item.Serialize()).ToArray();
         }
 
-        public ItemId<Ship> ItemId;
+        public readonly ItemId<Ship> ItemId;
 
         public ShipCategory ShipCategory;
 

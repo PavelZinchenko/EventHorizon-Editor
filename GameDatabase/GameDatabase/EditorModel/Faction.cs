@@ -35,7 +35,7 @@ namespace GameDatabase.EditorModel
             WanderingShipsDistance = new NumericValue<int>(shipLevel, 0, 0);
         }
 
-        public ItemId<Faction> Id;
+        public readonly ItemId<Faction> Id;
         public string Name;
         public Color Color;
         public NumericValue<int> HomeStarDistance;

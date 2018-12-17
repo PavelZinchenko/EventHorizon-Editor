@@ -46,7 +46,7 @@ namespace GameDatabase.EditorModel
             serializable.ControlButtonIcon = ControlButtonIcon;
         }
 
-        public ItemId<Device> ItemId;
+        public readonly ItemId<Device> ItemId;
 
         public DeviceClass DeviceClass;
         public NumericValue<float> EnergyConsumption;

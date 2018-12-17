@@ -78,7 +78,7 @@ namespace GameDatabase.EditorModel
             serializable.PossibleModifications = PossibleModification.Select(item => item.Modification.Id).ToArray();
         }
 
-        public ItemId<Component> ItemId;
+        public readonly ItemId<Component> ItemId;
         public string Name;
         public string Description;
         public ItemId<Faction> FactionId;

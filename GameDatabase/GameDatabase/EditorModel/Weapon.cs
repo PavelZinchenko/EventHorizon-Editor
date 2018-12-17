@@ -32,7 +32,7 @@ namespace GameDatabase.EditorModel
             serializable.ControlButtonIcon = ControlButtonIcon;
         }
 
-        public ItemId<Weapon> ItemId;
+        public readonly ItemId<Weapon> ItemId;
 
         public WeaponClass WeaponClass;
         public NumericValue<float> FireRate;

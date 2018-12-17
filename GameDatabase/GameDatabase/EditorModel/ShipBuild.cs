@@ -28,7 +28,7 @@ namespace GameDatabase.EditorModel
             serializable.Components = Components.Select(item => item.Serialize()).ToArray();
         }
 
-        public ItemId<ShipBuild> ItemId;
+        public readonly ItemId<ShipBuild> ItemId;
 
         public ItemId<Ship> ShipId;
         public bool NotAvailableInGame;

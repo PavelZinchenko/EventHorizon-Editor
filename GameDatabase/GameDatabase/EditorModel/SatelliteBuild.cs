@@ -25,7 +25,7 @@ namespace GameDatabase.EditorModel
             serializable.Components = Components.Select(item => item.Serialize()).ToArray();
         }
 
-        public ItemId<SatelliteBuild> ItemId;
+        public readonly ItemId<SatelliteBuild> ItemId;
 
         public ItemId<Satellite> SatelliteId;
         public bool NotAvailableInGame;

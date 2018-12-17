@@ -104,7 +104,7 @@ namespace GameDatabase.EditorModel
             serializable.AlterWeaponPlatform = AlterWeaponPlatform;
         }
 
-        public ItemId<ComponentStats> ItemId;
+        public readonly ItemId<ComponentStats> ItemId;
 
         public ComponentStatsType Type;
 

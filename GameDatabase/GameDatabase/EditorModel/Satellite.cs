@@ -29,7 +29,7 @@ namespace GameDatabase.EditorModel
             serializable.SizeClass = SizeClass;
         }
 
-        public ItemId<Satellite> ItemId;
+        public readonly ItemId<Satellite> ItemId;
 
         public string Name;
         public string ModelImage;
