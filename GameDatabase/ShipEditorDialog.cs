@@ -57,7 +57,7 @@ namespace GameDatabase
             else
                 throw new ArgumentException();
 
-            layoutSize.Value = layout.Size;
+            layoutSize.Value = (this.oldLayoutSize = layout.Size);
             layoutEditor1.Layout = layout.Data;
 
             _ignoreEvents = false;
@@ -124,9 +124,21 @@ namespace GameDatabase
         private readonly Object _item;
         private readonly Database _database;
 
+        private static bool warned = false;
+        private decimal oldLayoutSize;
         private void layoutSize_ValueChanged(object sender, EventArgs e)
         {
             if (_ignoreEvents) return;
+
+            if (!ShipEditorDialog.warned && this.oldLayoutSize > 32)
+            {
+                ShipEditorDialog.warned = true;
+            }
+            if (!ShipEditorDialog.warned && this.layoutSize.Value > 32)
+            {
+                ShipEditorDialog.warned = true;
+                MessageBox.Show("Large grid sizes can cause low performance.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
 
             modifyLayout((int)layoutSize.Value, 0, 0);
         }
