@@ -455,11 +455,11 @@ namespace GameDatabase
             int layoutWidth = this.LayoutWidth;
             int num = layoutWidth - 1;
             list.Add(x + y * layoutWidth);
-            if (this.mirror_horizontal)
+            if (this.mirror_vertical)
             {
                 list.Add(num - x + y * layoutWidth);
             }
-            if (this.mirror_vertical)
+            if (this.mirror_horizontal)
             {
                 list.Add(x + (num - y) * layoutWidth);
             }
@@ -767,7 +767,7 @@ namespace GameDatabase
                 this.recursiveFill(x, y + 1, editor, oldValue, newValue);
             }
 
-            private int filled;
+            private int filled = 0;
         }
 
         private class CircleBrush : BrushType.RectangleBrush
