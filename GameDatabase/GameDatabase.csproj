@@ -84,7 +84,11 @@
     <Compile Include="Controls\CollectionEditor.Designer.cs">
       <DependentUpon>CollectionEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ShipLayout\LayoutBrush.cs" />
+    <Compile Include="Controls\ShipLayout\LayoutModel.cs" />
     <Compile Include="Controls\RotationHelpers.cs" />
+    <Compile Include="Controls\ShipLayout\MousePosition.cs" />
+    <Compile Include="Controls\ShipLayout\PaintData.cs" />
     <Compile Include="Controls\StructDataView.cs">
       <SubType>UserControl</SubType>
     </Compile>

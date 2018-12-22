@@ -54,6 +54,18 @@ namespace GameDatabase.Model
             }
         }
 
+        public char this[int index]
+        {
+            get { return index < 0 || index >= _data.Length ? _defaultValue : _data[index]; }
+            set
+            {
+                if (index < 0 || index >= _data.Length)
+                    return;
+
+                _data[index] = value;
+            }
+        }
+
         public int Size
         {
             get { return _size; }
