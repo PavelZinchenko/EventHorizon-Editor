@@ -8,10 +8,10 @@ namespace GameDatabase.EditorModel
     {
         public GalaxySettings(SerializableGalaxySettings settings, Database database)
         {
-            AbandonedStarbaseFaction = database.GetFaction(settings.AbandonedStarbaseFaction).Id;
-            AlienLifeformFaction = database.GetFaction(settings.AlienLifeformFaction).Id;
+            AbandonedStarbaseFaction = database.GetFaction(settings.AbandonedStarbaseFaction).ItemId;
+            AlienLifeformFaction = database.GetFaction(settings.AlienLifeformFaction).ItemId;
             if (settings.StartingShipBuilds != null)
-                StartingShipBuilds = settings.StartingShipBuilds.Select(item => new ShipBuildWrapper { ShipBuild = database.GetShipBuildId(item) }).ToArray();
+                StartingShipBuilds = settings.StartingShipBuilds.Select(item => new Wrapper<ShipBuild> { Item = database.GetShipBuildId(item) }).ToArray();
         }
 
         public void Save(SerializableGalaxySettings serializable)
@@ -19,21 +19,11 @@ namespace GameDatabase.EditorModel
             serializable.AbandonedStarbaseFaction = AbandonedStarbaseFaction.Id;
             serializable.AlienLifeformFaction = AlienLifeformFaction.Id;
             if (StartingShipBuilds != null)
-                serializable.StartingShipBuilds = StartingShipBuilds.Select(item => item.ShipBuild.Id).ToArray();
+                serializable.StartingShipBuilds = StartingShipBuilds.Select(item => item.Item.Id).ToArray();
         }
 
         public ItemId<Faction> AbandonedStarbaseFaction;
         public ItemId<Faction> AlienLifeformFaction;
-        public ShipBuildWrapper[] StartingShipBuilds;
-    }
-
-    public class ShipBuildWrapper
-    {
-        public ItemId<ShipBuild> ShipBuild = ItemId<ShipBuild>.Empty;
-
-        public override string ToString()
-        {
-            return ShipBuild.ToString();
-        }
+        public Wrapper<ShipBuild>[] StartingShipBuilds;
     }
 }

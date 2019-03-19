@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using GameDatabase.GameDatabase;
 
 namespace GameDatabase.Controls
 {
@@ -87,7 +88,7 @@ namespace GameDatabase.Controls
                 CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
                 AutoSize = true,
                 Database = _database,
-                Data = data,
+                Data = data as IDataAdapter ?? new DataAdapter(data),
                 ContentAutoScroll = false,
             };
 
@@ -99,8 +100,7 @@ namespace GameDatabase.Controls
 
         private void OnDataChanged(object sender, EventArgs args)
         {
-            if (DataChanged != null)
-                DataChanged.Invoke(this, EventArgs.Empty);
+            DataChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnRadioButtonSelected(object sender, EventArgs args)
@@ -155,8 +155,7 @@ namespace GameDatabase.Controls
 
             AddRow(rowId, value);
 
-            if (CollectionChanged != null)
-                CollectionChanged.Invoke(this, EventArgs.Empty);
+            CollectionChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -180,8 +179,7 @@ namespace GameDatabase.Controls
             
             RebuildLayout();
 
-            if (CollectionChanged != null)
-                CollectionChanged.Invoke(this, EventArgs.Empty);
+            CollectionChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void SwapControls(int index1, int index2)

@@ -18,6 +18,7 @@
         "y": 0.46
       },
       "Rotation": 30.0,
+      "PlatformType": 2,
       "Image": "turret",
       "Size": 0.12
     },
@@ -26,6 +27,7 @@
         "y": -0.92
       },
       "Rotation": 270.0,
+      "PlatformType": 2,
       "Image": "turret",
       "Size": 0.12
     },
@@ -35,6 +37,7 @@
         "y": 0.46
       },
       "Rotation": 150.0,
+      "PlatformType": 2,
       "Image": "turret",
       "Size": 0.12
     }

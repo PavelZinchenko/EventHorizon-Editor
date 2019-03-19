@@ -7,7 +7,7 @@
   "Damage": 15.0,
   "Range": 16.0,
   "LifeTime": 0.05,
-  "EnergyCost": 30.0,
+  "EnergyCost": 10.0,
   "Color": "#80FF9B8B",
   "FireSound": "*flux_04",
   "HitEffectPrefab": "FlashAdditive",

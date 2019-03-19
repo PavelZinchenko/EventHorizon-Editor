@@ -111,7 +111,7 @@ namespace GameDatabase.Controls
             if (valueType.IsArray)
             {
                 var array = (object[]) value;
-                return array.Length > 0 ? CreateLabel(string.Join(" ", array), 1, rowId) : null;
+                return array.Length > 0 ? CreateLabel(string.Join("\n", array), 1, rowId) : null;
             }
 
             if (valueType == typeof (Vector2))

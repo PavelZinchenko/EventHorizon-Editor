@@ -212,6 +212,16 @@ namespace GameDatabase
                     return _database.GalaxySettings;
                 case ItemType.Faction:
                     return _database.GetFaction(_selectedItem.Id);
+                case ItemType.Quest:
+                    return _database.GetQuest(_selectedItem.Id);
+                case ItemType.Loot:
+                    return _database.GetLoot(_selectedItem.Id);
+                case ItemType.Fleet:
+                    return _database.GetFleet(_selectedItem.Id);
+                case ItemType.Character:
+                    return _database.GetCharacter(_selectedItem.Id);
+                case ItemType.Artifact:
+                    return _database.GetArtifact(_selectedItem.Id);
                 default:
                     return null;
             }

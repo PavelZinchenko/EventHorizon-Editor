@@ -3,7 +3,7 @@
   "Id": 79,
   "ShipCategory": 3,
   "Name": "Invader",
-  "IconImage": "unknown_ship",
+  "IconImage": "space_invader",
   "IconScale": 0.5,
   "ModelImage": "space_invader",
   "ModelScale": 3.0,
@@ -25,11 +25,6 @@
       "Position": {
         "x": 0.5,
         "y": -0.9
-      }
-    },
-    {
-      "Position": {
-        "x": 0.3
       }
     }
   ]

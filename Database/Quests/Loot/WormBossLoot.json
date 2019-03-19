@@ -1,0 +1,13 @@
+{
+  "ItemType": 16,
+  "Id": 7,
+  "Type": 21,
+  "Items": [
+    {
+      "LootId": 8
+    },
+    {
+      "LootId": 5
+    }
+  ]
+}

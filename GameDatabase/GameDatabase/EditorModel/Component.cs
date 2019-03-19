@@ -15,7 +15,7 @@ namespace GameDatabase.EditorModel
             Description = component.Description;
             DisplayCategory = component.DisplayCategory;
             Availability = component.Availability;
-            FactionId = database.GetFaction(component.Faction).Id;
+            FactionId = database.GetFaction(component.Faction).ItemId;
             Level = new NumericValue<int>(component.Level,0,500);
             Color = Helpers.ColorFromString(component.Color);
             Layout = new Layout(component.Layout);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using GameDatabase.GameDatabase;
 
 namespace GameDatabase
 {
@@ -18,11 +19,11 @@ namespace GameDatabase
         {
             Text = _dialogName;
             structDataEditor1.Database = _database;
-            structDataEditor1.Data = _item;
+            structDataEditor1.Data = _item as IDataAdapter ?? new DataAdapter(_item);
         }
 
         private readonly string _dialogName;
-        private readonly Object _item;
+        private readonly object _item;
         private readonly Database _database;
     }
 }

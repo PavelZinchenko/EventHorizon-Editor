@@ -13,7 +13,7 @@ namespace GameDatabase.EditorModel
             ItemId = new ItemId<Ship>(ship.Id, ship.FileName);
             ShipCategory = ship.ShipCategory;
             Name = ship.Name;
-            FactionId = database.GetFaction(ship.Faction).Id;
+            FactionId = database.GetFaction(ship.Faction).ItemId;
             SizeClass = ship.SizeClass;
             IconImage = ship.IconImage;
             IconScale = new NumericValue<float>(ship.IconScale, 0.1f, 100);
@@ -28,7 +28,7 @@ namespace GameDatabase.EditorModel
             HeatResistance = new NumericValue<float>(ship.HeatResistance, 0, 100);
             Regeneration = ship.Regeneration;
             BaseWeightModifier = new NumericValue<float>(ship.BaseWeightModifier, -0.9f, 100);
-            BuiltinDevices = ship.BuiltinDevices.Select(id => new DeviceWrapper { Device = database.GetDevice(id).ItemId }).ToArray();
+            BuiltinDevices = ship.BuiltinDevices.Select(id => new Wrapper<Device> { Item = database.GetDevice(id).ItemId }).ToArray();
             Layout = new Layout(ship.Layout);
             Barrels = ship.Barrels.Select(item => new Barrel(item)).ToArray();
         }
@@ -52,7 +52,7 @@ namespace GameDatabase.EditorModel
             serializable.HeatResistance = HeatResistance.Value;
             serializable.Regeneration = Regeneration;
             serializable.BaseWeightModifier = BaseWeightModifier.Value;
-            serializable.BuiltinDevices = BuiltinDevices.Select(device => device.Device.Id).ToArray();
+            serializable.BuiltinDevices = BuiltinDevices.Select(device => device.Item.Id).ToArray();
             serializable.Layout = Layout.Data;
             serializable.Barrels = Barrels.Select(item => item.Serialize()).ToArray();
         }
@@ -77,14 +77,9 @@ namespace GameDatabase.EditorModel
         public NumericValue<float> HeatResistance;
         public bool Regeneration;
         public NumericValue<float> BaseWeightModifier;
-        public DeviceWrapper[] BuiltinDevices;
+        public Wrapper<Device>[] BuiltinDevices;
 
         public Layout Layout;
         public Barrel[] Barrels;
-    }
-
-    public class DeviceWrapper
-    {
-        public ItemId<Device> Device = ItemId<Device>.Empty;
     }
 }

@@ -17,7 +17,12 @@
         ComponentMod = 12,
         Skill = 13,
         Faction = 14,
+
         Quest = 15,
+        Loot = 16,
+        Fleet = 18,
+        Character = 19,
+        Artifact = 20,
 
         ShipSettings = 100,
         GalaxySettings = 101,

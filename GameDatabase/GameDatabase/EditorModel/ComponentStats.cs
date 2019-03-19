@@ -89,6 +89,8 @@ namespace GameDatabase.EditorModel
             serializable.EnginePower = EnginePower.Value;
             serializable.TurnRate = TurnRate.Value;
 
+            serializable.Autopilot = Autopilot;
+
             serializable.DroneRangeModifier = DroneRangeModifier.Value;
             serializable.DroneDamageModifier = DroneDamageModifier.Value;
             serializable.DroneDefenseModifier = DroneDefenseModifier.Value;

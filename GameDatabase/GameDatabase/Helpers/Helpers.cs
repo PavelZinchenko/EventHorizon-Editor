@@ -9,14 +9,14 @@ namespace GameDatabase
         public static Color ColorFromString(string color)
         {
             if (string.IsNullOrEmpty(color) || color[0] != '#')
-                return Color.Black;
+                return Color.White;
 
             if (color.Length == 7)
                 return Color.FromArgb((int)(Convert.ToUInt32(color.Substring(1), 16) | 0xff000000));
             else if (color.Length == 9)
                 return Color.FromArgb((int)Convert.ToUInt32(color.Substring(1), 16));
             else
-                return Color.Black;
+                return Color.White;
         }
 
         public static string ColorToString(Color color)
@@ -30,7 +30,7 @@ namespace GameDatabase
         public static string ValidateColorString(string color)
         {
             if (string.IsNullOrEmpty(color))
-                return _colorBlack;
+                return _colorWhite;
 
             var index = color[0] == '#' ? 1 : 0;
             try
@@ -40,7 +40,7 @@ namespace GameDatabase
             }
             catch (Exception e)
             {
-                return _colorBlack;
+                return _colorWhite;
             }
         }
 
@@ -53,6 +53,6 @@ namespace GameDatabase
             return file.Substring(namePosition, file.Length - namePosition - 5); // trim ".json"        
         }
 
-        private const string _colorBlack = "#000000";
+        private const string _colorWhite = "#ffffff";
     }
 }

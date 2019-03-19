@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentEditorDialog));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.structDataEditor1 = new GameDatabase.StructDataEditor();
+            this.structDataEditor1 = new StructDataEditor();
             this.SuspendLayout();
             // 
             // statusStrip1

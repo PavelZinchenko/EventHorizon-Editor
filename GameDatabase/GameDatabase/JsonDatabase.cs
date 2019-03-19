@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using GameDatabase.Enums;
 using GameDatabase.Serializable;
 using Newtonsoft.Json;
@@ -97,6 +95,21 @@ namespace GameDatabase
                         case ItemType.Faction:
                             deserializedObject = DeserializeItem(data, name, _factions);
                             break;
+                        case ItemType.Quest:
+                            deserializedObject = DeserializeItem(data, name, _quests);
+                            break;
+                        case ItemType.Loot:
+                            deserializedObject = DeserializeItem(data, name, _loot);
+                            break;
+                        case ItemType.Fleet:
+                            deserializedObject = DeserializeItem(data, name, _fleets);
+                            break;
+                        case ItemType.Character:
+                            deserializedObject = DeserializeItem(data, name, _characters);
+                            break;
+                        case ItemType.Artifact:
+                            deserializedObject = DeserializeItem(data, name, _artifacts);
+                            break;
                         case ItemType.ShipSettings:
                             deserializedObject = ShipSettings = DeserializeItem<SerializableShipSettings>(data, name);
                             break;
@@ -142,6 +155,16 @@ namespace GameDatabase
                 Serialize(item, path);
             foreach (var item in _factions.Values)
                 Serialize(item, path);
+            foreach (var item in _loot.Values)
+                Serialize(item, path);
+            foreach (var item in _quests.Values)
+                Serialize(item, path);
+            foreach (var item in _fleets.Values)
+                Serialize(item, path);
+            foreach (var item in _characters.Values)
+                Serialize(item, path);
+            foreach (var item in _artifacts.Values)
+                Serialize(item, path);
 
             Serialize(ShipSettings, path);
             Serialize(GalaxySettings, path);
@@ -161,6 +184,12 @@ namespace GameDatabase
             _components.Clear();
             _componentStats.Clear();
             _componentMods.Clear();
+            _factions.Clear();
+            _loot.Clear();
+            _quests.Clear();
+            _fleets.Clear();
+            _characters.Clear();
+            _artifacts.Clear();
 
             _fileNames.Clear();
             _images.Clear();
@@ -187,6 +216,11 @@ namespace GameDatabase
         public IEnumerable<SerializableComponentStats> ComponentStats { get { return _componentStats.Values; } }
         public IEnumerable<SerializableComponentMod> ComponentMods { get { return _componentMods.Values; } }
         public IEnumerable<SerializableFaction> Factions { get { return _factions.Values; } }
+        public IEnumerable<SerializableLoot> Loot { get { return _loot.Values; } }
+        public IEnumerable<SerializableQuest> Quests { get { return _quests.Values; } }
+        public IEnumerable<SerializableFleet> Fleets { get { return _fleets.Values; } }
+        public IEnumerable<SerializableCharacter> Characters { get { return _characters.Values; } }
+        public IEnumerable<SerializableArtifact> Artifacts { get { return _artifacts.Values; } }
 
         public SerializableWeapon GetWeapon(int id) { return GetItem(id, _weapons); }
         public SerializableAmmunition GetAmmunition(int id) { return GetItem(id, _ammunitions); }
@@ -202,6 +236,11 @@ namespace GameDatabase
         public SerializableComponentStats GetComponentStats(int id) { return GetItem(id, _componentStats); }
         public SerializableComponentMod GetComponentMod(int id) { return GetItem(id, _componentMods); }
         public SerializableFaction GetFaction(int id) { return GetItem(id, _factions); }
+        public SerializableLoot GetLoot(int id) { return GetItem(id, _loot); }
+        public SerializableQuest GetQuest(int id) { return GetItem(id, _quests); }
+        public SerializableFleet GetFleet(int id) { return GetItem(id, _fleets); }
+        public SerializableCharacter GetCharacter(int id) { return GetItem(id, _characters); }
+        public SerializableArtifact GetArtifact(int id) { return GetItem(id, _artifacts); }
 
         public Image GetImage(string name)
         {
@@ -300,6 +339,11 @@ namespace GameDatabase
         private readonly Dictionary<int, SerializableComponentStats> _componentStats = new Dictionary<int, SerializableComponentStats>();
         private readonly Dictionary<int, SerializableComponentMod> _componentMods = new Dictionary<int, SerializableComponentMod>();
         private readonly Dictionary<int, SerializableFaction> _factions = new Dictionary<int, SerializableFaction>();
+        private readonly Dictionary<int, SerializableLoot> _loot = new Dictionary<int, SerializableLoot>();
+        private readonly Dictionary<int, SerializableQuest> _quests = new Dictionary<int, SerializableQuest>();
+        private readonly Dictionary<int, SerializableFleet> _fleets = new Dictionary<int, SerializableFleet>();
+        private readonly Dictionary<int, SerializableCharacter> _characters = new Dictionary<int, SerializableCharacter>();
+        private readonly Dictionary<int, SerializableArtifact> _artifacts = new Dictionary<int, SerializableArtifact>();
 
         private readonly Dictionary<string, Image> _images = new Dictionary<string, Image>();
         private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);

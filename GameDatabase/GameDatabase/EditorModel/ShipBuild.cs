@@ -15,7 +15,7 @@ namespace GameDatabase.EditorModel
             ShipId = database.GetShip(shipBuild.ShipId).ItemId;
             NotAvailableInGame = shipBuild.NotAvailableInGame;
             DifficultyClass = shipBuild.DifficultyClass;
-            BuildFactionId = database.GetFaction(shipBuild.BuildFaction).Id;
+            BuildFactionId = database.GetFaction(shipBuild.BuildFaction).ItemId;
             Components = shipBuild.Components.Select(item => new InstalledComponent(item, database)).ToArray();
         }
 

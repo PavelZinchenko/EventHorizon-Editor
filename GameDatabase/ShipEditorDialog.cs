@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using GameDatabase.EditorModel;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase;
 using GameDatabase.Model;
 using GameDatabase.Properties;
 
@@ -28,7 +29,7 @@ namespace GameDatabase
             Text = _dialogName;
             structDataEditor1.Exclusions = new List<string>() { "Layout", "Barrels" };
             structDataEditor1.Database = _database;
-            structDataEditor1.Data = _item;
+            structDataEditor1.Data = _item as IDataAdapter ?? new DataAdapter(_item);
             layoutEditor1.Colors.Clear();
             layoutEditor1.Colors.Add((char)CellType.Empty, Color.LightGray);
             layoutEditor1.Colors.Add((char)CellType.Engine, Color.FromArgb(192, 255,255,0));

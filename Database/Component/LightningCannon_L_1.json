@@ -1,7 +1,7 @@
 {
   "ItemType": 1,
   "Id": 21,
-  "Name": "LightningCannon_L_1",
+  "Name": "$LightningCannon_L_1",
   "DisplayCategory": 1,
   "ComponentStatsId": 1,
   "Faction": 4,

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 using Cyotek.Windows.Forms;
 using GameDatabase.Controls;
+using GameDatabase.EditorModel.Quests;
+using GameDatabase.GameDatabase;
 using GameDatabase.Model;
 
 namespace GameDatabase
@@ -14,12 +15,20 @@ namespace GameDatabase
     public partial class StructDataEditor : UserControl
     {
         [Description("Data"), Category("Data")]
-        public object Data
+        public IDataAdapter Data
         {
             get { return _data; }
             set
             {
                 _data = value;
+                if (_data == null)
+                {
+                    Cleanup();
+                    return;
+                }
+
+                _data.DataChangedEvent += OnDataChanged;
+                _data.LayoutChangedEvent += BuildLayout;
                 BuildLayout();
             }
         }
@@ -74,12 +83,10 @@ namespace GameDatabase
             if (_data == null)
                 return;
 
-            var type = _data.GetType();
-            var fields = type.GetFields().Where(f => f.IsPublic && !f.IsStatic).ToDictionary(field => field.Name);
+            var fields = _data.Properties.ToArray();
 
-            var rowCount = fields.Count;
             tableLayoutPanel.Controls.Clear();
-            tableLayoutPanel.RowCount = rowCount+1;
+            tableLayoutPanel.RowCount = fields.Length + 1;
 
             tableLayoutPanel.SuspendLayout();
             for (var i = 0; i <= tableLayoutPanel.RowCount; ++i)
@@ -90,17 +97,19 @@ namespace GameDatabase
             var rowId = 0;
             foreach (var item in fields)
             {
-                if (_exclusions.Contains(item.Key))
+                var name = item.Name;
+
+                if (_exclusions.Contains(name))
                     continue;
 
-                CreateLabel(item.Key, 0, rowId);
+                CreateLabel(name, 0, rowId);
 
-                var value = item.Value.GetValue(_data);
-                var control = item.Value.IsInitOnly ? null : CreateControl(value, item.Value.FieldType, rowId);
+                var value = item.Value;
+                var control = item.IsReadOnly ? null : CreateControl(value, item.Type, rowId);
                 if (control != null)
-                    _binding.Add(control, item.Value);
+                    _binding.Add(control, item);
                 else
-                    CreateLabel(value != null ? value.ToString() : "[empty]", 1, rowId);
+                    CreateLabel(value?.ToString() ?? "[empty]", 1, rowId);
 
                 rowId++;
             }
@@ -173,8 +182,24 @@ namespace GameDatabase
                 return result;
             if ((result = TryCreateIdItem(value, type, _database.ComponentModIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, type, _database.Factions, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.FactionIds, 1, rowId)) != null)
                 return result;
+            if ((result = TryCreateIdItem(value, type, _database.QuestIds, 1, rowId)) != null)
+                return result;
+            if ((result = TryCreateIdItem(value, type, _database.LootIds, 1, rowId)) != null)
+                return result;
+            if ((result = TryCreateIdItem(value, type, _database.FleetIds, 1, rowId)) != null)
+                return result;
+            if ((result = TryCreateIdItem(value, type, _database.CharacterIds, 1, rowId)) != null)
+                return result;
+            if ((result = TryCreateIdItem(value, type, _database.ArtifactIds, 1, rowId)) != null)
+                return result;
+
+            if (typeof(IDataAdapter).IsAssignableFrom(type))
+                return CreateStructEditor((IDataAdapter)value, 1, rowId);
+
+            if (type == typeof(FactionFilter))
+                return CreateStructEditor(new DataAdapter(value), 1, rowId);
 
             return null;
         }
@@ -330,6 +355,23 @@ namespace GameDatabase
             return collection;
         }
 
+        private Control CreateStructEditor(IDataAdapter data, int column, int row)
+        {
+            var editor = new StructDataEditor
+            {
+                Dock = DockStyle.Fill,
+                CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
+                AutoSize = true,
+                Database = _database,
+                Data = data,
+                ContentAutoScroll = false,
+            };
+
+            editor.DataChanged += DataChanged;
+            tableLayoutPanel.Controls.Add(editor, column, row);
+            return editor;
+        }
+
         private VectorEditor CreateVectorEditor(Vector2 value, int column, int row)
         {
             var vector = new VectorEditor()
@@ -378,9 +420,7 @@ namespace GameDatabase
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 button.BackColor = colorDialog.Color;
-                _binding[sender].SetValue(_data, colorDialog.Color);
-
-                if (DataChanged != null) DataChanged.Invoke(this, EventArgs.Empty);
+                _binding[sender].Value = colorDialog.Color;
             }
         }
 
@@ -406,18 +446,14 @@ namespace GameDatabase
         {
             if (_ignoreEvents) return;
 
-            _binding[sender].SetValue(_data, new Layout(((LayoutEditor)sender).Layout));
-
-            if (DataChanged != null) DataChanged.Invoke(this, EventArgs.Empty);
+            _binding[sender].Value = new Layout(((LayoutEditor)sender).Layout);
         }
 
         private void OnComboBoxValueChanged(object sender, EventArgs args)
         {
             if (_ignoreEvents) return;
 
-            _binding[sender].SetValue(_data, ((ComboBox)sender).SelectedItem);
-
-            if (DataChanged != null) DataChanged.Invoke(this, EventArgs.Empty);
+            _binding[sender].Value = ((ComboBox)sender).SelectedItem;
         }
 
         private void OnTextBoxValueChanged(object sender, EventArgs args)
@@ -425,56 +461,46 @@ namespace GameDatabase
             if (_ignoreEvents) return;
 
             var newValue = ((TextBox)sender).Text;
-            _binding[sender].SetValue(_data, string.IsNullOrWhiteSpace(newValue) ? null : newValue);
-
-            if (DataChanged != null) DataChanged.Invoke(this, EventArgs.Empty);
+            _binding[sender].Value = string.IsNullOrWhiteSpace(newValue) ? null : newValue;
         }
 
         private void OnNumericValueChanged(object sender, EventArgs args)
         {
             if (_ignoreEvents) return;
 
-            FieldInfo fieldInfo;
-            if (!_binding.TryGetValue(sender, out fieldInfo))
+            IProperty property;
+            if (!_binding.TryGetValue(sender, out property))
                 return;
 
             var value = ((NumericUpDown)sender).Value;
-            var oldValue = fieldInfo.GetValue(_data);
-            fieldInfo.SetValue(_data, ConvertDecimal(value, oldValue));
-
-            if (DataChanged != null) DataChanged.Invoke(this, EventArgs.Empty);
+            var oldValue = property.Value;
+            property.Value = ConvertDecimal(value, oldValue);
         }
 
         private void OnVectorValueChanged(object sender, EventArgs args)
         {
             if (_ignoreEvents) return;
 
-            FieldInfo fieldInfo;
-            if (!_binding.TryGetValue(sender, out fieldInfo))
+            IProperty property;
+            if (!_binding.TryGetValue(sender, out property))
                 return;
 
             var value = ((VectorEditor)sender).Value;
-            fieldInfo.SetValue(_data, value);
-
-            if (DataChanged != null) DataChanged.Invoke(this, EventArgs.Empty);
+            property.Value = value;
         }
 
         private void OnCheckedChanged(object sender, EventArgs args)
         {
             if (_ignoreEvents) return;
 
-            _binding[sender].SetValue(_data, ((CheckBox)sender).Checked);
-
-            if (DataChanged != null) DataChanged.Invoke(this, EventArgs.Empty);
+            _binding[sender].Value = ((CheckBox)sender).Checked;
         }
 
         private void OnCollectionChanged(object sender, EventArgs args)
         {
             if (_ignoreEvents) return;
 
-            _binding[sender].SetValue(_data, ((CollectionEditor)sender).Data);
-
-            if (DataChanged != null) DataChanged.Invoke(this, EventArgs.Empty);
+            _binding[sender].Value = ((CollectionEditor)sender).Data;
         }
 
         private static object ConvertDecimal(decimal value, object oldValue)
@@ -496,16 +522,21 @@ namespace GameDatabase
             return value;
         }
 
+        private void OnDataChanged()
+        {
+            DataChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         private static void DisableMouseWheel(object sender, EventArgs args)
         {
             ((HandledMouseEventArgs)args).Handled = true;
         }
 
         private bool _ignoreEvents;
-        private object _data;
+        private IDataAdapter _data;
         private Database _database;
         private HashSet<string> _exclusions = new HashSet<string>();
-        private readonly Dictionary<object, FieldInfo>  _binding = new Dictionary<object, FieldInfo>();
+        private readonly Dictionary<object, IProperty>  _binding = new Dictionary<object, IProperty>();
         private readonly Dictionary<object, LayoutEditor> _layouts = new Dictionary<object, LayoutEditor>();
     }
 }

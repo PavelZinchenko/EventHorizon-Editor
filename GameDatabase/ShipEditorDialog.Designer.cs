@@ -33,10 +33,10 @@ namespace GameDatabase
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShipEditorDialog));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.structDataEditor1 = new GameDatabase.StructDataEditor();
+            this.structDataEditor1 = new StructDataEditor();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.layoutEditor1 = new GameDatabase.LayoutEditor();
-            this.barrelCollection = new GameDatabase.Controls.CollectionEditor();
+            this.layoutEditor1 = new LayoutEditor();
+            this.barrelCollection = new CollectionEditor();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();

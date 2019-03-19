@@ -12,10 +12,11 @@ namespace GameDatabase.EditorModel
             ItemId = new ItemId<Technology>(technology.Id, technology.FileName);
 
             Type = technology.Type;
-            FactionId = database.GetFaction(technology.Faction).Id;
+            FactionId = database.GetFaction(technology.Faction).ItemId;
             Price = new NumericValue<int>(technology.Price, 0, 1000);
             Hidden = technology.Hidden;
-            Dependencies = technology.Dependencies.Select(item => new TechWrapper { Technology = database.GetTechnologyId(item) }).ToArray();
+            Special = technology.Special;
+            Dependencies = technology.Dependencies.Select(item => new Wrapper<Technology> { Item = database.GetTechnologyId(item) }).ToArray();
 
             if (Type == TechType.Component)
                 LinkedItem = database.GetComponent(technology.ItemId).ItemId;
@@ -32,7 +33,8 @@ namespace GameDatabase.EditorModel
             serializable.Faction = FactionId.Id;
             serializable.Price = Price.Value;
             serializable.Hidden = Hidden;
-            serializable.Dependencies = Dependencies.Select(item => item.Technology.Id).ToArray();
+            serializable.Special = Special;
+            serializable.Dependencies = Dependencies.Select(item => item.Item.Id).ToArray();
         }
 
         public readonly ItemId<Technology> ItemId;
@@ -43,17 +45,8 @@ namespace GameDatabase.EditorModel
         public ItemId<Faction> FactionId;
         public NumericValue<int> Price;
         public bool Hidden;
+        public bool Special;
 
-        public TechWrapper[] Dependencies;
-    }
-
-    public class TechWrapper
-    {
-        public ItemId<Technology> Technology = ItemId<Technology>.Empty;
-
-        public override string ToString()
-        {
-            return Technology.ToString();
-        }
+        public Wrapper<Technology>[] Dependencies;
     }
 }

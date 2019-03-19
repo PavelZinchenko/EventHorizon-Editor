@@ -40,14 +40,4 @@ namespace GameDatabase.EditorModel
         public NumericValue<float> PricePerLevel;
         public NumericValue<int> MaxLevel;
     }
-
-    public class SkillWrapper
-    {
-        public ItemId<Skill> Skill = ItemId<Skill>.Empty;
-
-        public override string ToString()
-        {
-            return Skill.ToString();
-        }
-    }
 }

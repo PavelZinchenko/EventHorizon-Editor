@@ -1,4 +1,6 @@
-﻿namespace GameDatabase
+﻿using GameDatabase.Controls;
+
+namespace GameDatabase
 {
     partial class MainWindow
     {
@@ -30,7 +32,7 @@
         {
             this.DatabaseTreeView = new System.Windows.Forms.TreeView();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.structDataView1 = new GameDatabase.Controls.StructDataView();
+            this.structDataView1 = new StructDataView();
             this.EditButton = new System.Windows.Forms.Button();
             this.ItemTypeText = new System.Windows.Forms.Label();
             this.ItemTypeLabel = new System.Windows.Forms.Label();

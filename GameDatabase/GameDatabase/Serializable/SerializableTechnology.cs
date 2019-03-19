@@ -12,6 +12,7 @@ namespace GameDatabase.Serializable
         public int Faction;
         public int Price;
         public bool Hidden;
+        public bool Special;
 
         public int[] Dependencies;
     }
