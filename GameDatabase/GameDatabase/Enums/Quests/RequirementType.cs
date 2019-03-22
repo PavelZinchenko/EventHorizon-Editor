@@ -6,7 +6,6 @@
         Any = 1,
         All = 2,
         None = 3,
-        HaveItem = 5,
         PlayerPosition = 6,
         RandomStarSystem = 7,
         AggressiveOccupants = 8,
@@ -19,7 +18,9 @@
 
         Faction = 20,
 
-        HaveArtifact = 25,
+        HaveQuestItem = 25,
+        HaveItem = 26,
+        HaveItemById = 27,
 
         ComeBack = 30,
     }

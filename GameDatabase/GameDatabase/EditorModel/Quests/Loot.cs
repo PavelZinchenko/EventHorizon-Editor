@@ -3,25 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using GameDatabase.Enums.Quests;
 using GameDatabase.GameDatabase;
-using GameDatabase.Model;
 using GameDatabase.Serializable;
 
 namespace GameDatabase.EditorModel.Quests
 {
     public class Loot : IDataAdapter
     {
-        public Loot(SerializableLoot loot, Database database)
+        public Loot(SerializableLoot serializable, Database database)
+            : this(serializable.Loot, database)
         {
-            ItemId = new ItemId<Loot>(loot.Id, loot.FileName);
-            Type = (LootItemType)loot.Type;
+            //ItemId = new ItemId<Loot>(loot.Id, loot.FileName);
+        }
+
+        public Loot(SerializableLootContent serializable, Database database)
+            : this()
+        {
+            if (serializable == null)
+                return;
+
+            Type = (LootItemType)serializable.Type;
             Content = LootFactory.CreateLoot(Type);
-            Content.Load(loot, database);
+            Content.Load(serializable, database);
+        }
+
+        public Loot()
+        {
+            Type = LootItemType.None;
+            Content = LootFactory.CreateLoot(Type);
+        }
+
+        public void Save(SerializableLootContent serializable)
+        {
+            serializable.Type = (int)Type;
+            Content.Save(serializable);
         }
 
         public void Save(SerializableLoot serializable)
         {
-            serializable.Type = (int)Type;
-            Content.Save(serializable);
+            if (serializable.Loot == null)
+                serializable.Loot = new SerializableLootContent();
+
+            serializable.Loot.Type = (int)Type;
+            Content.Save(serializable.Loot);
         }
 
         public event Action LayoutChangedEvent;
@@ -32,7 +55,7 @@ namespace GameDatabase.EditorModel.Quests
             get
             {
                 var type = GetType();
-                yield return new Property(this, type.GetField("ItemId"), DataChangedEvent);
+                //yield return new Property(this, type.GetField("ItemId"), DataChangedEvent);
                 yield return new Property(this, type.GetField("Type"), OnTypeChanged);
 
                 foreach (var item in Content.GetType().GetFields().Where(f => f.IsPublic && !f.IsStatic))
@@ -47,7 +70,7 @@ namespace GameDatabase.EditorModel.Quests
             LayoutChangedEvent?.Invoke();
         }
 
-        public ItemId<Loot> ItemId;
+        //public readonly ItemId<Loot> ItemId = ItemId<Loot>.Empty;
         public LootItemType Type;
         public ILootContent Content;
     }

@@ -9,6 +9,7 @@
       "Id": 1,
       "Type": 10,
       "Message": "$TUTORIAL_Start",
+      "Character": 3,
       "Actions": [
         {
           "TargetNode": 2,
@@ -20,6 +21,7 @@
       "Id": 2,
       "Type": 10,
       "Message": "$TUTORIAL_Info1",
+      "Character": 3,
       "Actions": [
         {
           "TargetNode": 3,
@@ -31,6 +33,7 @@
       "Id": 3,
       "Type": 10,
       "Message": "$TUTORIAL_Training",
+      "Character": 3,
       "Actions": [
         {
           "TargetNode": 4,
@@ -53,6 +56,7 @@
       "Id": 5,
       "Type": 10,
       "Message": "$TUTORIAL_End",
+      "Character": 3,
       "Actions": [
         {
           "TargetNode": 6,

@@ -11,8 +11,12 @@
         "ItemId": 100
       },
       {
-        "Type": 5,
-        "ItemId": 9
+        "Type": 26,
+        "Loot": {
+          "Type": 2,
+          "MinAmount": 30,
+          "MaxAmount": 30
+        }
       }
     ]
   },
@@ -21,6 +25,7 @@
       "Id": 1,
       "Type": 10,
       "Message": "$JanSalo_2_Intro",
+      "Loot": 2,
       "Character": 2,
       "Actions": [
         {
@@ -37,6 +42,7 @@
       "Id": 2,
       "Type": 10,
       "Message": "$JanSalo_2_Message1",
+      "Loot": 2,
       "Character": 2,
       "Actions": [
         {
@@ -53,6 +59,7 @@
       "Id": 3,
       "Type": 10,
       "Message": "$JanSalo_2_Message2",
+      "Loot": 2,
       "Character": 2,
       "Actions": [
         {

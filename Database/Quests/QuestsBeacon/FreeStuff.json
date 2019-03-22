@@ -2,12 +2,13 @@
   "ItemType": 15,
   "Id": 2,
   "StartCondition": 1,
-  "Weight": 0.5,
+  "Weight": 1.0,
   "Nodes": [
     {
       "Id": 1,
       "Type": 10,
-      "Message": "$SOS_EMPTY_Message",
+      "Message": "$Beacon_FreeStuff",
+      "Loot": 3,
       "Actions": [
         {
           "TargetNode": 2,
@@ -17,6 +18,12 @@
     },
     {
       "Id": 2,
+      "Type": 35,
+      "DefaultTransition": 3,
+      "Loot": 3
+    },
+    {
+      "Id": 3,
       "Type": 40
     }
   ]

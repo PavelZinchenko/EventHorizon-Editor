@@ -18,7 +18,7 @@
 
         Retreat = 30,
 
-        ObtainItem = 35,
+        ReceiveItem = 35,
         RemoveItem = 36,
         Trade = 37,
 

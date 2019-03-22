@@ -36,7 +36,7 @@ namespace GameDatabase.EditorModel.Quests
                     return new CombatNodeContent();
                 case NodeType.AttackOccupants:
                     return new LocalCombatNodeContent();
-                case NodeType.ObtainItem:
+                case NodeType.ReceiveItem:
                 case NodeType.RemoveItem:
                 case NodeType.Trade:
                     return new LootNodeContent();
@@ -139,7 +139,7 @@ namespace GameDatabase.EditorModel.Quests
     {
         public void Load(SerializableNode serializable, Database database)
         {
-            Loot = database.GetLoot(serializable.Loot)?.ItemId ?? ItemId<Loot>.Empty;
+            Loot = database.GetLootId(serializable.Loot);
             Transition = new NumericValue<int>(serializable.DefaultTransition, 1, 1000);
         }
 
@@ -160,6 +160,8 @@ namespace GameDatabase.EditorModel.Quests
         {
             Message = serializable.Message;
             Character = database.GetCharacterId(serializable.Character);
+            Enemy = database.GetFleetId(serializable.Enemy);
+            Loot = database.GetLootId(serializable.Loot);
             RequiredView = (RequiredViewMode)serializable.RequiredView;
 
             Actions = serializable.Actions?.Select(action =>
@@ -179,6 +181,8 @@ namespace GameDatabase.EditorModel.Quests
             serializable.Message = Message;
             serializable.RequiredView = (int)RequiredView;
             serializable.Character = Character.Id;
+            serializable.Enemy = Enemy.Id;
+            serializable.Loot = Loot.Id;
 
             if (Actions == null || Actions.Length == 0)
                 serializable.Actions = null;
@@ -195,6 +199,8 @@ namespace GameDatabase.EditorModel.Quests
 
         public string Message;
         public ItemId<Character> Character = ItemId<Character>.Empty;
+        public ItemId<Fleet> Enemy = ItemId<Fleet>.Empty;
+        public ItemId<Loot> Loot = ItemId<Loot>.Empty;
         public RequiredViewMode RequiredView;
         public QuestAction[] Actions;
 

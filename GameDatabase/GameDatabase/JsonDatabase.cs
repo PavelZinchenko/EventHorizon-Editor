@@ -107,8 +107,8 @@ namespace GameDatabase
                         case ItemType.Character:
                             deserializedObject = DeserializeItem(data, name, _characters);
                             break;
-                        case ItemType.Artifact:
-                            deserializedObject = DeserializeItem(data, name, _artifacts);
+                        case ItemType.QuestItem:
+                            deserializedObject = DeserializeItem(data, name, _questItems);
                             break;
                         case ItemType.ShipSettings:
                             deserializedObject = ShipSettings = DeserializeItem<SerializableShipSettings>(data, name);
@@ -163,7 +163,7 @@ namespace GameDatabase
                 Serialize(item, path);
             foreach (var item in _characters.Values)
                 Serialize(item, path);
-            foreach (var item in _artifacts.Values)
+            foreach (var item in _questItems.Values)
                 Serialize(item, path);
 
             Serialize(ShipSettings, path);
@@ -189,7 +189,7 @@ namespace GameDatabase
             _quests.Clear();
             _fleets.Clear();
             _characters.Clear();
-            _artifacts.Clear();
+            _questItems.Clear();
 
             _fileNames.Clear();
             _images.Clear();
@@ -220,7 +220,7 @@ namespace GameDatabase
         public IEnumerable<SerializableQuest> Quests { get { return _quests.Values; } }
         public IEnumerable<SerializableFleet> Fleets { get { return _fleets.Values; } }
         public IEnumerable<SerializableCharacter> Characters { get { return _characters.Values; } }
-        public IEnumerable<SerializableArtifact> Artifacts { get { return _artifacts.Values; } }
+        public IEnumerable<SerializableQuestItem> QuestItems { get { return _questItems.Values; } }
 
         public SerializableWeapon GetWeapon(int id) { return GetItem(id, _weapons); }
         public SerializableAmmunition GetAmmunition(int id) { return GetItem(id, _ammunitions); }
@@ -240,7 +240,7 @@ namespace GameDatabase
         public SerializableQuest GetQuest(int id) { return GetItem(id, _quests); }
         public SerializableFleet GetFleet(int id) { return GetItem(id, _fleets); }
         public SerializableCharacter GetCharacter(int id) { return GetItem(id, _characters); }
-        public SerializableArtifact GetArtifact(int id) { return GetItem(id, _artifacts); }
+        public SerializableQuestItem GetQuestItem(int id) { return GetItem(id, _questItems); }
 
         public Image GetImage(string name)
         {
@@ -343,7 +343,7 @@ namespace GameDatabase
         private readonly Dictionary<int, SerializableQuest> _quests = new Dictionary<int, SerializableQuest>();
         private readonly Dictionary<int, SerializableFleet> _fleets = new Dictionary<int, SerializableFleet>();
         private readonly Dictionary<int, SerializableCharacter> _characters = new Dictionary<int, SerializableCharacter>();
-        private readonly Dictionary<int, SerializableArtifact> _artifacts = new Dictionary<int, SerializableArtifact>();
+        private readonly Dictionary<int, SerializableQuestItem> _questItems = new Dictionary<int, SerializableQuestItem>();
 
         private readonly Dictionary<string, Image> _images = new Dictionary<string, Image>();
         private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);

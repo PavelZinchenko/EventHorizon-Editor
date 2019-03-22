@@ -2,12 +2,13 @@
   "ItemType": 15,
   "Id": 7,
   "StartCondition": 1,
-  "Weight": 1.0,
+  "Weight": 0.2,
   "Nodes": [
     {
       "Id": 1,
       "Type": 10,
       "Message": "$WORM_Message",
+      "Enemy": 4,
       "Actions": [
         {
           "TargetNode": 2,
@@ -30,6 +31,7 @@
       "Id": 3,
       "Type": 10,
       "Message": "$MessageCombatReward",
+      "Loot": 7,
       "Actions": [
         {
           "TargetNode": 4,

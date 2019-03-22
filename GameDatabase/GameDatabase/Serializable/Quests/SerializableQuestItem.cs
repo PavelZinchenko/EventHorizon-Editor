@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace GameDatabase.Serializable
 {
     [Serializable]
-    public class SerializableArtifact : SerializableItem
+    public class SerializableQuestItem : SerializableItem
     {
         [DefaultValue("")]
         public string Name;

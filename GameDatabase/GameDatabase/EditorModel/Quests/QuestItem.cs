@@ -4,20 +4,20 @@ using GameDatabase.Serializable;
 
 namespace GameDatabase.EditorModel.Quests
 {
-    public class Artifact
+    public class QuestItem
     {
-        public Artifact(SerializableArtifact artifact, Database database)
+        public QuestItem(SerializableQuestItem questItem, Database database)
         {
-            ItemId = new ItemId<Artifact>(artifact.Id, artifact.FileName);
+            ItemId = new ItemId<QuestItem>(questItem.Id, questItem.FileName);
 
-            Name = artifact.Name;
-            Description = artifact.Description;
-            Icon = artifact.Icon;
-            Color = Helpers.ColorFromString(artifact.Color);
-            Price = new NumericValue<int>(artifact.Price, 0, 1000000);
+            Name = questItem.Name;
+            Description = questItem.Description;
+            Icon = questItem.Icon;
+            Color = Helpers.ColorFromString(questItem.Color);
+            Price = new NumericValue<int>(questItem.Price, 0, 1000000);
         }
 
-        public void Save(SerializableArtifact serializable)
+        public void Save(SerializableQuestItem serializable)
         {
             serializable.Name = Name;
             serializable.Color = Helpers.ColorToString(Color);
@@ -26,7 +26,7 @@ namespace GameDatabase.EditorModel.Quests
             serializable.Price = Price.Value;
         }
 
-        public readonly ItemId<Artifact> ItemId;
+        public readonly ItemId<QuestItem> ItemId;
         public string Name;
         public string Description;
         public string Icon;

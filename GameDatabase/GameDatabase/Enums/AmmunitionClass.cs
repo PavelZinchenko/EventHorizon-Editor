@@ -32,5 +32,7 @@
         IonBeam,
         AcidRocket,
         BlackHole,
+        ClusterMissile,
+        HomingCarrier,
     }
 }

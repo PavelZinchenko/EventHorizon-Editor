@@ -60,11 +60,11 @@ namespace GameDatabase.Controls
             if (_collection == null || _collection.Length == 0)
                 return;
 
+            tableLayoutPanel.SuspendLayout();
+
             var rowCount = _collection.Length;
             tableLayoutPanel.Controls.Clear();
             tableLayoutPanel.RowCount = rowCount;
-
-            tableLayoutPanel.SuspendLayout();
 
             for (var i = 0; i < rowCount; ++i)
                 tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -76,6 +76,8 @@ namespace GameDatabase.Controls
 
         private void AddRow(int rowId, object data)
         {
+            tableLayoutPanel.SuspendLayout();
+
             var radioButton = new RadioButton { Text = string.Empty, AutoSize = true };
             _radioButtons.Add(radioButton);
             radioButton.CheckedChanged += OnRadioButtonSelected;
@@ -96,6 +98,8 @@ namespace GameDatabase.Controls
             editor.DataChanged += OnDataChanged;
 
             tableLayoutPanel.Controls.Add(editor, 1, rowId);
+
+            tableLayoutPanel.ResumeLayout();
         }
 
         private void OnDataChanged(object sender, EventArgs args)

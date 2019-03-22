@@ -28,7 +28,9 @@ namespace GameDatabase.EditorModel.Quests
                     return new BooleanContent();
                 case RequirementType.HaveItem:
                     return new RequiredItemsContent();
-                case RequirementType.HaveArtifact:
+                case RequirementType.HaveItemById:
+                    return new RequiredItemsByIdContent();
+                case RequirementType.HaveQuestItem:
                     return new RequiredArtifactContent();
                 case RequirementType.PlayerPosition:
                 case RequirementType.RandomStarSystem:
@@ -79,6 +81,24 @@ namespace GameDatabase.EditorModel.Quests
     {
         public void Load(SerializableRequirement serializable, Database database)
         {
+            Loot = new Loot(serializable.Loot, database);
+        }
+
+        public void Save(SerializableRequirement serializable)
+        {
+            if (Loot.Type == LootItemType.None)
+                serializable.Loot = null;
+            else
+                Loot.Save(serializable.Loot = new SerializableLootContent());
+        }
+
+        public Loot Loot = new Loot();
+    }
+
+    public class RequiredItemsByIdContent : IRequirementContent
+    {
+        public void Load(SerializableRequirement serializable, Database database)
+        {
             LootId = database.GetLootId(serializable.ItemId);
         }
 
@@ -94,7 +114,7 @@ namespace GameDatabase.EditorModel.Quests
     {
         public void Load(SerializableRequirement serializable, Database database)
         {
-            Item = database.GetArtifactId(serializable.ItemId);
+            Item = database.GetQuestItemId(serializable.ItemId);
             Amount = new NumericValue<int>(serializable.MinValue, 0, 1000000);
         }
 
@@ -104,7 +124,7 @@ namespace GameDatabase.EditorModel.Quests
             serializable.MinValue = Amount.Value;
         }
 
-        public ItemId<Artifact> Item;
+        public ItemId<QuestItem> Item;
         public NumericValue<int> Amount = new NumericValue<int>(0, 0, 1000000);
     }
 

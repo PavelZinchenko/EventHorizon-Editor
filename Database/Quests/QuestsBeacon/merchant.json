@@ -2,12 +2,14 @@
   "ItemType": 15,
   "Id": 6,
   "StartCondition": 1,
-  "Weight": 1.0,
+  "Weight": 0.7,
   "Nodes": [
     {
       "Id": 1,
       "Type": 10,
       "Message": "$MERCHANT_Message",
+      "Enemy": 2,
+      "Character": 1,
       "Actions": [
         {
           "TargetNode": 2,
@@ -40,6 +42,7 @@
       "Id": 4,
       "Type": 10,
       "Message": "$Beacon_Merchant_Loot",
+      "Loot": 5,
       "Actions": [
         {
           "TargetNode": 5,

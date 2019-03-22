@@ -83,12 +83,13 @@ namespace GameDatabase
             if (_data == null)
                 return;
 
+            tableLayoutPanel.SuspendLayout();
+
             var fields = _data.Properties.ToArray();
 
             tableLayoutPanel.Controls.Clear();
             tableLayoutPanel.RowCount = fields.Length + 1;
 
-            tableLayoutPanel.SuspendLayout();
             for (var i = 0; i <= tableLayoutPanel.RowCount; ++i)
                 tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
@@ -192,7 +193,7 @@ namespace GameDatabase
                 return result;
             if ((result = TryCreateIdItem(value, type, _database.CharacterIds, 1, rowId)) != null)
                 return result;
-            if ((result = TryCreateIdItem(value, type, _database.ArtifactIds, 1, rowId)) != null)
+            if ((result = TryCreateIdItem(value, type, _database.QuestItemIds, 1, rowId)) != null)
                 return result;
 
             if (typeof(IDataAdapter).IsAssignableFrom(type))
@@ -209,7 +210,9 @@ namespace GameDatabase
             if (type != typeof(ItemId<T>))
                 return null;
 
-            return CreateComboBox(items.Cast<object>(), value, column, row);
+            var itemlist = Enumerable.Repeat(ItemId<T>.Empty, 1).Concat(items).Cast<object>();
+
+            return CreateComboBox(itemlist, value, column, row);
         }
 
         private Label CreateLabel(string text, int column, int row)

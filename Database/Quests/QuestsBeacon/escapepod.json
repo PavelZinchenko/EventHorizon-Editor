@@ -3,7 +3,7 @@
   "Id": 4,
   "Name": "$Beacon_EscapePod",
   "StartCondition": 1,
-  "Weight": 1.0,
+  "Weight": 0.5,
   "Nodes": [
     {
       "Id": 1,
@@ -38,6 +38,7 @@
       "Id": 3,
       "Type": 10,
       "Message": "$Beacon_EscapePod_Completed",
+      "Loot": 1,
       "Actions": [
         {
           "TargetNode": 4,

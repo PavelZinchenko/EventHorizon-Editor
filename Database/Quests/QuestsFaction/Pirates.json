@@ -35,6 +35,7 @@
       "Id": 3,
       "Type": 10,
       "Message": "$Mission_DestroyPirates_Attack",
+      "Enemy": 3,
       "Character": 3,
       "Actions": [
         {

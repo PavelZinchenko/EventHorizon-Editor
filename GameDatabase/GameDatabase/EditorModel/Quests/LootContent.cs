@@ -7,8 +7,8 @@ namespace GameDatabase.EditorModel.Quests
 {
     public interface ILootContent
     {
-        void Load(SerializableLoot serializable, Database database);
-        void Save(SerializableLoot serializable);
+        void Load(SerializableLootContent serializable, Database database);
+        void Save(SerializableLootContent serializable);
     }
 
     public static class LootFactory
@@ -28,12 +28,14 @@ namespace GameDatabase.EditorModel.Quests
                     return new ResourceLootContent();
                 case LootItemType.RandomComponents:
                     return new RandomComponentsLootContent();
+                case LootItemType.ItemsWithChance:
+                    return new ItemsWithChanceLootContent();
                 case LootItemType.RandomItems:
                     return new RandomItemsLootContent();
-                case LootItemType.Group:
+                case LootItemType.AllItems:
                     return new ItemGroupLootContent();
-                case LootItemType.Artifact:
-                    return new ArtifactLootContent();
+                case LootItemType.QuestItem:
+                    return new QuestItemLootContent();
                 case LootItemType.Ship:
                     return new ShipBuildLootContent();
                 case LootItemType.EmptyShip:
@@ -48,12 +50,12 @@ namespace GameDatabase.EditorModel.Quests
 
     public class ShipBuildLootContent : ILootContent
     {
-        public void Load(SerializableLoot serializable, Database database)
+        public void Load(SerializableLootContent serializable, Database database)
         {
             Build = database.GetShipBuildId(serializable.ItemId);
         }
 
-        public void Save(SerializableLoot serializable)
+        public void Save(SerializableLootContent serializable)
         {
             serializable.ItemId = Build.Id;
         }
@@ -63,12 +65,12 @@ namespace GameDatabase.EditorModel.Quests
 
     public class ShipLootContent : ILootContent
     {
-        public void Load(SerializableLoot serializable, Database database)
+        public void Load(SerializableLootContent serializable, Database database)
         {
             Ship = database.GetShipId(serializable.ItemId);
         }
 
-        public void Save(SerializableLoot serializable)
+        public void Save(SerializableLootContent serializable)
         {
             serializable.ItemId = Ship.Id;
         }
@@ -78,14 +80,14 @@ namespace GameDatabase.EditorModel.Quests
 
     public class ComponentLootContent : ILootContent
     {
-        public void Load(SerializableLoot serializable, Database database)
+        public void Load(SerializableLootContent serializable, Database database)
         {
             Component = database.GetComponentId(serializable.ItemId);
             MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 1000);
             MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 1000);
         }
 
-        public void Save(SerializableLoot serializable)
+        public void Save(SerializableLootContent serializable)
         {
             serializable.ItemId = Component.Id;
             serializable.MinAmount = MinAmount.Value;
@@ -99,18 +101,18 @@ namespace GameDatabase.EditorModel.Quests
 
     public class EmptyLootContent : ILootContent
     {
-        public void Load(SerializableLoot serializable, Database database) {}
-        public void Save(SerializableLoot serializable) {}
+        public void Load(SerializableLootContent serializable, Database database) {}
+        public void Save(SerializableLootContent serializable) {}
     }
 
     public class ResourceByLevelLootContent : ILootContent
     {
-        public void Load(SerializableLoot serializable, Database database)
+        public void Load(SerializableLootContent serializable, Database database)
         {
             ValueRatio = new NumericValue<float>(serializable.ValueRatio, 0, 100);
         }
 
-        public void Save(SerializableLoot serializable)
+        public void Save(SerializableLootContent serializable)
         {
             serializable.ValueRatio = ValueRatio.Value;
         }
@@ -120,13 +122,13 @@ namespace GameDatabase.EditorModel.Quests
 
     public class ResourceLootContent : ILootContent
     {
-        public void Load(SerializableLoot serializable, Database database)
+        public void Load(SerializableLootContent serializable, Database database)
         {
             MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 1000);
             MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 1000);
         }
 
-        public void Save(SerializableLoot serializable)
+        public void Save(SerializableLootContent serializable)
         {
             serializable.MinAmount = MinAmount.Value;
             serializable.MaxAmount = MaxAmount.Value;
@@ -136,29 +138,30 @@ namespace GameDatabase.EditorModel.Quests
         public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 1000);
     }
 
-    public class ArtifactLootContent : ILootContent
+    public class QuestItemLootContent : ILootContent
     {
-        public void Load(SerializableLoot serializable, Database database)
+        public void Load(SerializableLootContent serializable, Database database)
         {
-            Item = database.GetArtifactId(serializable.ItemId);
+            Item = database.GetQuestItemId(serializable.ItemId);
             MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 1000);
             MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 1000);
         }
 
-        public void Save(SerializableLoot serializable)
+        public void Save(SerializableLootContent serializable)
         {
+            serializable.ItemId = Item.Id;
             serializable.MinAmount = MinAmount.Value;
             serializable.MaxAmount = MaxAmount.Value;
         }
 
-        public ItemId<Artifact> Item = ItemId<Artifact>.Empty;
+        public ItemId<QuestItem> Item = ItemId<QuestItem>.Empty;
         public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 1000);
         public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 1000);
     }
 
     public class RandomComponentsLootContent : ILootContent
     {
-        public void Load(SerializableLoot serializable, Database database)
+        public void Load(SerializableLootContent serializable, Database database)
         {
             ValueRatio = new NumericValue<float>(serializable.ValueRatio, 0, 100);
             MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 1000);
@@ -166,7 +169,7 @@ namespace GameDatabase.EditorModel.Quests
             Factions = new FactionFilter(serializable.Factions, database);
         }
 
-        public void Save(SerializableLoot serializable)
+        public void Save(SerializableLootContent serializable)
         {
             serializable.ValueRatio = ValueRatio.Value;
             serializable.MinAmount = MinAmount.Value;
@@ -182,38 +185,78 @@ namespace GameDatabase.EditorModel.Quests
 
     public class ItemGroupLootContent : ILootContent
     {
-        public void Load(SerializableLoot serializable, Database database)
+        public void Load(SerializableLootContent serializable, Database database)
         {
-            Items = serializable.Items?.Select(item => new Wrapper<Loot> { Item = database.GetLoot(item.LootId).ItemId }).ToArray();
+            Items = serializable.Items?.Select(item => new Loot(item.Loot, database)).ToArray();
         }
 
-        public void Save(SerializableLoot serializable)
+        public void Save(SerializableLootContent serializable)
         {
-            serializable.Items = Items?.Select(item => new SerializableLoot.LootItem { LootId = item.Item.Id }).ToArray();
+            serializable.Items = Items?.Select(item =>
+            {
+                var loot = new SerializableLootContent();
+                item.Save(loot);
+                return new SerializableLootContent.LootItem { Loot = loot };
+            }).ToArray();
         }
 
-        public Wrapper<Loot>[] Items;
+        public Loot[] Items;
+    }
+
+    public class ItemsWithChanceLootContent : ILootContent
+    {
+        public void Load(SerializableLootContent serializable, Database database)
+        {
+            Items = serializable.Items?.Select(item => new LootContentItem
+            {
+                Loot = new Loot(item.Loot, database),
+                Chance = new NumericValue<float>(item.Weight, 0, 1)
+            }).ToArray();
+        }
+
+        public void Save(SerializableLootContent serializable)
+        {
+            serializable.Items = Items?.Select(item =>
+            {
+                var loot = new SerializableLootContent();
+                item.Loot.Save(loot);
+                return new SerializableLootContent.LootItem { Weight = item.Chance.Value, Loot = loot };
+            }).ToArray();
+        }
+
+        public LootContentItem[] Items;
+
+        public class LootContentItem
+        {
+            public Loot Loot = new Loot();
+            public NumericValue<float> Chance = new NumericValue<float>(0, 0, 1);
+        }
     }
 
     public class RandomItemsLootContent : ILootContent
     {
-        public void Load(SerializableLoot serializable, Database database)
+        public void Load(SerializableLootContent serializable, Database database)
         {
             MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 1000);
             MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 1000);
 
             Items = serializable.Items?.Select(item => new LootContentItem
             {
-                Loot = database.GetLoot(item.LootId).ItemId,
+                Loot = new Loot(item.Loot, database),
                 Weight = new NumericValue<float>(item.Weight, 0, 100)
             }).ToArray();
         }
 
-        public void Save(SerializableLoot serializable)
+        public void Save(SerializableLootContent serializable)
         {
             serializable.MinAmount = MinAmount.Value;
             serializable.MaxAmount = MaxAmount.Value;
-            serializable.Items = Items?.Select(item => new SerializableLoot.LootItem { Weight = item.Weight.Value, LootId = item.Loot.Id }).ToArray();
+            serializable.Items = Items?.Select(item =>
+            {
+                var loot = new SerializableLootContent();
+                item.Loot.Save(loot);
+                return new SerializableLootContent.LootItem { Weight = item.Weight.Value, Loot = loot };
+            }).ToArray();
         }
 
         public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 1000);
@@ -222,7 +265,7 @@ namespace GameDatabase.EditorModel.Quests
 
         public class LootContentItem
         {
-            public ItemId<Loot> Loot = ItemId<Loot>.Empty;
+            public Loot Loot = new Loot();
             public NumericValue<float> Weight = new NumericValue<float>(0, 0, 100);
         }
     }

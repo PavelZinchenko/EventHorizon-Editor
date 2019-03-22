@@ -12,10 +12,6 @@ namespace GameDatabase.Serializable
         public float ArmorRepairRate;
         public float ArmorRepairCooldownModifier;
 
-        public float HullPoints;
-        public float HullRepairRate;
-        public float HullRepairCooldownModifier;
-        
         public float EnergyPoints;
         public float EnergyRechargeRate;
         public float EnergyRechargeCooldownModifier;

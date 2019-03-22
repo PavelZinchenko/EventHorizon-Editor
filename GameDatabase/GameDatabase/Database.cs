@@ -33,7 +33,7 @@ namespace GameDatabase
                 _componentMods = _jsonDatabase.ComponentMods.ToDictionary(item => item.Id, item => new ComponentMod(item, this));
                 _factions = _jsonDatabase.Factions.ToDictionary(item => item.Id, item => new Faction(item, this));
                 _characters = _jsonDatabase.Characters.ToDictionary(item => item.Id, item => new Character(item, this));
-                _artifacts = _jsonDatabase.Artifacts.ToDictionary(item => item.Id, item => new Artifact(item, this));
+                _questItems = _jsonDatabase.QuestItems.ToDictionary(item => item.Id, item => new QuestItem(item, this));
             }
         }
 
@@ -90,8 +90,8 @@ namespace GameDatabase
                 item.Value.Save(Cleanup(_jsonDatabase.GetFleet(item.Key)));
             foreach (var item in _characters)
                 item.Value.Save(Cleanup(_jsonDatabase.GetCharacter(item.Key)));
-            foreach (var item in _artifacts)
-                item.Value.Save(Cleanup(_jsonDatabase.GetArtifact(item.Key)));
+            foreach (var item in _questItems)
+                item.Value.Save(Cleanup(_jsonDatabase.GetQuestItem(item.Key)));
 
             ShipSettings.Save(Cleanup(_jsonDatabase.ShipSettings));
             GalaxySettings.Save(Cleanup(_jsonDatabase.GalaxySettings));
@@ -120,7 +120,7 @@ namespace GameDatabase
         public QuestModel GetQuest(int id) { return GetItem(id, _quests, _jsonDatabase.GetQuest(id)); }
         public Fleet GetFleet(int id) { return GetItem(id, _fleets, _jsonDatabase.GetFleet(id)); }
         public Character GetCharacter(int id) { return GetItem(id, _characters, _jsonDatabase.GetCharacter(id)); }
-        public Artifact GetArtifact(int id) { return GetItem(id, _artifacts, _jsonDatabase.GetArtifact(id)); }
+        public QuestItem GetQuestItem(int id) { return GetItem(id, _questItems, _jsonDatabase.GetQuestItem(id)); }
 
         public IEnumerable<ItemId<Component>> ComponentIds { get { return _jsonDatabase.Components.Select(item => new ItemId<Component>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<Device>> DeviceIds { get { return _jsonDatabase.Devices.Select(item => new ItemId<Device>(item.Id, item.FileName)); } }
@@ -140,7 +140,7 @@ namespace GameDatabase
         public IEnumerable<ItemId<QuestModel>> QuestIds { get { return _jsonDatabase.Quests.Select(item => new ItemId<QuestModel>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<Fleet>> FleetIds { get { return _jsonDatabase.Fleets.Select(item => new ItemId<Fleet>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<Character>> CharacterIds { get { return _jsonDatabase.Characters.Select(item => new ItemId<Character>(item.Id, item.FileName)); } }
-        public IEnumerable<ItemId<Artifact>> ArtifactIds { get { return _jsonDatabase.Artifacts.Select(item => new ItemId<Artifact>(item.Id, item.FileName)); } }
+        public IEnumerable<ItemId<QuestItem>> QuestItemIds { get { return _jsonDatabase.QuestItems.Select(item => new ItemId<QuestItem>(item.Id, item.FileName)); } }
 
         public Image GetImage(string name) { return _jsonDatabase.GetImage(name); }
         public string GetLocalization(string language) { return _jsonDatabase.GetLocalization(language); }
@@ -154,7 +154,7 @@ namespace GameDatabase
         public ItemId<Loot> GetLootId(int id) { return new ItemId<Loot>(id, _jsonDatabase.GetLoot(id)?.FileName); }
         public ItemId<Fleet> GetFleetId(int id) { return new ItemId<Fleet>(id, _jsonDatabase.GetFleet(id)?.FileName); }
         public ItemId<Character> GetCharacterId(int id) { return new ItemId<Character>(id, _jsonDatabase.GetCharacter(id)?.FileName); }
-        public ItemId<Artifact> GetArtifactId(int id) { return new ItemId<Artifact>(id, _jsonDatabase.GetArtifact(id)?.FileName); }
+        public ItemId<QuestItem> GetQuestItemId(int id) { return new ItemId<QuestItem>(id, _jsonDatabase.GetQuestItem(id)?.FileName); }
         public ItemId<Component> GetComponentId(int id) { return new ItemId<Component>(id, _jsonDatabase.GetComponent(id)?.FileName); }
 
         private T GetItem<T,U>(int id, Dictionary<int, T> cache, U source) where T : class
@@ -190,7 +190,7 @@ namespace GameDatabase
         private readonly Dictionary<int, QuestModel> _quests = new Dictionary<int, QuestModel>();
         private readonly Dictionary<int, Fleet> _fleets = new Dictionary<int, Fleet>();
         private readonly Dictionary<int, Character> _characters = new Dictionary<int, Character>();
-        private readonly Dictionary<int, Artifact> _artifacts = new Dictionary<int, Artifact>();
+        private readonly Dictionary<int, QuestItem> _questItems = new Dictionary<int, QuestItem>();
 
         private readonly JsonDatabase _jsonDatabase;
     }

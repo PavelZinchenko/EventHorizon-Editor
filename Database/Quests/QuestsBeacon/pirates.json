@@ -8,6 +8,7 @@
       "Id": 1,
       "Type": 10,
       "Message": "$SOS_TRAP_Message",
+      "Enemy": 3,
       "Actions": [
         {
           "TargetNode": 2,
@@ -20,8 +21,7 @@
       "Type": 20,
       "DefaultTransition": 3,
       "FailureTransition": 4,
-      "Enemy": 3,
-      "Loot": 8
+      "Enemy": 3
     },
     {
       "Id": 3,

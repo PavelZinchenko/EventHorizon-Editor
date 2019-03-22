@@ -4,7 +4,7 @@
   "Name": "$f13_Scout",
   "Faction": 13,
   "IconImage": "f13s3",
-  "IconScale": 1.0,
+  "IconScale": 0.5,
   "ModelImage": "f13s3",
   "ModelScale": 1.0,
   "EnginePosition": {

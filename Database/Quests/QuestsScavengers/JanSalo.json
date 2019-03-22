@@ -5,7 +5,7 @@
   "QuestType": 2,
   "StartCondition": 6,
   "Weight": 0.05,
-  "Level": 10,
+  "Level": 60,
   "Nodes": [
     {
       "Id": 1,
@@ -88,7 +88,50 @@
     },
     {
       "Id": 6,
-      "Type": 1
+      "Type": 15,
+      "Message": "$JanSalo_1_Description",
+      "Transitions": [
+        {
+          "TargetNode": 7,
+          "Requirement": {
+            "Type": 2,
+            "Requirements": [
+              {
+                "Type": 15,
+                "MinValue": 50,
+                "Character": 2
+              },
+              {
+                "Type": 6,
+                "MinValue": 100
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Id": 7,
+      "Type": 10,
+      "Message": "$JanSalo_1_End",
+      "Loot": 15,
+      "Character": 2,
+      "Actions": [
+        {
+          "TargetNode": 8,
+          "ButtonText": "$Continue"
+        }
+      ]
+    },
+    {
+      "Id": 8,
+      "Type": 35,
+      "DefaultTransition": 9,
+      "Loot": 15
+    },
+    {
+      "Id": 9,
+      "Type": 40
     }
   ]
 }

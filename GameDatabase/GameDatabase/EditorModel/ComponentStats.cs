@@ -16,10 +16,6 @@ namespace GameDatabase.EditorModel
             ArmorRepairRate = new NumericValue<float>(stats.ArmorRepairRate, -1000, 1000);
             ArmorRepairCooldownModifier = new NumericValue<float>(stats.ArmorRepairCooldownModifier, -1f, 1f);
 
-            HullPoints = new NumericValue<float>(stats.HullPoints, -1000, 1000);
-            HullRepairRate = new NumericValue<float>(stats.HullRepairRate, -1000, 1000);
-            HullRepairCooldownModifier = new NumericValue<float>(stats.HullRepairCooldownModifier, -1f, 1f);
-
             EnergyPoints = new NumericValue<float>(stats.EnergyPoints, -1000, 1000);
             EnergyRechargeRate = new NumericValue<float>(stats.EnergyRechargeRate, -1000, 1000);
             EnergyRechargeCooldownModifier = new NumericValue<float>(stats.EnergyRechargeCooldownModifier, -1f, 1f);
@@ -64,10 +60,6 @@ namespace GameDatabase.EditorModel
             serializable.ArmorPoints = ArmorPoints.Value;
             serializable.ArmorRepairRate = ArmorRepairRate.Value;
             serializable.ArmorRepairCooldownModifier = ArmorRepairCooldownModifier.Value;
-
-            serializable.HullPoints = HullPoints.Value;
-            serializable.HullRepairRate = HullRepairRate.Value;
-            serializable.HullRepairCooldownModifier = HullRepairCooldownModifier.Value;
 
             serializable.EnergyPoints = EnergyPoints.Value;
             serializable.EnergyRechargeRate = EnergyRechargeRate.Value;

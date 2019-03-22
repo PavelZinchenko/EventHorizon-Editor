@@ -12,6 +12,7 @@ namespace GameDatabase.Serializable
         public int MaxValue;
         public int Character;
         public int Faction;
+        public SerializableLootContent Loot;
         public SerializableRequirement[] Requirements;
     }
 }

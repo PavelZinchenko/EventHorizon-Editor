@@ -10,10 +10,12 @@
 
         StarMap = 5,
         RandomComponents = 10,
-        RandomItems = 20,
-        Group = 21,
 
-        Artifact = 25,
+        RandomItems = 20,
+        AllItems = 21,
+        ItemsWithChance = 22,
+
+        QuestItem = 25,
 
         Ship = 30,
         EmptyShip = 31,

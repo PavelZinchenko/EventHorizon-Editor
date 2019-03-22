@@ -5,6 +5,12 @@ namespace GameDatabase.Serializable
     [Serializable]
     public class SerializableLoot : SerializableItem
     {
+        public SerializableLootContent Loot;
+    }
+
+    [Serializable]
+    public class SerializableLootContent
+    {
         public int Type;
         public int ItemId;
         public int MinAmount;
@@ -17,7 +23,7 @@ namespace GameDatabase.Serializable
         public struct LootItem
         {
             public float Weight;
-            public int LootId;
+            public SerializableLootContent Loot;
         }
     }
 }

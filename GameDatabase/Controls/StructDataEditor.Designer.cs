@@ -33,7 +33,6 @@
             // 
             // tableLayoutPanel
             // 
-            this.tableLayoutPanel.AutoScroll = true;
             this.tableLayoutPanel.AutoSize = true;
             this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel.ColumnCount = 3;

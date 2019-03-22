@@ -5,7 +5,7 @@
   "Faction": 13,
   "SizeClass": 3,
   "IconImage": "f13s4",
-  "IconScale": 1.0,
+  "IconScale": 0.8,
   "ModelImage": "f13s4",
   "ModelScale": 2.2,
   "EnginePosition": {

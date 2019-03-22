@@ -220,8 +220,8 @@ namespace GameDatabase
                     return _database.GetFleet(_selectedItem.Id);
                 case ItemType.Character:
                     return _database.GetCharacter(_selectedItem.Id);
-                case ItemType.Artifact:
-                    return _database.GetArtifact(_selectedItem.Id);
+                case ItemType.QuestItem:
+                    return _database.GetQuestItem(_selectedItem.Id);
                 default:
                     return null;
             }

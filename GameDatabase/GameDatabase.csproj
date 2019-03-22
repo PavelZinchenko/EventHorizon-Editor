@@ -124,7 +124,7 @@
     <Compile Include="GameDatabase\EditorModel\Faction.cs" />
     <Compile Include="GameDatabase\EditorModel\GalaxySettings.cs" />
     <Compile Include="GameDatabase\EditorModel\InstalledComponent.cs" />
-    <Compile Include="GameDatabase\EditorModel\Quests\Artifact.cs" />
+    <Compile Include="GameDatabase\EditorModel\Quests\QuestItem.cs" />
     <Compile Include="GameDatabase\EditorModel\Quests\Character.cs" />
     <Compile Include="GameDatabase\EditorModel\Quests\Fleet.cs" />
     <Compile Include="GameDatabase\EditorModel\Quests\FactionFilter.cs" />
@@ -174,7 +174,7 @@
     <Compile Include="GameDatabase\Model\Layout.cs" />
     <Compile Include="GameDatabase\Model\NumericValue.cs" />
     <Compile Include="GameDatabase\Model\Vector2.cs" />
-    <Compile Include="GameDatabase\Serializable\Quests\SerializableArtifact.cs" />
+    <Compile Include="GameDatabase\Serializable\Quests\SerializableQuestItem.cs" />
     <Compile Include="GameDatabase\Serializable\Quests\SerializableCharacter.cs" />
     <Compile Include="GameDatabase\Serializable\Quests\SerializableFleet.cs" />
     <Compile Include="GameDatabase\Serializable\Quests\SerializableFactionFilter.cs" />
