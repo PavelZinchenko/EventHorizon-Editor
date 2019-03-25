@@ -21,7 +21,8 @@
       "Type": 20,
       "DefaultTransition": 3,
       "FailureTransition": 4,
-      "Enemy": 3
+      "Enemy": 3,
+      "Loot": 11
     },
     {
       "Id": 3,

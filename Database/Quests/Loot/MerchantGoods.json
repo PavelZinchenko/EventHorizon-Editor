@@ -13,6 +13,11 @@
       },
       {
         "Loot": {
+          "Type": 5
+        }
+      },
+      {
+        "Loot": {
           "Type": 10,
           "MinAmount": 5,
           "MaxAmount": 8,
