@@ -25,3 +25,49 @@ Localization files should be named according to the language - \<language\>.xml 
 <string name="Module2">Big bomb</string>
 </resources>
 ```
+
+## Quests
+
+#### Quest Types
+* Common - can be started multiple times
+* Singleton - like common, but only one can be active at a time
+* Storyline - can be completed only once
+* Temporary - like common, but doesn't save it's state
+
+#### Start Conditions
+* Manual - can only be started manually
+* Beacon - starts at beacons (more `Weight` = more chances to start)
+* LocalEncounter - starts when you are attacked (or attack) by local occupants (more `Weight` = more chances to start)
+* FactionMission - starts when you take a mission (more `Weight` = more chances to start)
+* GameStart - starts when you start (or load) the game
+* NewStarExplored - starts when you explore a new star and defeat its defenders (`Weight*100%` = chances to start)
+* ArrivedAtStar - starts when you arrive at any star stystem (`Weight*100%` = chances to start)
+
+#### Quest node types
+* ComingSoon - does nothing, shows 'Coming Soon' message in quest log
+* ShowDialog - shows the dialog window
+* Switch - waits until any transition in `Transitions` or `DefaultTransition` is available, then use it.
+* Random - selects random transition it `Transitions` or `DefaultTransition` in none is available.
+* AttackFleet - attacks the fleet then jumps to `VictoryTransition` or `DefeatTransition`
+* AttackOccupants - same as AttackFleet but attacks current star defenders
+* DestroyOccupants - removes current star defenders
+* SuppressOccupants - makes current star defenders non agressive
+* Retreat - moves to the nearest safe star system
+* ReceiveItem - gives `Loot` to player
+* RemoveItem - removes `Loot` from player
+* Trade - opens trade window. `Loot` = items in the store.
+* CompleteQuest - completes this quest
+* FailQuest - fails this quest
+* CancelQuest - cancels this quest (like it has never started)
+* StartQuest - starts the new `Quest` (it should be `Manual`)
+* SetCharacterRelations - sets the relations between `Character` and player to `Value`
+* SetFactionRelations - sets the relations between current faction and player to `Value`
+* ChangeCharacterRelations - modifies the relations between `Character` and player by `Value`
+* ChangeFactionRelations - modifies the relations between current faction and player by `Value`
+
+#### Requirement types
+TBD
+
+### Loot types
+TBD
+
