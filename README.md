@@ -66,8 +66,32 @@ Localization files should be named according to the language - \<language\>.xml 
 * ChangeFactionRelations - modifies the relations between current faction and player by `Value`
 
 #### Requirement types
-TBD
+* Any - any of `Requirements` should be true
+* All - all `Requirements` should be true
+* None - all `Requirements` should be false
+* PlayerPosition - player should be between `MinDistance` and `MaxDistance` l.y. from home
+* RandomStarSystem - player should be at random star system between `MinDistance` and `MaxDistance` l.y. from home
+* AggressiveOccupants - enemies in current star system want attack player
+* QuestCompleted - quest `QuestId` has been completed
+* QuestActive - quest `QuestId` is in progress
+* CharacterRelations - relations between player and `Character` should be between `MinValue` and `MaxValue`
+* FactionRelations - relations between player and current faction should be between `MinValue` and `MaxValue`
+* Faction - player should be on the territory of `Faction`
+* HaveQuestItem - player has an `Amount` of `Item`s
+* HaveItem, HaveItemById - player has every item in `Loot` (or `LootId`)
+* ComeBack - player should go to the star system where this quest has been taken
 
-### Loot types
-TBD
-
+#### Loot types
+* SomeMoney - an amount of money according to current distance from homestar multiplied by `ValueRatio`.
+* Fuel - random amount of fuel between `MinAmount` and `MaxAmount`
+* Money - random amount of money between `MinAmount` and `MaxAmount`
+* Stars - random amount of stars between `MinAmount` and `MaxAmount` (mobile version only)
+* StarMap - a star map which explores adjacent star systems
+* RandomComponents - random amount between `MinAmount` and `MaxAmount` of random compmonents of level according to the distance from homestar multiplied by `ValueRatio` and filtered by `Factions`
+* RandomItems - random amount of `Items` between `MinAmount` and `MaxAmount` (more `Weight` = more chances to pick)
+* AllItems - every item in `Items`
+* ItemsWithChance - random amount of `Items` (chance to pick = `Weight`*100%)
+* QuestItem - random amount of `Item`s between `MinAmount` and `MaxAmount`
+* Ship - selected ship `Build`
+* EmptyShip - selected `Ship` without weapons and modules
+* Component - random amount of selected `Component`s between `MinAmount` and `MaxAmount`
