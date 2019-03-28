@@ -28,6 +28,8 @@ Localization files should be named according to the language - \<language\>.xml 
 
 ## Quests
 
+You can email me any interesting quests you made. If I like it, I'll add it to the game.
+
 #### Quest Types
 * Common - can be started multiple times
 * Singleton - like common, but only one can be active at a time
