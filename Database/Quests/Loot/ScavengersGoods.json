@@ -93,6 +93,15 @@
                 "MinAmount": 5,
                 "MaxAmount": 25
               }
+            },
+            {
+              "Weight": 0.5,
+              "Loot": {
+                "Type": 25,
+                "ItemId": 5,
+                "MinAmount": 200,
+                "MaxAmount": 2000
+              }
             }
           ]
         }

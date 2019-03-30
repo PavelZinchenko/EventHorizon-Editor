@@ -23,8 +23,11 @@ namespace GameDatabase.EditorModel.Quests
                 case NodeType.Switch:
                 case NodeType.Random:
                     return new SwitchNodeContent();
+                case NodeType.Condition:
+                    return new ConditionNodeContent();
                 case NodeType.CompleteQuest:
                 case NodeType.FailQuest:
+                case NodeType.CancelQuest:
                 case NodeType.Undefined:
                 case NodeType.ComingSoon:
                     return new EmptyNodeContent();
@@ -259,6 +262,33 @@ namespace GameDatabase.EditorModel.Quests
             public Requirement Requirement = new Requirement();
             public NumericValue<float> Weight = new NumericValue<float>(0, 0, 100);
         }
+    }
+
+    public class ConditionNodeContent : INodeContent
+    {
+        public void Load(SerializableNode serializable, Database database)
+        {
+            QuestLogText = serializable.Message;
+            if (serializable.Transitions != null && serializable.Transitions.Length > 0)
+            {
+                var transition = serializable.Transitions[0];
+                TargetNode = new NumericValue<int>(transition.TargetNode, 1, 1000);
+                Requirement = new Requirement(transition.Requirement ?? new SerializableRequirement(), database);
+            }
+        }
+
+        public void Save(SerializableNode serializable)
+        {
+            serializable.Message = QuestLogText;
+            if (TargetNode.Value > 0)
+                serializable.Transitions = new [] { new SerializableNode.Transition { Requirement = Requirement.Save(), TargetNode = TargetNode.Value } };
+            else
+                serializable.Transitions = null;
+        }
+
+        public string QuestLogText;
+        public NumericValue<int> TargetNode = new NumericValue<int>(1, 1, 1000);
+        public Requirement Requirement = new Requirement();
     }
 
     public class FactionRelationsNodeContent : INodeContent

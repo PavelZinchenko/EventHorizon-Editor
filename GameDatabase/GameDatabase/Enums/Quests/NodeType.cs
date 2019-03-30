@@ -9,6 +9,7 @@
 
         Switch = 15,
         Random = 16,
+        Condition = 17,
 
         AttackFleet = 20,
         AttackOccupants = 21,

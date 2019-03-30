@@ -124,8 +124,8 @@ namespace GameDatabase.EditorModel.Quests
     {
         public void Load(SerializableLootContent serializable, Database database)
         {
-            MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 1000);
-            MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 1000);
+            MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 1000000);
+            MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 1000000);
         }
 
         public void Save(SerializableLootContent serializable)
@@ -134,8 +134,8 @@ namespace GameDatabase.EditorModel.Quests
             serializable.MaxAmount = MaxAmount.Value;
         }
 
-        public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 1000);
-        public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 1000);
+        public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 1000000);
+        public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 1000000);
     }
 
     public class QuestItemLootContent : ILootContent
@@ -143,8 +143,8 @@ namespace GameDatabase.EditorModel.Quests
         public void Load(SerializableLootContent serializable, Database database)
         {
             Item = database.GetQuestItemId(serializable.ItemId);
-            MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 1000);
-            MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 1000);
+            MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 1000000);
+            MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 1000000);
         }
 
         public void Save(SerializableLootContent serializable)
@@ -155,8 +155,8 @@ namespace GameDatabase.EditorModel.Quests
         }
 
         public ItemId<QuestItem> Item = ItemId<QuestItem>.Empty;
-        public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 1000);
-        public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 1000);
+        public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 1000000);
+        public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 1000000);
     }
 
     public class RandomComponentsLootContent : ILootContent

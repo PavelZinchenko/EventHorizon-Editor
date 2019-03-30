@@ -22,7 +22,7 @@
     },
     {
       "Id": 2,
-      "Type": 15,
+      "Type": 17,
       "Transitions": [
         {
           "TargetNode": 3,

@@ -620,16 +620,6 @@
       "KeyBinding": 1
     },
     {
-      "ComponentId": 218,
-      "Modification": 2,
-      "Quality": 5,
-      "Locked": true,
-      "X": 17,
-      "Y": 19,
-      "BarrelId": -1,
-      "KeyBinding": 1
-    },
-    {
       "ComponentId": 20,
       "Locked": true,
       "X": 16,

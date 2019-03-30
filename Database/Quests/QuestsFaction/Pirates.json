@@ -19,7 +19,7 @@
     },
     {
       "Id": 2,
-      "Type": 15,
+      "Type": 17,
       "Transitions": [
         {
           "TargetNode": 3,
@@ -53,7 +53,7 @@
     },
     {
       "Id": 11,
-      "Type": 15,
+      "Type": 17,
       "Transitions": [
         {
           "TargetNode": 5,

@@ -88,15 +88,6 @@
       "BarrelId": -1
     },
     {
-      "ComponentId": 217,
-      "Modification": 2,
-      "Quality": 5,
-      "Locked": true,
-      "X": 7,
-      "Y": 13,
-      "BarrelId": -1
-    },
-    {
       "ComponentId": 120,
       "Locked": true,
       "X": 6,

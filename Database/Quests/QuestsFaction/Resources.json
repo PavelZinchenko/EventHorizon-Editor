@@ -55,7 +55,7 @@
     },
     {
       "Id": 4,
-      "Type": 15,
+      "Type": 17,
       "Transitions": [
         {
           "TargetNode": 5,

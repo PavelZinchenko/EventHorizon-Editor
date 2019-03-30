@@ -2,7 +2,7 @@
   "ItemType": 6,
   "Id": 113,
   "ShipCategory": 2,
-  "Name": "$fs_Flagship",
+  "Name": "$f15_Flagship",
   "Faction": 15,
   "SizeClass": 4,
   "IconImage": "flagships",
