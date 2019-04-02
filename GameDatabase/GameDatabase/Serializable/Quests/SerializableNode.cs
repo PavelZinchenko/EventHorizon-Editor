@@ -17,6 +17,7 @@ namespace GameDatabase.Serializable
         public int Loot;
         public int Quest;
         public int Character;
+        public int Faction;
         public int Value;
         public Action[] Actions;
         public Transition[] Transitions;

@@ -51,6 +51,8 @@ namespace GameDatabase.EditorModel.Quests
                 case NodeType.ChangeCharacterRelations:
                 case NodeType.SetCharacterRelations:
                     return new CharacterRelationsNodeContent();
+                case NodeType.OpenShipyard:
+                    return new OpenShipyardNodeContent();
                 default:
                     throw new ArgumentException("Unknown node type - " + type);
             }
@@ -327,6 +329,27 @@ namespace GameDatabase.EditorModel.Quests
 
         public ItemId<Character> Character = ItemId<Character>.Empty;
         public NumericValue<int> Value = new NumericValue<int>(0, -100, 100);
+        public NumericValue<int> Transition = new NumericValue<int>(1, 1, 1000);
+    }
+
+    public class OpenShipyardNodeContent : INodeContent
+    {
+        public void Load(SerializableNode serializable, Database database)
+        {
+            Faction = database.GetFactionId(serializable.Faction);
+            Level = new NumericValue<int>(serializable.Value, 0, 1000);
+            Transition = new NumericValue<int>(serializable.DefaultTransition, 1, 1000);
+        }
+
+        public void Save(SerializableNode serializable)
+        {
+            serializable.Faction = Faction.Id;
+            serializable.Value = Level.Value;
+            serializable.DefaultTransition = Transition.Value;
+        }
+
+        public NumericValue<int> Level = new NumericValue<int>(0, 0, 1000);
+        public ItemId<Faction> Faction = ItemId<Faction>.Empty;
         public NumericValue<int> Transition = new NumericValue<int>(1, 1, 1000);
     }
 }

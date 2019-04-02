@@ -6,6 +6,7 @@
         ComingSoon = 1,
 
         ShowDialog = 10,
+        OpenShipyard = 11,
 
         Switch = 15,
         Random = 16,

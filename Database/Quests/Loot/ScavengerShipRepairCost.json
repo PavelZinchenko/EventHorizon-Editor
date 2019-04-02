@@ -8,16 +8,16 @@
         "Loot": {
           "Type": 25,
           "ItemId": 6,
-          "MinAmount": 850000,
-          "MaxAmount": 950000
+          "MinAmount": 9500,
+          "MaxAmount": 11000
         }
       },
       {
         "Loot": {
           "Type": 25,
           "ItemId": 5,
-          "MinAmount": 90000,
-          "MaxAmount": 110000
+          "MinAmount": 9500,
+          "MaxAmount": 11000
         }
       }
     ]
