@@ -34,12 +34,11 @@ namespace GameDatabase.EditorModel
             if (weapon != null)
                 WeaponId = weapon.ItemId;
 
-            //WeaponSlotType = string.IsNullOrEmpty(component.WeaponType) ? WeaponSlotType.Default : (WeaponSlotType)component.WeaponType.First();
             WeaponSlotType = string.IsNullOrEmpty(component.WeaponSlotType) ? WeaponSlotType.Default : (WeaponSlotType)component.WeaponSlotType.First();
 
-            var ammunition = database.GetAmmunition(component.AmmunitionId);
-            if (ammunition != null)
-                AmmunitionId = ammunition.ItemId;
+            AmmunitionId = database.GetAmmunitionId(component.AmmunitionId);
+            if (AmmunitionId.IsNull)
+                AmmunitionObsoleteId = database.GetAmmunitionObsoleteId(component.AmmunitionId);
 
             var dronebay = database.GetDroneBay(component.DroneBayId);
             if (dronebay != null)
@@ -70,7 +69,7 @@ namespace GameDatabase.EditorModel
             serializable.CellType = CellType == CellType.Empty ? string.Empty : ((char)CellType).ToString();
             serializable.DeviceId = DeviceId.Id;
             serializable.WeaponId = WeaponId.Id;
-            serializable.AmmunitionId = AmmunitionId.Id;
+            serializable.AmmunitionId = AmmunitionId.IsNull ? AmmunitionObsoleteId.Id : AmmunitionId.Id;
             serializable.WeaponSlotType = WeaponSlotType == WeaponSlotType.Default ? string.Empty : ((char)WeaponSlotType).ToString();
             serializable.DroneBayId = DroneBayId.Id;
             serializable.DroneId = DroneId.Id;
@@ -96,6 +95,7 @@ namespace GameDatabase.EditorModel
 
         public ItemId<Weapon> WeaponId = ItemId<Weapon>.Empty;
         public ItemId<Ammunition> AmmunitionId = ItemId<Ammunition>.Empty;
+        public ItemId<AmmunitionObsolete> AmmunitionObsoleteId = ItemId<AmmunitionObsolete>.Empty;
         public WeaponSlotType WeaponSlotType;
 
         public ItemId<DroneBay> DroneBayId = ItemId<DroneBay>.Empty;

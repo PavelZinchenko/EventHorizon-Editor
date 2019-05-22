@@ -5,38 +5,38 @@ using GameDatabase.Serializable;
 
 namespace GameDatabase.EditorModel
 {
-    public class Ammunition
+    public class AmmunitionObsolete
     {
-        public Ammunition(SerializableAmmunition ammunition, Database database)
+        public AmmunitionObsolete(SerializableAmmunitionObsolete ammunitionObsolete, Database database)
         {
-            ItemId = new ItemId<Ammunition>(ammunition.Id, ammunition.FileName);
-            AmmunitionClass = ammunition.AmmunitionClass;
-            DamageType = ammunition.DamageType;
-            Impulse = new NumericValue<float>(ammunition.Impulse, 0, 10);
-            Recoil = new NumericValue<float>(ammunition.Recoil, 0, 10);
-            Size = new NumericValue<float>(ammunition.Size, 0, 1000);
-            InitialPosition = ammunition.InitialPosition;
-            AreaOfEffect = new NumericValue<float>(ammunition.AreaOfEffect, 0, 1000);
-            Range = new NumericValue<float>(ammunition.Range, 0, 1000);
-            Damage = new NumericValue<float>(ammunition.Damage, 0, 10000);
-            Velocity = new NumericValue<float>(ammunition.Velocity, 0, 1000);
-            LifeTime = new NumericValue<float>(ammunition.LifeTime, 0, 1000);
-            IgnoresShipSpeed = ammunition.IgnoresShipVelocity;
-            HitPoints = new NumericValue<int>(ammunition.HitPoints, 0, 1000);
-            EnergyCost = new NumericValue<float>(ammunition.EnergyCost, 0, 1000);
+            ItemId = new ItemId<AmmunitionObsolete>(ammunitionObsolete.Id, ammunitionObsolete.FileName);
+            AmmunitionClass = ammunitionObsolete.AmmunitionClass;
+            DamageType = ammunitionObsolete.DamageType;
+            Impulse = new NumericValue<float>(ammunitionObsolete.Impulse, 0, 10);
+            Recoil = new NumericValue<float>(ammunitionObsolete.Recoil, 0, 10);
+            Size = new NumericValue<float>(ammunitionObsolete.Size, 0, 1000);
+            InitialPosition = ammunitionObsolete.InitialPosition;
+            AreaOfEffect = new NumericValue<float>(ammunitionObsolete.AreaOfEffect, 0, 1000);
+            Range = new NumericValue<float>(ammunitionObsolete.Range, 0, 1000);
+            Damage = new NumericValue<float>(ammunitionObsolete.Damage, 0, 10000);
+            Velocity = new NumericValue<float>(ammunitionObsolete.Velocity, 0, 1000);
+            LifeTime = new NumericValue<float>(ammunitionObsolete.LifeTime, 0, 1000);
+            IgnoresShipSpeed = ammunitionObsolete.IgnoresShipVelocity;
+            HitPoints = new NumericValue<int>(ammunitionObsolete.HitPoints, 0, 1000);
+            EnergyCost = new NumericValue<float>(ammunitionObsolete.EnergyCost, 0, 1000);
 
-            var coupledAmmo = database.GetAmmunition(ammunition.CoupledAmmunitionId);
+            var coupledAmmo = database.GetAmmunitionObsolete(ammunitionObsolete.CoupledAmmunitionId);
             if (coupledAmmo != null)
                 CoupledAmmunitionId = coupledAmmo.ItemId;
 
-            Color = Helpers.ColorFromString(ammunition.Color);
-            FireSound = ammunition.FireSound;
-            HitSound = ammunition.HitSound;
-            HitEffectPrefab = ammunition.HitEffectPrefab;
-            BulletPrefab = ammunition.BulletPrefab;
+            Color = Helpers.ColorFromString(ammunitionObsolete.Color);
+            FireSound = ammunitionObsolete.FireSound;
+            HitSound = ammunitionObsolete.HitSound;
+            HitEffectPrefab = ammunitionObsolete.HitEffectPrefab;
+            BulletPrefab = ammunitionObsolete.BulletPrefab;
         }
 
-        public void Save(SerializableAmmunition serializable)
+        public void Save(SerializableAmmunitionObsolete serializable)
         {
             serializable.AmmunitionClass = AmmunitionClass;
             serializable.DamageType = DamageType;
@@ -60,9 +60,9 @@ namespace GameDatabase.EditorModel
             serializable.BulletPrefab = BulletPrefab;
         }
 
-        public readonly ItemId<Ammunition> ItemId;
+        public readonly ItemId<AmmunitionObsolete> ItemId;
 
-        public AmmunitionClass AmmunitionClass;
+        public AmmunitionClassObsolete AmmunitionClass;
         public DamageType DamageType;
         public NumericValue<float> Impulse;
         public NumericValue<float> Recoil;
@@ -76,7 +76,7 @@ namespace GameDatabase.EditorModel
         public bool IgnoresShipSpeed;
         public NumericValue<int> HitPoints;
         public NumericValue<float> EnergyCost;
-        public ItemId<Ammunition> CoupledAmmunitionId = ItemId<Ammunition>.Empty;
+        public ItemId<AmmunitionObsolete> CoupledAmmunitionId = ItemId<AmmunitionObsolete>.Empty;
 
         public Color Color;
         public string FireSound;

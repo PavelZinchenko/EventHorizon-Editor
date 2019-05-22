@@ -8,10 +8,8 @@
   "Faction": -1,
   "Level": 15,
   "Icon": "fueltank12",
-  "Color": "#FFFFFF",
   "Layout": "1111",
   "CellType": "",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     9,
     1

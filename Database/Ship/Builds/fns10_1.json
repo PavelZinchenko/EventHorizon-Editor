@@ -286,11 +286,6 @@
       "KeyBinding": 2
     },
     {
-      "ComponentId": 228,
-      "Locked": true,
-      "X": 5
-    },
-    {
       "ComponentId": 67,
       "Modification": 9,
       "Quality": 5,
@@ -307,6 +302,11 @@
       "X": 7,
       "Y": 5,
       "KeyBinding": 2
+    },
+    {
+      "ComponentId": 228,
+      "Locked": true,
+      "X": 5
     }
   ]
 }

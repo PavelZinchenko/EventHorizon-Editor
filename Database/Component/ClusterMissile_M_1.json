@@ -11,8 +11,8 @@
   "Color": "#FFA075",
   "Layout": "110110110",
   "CellType": "4",
-  "WeaponId": 42,
-  "AmmunitionId": 93,
+  "WeaponId": 104,
+  "AmmunitionId": 112,
   "WeaponSlotType": "M",
   "PossibleModifications": [
     14,

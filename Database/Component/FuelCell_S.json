@@ -7,10 +7,8 @@
   "ComponentStatsId": 67,
   "Faction": -1,
   "Icon": "fueltank11",
-  "Color": "#FFFFFF",
   "Layout": "1",
   "CellType": "",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     9,
     1

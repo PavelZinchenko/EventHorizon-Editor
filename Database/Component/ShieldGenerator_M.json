@@ -8,10 +8,8 @@
   "Faction": -1,
   "Level": 50,
   "Icon": "shield_generator2",
-  "Color": "#FFFFFF",
   "Layout": "1111",
   "CellType": "2",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     1,
     12

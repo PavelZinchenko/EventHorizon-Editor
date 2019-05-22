@@ -114,7 +114,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GameDatabase\Database.cs" />
-    <Compile Include="GameDatabase\EditorModel\Ammunition.cs" />
+    <Compile Include="GameDatabase\EditorModel\Weapon\AmmunitionObsolete.cs" />
     <Compile Include="GameDatabase\EditorModel\Barrel.cs" />
     <Compile Include="GameDatabase\EditorModel\Component.cs" />
     <Compile Include="GameDatabase\EditorModel\ComponentMod.cs" />
@@ -142,13 +142,15 @@
     <Compile Include="GameDatabase\EditorModel\ShipSettings.cs" />
     <Compile Include="GameDatabase\EditorModel\Skill.cs" />
     <Compile Include="GameDatabase\EditorModel\Technology.cs" />
-    <Compile Include="GameDatabase\EditorModel\Weapon.cs" />
+    <Compile Include="GameDatabase\EditorModel\Weapon\Weapon.cs" />
+    <Compile Include="GameDatabase\EditorModel\Weapon\Ammunition.cs" />
+    <Compile Include="GameDatabase\EditorModel\Weapon\BulletPrefab.cs" />
+    <Compile Include="GameDatabase\EditorModel\Weapon\VisualEffect.cs" />
     <Compile Include="GameDatabase\EditorModel\Wrapper.cs" />
     <Compile Include="GameDatabase\Enums\ActivationType.cs" />
-    <Compile Include="GameDatabase\Enums\AmmunitionClass.cs" />
+    <Compile Include="GameDatabase\Enums\AmmunitionClassObsolete.cs" />
     <Compile Include="GameDatabase\Enums\ComponentCategory.cs" />
     <Compile Include="GameDatabase\Enums\ComponentStatsType.cs" />
-    <Compile Include="GameDatabase\Enums\DamageType.cs" />
     <Compile Include="GameDatabase\Enums\DeviceClass.cs" />
     <Compile Include="GameDatabase\Enums\DifficultyClass.cs" />
     <Compile Include="GameDatabase\Enums\ItemType.cs" />
@@ -167,8 +169,17 @@
     <Compile Include="GameDatabase\Enums\SizeClass.cs" />
     <Compile Include="GameDatabase\Enums\SkillType.cs" />
     <Compile Include="GameDatabase\Enums\TechType.cs" />
-    <Compile Include="GameDatabase\Enums\WeaponClass.cs" />
     <Compile Include="GameDatabase\Enums\WeaponSlotType.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\BulletEffectType.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\BulletImpactType.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\BulletShape.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\BulletTriggerCondition.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\BulletType.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\ColorMode.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\DamageType.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\ImpactEffectType.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\VisualEffectType.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\WeaponClass.cs" />
     <Compile Include="GameDatabase\Helpers\DataAdapter.cs" />
     <Compile Include="GameDatabase\Model\ItemId.cs" />
     <Compile Include="GameDatabase\Model\Layout.cs" />
@@ -182,7 +193,7 @@
     <Compile Include="GameDatabase\Serializable\Quests\SerializableNode.cs" />
     <Compile Include="GameDatabase\Serializable\Quests\SerializableQuest.cs" />
     <Compile Include="GameDatabase\Serializable\Quests\SerializableRequirement.cs" />
-    <Compile Include="GameDatabase\Serializable\SerializableAmmunition.cs" />
+    <Compile Include="GameDatabase\Serializable\SerializableAmmunitionObsolete.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableBarrel.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableComponent.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableComponentMod.cs" />
@@ -202,7 +213,6 @@
     <Compile Include="GameDatabase\Serializable\SerializableShipSettings.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableSkill.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableTechnology.cs" />
-    <Compile Include="GameDatabase\Serializable\SerializableWeapon.cs" />
     <Compile Include="GameDatabase\Serializable\SerializableInstalledComponent.cs" />
     <Compile Include="GameDatabase\JsonDatabase.cs" />
     <Compile Include="Controls\LayoutEditor.cs">
@@ -211,6 +221,10 @@
     <Compile Include="Controls\LayoutEditor.Designer.cs">
       <DependentUpon>LayoutEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameDatabase\Serializable\Weapon\SerializableAmmunition.cs" />
+    <Compile Include="GameDatabase\Serializable\Weapon\SerializableBulletPrefab.cs" />
+    <Compile Include="GameDatabase\Serializable\Weapon\SerializableVisualEffect.cs" />
+    <Compile Include="GameDatabase\Serializable\Weapon\SerializableWeapon.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

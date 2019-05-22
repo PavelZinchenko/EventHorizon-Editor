@@ -8,10 +8,8 @@
   "Faction": 15,
   "Level": 100,
   "Icon": "armor52",
-  "Color": "#FFFFFF",
   "Layout": "1111",
   "CellType": "1",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     1,
     3,

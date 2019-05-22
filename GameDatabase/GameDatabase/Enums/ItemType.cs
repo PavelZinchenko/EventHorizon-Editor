@@ -6,7 +6,7 @@
         Component = 1,
         Device = 2,
         Weapon = 3,
-        Ammunition = 4,
+        AmmunitionObsolete = 4,
         DroneBay = 5,
         Ship = 6,
         Satellite = 7,
@@ -23,6 +23,10 @@
         Fleet = 18,
         Character = 19,
         QuestItem = 20,
+
+        Ammunition = 25,
+        VisualEffect = 26,
+        BulletPrefab = 27,
 
         ShipSettings = 100,
         GalaxySettings = 101,

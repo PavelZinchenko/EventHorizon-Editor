@@ -14,6 +14,7 @@ namespace GameDatabase.EditorModel
             Spread = new NumericValue<float>(weapon.Spread, 0, 180);
             Magazine = new NumericValue<int>(weapon.Magazine, 0, 1000);
             ActivationType = weapon.ActivationType;
+            ShotSound = weapon.ShotSound;
             ChargeSound = weapon.ChargeSound;
             ShotEffectPrefab = weapon.ShotEffectPrefab;
             ControlButtonIcon = weapon.ControlButtonIcon;
@@ -27,6 +28,7 @@ namespace GameDatabase.EditorModel
             serializable.Magazine = Magazine.Value;
             serializable.ActivationType = ActivationType;
 
+            serializable.ShotSound = ShotSound;
             serializable.ChargeSound = ChargeSound;
             serializable.ShotEffectPrefab = ShotEffectPrefab;
             serializable.ControlButtonIcon = ControlButtonIcon;
@@ -41,6 +43,7 @@ namespace GameDatabase.EditorModel
 
         public ActivationType ActivationType;
 
+        public string ShotSound;
         public string ChargeSound;
         public string ShotEffectPrefab;
         public string ControlButtonIcon;

@@ -1,7 +1,7 @@
 {
   "ItemType": 6,
   "Id": 117,
-  "Name": "$f15_Ship",
+  "Name": "$f15_Battleship",
   "Faction": 15,
   "SizeClass": 3,
   "IconImage": "fs3",

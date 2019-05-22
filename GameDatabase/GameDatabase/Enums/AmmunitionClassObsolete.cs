@@ -1,6 +1,6 @@
 ﻿namespace GameDatabase.Enums
 {
-    public enum AmmunitionClass
+    public enum AmmunitionClassObsolete
     {
         Common,
         Acid,

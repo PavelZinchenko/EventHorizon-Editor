@@ -1,4 +1,4 @@
-﻿using System;
+﻿using GameDatabase.Serializable;
 
 namespace GameDatabase.Model
 {
@@ -15,6 +15,19 @@ namespace GameDatabase.Model
         {
             _id = id;
             _name = name;
+        }
+
+        public ItemId(SerializableItem item)
+        {
+            if (item == null)
+            {
+                _id = 0;
+                _name = string.Empty;
+                return;
+            }
+
+            _id = item.Id;
+            _name = item.FileName;
         }
 
         public int Id { get { return _id; } }

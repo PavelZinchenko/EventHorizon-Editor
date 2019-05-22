@@ -33,7 +33,7 @@ namespace GameDatabase.Serializable
 
         public int WeaponId;
         public int AmmunitionId;
-        //public string WeaponType;
+        [DefaultValue("")]
         public string WeaponSlotType;
 
         public int DroneBayId;

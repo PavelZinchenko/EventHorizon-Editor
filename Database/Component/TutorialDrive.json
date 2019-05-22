@@ -6,10 +6,8 @@
   "ComponentStatsId": 1,
   "Faction": -1,
   "Icon": "engine1",
-  "Color": "#FFFFFF",
   "Layout": "1",
   "CellType": "5",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     2,
     11,

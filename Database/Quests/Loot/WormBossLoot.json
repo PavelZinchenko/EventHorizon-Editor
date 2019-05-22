@@ -7,7 +7,7 @@
       {
         "Loot": {
           "Type": 4,
-          "MinAmount": 3,
+          "MinAmount": 1,
           "MaxAmount": 5
         }
       },

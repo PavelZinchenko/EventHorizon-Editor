@@ -15,6 +15,8 @@ namespace GameDatabase.Serializable
         public ActivationType ActivationType;
 
         [DefaultValue("")]
+        public string ShotSound;
+        [DefaultValue("")]
         public string ChargeSound;
         [DefaultValue("")]
         public string ShotEffectPrefab;

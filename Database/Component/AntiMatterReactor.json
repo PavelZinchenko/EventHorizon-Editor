@@ -8,10 +8,8 @@
   "Faction": -1,
   "Level": 100,
   "Icon": "reactor21",
-  "Color": "#FFFFFF",
   "Layout": "010111010",
   "CellType": "2",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     12,
     1

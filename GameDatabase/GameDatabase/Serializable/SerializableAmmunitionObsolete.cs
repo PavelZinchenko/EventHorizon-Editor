@@ -6,9 +6,9 @@ using GameDatabase.Model;
 namespace GameDatabase.Serializable
 {
     [Serializable]
-    public class SerializableAmmunition : SerializableItem
+    public class SerializableAmmunitionObsolete : SerializableItem
     {
-        public AmmunitionClass AmmunitionClass;
+        public AmmunitionClassObsolete AmmunitionClass;
         public DamageType DamageType;
         public float Impulse;
         public float Recoil;

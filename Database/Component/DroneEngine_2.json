@@ -7,10 +7,8 @@
   "Faction": -1,
   "Level": 5,
   "Icon": "engine0",
-  "Color": "#FFFFFF",
   "Layout": "1",
   "CellType": "5",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     11,
     1,

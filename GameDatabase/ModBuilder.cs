@@ -14,6 +14,7 @@ namespace GameDatabase
             Data = 1,
             Image = 2,
             Localization = 3,
+            WaveAudio = 4,
         }
 
         public static ModBuilder Create(string path)
@@ -98,6 +99,12 @@ namespace GameDatabase
                 {
                     yield return (byte)FileType.Image;
                     foreach (var value in Serialize(file.Name))
+                        yield return value;
+                }
+                else if (ext == ".wav")
+                {
+                    yield return (byte)FileType.WaveAudio;
+                    foreach (var value in Serialize(Path.GetFileNameWithoutExtension(file.Name)))
                         yield return value;
                 }
                 else if (ext == ".xml")

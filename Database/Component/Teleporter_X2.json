@@ -6,11 +6,9 @@
   "ComponentStatsId": 3,
   "Faction": 4,
   "Icon": "teleporter1",
-  "Color": "#FFFFFF",
   "Layout": "010111010",
   "CellType": "2",
   "DeviceId": 19,
-  "WeaponSlotType": "",
   "PossibleModifications": [
     2,
     7,

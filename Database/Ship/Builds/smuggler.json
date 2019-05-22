@@ -6,18 +6,6 @@
   "BuildFaction": -1,
   "Components": [
     {
-      "ComponentId": 167,
-      "Locked": true,
-      "X": 8
-    },
-    {
-      "ComponentId": 91,
-      "Locked": true,
-      "X": 8,
-      "Y": 3,
-      "KeyBinding": 1
-    },
-    {
       "ComponentId": 160,
       "Locked": true,
       "X": 10,
@@ -176,6 +164,18 @@
       "Y": 8,
       "BarrelId": -1,
       "KeyBinding": 1
+    },
+    {
+      "ComponentId": 91,
+      "Locked": true,
+      "X": 8,
+      "Y": 4,
+      "KeyBinding": 1
+    },
+    {
+      "ComponentId": 250,
+      "Locked": true,
+      "X": 7
     }
   ]
 }

@@ -8,10 +8,8 @@
   "Faction": -1,
   "Level": 20,
   "Icon": "armor12",
-  "Color": "#FFFFFF",
   "Layout": "1111",
   "CellType": "1",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     1,
     3

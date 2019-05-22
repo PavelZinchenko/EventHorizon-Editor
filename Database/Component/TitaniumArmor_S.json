@@ -7,10 +7,8 @@
   "ComponentStatsId": 12,
   "Faction": -1,
   "Icon": "armor11",
-  "Color": "#FFFFFF",
   "Layout": "1",
   "CellType": "1",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     1,
     3

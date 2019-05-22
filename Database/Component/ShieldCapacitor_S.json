@@ -8,10 +8,8 @@
   "Faction": -1,
   "Level": 25,
   "Icon": "shield_capacitor1",
-  "Color": "#FFFFFF",
   "Layout": "1",
   "CellType": "1",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     1,
     3

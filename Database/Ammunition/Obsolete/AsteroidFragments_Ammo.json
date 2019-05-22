@@ -8,7 +8,6 @@
   "Range": 10.0,
   "Velocity": 8.0,
   "LifeTime": 1.6,
-  "Color": "#FFFFFF",
   "HitSound": "explosion_08",
   "HitEffectPrefab": "OrbAdditive",
   "BulletPrefab": "Fragment"

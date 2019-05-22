@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Cyotek.Windows.Forms;
 using GameDatabase.Controls;
+using GameDatabase.EditorModel;
 using GameDatabase.EditorModel.Quests;
 using GameDatabase.GameDatabase;
 using GameDatabase.Model;
@@ -167,6 +168,8 @@ namespace GameDatabase
                 return result;
             if ((result = TryCreateIdItem(value, type, _database.AmmunitionIds, 1, rowId)) != null)
                 return result;
+            if ((result = TryCreateIdItem(value, type, _database.AmmunitionObsoleteIds, 1, rowId)) != null)
+                return result;
             if ((result = TryCreateIdItem(value, type, _database.DroneBayIds, 1, rowId)) != null)
                 return result;
             if ((result = TryCreateIdItem(value, type, _database.ShipIds, 1, rowId)) != null)
@@ -195,11 +198,15 @@ namespace GameDatabase
                 return result;
             if ((result = TryCreateIdItem(value, type, _database.QuestItemIds, 1, rowId)) != null)
                 return result;
+            if ((result = TryCreateIdItem(value, type, _database.BulletPerfabIds, 1, rowId)) != null)
+                return result;
+            if ((result = TryCreateIdItem(value, type, _database.VisualEffectIds, 1, rowId)) != null)
+                return result;
 
             if (typeof(IDataAdapter).IsAssignableFrom(type))
                 return CreateStructEditor((IDataAdapter)value, 1, rowId);
 
-            if (type == typeof(FactionFilter))
+            if (type.IsClass)
                 return CreateStructEditor(new DataAdapter(value), 1, rowId);
 
             return null;

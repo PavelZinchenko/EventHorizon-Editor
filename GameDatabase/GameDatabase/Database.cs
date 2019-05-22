@@ -21,7 +21,7 @@ namespace GameDatabase
                 _components = _jsonDatabase.Components.ToDictionary(item => item.Id, item => new Component(item, this));
                 _devices = _jsonDatabase.Devices.ToDictionary(item => item.Id, item => new Device(item, this));
                 _weapons = _jsonDatabase.Weapons.ToDictionary(item => item.Id, item => new Weapon(item, this));
-                _ammunitions = _jsonDatabase.Ammunitions.ToDictionary(item => item.Id, item => new Ammunition(item, this));
+                _ammunition = _jsonDatabase.Ammunitions.ToDictionary(item => item.Id, item => new Ammunition(item, this));
                 _droneBays = _jsonDatabase.DroneBays.ToDictionary(item => item.Id, item => new DroneBay(item, this));
                 _ships = _jsonDatabase.Ships.ToDictionary(item => item.Id, item => new Ship(item, this));
                 _shipBuilds = _jsonDatabase.ShipBuilds.ToDictionary(item => item.Id, item => new ShipBuild(item, this));
@@ -34,6 +34,9 @@ namespace GameDatabase
                 _factions = _jsonDatabase.Factions.ToDictionary(item => item.Id, item => new Faction(item, this));
                 _characters = _jsonDatabase.Characters.ToDictionary(item => item.Id, item => new Character(item, this));
                 _questItems = _jsonDatabase.QuestItems.ToDictionary(item => item.Id, item => new QuestItem(item, this));
+                _ammunitionObsolete = _jsonDatabase.AmmunitionObsolete.ToDictionary(item => item.Id, item => new AmmunitionObsolete(item, this));
+                _bulletPrefabs = _jsonDatabase.BulletPrefabs.ToDictionary(item => item.Id, item => new BulletPrefab(item, this));
+                _visualEffects = _jsonDatabase.VisualEffects.ToDictionary(item => item.Id, item => new VisualEffect(item, this));
             }
         }
 
@@ -60,8 +63,10 @@ namespace GameDatabase
                 item.Value.Save(Cleanup(_jsonDatabase.GetDevice(item.Key)));
             foreach (var item in _weapons)
                 item.Value.Save(Cleanup(_jsonDatabase.GetWeapon(item.Key)));
-            foreach (var item in _ammunitions)
+            foreach (var item in _ammunition)
                 item.Value.Save(Cleanup(_jsonDatabase.GetAmmunition(item.Key)));
+            foreach (var item in _ammunitionObsolete)
+                item.Value.Save(Cleanup(_jsonDatabase.GetAmmunitionObsolete(item.Key)));
             foreach (var item in _droneBays)
                 item.Value.Save(Cleanup(_jsonDatabase.GetDroneBay(item.Key)));
             foreach (var item in _ships)
@@ -92,6 +97,10 @@ namespace GameDatabase
                 item.Value.Save(Cleanup(_jsonDatabase.GetCharacter(item.Key)));
             foreach (var item in _questItems)
                 item.Value.Save(Cleanup(_jsonDatabase.GetQuestItem(item.Key)));
+            foreach (var item in _bulletPrefabs)
+                item.Value.Save(Cleanup(_jsonDatabase.GetBulletPrefab(item.Key)));
+            foreach (var item in _visualEffects)
+                item.Value.Save(Cleanup(_jsonDatabase.GetVisualEffect(item.Key)));
 
             ShipSettings.Save(Cleanup(_jsonDatabase.ShipSettings));
             GalaxySettings.Save(Cleanup(_jsonDatabase.GalaxySettings));
@@ -105,7 +114,6 @@ namespace GameDatabase
         public Component GetComponent(int id) { return GetItem(id, _components, _jsonDatabase.GetComponent(id)); }
         public Device GetDevice(int id) { return GetItem(id, _devices, _jsonDatabase.GetDevice(id)); }
         public Weapon GetWeapon(int id) { return GetItem(id, _weapons, _jsonDatabase.GetWeapon(id)); }
-        public Ammunition GetAmmunition(int id) { return GetItem(id, _ammunitions, _jsonDatabase.GetAmmunition(id)); }
         public DroneBay GetDroneBay(int id) { return GetItem(id, _droneBays, _jsonDatabase.GetDroneBay(id)); }
         public Ship GetShip(int id) { return GetItem(id, _ships, _jsonDatabase.GetShip(id)); }
         public ShipBuild GetShipBuild(int id) { return GetItem(id, _shipBuilds, _jsonDatabase.GetShipBuild(id)); }
@@ -121,6 +129,10 @@ namespace GameDatabase
         public Fleet GetFleet(int id) { return GetItem(id, _fleets, _jsonDatabase.GetFleet(id)); }
         public Character GetCharacter(int id) { return GetItem(id, _characters, _jsonDatabase.GetCharacter(id)); }
         public QuestItem GetQuestItem(int id) { return GetItem(id, _questItems, _jsonDatabase.GetQuestItem(id)); }
+        public VisualEffect GetVisualEffect(int id) { return GetItem(id, _visualEffects, _jsonDatabase.GetVisualEffect(id)); }
+        public BulletPrefab GetBulletPrefab(int id) { return GetItem(id, _bulletPrefabs, _jsonDatabase.GetBulletPrefab(id)); }
+        public AmmunitionObsolete GetAmmunitionObsolete(int id) { return GetItem(id, _ammunitionObsolete, _jsonDatabase.GetAmmunitionObsolete(id)); }
+        public Ammunition GetAmmunition(int id) { return GetItem(id, _ammunition, _jsonDatabase.GetAmmunition(id)); }
 
         public IEnumerable<ItemId<Component>> ComponentIds { get { return _jsonDatabase.Components.Select(item => new ItemId<Component>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<Device>> DeviceIds { get { return _jsonDatabase.Devices.Select(item => new ItemId<Device>(item.Id, item.FileName)); } }
@@ -141,21 +153,28 @@ namespace GameDatabase
         public IEnumerable<ItemId<Fleet>> FleetIds { get { return _jsonDatabase.Fleets.Select(item => new ItemId<Fleet>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<Character>> CharacterIds { get { return _jsonDatabase.Characters.Select(item => new ItemId<Character>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<QuestItem>> QuestItemIds { get { return _jsonDatabase.QuestItems.Select(item => new ItemId<QuestItem>(item.Id, item.FileName)); } }
+        public IEnumerable<ItemId<AmmunitionObsolete>> AmmunitionObsoleteIds { get { return _jsonDatabase.AmmunitionObsolete.Select(item => new ItemId<AmmunitionObsolete>(item.Id, item.FileName)); } }
+        public IEnumerable<ItemId<BulletPrefab>> BulletPerfabIds { get { return _jsonDatabase.BulletPrefabs.Select(item => new ItemId<BulletPrefab>(item.Id, item.FileName)); } }
+        public IEnumerable<ItemId<VisualEffect>> VisualEffectIds { get { return _jsonDatabase.VisualEffects.Select(item => new ItemId<VisualEffect>(item.Id, item.FileName)); } }
 
         public Image GetImage(string name) { return _jsonDatabase.GetImage(name); }
         public string GetLocalization(string language) { return _jsonDatabase.GetLocalization(language); }
 
-        public ItemId<Technology> GetTechnologyId(int id) { return new ItemId<Technology>(id, _jsonDatabase.GetTechnology(id)?.FileName); }
-        public ItemId<Skill> GetSkillId(int id) { return new ItemId<Skill>(id, _jsonDatabase.GetSkill(id)?.FileName); }
-        public ItemId<ComponentMod> GetComponentModId(int id) { return new ItemId<ComponentMod>(id, _jsonDatabase.GetComponentMod(id)?.FileName); }
-        public ItemId<ShipBuild> GetShipBuildId(int id) { return new ItemId<ShipBuild>(id, _jsonDatabase.GetShipBuild(id)?.FileName); }
-        public ItemId<Ship> GetShipId(int id) { return new ItemId<Ship>(id, _jsonDatabase.GetShip(id)?.FileName); }
-        public ItemId<Faction> GetFactionId(int id) { return new ItemId<Faction>(id, _jsonDatabase.GetFaction(id)?.FileName); }
-        public ItemId<Loot> GetLootId(int id) { return new ItemId<Loot>(id, _jsonDatabase.GetLoot(id)?.FileName); }
-        public ItemId<Fleet> GetFleetId(int id) { return new ItemId<Fleet>(id, _jsonDatabase.GetFleet(id)?.FileName); }
-        public ItemId<Character> GetCharacterId(int id) { return new ItemId<Character>(id, _jsonDatabase.GetCharacter(id)?.FileName); }
-        public ItemId<QuestItem> GetQuestItemId(int id) { return new ItemId<QuestItem>(id, _jsonDatabase.GetQuestItem(id)?.FileName); }
-        public ItemId<Component> GetComponentId(int id) { return new ItemId<Component>(id, _jsonDatabase.GetComponent(id)?.FileName); }
+        public ItemId<Technology> GetTechnologyId(int id) { return new ItemId<Technology>(_jsonDatabase.GetTechnology(id)); }
+        public ItemId<Skill> GetSkillId(int id) { return new ItemId<Skill>(_jsonDatabase.GetSkill(id)); }
+        public ItemId<ComponentMod> GetComponentModId(int id) { return new ItemId<ComponentMod>(_jsonDatabase.GetComponentMod(id)); }
+        public ItemId<ShipBuild> GetShipBuildId(int id) { return new ItemId<ShipBuild>(_jsonDatabase.GetShipBuild(id)); }
+        public ItemId<Ship> GetShipId(int id) { return new ItemId<Ship>(_jsonDatabase.GetShip(id)); }
+        public ItemId<Faction> GetFactionId(int id) { return new ItemId<Faction>(_jsonDatabase.GetFaction(id)); }
+        public ItemId<Loot> GetLootId(int id) { return new ItemId<Loot>(_jsonDatabase.GetLoot(id)); }
+        public ItemId<Fleet> GetFleetId(int id) { return new ItemId<Fleet>(_jsonDatabase.GetFleet(id)); }
+        public ItemId<Character> GetCharacterId(int id) { return new ItemId<Character>(_jsonDatabase.GetCharacter(id)); }
+        public ItemId<QuestItem> GetQuestItemId(int id) { return new ItemId<QuestItem>(_jsonDatabase.GetQuestItem(id)); }
+        public ItemId<Component> GetComponentId(int id) { return new ItemId<Component>(_jsonDatabase.GetComponent(id)); }
+        public ItemId<BulletPrefab> GetBulletPrefabId(int id) { return new ItemId<BulletPrefab>(_jsonDatabase.GetBulletPrefab(id)); }
+        public ItemId<VisualEffect> GetVisualEffectId(int id) { return new ItemId<VisualEffect>(_jsonDatabase.GetVisualEffect(id)); }
+        public ItemId<Ammunition> GetAmmunitionId(int id) { return new ItemId<Ammunition>(_jsonDatabase.GetAmmunition(id)); }
+        public ItemId<AmmunitionObsolete> GetAmmunitionObsoleteId(int id) { return new ItemId<AmmunitionObsolete>(_jsonDatabase.GetAmmunitionObsolete(id)); }
 
         private T GetItem<T,U>(int id, Dictionary<int, T> cache, U source) where T : class
         {
@@ -175,7 +194,8 @@ namespace GameDatabase
         private readonly Dictionary<int, Component> _components = new Dictionary<int, Component>();
         private readonly Dictionary<int, Device> _devices = new Dictionary<int, Device>();
         private readonly Dictionary<int, Weapon> _weapons = new Dictionary<int, Weapon>();
-        private readonly Dictionary<int, Ammunition> _ammunitions = new Dictionary<int, Ammunition>();
+        private readonly Dictionary<int, AmmunitionObsolete> _ammunitionObsolete = new Dictionary<int, AmmunitionObsolete>();
+        private readonly Dictionary<int, Ammunition> _ammunition = new Dictionary<int, Ammunition>();
         private readonly Dictionary<int, DroneBay> _droneBays = new Dictionary<int, DroneBay>();
         private readonly Dictionary<int, Ship> _ships = new Dictionary<int, Ship>();
         private readonly Dictionary<int, ShipBuild> _shipBuilds = new Dictionary<int, ShipBuild>();
@@ -191,6 +211,8 @@ namespace GameDatabase
         private readonly Dictionary<int, Fleet> _fleets = new Dictionary<int, Fleet>();
         private readonly Dictionary<int, Character> _characters = new Dictionary<int, Character>();
         private readonly Dictionary<int, QuestItem> _questItems = new Dictionary<int, QuestItem>();
+        private readonly Dictionary<int, VisualEffect> _visualEffects = new Dictionary<int, VisualEffect>();
+        private readonly Dictionary<int, BulletPrefab> _bulletPrefabs = new Dictionary<int, BulletPrefab>();
 
         private readonly JsonDatabase _jsonDatabase;
     }

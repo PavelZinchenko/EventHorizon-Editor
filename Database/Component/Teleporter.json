@@ -8,11 +8,9 @@
   "Faction": 4,
   "Level": 35,
   "Icon": "teleporter",
-  "Color": "#FFFFFF",
   "Layout": "010111010",
   "CellType": "2",
   "DeviceId": 15,
-  "WeaponSlotType": "",
   "PossibleModifications": [
     2,
     7,

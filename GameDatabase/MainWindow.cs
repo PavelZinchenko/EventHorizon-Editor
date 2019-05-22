@@ -188,6 +188,8 @@ namespace GameDatabase
                     return _database.GetWeapon(_selectedItem.Id);
                 case ItemType.Ammunition:
                     return _database.GetAmmunition(_selectedItem.Id);
+                case ItemType.AmmunitionObsolete:
+                    return _database.GetAmmunitionObsolete(_selectedItem.Id);
                 case ItemType.DroneBay:
                     return _database.GetDroneBay(_selectedItem.Id);
                 case ItemType.Ship:
@@ -222,6 +224,10 @@ namespace GameDatabase
                     return _database.GetCharacter(_selectedItem.Id);
                 case ItemType.QuestItem:
                     return _database.GetQuestItem(_selectedItem.Id);
+                case ItemType.BulletPrefab:
+                    return _database.GetBulletPrefab(_selectedItem.Id);
+                case ItemType.VisualEffect:
+                    return _database.GetVisualEffect(_selectedItem.Id);
                 default:
                     return null;
             }

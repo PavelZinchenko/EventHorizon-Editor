@@ -4,6 +4,5 @@
   "DeviceClass": 11,
   "PassiveEnergyConsumption": 1.0,
   "Power": 5.0,
-  "Color": "#FFFFFF",
   "ControlButtonIcon": "controls_shield"
 }

@@ -3,10 +3,10 @@
     public enum WeaponClass
     {
         Common,
-        Controlled,
-        Laser,
+        Manageable,
+        Continuous,
         MashineGun,
         MultiShot,
-        Charged,
+        RequiredCharging,
     }
 }

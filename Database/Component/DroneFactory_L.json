@@ -8,10 +8,8 @@
   "Faction": 3,
   "Level": 90,
   "Icon": "drone_replicator3",
-  "Color": "#FFFFFF",
   "Layout": "0110111111110110",
   "CellType": "2",
-  "WeaponSlotType": "",
   "PossibleModifications": [
     1,
     2

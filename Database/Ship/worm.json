@@ -2,7 +2,7 @@
   "ItemType": 6,
   "Id": 103,
   "ShipCategory": 1,
-  "Name": "Wormship",
+  "Name": "$f12_Battleship",
   "Faction": 12,
   "SizeClass": 3,
   "IconImage": "worm_head",

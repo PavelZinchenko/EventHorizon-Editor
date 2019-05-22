@@ -63,7 +63,10 @@ namespace GameDatabase
                             deserializedObject = DeserializeItem(data, name, _weapons);
                             break;
                         case ItemType.Ammunition:
-                            deserializedObject = DeserializeItem(data, name, _ammunitions);
+                            deserializedObject = DeserializeItem(data, name, _ammunition);
+                            break;
+                        case ItemType.AmmunitionObsolete:
+                            deserializedObject = DeserializeItem(data, name, _ammunitionObsolete);
                             break;
                         case ItemType.DroneBay:
                             deserializedObject = DeserializeItem(data, name, _droneBays);
@@ -110,6 +113,12 @@ namespace GameDatabase
                         case ItemType.QuestItem:
                             deserializedObject = DeserializeItem(data, name, _questItems);
                             break;
+                        case ItemType.BulletPrefab:
+                            deserializedObject = DeserializeItem(data, name, _bulletPrefabs);
+                            break;
+                        case ItemType.VisualEffect:
+                            deserializedObject = DeserializeItem(data, name, _visualEffects);
+                            break;
                         case ItemType.ShipSettings:
                             deserializedObject = ShipSettings = DeserializeItem<SerializableShipSettings>(data, name);
                             break;
@@ -129,7 +138,9 @@ namespace GameDatabase
         {
             foreach (var item in _weapons.Values)
                 Serialize(item, path);
-            foreach (var item in _ammunitions.Values)
+            foreach (var item in _ammunition.Values)
+                Serialize(item, path);
+            foreach (var item in _ammunitionObsolete.Values)
                 Serialize(item, path);
             foreach (var item in _devices.Values)
                 Serialize(item, path);
@@ -165,6 +176,10 @@ namespace GameDatabase
                 Serialize(item, path);
             foreach (var item in _questItems.Values)
                 Serialize(item, path);
+            foreach (var item in _bulletPrefabs.Values)
+                Serialize(item, path);
+            foreach (var item in _visualEffects.Values)
+                Serialize(item, path);
 
             Serialize(ShipSettings, path);
             Serialize(GalaxySettings, path);
@@ -173,7 +188,8 @@ namespace GameDatabase
         public void Clear()
         {
             _weapons.Clear();
-            _ammunitions.Clear();
+            _ammunition.Clear();
+            _ammunitionObsolete.Clear();
             _devices.Clear();
             _ships.Clear();
             _shipBuilds.Clear();
@@ -190,6 +206,8 @@ namespace GameDatabase
             _fleets.Clear();
             _characters.Clear();
             _questItems.Clear();
+            _visualEffects.Clear();
+            _bulletPrefabs.Clear();
 
             _fileNames.Clear();
             _images.Clear();
@@ -203,7 +221,7 @@ namespace GameDatabase
         public SerializableGalaxySettings GalaxySettings { get; private set; }
 
         public IEnumerable<SerializableWeapon> Weapons { get { return _weapons.Values; } }
-        public IEnumerable<SerializableAmmunition> Ammunitions { get { return _ammunitions.Values; } }
+        public IEnumerable<SerializableAmmunition> Ammunitions { get { return _ammunition.Values; } }
         public IEnumerable<SerializableDevice> Devices { get { return _devices.Values; } }
         public IEnumerable<SerializableShip> Ships { get { return _ships.Values; } }
         public IEnumerable<SerializableShipBuild> ShipBuilds { get { return _shipBuilds.Values; } }
@@ -221,9 +239,11 @@ namespace GameDatabase
         public IEnumerable<SerializableFleet> Fleets { get { return _fleets.Values; } }
         public IEnumerable<SerializableCharacter> Characters { get { return _characters.Values; } }
         public IEnumerable<SerializableQuestItem> QuestItems { get { return _questItems.Values; } }
+        public IEnumerable<SerializableVisualEffect> VisualEffects { get { return _visualEffects.Values; } }
+        public IEnumerable<SerializableBulletPrefab> BulletPrefabs { get { return _bulletPrefabs.Values; } }
 
         public SerializableWeapon GetWeapon(int id) { return GetItem(id, _weapons); }
-        public SerializableAmmunition GetAmmunition(int id) { return GetItem(id, _ammunitions); }
+        public SerializableAmmunition GetAmmunition(int id) { return GetItem(id, _ammunition); }
         public SerializableDevice GetDevice(int id) { return GetItem(id, _devices); }
         public SerializableShip GetShip(int id) { return GetItem(id, _ships); }
         public SerializableShipBuild GetShipBuild(int id) { return GetItem(id, _shipBuilds); }
@@ -241,6 +261,8 @@ namespace GameDatabase
         public SerializableFleet GetFleet(int id) { return GetItem(id, _fleets); }
         public SerializableCharacter GetCharacter(int id) { return GetItem(id, _characters); }
         public SerializableQuestItem GetQuestItem(int id) { return GetItem(id, _questItems); }
+        public SerializableVisualEffect GetVisualEffect(int id) { return GetItem(id, _visualEffects); }
+        public SerializableBulletPrefab GetBulletPrefab(int id) { return GetItem(id, _bulletPrefabs); }
 
         public Image GetImage(string name)
         {
@@ -326,7 +348,7 @@ namespace GameDatabase
         private JsonSerializerSettings Settings { get; set; }
 
         private readonly Dictionary<int, SerializableWeapon> _weapons = new Dictionary<int, SerializableWeapon>();
-        private readonly Dictionary<int, SerializableAmmunition> _ammunitions = new Dictionary<int, SerializableAmmunition>();
+        private readonly Dictionary<int, SerializableAmmunition> _ammunition = new Dictionary<int, SerializableAmmunition>();
         private readonly Dictionary<int, SerializableDevice> _devices = new Dictionary<int, SerializableDevice>();
         private readonly Dictionary<int, SerializableShip> _ships = new Dictionary<int, SerializableShip>();
         private readonly Dictionary<int, SerializableShipBuild> _shipBuilds = new Dictionary<int, SerializableShipBuild>();
@@ -344,10 +366,18 @@ namespace GameDatabase
         private readonly Dictionary<int, SerializableFleet> _fleets = new Dictionary<int, SerializableFleet>();
         private readonly Dictionary<int, SerializableCharacter> _characters = new Dictionary<int, SerializableCharacter>();
         private readonly Dictionary<int, SerializableQuestItem> _questItems = new Dictionary<int, SerializableQuestItem>();
+        private readonly Dictionary<int, SerializableVisualEffect> _visualEffects = new Dictionary<int, SerializableVisualEffect>();
+        private readonly Dictionary<int, SerializableBulletPrefab> _bulletPrefabs = new Dictionary<int, SerializableBulletPrefab>();
 
         private readonly Dictionary<string, Image> _images = new Dictionary<string, Image>();
         private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<object, string> _fileNames = new Dictionary<object, string>();
+
+        #region Obsolete
+        public SerializableAmmunitionObsolete GetAmmunitionObsolete(int id) { return GetItem(id, _ammunitionObsolete); }
+        public IEnumerable<SerializableAmmunitionObsolete> AmmunitionObsolete { get { return _ammunitionObsolete.Values; } }
+        private readonly Dictionary<int, SerializableAmmunitionObsolete> _ammunitionObsolete = new Dictionary<int, SerializableAmmunitionObsolete>();
+        #endregion
 
         private class BaseFirstContractResolver : DefaultContractResolver
         {

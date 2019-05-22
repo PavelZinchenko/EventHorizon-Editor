@@ -7,7 +7,6 @@
   "Velocity": 15.0,
   "LifeTime": 1.0,
   "EnergyCost": 1.0,
-  "Color": "#FFFFFF",
   "FireSound": "shot_03",
   "HitSound": "hit_01",
   "HitEffectPrefab": "FlashAdditive",

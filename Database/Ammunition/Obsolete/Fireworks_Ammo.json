@@ -11,7 +11,6 @@
   "LifeTime": 1.5,
   "IgnoresShipVelocity": true,
   "EnergyCost": 3.0,
-  "Color": "#FFFFFF",
   "HitSound": "hit_09",
   "BulletPrefab": "Energy1"
 }

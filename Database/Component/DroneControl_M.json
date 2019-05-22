@@ -8,12 +8,10 @@
   "Faction": 5,
   "Level": 75,
   "Icon": "torpedo1",
-  "Color": "#FFFFFF",
   "Layout": "1010",
   "CellType": "4",
   "WeaponId": 12,
   "AmmunitionId": 12,
-  "WeaponSlotType": "",
   "PossibleModifications": [
     13,
     8,

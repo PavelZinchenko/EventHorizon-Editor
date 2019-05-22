@@ -2,6 +2,5 @@
   "ItemType": 20,
   "Id": 30,
   "Name": "$AncientArtifact",
-  "Icon": "artifact",
-  "Color": "#FFFFFF"
+  "Icon": "artifact"
 }

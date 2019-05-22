@@ -1,4 +1,5 @@
-﻿using GameDatabase.Enums;
+﻿using System;
+using GameDatabase.Enums;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -13,8 +14,11 @@ namespace GameDatabase.EditorModel
 
         public InstalledComponent(SerializableInstalledComponent data, Database database)
         {
-            ComponentId = database.GetComponent(data.ComponentId).ItemId;
+            var component = database.GetComponent(data.ComponentId);
+            if (component == null)
+                throw new ArgumentException("Unknown component - " + data.ComponentId);
 
+            ComponentId = component.ItemId;
             Modification = data.Modification;
             Quality = data.Quality;
             Locked = data.Locked;

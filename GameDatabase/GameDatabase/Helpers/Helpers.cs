@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 
 namespace GameDatabase
@@ -21,6 +20,8 @@ namespace GameDatabase
 
         public static string ColorToString(Color color)
         {
+            if (color.ToArgb() == -1) return string.Empty;
+
             if (color.A == 0xff)
                 return "#" + (color.ToArgb() & 0xffffff).ToString("X6");
             else
