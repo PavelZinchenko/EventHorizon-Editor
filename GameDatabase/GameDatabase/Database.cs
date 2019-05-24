@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using GameDatabase.EditorModel;
 using GameDatabase.EditorModel.Quests;
+using GameDatabase.GameDatabase.Model;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -179,10 +180,16 @@ namespace GameDatabase
         private T GetItem<T,U>(int id, Dictionary<int, T> cache, U source) where T : class
         {
             T item;
-            if (!cache.TryGetValue(id, out item) && source != null)
+            try
             {
-                item = (T)Activator.CreateInstance(typeof(T), source, this);
-                cache.Add(id, item);
+                if (!cache.TryGetValue(id, out item) && source != null)
+                {
+                    item = (T)Activator.CreateInstance(typeof(T), source, this);
+                    cache.Add(id, item);
+                }
+            } catch(System.Reflection.TargetInvocationException err)
+            {
+                throw err.InnerException;
             }
 
             return item;

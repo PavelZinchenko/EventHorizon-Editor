@@ -181,6 +181,7 @@
     <Compile Include="GameDatabase\Enums\Weapon\VisualEffectType.cs" />
     <Compile Include="GameDatabase\Enums\Weapon\WeaponClass.cs" />
     <Compile Include="GameDatabase\Helpers\DataAdapter.cs" />
+    <Compile Include="GameDatabase\Model\EditorException.cs" />
     <Compile Include="GameDatabase\Model\ItemId.cs" />
     <Compile Include="GameDatabase\Model\Layout.cs" />
     <Compile Include="GameDatabase\Model\NumericValue.cs" />

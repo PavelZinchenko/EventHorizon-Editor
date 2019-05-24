@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Model;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -12,11 +14,23 @@ namespace GameDatabase.EditorModel
         {
             ItemId = new ItemId<ShipBuild>(shipBuild.Id, shipBuild.FileName);
 
-            ShipId = database.GetShip(shipBuild.ShipId).ItemId;
+            try
+            {
+                ShipId = database.GetShip(shipBuild.ShipId).ItemId;
+            } catch (NullReferenceException err)
+            {
+                throw new EditorException("Unknown ship ID - " + shipBuild.ShipId + " in " + shipBuild.FilePath);
+            }
             NotAvailableInGame = shipBuild.NotAvailableInGame;
             DifficultyClass = shipBuild.DifficultyClass;
             BuildFactionId = database.GetFaction(shipBuild.BuildFaction).ItemId;
-            Components = shipBuild.Components.Select(item => new InstalledComponent(item, database)).ToArray();
+            try
+            {
+                Components = shipBuild.Components.Select(item => new InstalledComponent(item, database)).ToArray();
+            } catch(System.ArgumentException e)
+            {
+                throw new EditorException(e.Message+ " in " + shipBuild.FilePath);
+            }
         }
 
         public void Save(SerializableShipBuild serializable)

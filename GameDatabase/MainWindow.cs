@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using GameDatabase.EditorModel;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Model;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 using Newtonsoft.Json;
@@ -32,6 +33,10 @@ namespace GameDatabase
                 _database = new Database(path, true); // TODO:
                 BuildFilesTree(path, DatabaseTreeView.Nodes);
                 _lastDatabasePath = path;
+            }
+            catch (EditorException e)
+            {
+                MessageBox.Show(e.Message);
             }
             catch (Exception e)
             {
@@ -291,5 +296,10 @@ namespace GameDatabase
         private SerializableItem _selectedItem;
         private Database _database;
         private string _lastDatabasePath;
+
+        private void reloadDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDatabase(_lastDatabasePath);
+        }
     }
 }
