@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using GameDatabase.EditorModel;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.GameDatabase.Model;
+using GameDatabase.GameDatabase.Serializable;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 using Newtonsoft.Json;
@@ -17,6 +20,11 @@ namespace GameDatabase
     {
         public MainWindow()
         {
+            //This check is necessary becouse setting icon from AppDomain.CurrentDomain fails if we are running the code from VisualStudio
+            if (!System.Diagnostics.Debugger.IsAttached)
+                //Setting icon this way makes it appear at higher resolution in taskbar
+                Icon = Icon.ExtractAssociatedIcon(AppDomain.CurrentDomain.FriendlyName);
+
             InitializeComponent();
         }
 
@@ -33,6 +41,7 @@ namespace GameDatabase
                 _database = new Database(path, true); // TODO:
                 BuildFilesTree(path, DatabaseTreeView.Nodes);
                 _lastDatabasePath = path;
+                BuildTemplates();
             }
             catch (EditorException e)
             {
@@ -52,6 +61,7 @@ namespace GameDatabase
                 {
                     var name = directory.Substring(directory.LastIndexOf("\\", StringComparison.OrdinalIgnoreCase) + 1);
                     var node = nodeCollection.Add(directory, name);
+                    node.Tag = "Folder";
                     BuildFilesTree(directory, node.Nodes);
                 }
 
@@ -64,10 +74,64 @@ namespace GameDatabase
             }
         }
 
+        private void BuildTemplates()
+        {
+            createToolStripMenuItem.DropDownItems.Clear();
+            createToolStripMenuItem.DropDownItems.Add(folderToolStripMenuItem);
+            ToolStripMenuItem item = new ToolStripMenuItem("Templates");
+            item.Name = "Templates";
+            createToolStripMenuItem.DropDownItems.Add(item);
+            item = new ToolStripMenuItem("");
+            item.Enabled = false;
+            createToolStripMenuItem.DropDownItems.Add(item);
+            foreach (var template in _database.Templates)
+            {
+                var lastNode = createToolStripMenuItem;
+                var _name = template.Name;
+                if (template.Name.Contains('/'))
+                {
+                    var path = template.Name.Split('/');
+                    _name = path.Last();
+                    for (var i= 0;i< path.Length - 1; i++){
+                        var findResult = lastNode.DropDownItems.Find(path[i], false);
+                        ToolStripMenuItem curNode;
+                        if (findResult.Length==0 || (curNode = findResult[0] as ToolStripMenuItem) == null)
+                        {
+                            curNode = new ToolStripMenuItem(path[i]);
+                            curNode.Name = path[i];
+                            lastNode.DropDownItems.Add(curNode);
+                        }
+                        lastNode = curNode;
+                    }
+                }
+                item = new ToolStripMenuItem(_name);
+                lastNode.DropDownItems.Add(item);
+                item.Tag = item.Name = template.Name;
+                item.Click += TemplateMenuItem_Click;
+            }
+        }
+
         private void DatabaseTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             ShowItemInfo(e.Node.Name);
         }
+
+        private void DatabaseTreeView_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                Point p = new Point(e.X, e.Y);
+                TreeNode node = DatabaseTreeView.GetNodeAt(p);
+                if (node != null)
+                {
+                    DatabaseTreeView.SelectedNode = node;
+                    ShowItemInfo(node.Name);
+                    contextMenuStrip1.Show(this, p);
+                }
+            }
+        }
+
+        private Dictionary<string, string> ghostFiles = new Dictionary<string, string>();
 
         private void ShowItemInfo(string path)
         {
@@ -83,8 +147,11 @@ namespace GameDatabase
                     structDataView1.Data = GetDirectoryInfo(path);
                     return;
                 }
-
-                var data = File.ReadAllText(path);
+                string data;
+                if (File.Exists(path))
+                    data = File.ReadAllText(path);
+                else
+                    data = ghostFiles[path];
                 var name = Helpers.FileName(path);
                 var item = JsonConvert.DeserializeObject<SerializableItem>(data);
                 item.FileName = name;
@@ -125,7 +192,8 @@ namespace GameDatabase
 
             try
             {
-                var ids = new List<bool> { true };
+                var ids = new HashSet<int>();
+                var top = 0;
                 foreach (var file in Directory.EnumerateFiles(path, "*.json", SearchOption.TopDirectoryOnly))
                 {
                     var text = File.ReadAllText(file);
@@ -136,17 +204,17 @@ namespace GameDatabase
                     if (item.ItemType == ItemType.Undefined)
                         continue;
 
-                    if (ids.Count <= item.Id)
-                        ids.AddRange(Enumerable.Repeat(false, item.Id - ids.Count + 1));
-                    ids[item.Id] = true;
+                    ids.Add(item.Id);
+                    top = Math.Max(top, item.Id);
 
                     if (data.ItemTypes == ItemType.Undefined)
                         data.ItemTypes = item.ItemType;
                 }
 
-                data.LastItemId.Value = ids.Count - 1;
-                var index = ids.IndexOf(false);
-                data.FirstUnusedId.Value = index > 0 ? index : ids.Count;
+                data.LastItemId.Value = top;
+                var index = 0;
+                while (ids.Contains(index)) index++;
+                data.FirstUnusedId.Value = index > 0 ? index : top+1;
             }
             catch (Exception e)
             {
@@ -251,13 +319,17 @@ namespace GameDatabase
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 _database.SaveAs(folderBrowserDialog1.SelectedPath);
+                ghostFiles.Clear();
             }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(_lastDatabasePath))
+            {
                 _database.SaveAs(_lastDatabasePath);
+                ghostFiles.Clear();
+            }
         }
 
         private void createModMenuItem_Click(object sender, EventArgs e)
@@ -277,7 +349,7 @@ namespace GameDatabase
                     name = dialog.Name;
                     guid = Guid.NewGuid().ToString();
 
-                    File.WriteAllText(Path.Combine(_lastDatabasePath, ModBuilder.SignatureFileName), name + '\n' + guid );
+                    File.WriteAllText(Path.Combine(_lastDatabasePath, ModBuilder.SignatureFileName), name + '\n' + guid);
                 }
 
                 if (saveFileDialog.ShowDialog() != DialogResult.OK)
@@ -300,6 +372,273 @@ namespace GameDatabase
         private void reloadDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenDatabase(_lastDatabasePath);
+        }
+
+        private void loadAsDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDatabase(DatabaseTreeView.SelectedNode.Name);
+        }
+
+        private void folderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var name = Prompt.ShowDialog("Input folder name", "");
+            if (name == "") return;
+            var _node = DatabaseTreeView.SelectedNode;
+            if (Path.GetInvalidFileNameChars().Any(name.Contains))
+            {
+                MessageBox.Show("Folder name contains invalid characters");
+                return;
+            }
+            if (_node.Tag == null || _node.Tag.ToString() != "Folder")
+            {
+                _node = _node.Parent;
+            }
+
+            var _path = Path.Combine(_node.Name, name);
+            if (Directory.Exists(_path))
+            {
+                MessageBox.Show("Folder with same name aready exists");
+                return;
+            }
+            var _folder = new TreeNode(name);
+            _folder.Name = _path;
+            _folder.Tag = "Folder";
+            _node.Nodes.Insert(0, _folder);
+        }
+
+        private void TemplateMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem)
+            {
+
+                var template = _database.GetTemplate((sender as ToolStripMenuItem).Tag.ToString());
+
+                var name = Prompt.ShowDialog(template.NameDialog, "");
+                if (name == "") return;
+                var _node = DatabaseTreeView.SelectedNode;
+                if (Path.GetInvalidFileNameChars().Any(name.Contains))
+                {
+                    MessageBox.Show("File Name contains invalid characters");
+                    return;
+                }
+                if (_node.Tag == null || _node.Tag.ToString() != "Folder")
+                {
+                    _node = _node.Parent;
+                }
+                int id;
+                try
+                {
+                    var result = Prompt.ShowDialog(template.IdDialog, "");
+                    id = Int32.Parse(result);
+                }
+                catch (OverflowException)
+                {
+                    MessageBox.Show("Id is too big");
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    //Console.WriteLine(ex.GetType());
+                    MessageBox.Show("Invalid Id");
+                    return;
+                }
+
+                try
+                {
+                    var items = template.Items;
+                    Dictionary<string, Newtonsoft.Json.Linq.JObject> files = new Dictionary<string, Newtonsoft.Json.Linq.JObject>();
+                    Dictionary<TreeNode, TreeNode> nodes = new Dictionary<TreeNode, TreeNode>();
+                    HashSet<string> _files = new HashSet<string>();
+                    HashSet<string> _dirs = new HashSet<string>();
+
+                    void FormatNumberField(Newtonsoft.Json.Linq.JObject target, string field, int placeholder=-1)
+                    {
+                        var _field = target.GetValue(field);
+                        if (_field != null)
+                        {
+                            _field = (int)new DataTable().Compute(String.Format((string)_field, id), null);
+                            target.Remove(field);
+                            target.Add(field, _field);
+                        } else
+                        {
+                            if(placeholder!=-1)
+                                target.Add(field, placeholder);
+                        }
+                    }
+
+                    bool error = false;
+
+                    void BuildTemplateItems(SerializableTemplateItem[] _items, TreeNode _parentNode)
+                    {
+                        if (error) return;
+                        for (int i = 0; i < _items.Length; i++)
+                        {
+                            var item = _items[i];
+                            var path = Path.Combine(_parentNode.Name, String.Format(item.Filename, id, name));
+                            TreeNode _newNode;
+                            if (item.Type == "Folder")
+                            {
+                                _newNode = new TreeNode(path.Substring(path.LastIndexOf("\\", StringComparison.OrdinalIgnoreCase) + 1))
+                                {
+                                    Name = path
+                                };
+                                nodes.Add(_newNode, _parentNode);
+                                BuildTemplateItems(item.Items,_newNode);
+                                continue;
+                            }
+                            path += ".json";
+                            string filename = Helpers.FileName(path);
+                            _newNode = new TreeNode(filename)
+                            {
+                                Name = path
+                            };
+                            nodes.Add(_newNode, _parentNode);
+                            _files.Add(path);
+                            var content = files[path] = (Newtonsoft.Json.Linq.JObject)_items[i].Content.DeepClone();
+
+                            FormatNumberField(content, "Id");
+                            var _id = (int)content.GetValue("Id");
+
+                            if (File.Exists(path)||ghostFiles.ContainsKey(path))
+                            {
+                                MessageBox.Show("File " +path + " already exists");
+                                error = true;
+                                return;
+                            }
+                            var _name = (string)content.GetValue("Name");
+                            if (_name != null)
+                            {
+                                _name = String.Format(_name, id, name);
+                                content.Remove("Name");
+                                content.Add("Name", _name);
+                            }
+                            var type = (ItemType)(int)content.GetValue("ItemType");
+                            switch (type)
+                            {
+                                case ItemType.Component:
+                                    if (_database.GetComponent(_id) != null) error = true;
+                                    FormatNumberField(content, "WeaponId");
+                                    FormatNumberField(content, "AmmunitionId");
+                                    FormatNumberField(content, "DroneBayId");
+                                    FormatNumberField(content, "DroneId");
+                                    FormatNumberField(content, "DeviceId");
+                                    FormatNumberField(content, "ComponentStatsId", _database.ComponentStatsIds.First().Id);
+                                    break;
+                                case ItemType.Device:
+                                    if (_database.GetDevice(_id) != null) error = true;
+                                    break;
+                                case ItemType.Weapon:
+                                    if (_database.GetWeapon(_id) != null) error = true;
+                                    break;
+                                case ItemType.AmmunitionObsolete:
+                                    if (_database.GetAmmunitionObsolete(_id) != null) error = true;
+                                    break;
+                                case ItemType.DroneBay:
+                                    if (_database.GetDroneBay(_id) != null) error = true;
+                                    break;
+                                case ItemType.Ship:
+                                    if (_database.GetShip(_id) != null) error = true;
+                                    break;
+                                case ItemType.Satellite:
+                                    if (_database.GetSatellite(_id) != null) error = true;
+                                    break;
+                                case ItemType.ShipBuild:
+                                    if (_database.GetShipBuild(_id) != null) error = true;
+                                    FormatNumberField(content,"ShipId", _database.ShipIds.First().Id);
+                                    break;
+                                case ItemType.SatelliteBuild:
+                                    if (_database.GetSatelliteBuild(_id) != null) error = true;
+                                    FormatNumberField(content, "SatelliteId",_database.SatelliteIds.First().Id);
+                                    break;
+                                case ItemType.Technology:
+                                    if (_database.GetTechnology(_id) != null) error = true;
+                                    FormatNumberField(content, "ItemId");
+                                    if (content.GetValue("ItemId") == null)
+                                    {
+                                        switch ((TechType)(int)content.GetValue("Type"))
+                                        {
+                                            case TechType.Component:
+                                                content.Add("ItemId", _database.ComponentIds.First().Id);
+                                                break;
+                                            case TechType.Ship:
+                                                content.Add("ItemId", _database.ShipIds.First().Id);
+                                                break;
+                                            case TechType.Satellite:
+                                                content.Add("ItemId", _database.SatelliteIds.First().Id);
+                                                break;
+                                        }
+                                    }
+                                break;
+                                case ItemType.ComponentStats:
+                                    if (_database.GetComponentStats(_id) != null) error = true;
+                                    break;
+                                case ItemType.ComponentMod:
+                                    if (_database.GetComponentMods(_id) != null) error = true;
+                                    break;
+                                case ItemType.Skill:
+                                    if (_database.GetSkill(_id) != null) error = true;
+                                    break;
+                                case ItemType.Faction:
+                                    if (_database.GetFaction(_id) != null) error = true;
+                                    break;
+                                case ItemType.Quest:
+                                    if (_database.GetQuest(_id) != null) error = true;
+                                    break;
+                                case ItemType.Loot:
+                                    if (_database.GetLoot(_id) != null) error = true;
+                                    break;
+                                case ItemType.Fleet:
+                                    if (_database.GetFleet(_id) != null) error = true;
+                                    break;
+                                case ItemType.Character:
+                                    if (_database.GetCharacter(_id) != null) error = true;
+                                    break;
+                                case ItemType.QuestItem:
+                                    if (_database.GetQuestItem(_id) != null) error = true;
+                                    break;
+                                case ItemType.Ammunition:
+                                    if (_database.GetAmmunition(_id) != null) error = true;
+                                    FormatNumberField(content.GetValue("Body") as Newtonsoft.Json.Linq.JObject, "BulletPrefab");
+                                    break;
+                                case ItemType.VisualEffect:
+                                    if (_database.GetVisualEffect(_id) != null) error = true;
+                                    break;
+                                case ItemType.BulletPrefab:
+                                    if (_database.GetBulletPrefab(_id) != null) error = true;
+                                    break;
+                            }
+                            if (error)
+                            {
+                                MessageBox.Show(type.ToString() + " with Id " + _id + " already exists");
+                                return;
+                            }
+                        }
+                    }
+
+                    BuildTemplateItems(template.Items,_node);
+
+                    if (error)
+                    {
+                        return;
+                    }
+
+                    foreach(string path in _files)
+                    {
+                        _database.DeserializeItem(files[path].ToString(), _lastDatabasePath, path);
+                        ghostFiles.Add(path, files[path].ToString());
+                    }
+
+                    foreach(TreeNode node in nodes.Keys)
+                    {
+                        nodes[node].Nodes.Add(node);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unexpected error happened, most likely due to invalid template file.\nIf yoy sure your template file is correct, then report stacktrace bellow\n\n"+ex);
+                    return;
+                }
+            }
         }
     }
 }

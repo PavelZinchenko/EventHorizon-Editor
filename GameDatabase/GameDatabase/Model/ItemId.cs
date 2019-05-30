@@ -1,4 +1,5 @@
 ﻿using GameDatabase.Serializable;
+using GameDatabase.EditorModel;
 
 namespace GameDatabase.Model
 {
@@ -25,7 +26,7 @@ namespace GameDatabase.Model
                 _name = string.Empty;
                 return;
             }
-
+            
             _id = item.Id;
             _name = item.FileName;
         }

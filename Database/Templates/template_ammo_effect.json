@@ -1,0 +1,16 @@
+{
+  "Name": "Ammunition/Effect",
+  "NameDialog": "File Name",
+  "IdDialog": "ID",
+  "Items": [
+    {
+      "Filename": "{1}",
+      "Type": "File",
+      "Content": {
+		  "ItemType": 26,
+		  "Id": "{0}",
+		  "Elements": []
+		}
+    }
+  ]
+}

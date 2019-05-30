@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using GameDatabase.Enums;
 using GameDatabase.GameDatabase.Model;
+using GameDatabase.GameDatabase.Serializable;
 using GameDatabase.Serializable;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -44,102 +45,123 @@ namespace GameDatabase
                 else if (fileInfo.Extension == ".json")
                 {
                     var data = File.ReadAllText(file);
-                    SerializableItem item;
-                    try {
-                        item = JsonConvert.DeserializeObject<SerializableItem>(data);
-                    }
-                    catch (Exception e)
-                    {
-                        throw new EditorException("Malformed JSON file at " + file + " \nTry using a JSON validator.");
-                    }
-                    var type = item.ItemType;
 
-                    var name = Helpers.FileName(file);
-                    object deserializedObject;
-
-                    switch (type)
-                    {
-                        case ItemType.Undefined:
-                            continue;
-                        case ItemType.Component:
-                            deserializedObject = DeserializeItem(data, file, name, _components);
-                            break;
-                        case ItemType.Device:
-                            deserializedObject = DeserializeItem(data, name, file, _devices);
-                            break;
-                        case ItemType.Weapon:
-                            deserializedObject = DeserializeItem(data, name, file, _weapons);
-                            break;
-                        case ItemType.Ammunition:
-                            deserializedObject = DeserializeItem(data, name, file, _ammunition);
-                            break;
-                        case ItemType.AmmunitionObsolete:
-                            deserializedObject = DeserializeItem(data, name, file, _ammunitionObsolete);
-                            break;
-                        case ItemType.DroneBay:
-                            deserializedObject = DeserializeItem(data, name, file, _droneBays);
-                            break;
-                        case ItemType.Ship:
-                            deserializedObject = DeserializeItem(data, name, file, _ships);
-                            break;
-                        case ItemType.Satellite:
-                            deserializedObject = DeserializeItem(data, name, file, _satellites);
-                            break;
-                        case ItemType.ShipBuild:
-                            deserializedObject = DeserializeItem(data, name, file, _shipBuilds);
-                            break;
-                        case ItemType.SatelliteBuild:
-                            deserializedObject = DeserializeItem(data, name, file, _satelliteBuilds);
-                            break;
-                        case ItemType.Technology:
-                            deserializedObject = DeserializeItem(data, name, file, _technologies);
-                            break;
-                        case ItemType.Skill:
-                            deserializedObject = DeserializeItem(data, name, file, _skills);
-                            break;
-                        case ItemType.ComponentStats:
-                            deserializedObject = DeserializeItem(data, name, file, _componentStats);
-                            break;
-                        case ItemType.ComponentMod:
-                            deserializedObject = DeserializeItem(data, name, file, _componentMods);
-                            break;
-                        case ItemType.Faction:
-                            deserializedObject = DeserializeItem(data, name, file, _factions);
-                            break;
-                        case ItemType.Quest:
-                            deserializedObject = DeserializeItem(data, name, file, _quests);
-                            break;
-                        case ItemType.Loot:
-                            deserializedObject = DeserializeItem(data, name, file, _loot);
-                            break;
-                        case ItemType.Fleet:
-                            deserializedObject = DeserializeItem(data, name, file, _fleets);
-                            break;
-                        case ItemType.Character:
-                            deserializedObject = DeserializeItem(data, name, file, _characters);
-                            break;
-                        case ItemType.QuestItem:
-                            deserializedObject = DeserializeItem(data, name, file, _questItems);
-                            break;
-                        case ItemType.BulletPrefab:
-                            deserializedObject = DeserializeItem(data, name, file, _bulletPrefabs);
-                            break;
-                        case ItemType.VisualEffect:
-                            deserializedObject = DeserializeItem(data, name, file, _visualEffects);
-                            break;
-                        case ItemType.ShipSettings:
-                            deserializedObject = ShipSettings = DeserializeItem<SerializableShipSettings>(data, name, file);
-                            break;
-                        case ItemType.GalaxySettings:
-                            deserializedObject = GalaxySettings = DeserializeItem<SerializableGalaxySettings>(data, name, file);
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                    _fileNames.Add(deserializedObject, file.Substring(path.Length));
+                    DeserializeItem(data, path, file);
                 }
             }
+        }
+        
+        public SerializableItem DeserializeItem(string data, string path, string file)
+        {
+            SerializableItem item;
+            try
+            {
+                item = JsonConvert.DeserializeObject<SerializableItem>(data);
+            }
+            catch (Exception e)
+            {
+                throw new EditorException("Malformed JSON file at " + file + " \nTry using a JSON validator.");
+            }
+            if (item == null)
+            {
+                throw new EditorException("Empty JSON file at " + file);
+            }
+            ItemType type;
+            type = item.ItemType;
+
+            var name = Helpers.FileName(file);
+            object deserializedObject;
+
+            switch (type)
+            {
+                case ItemType.Undefined:
+
+                    if (name.StartsWith("template_"))
+                    {
+                        SerializableTemplate template = JsonConvert.DeserializeObject<SerializableTemplate>(data);
+                        template.FileName = name;
+                        template.FilePath = file;
+                        _templates.Add(template.Name, template);
+                    }
+                    return null;
+                case ItemType.Component:
+                    deserializedObject = DeserializeItem(data, name, file, _components);
+                    break;
+                case ItemType.Device:
+                    deserializedObject = DeserializeItem(data, name, file, _devices);
+                    break;
+                case ItemType.Weapon:
+                    deserializedObject = DeserializeItem(data, name, file, _weapons);
+                    break;
+                case ItemType.Ammunition:
+                    deserializedObject = DeserializeItem(data, name, file, _ammunition);
+                    break;
+                case ItemType.AmmunitionObsolete:
+                    deserializedObject = DeserializeItem(data, name, file, _ammunitionObsolete);
+                    break;
+                case ItemType.DroneBay:
+                    deserializedObject = DeserializeItem(data, name, file, _droneBays);
+                    break;
+                case ItemType.Ship:
+                    deserializedObject = DeserializeItem(data, name, file, _ships);
+                    break;
+                case ItemType.Satellite:
+                    deserializedObject = DeserializeItem(data, name, file, _satellites);
+                    break;
+                case ItemType.ShipBuild:
+                    deserializedObject = DeserializeItem(data, name, file, _shipBuilds);
+                    break;
+                case ItemType.SatelliteBuild:
+                    deserializedObject = DeserializeItem(data, name, file, _satelliteBuilds);
+                    break;
+                case ItemType.Technology:
+                    deserializedObject = DeserializeItem(data, name, file, _technologies);
+                    break;
+                case ItemType.Skill:
+                    deserializedObject = DeserializeItem(data, name, file, _skills);
+                    break;
+                case ItemType.ComponentStats:
+                    deserializedObject = DeserializeItem(data, name, file, _componentStats);
+                    break;
+                case ItemType.ComponentMod:
+                    deserializedObject = DeserializeItem(data, name, file, _componentMods);
+                    break;
+                case ItemType.Faction:
+                    deserializedObject = DeserializeItem(data, name, file, _factions);
+                    break;
+                case ItemType.Quest:
+                    deserializedObject = DeserializeItem(data, name, file, _quests);
+                    break;
+                case ItemType.Loot:
+                    deserializedObject = DeserializeItem(data, name, file, _loot);
+                    break;
+                case ItemType.Fleet:
+                    deserializedObject = DeserializeItem(data, name, file, _fleets);
+                    break;
+                case ItemType.Character:
+                    deserializedObject = DeserializeItem(data, name, file, _characters);
+                    break;
+                case ItemType.QuestItem:
+                    deserializedObject = DeserializeItem(data, name, file, _questItems);
+                    break;
+                case ItemType.BulletPrefab:
+                    deserializedObject = DeserializeItem(data, name, file, _bulletPrefabs);
+                    break;
+                case ItemType.VisualEffect:
+                    deserializedObject = DeserializeItem(data, name, file, _visualEffects);
+                    break;
+                case ItemType.ShipSettings:
+                    deserializedObject = ShipSettings = DeserializeItem<SerializableShipSettings>(data, name, file);
+                    break;
+                case ItemType.GalaxySettings:
+                    deserializedObject = GalaxySettings = DeserializeItem<SerializableGalaxySettings>(data, name, file);
+                    break;
+                default:
+                    throw new EditorException("Unknown ItemType" + type.ToString() + " at " + file);
+            }
+
+            _fileNames.Add(deserializedObject, file.Substring(path.Length));
+            return (SerializableItem) deserializedObject;
         }
 
         public void SaveData(string path)
@@ -250,6 +272,8 @@ namespace GameDatabase
         public IEnumerable<SerializableVisualEffect> VisualEffects { get { return _visualEffects.Values; } }
         public IEnumerable<SerializableBulletPrefab> BulletPrefabs { get { return _bulletPrefabs.Values; } }
 
+        public IEnumerable<SerializableTemplate> Templates{ get { return _templates.Values; } }
+
         public SerializableWeapon GetWeapon(int id) { return GetItem(id, _weapons); }
         public SerializableAmmunition GetAmmunition(int id) { return GetItem(id, _ammunition); }
         public SerializableDevice GetDevice(int id) { return GetItem(id, _devices); }
@@ -284,6 +308,12 @@ namespace GameDatabase
             return _localizations.TryGetValue(language, out data) ? data : null;
         }
 
+        public SerializableTemplate GetTemplate(string name)
+        {
+            SerializableTemplate data;
+            return _templates.TryGetValue(name, out data) ? data : null;
+        }
+
         private void Serialize(object item, string path)
         {
             if (item == null)
@@ -316,7 +346,17 @@ namespace GameDatabase
         {
 
             T item;
-            item = JsonConvert.DeserializeObject<T>(data);
+            try { 
+                item = JsonConvert.DeserializeObject<T>(data);
+            }
+            catch (Exception e)
+            {
+                throw new EditorException("Malformed JSON file at " + path + " \nTry using a JSON validator.");
+            }
+            if (item == null)
+            {
+                throw new EditorException("Empty JSON file at " + path);
+            }
             item.FileName = name;
             item.FilePath = path;
             return item;
@@ -351,6 +391,7 @@ namespace GameDatabase
                 return;
 
             image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+
             _images.Add(file.Name, image);
         }
 
@@ -378,6 +419,8 @@ namespace GameDatabase
         private readonly Dictionary<int, SerializableQuestItem> _questItems = new Dictionary<int, SerializableQuestItem>();
         private readonly Dictionary<int, SerializableVisualEffect> _visualEffects = new Dictionary<int, SerializableVisualEffect>();
         private readonly Dictionary<int, SerializableBulletPrefab> _bulletPrefabs = new Dictionary<int, SerializableBulletPrefab>();
+
+        private readonly Dictionary<string, SerializableTemplate> _templates = new Dictionary<string, SerializableTemplate>();
 
         private readonly Dictionary<string, Image> _images = new Dictionary<string, Image>();
         private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);

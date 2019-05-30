@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Linq;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Model;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -28,8 +29,18 @@ namespace GameDatabase.EditorModel
             HeatResistance = new NumericValue<float>(ship.HeatResistance, 0, 100);
             Regeneration = ship.Regeneration;
             BaseWeightModifier = new NumericValue<float>(ship.BaseWeightModifier, -0.9f, 100);
+
+            if (ship.BuiltinDevices == null)
+            {
+                throw new EditorException("Ship file at "+ship.FilePath + " doesn't have requied field \"BuiltinDevices\".");
+            }
             BuiltinDevices = ship.BuiltinDevices.Select(id => new Wrapper<Device> { Item = database.GetDevice(id).ItemId }).ToArray();
             Layout = new Layout(ship.Layout);
+
+            if (ship.Barrels == null)
+            {
+                throw new EditorException("Ship file at " + ship.FilePath + " doesn't have requied field \"Barrels\".");
+            }
             Barrels = ship.Barrels.Select(item => new Barrel(item)).ToArray();
         }
 
