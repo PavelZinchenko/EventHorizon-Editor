@@ -47,6 +47,14 @@ namespace GameDatabase
                     var data = File.ReadAllText(file);
 
                     DeserializeItem(data, path, file);
+                } else if (fileInfo.Extension == ".template")
+                {
+                    var data = File.ReadAllText(file);
+                    var name = Helpers.FileName(file);
+                    SerializableTemplate template = JsonConvert.DeserializeObject<SerializableTemplate>(data);
+                    template.FileName = name;
+                    template.FilePath = file;
+                    _templates.Add(template.Name, template);
                 }
             }
         }
@@ -75,14 +83,6 @@ namespace GameDatabase
             switch (type)
             {
                 case ItemType.Undefined:
-
-                    if (name.StartsWith("template_"))
-                    {
-                        SerializableTemplate template = JsonConvert.DeserializeObject<SerializableTemplate>(data);
-                        template.FileName = name;
-                        template.FilePath = file;
-                        _templates.Add(template.Name, template);
-                    }
                     return null;
                 case ItemType.Component:
                     deserializedObject = DeserializeItem(data, name, file, _components);
