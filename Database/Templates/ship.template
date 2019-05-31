@@ -10,6 +10,8 @@
         "ItemType": 6,
 		"Name": "{1}",
         "Id": "{0}",
+		"ModelImage": "",
+		"IconImage": "",
         "BuiltinDevices": [],
         "Barrels": []
       }
