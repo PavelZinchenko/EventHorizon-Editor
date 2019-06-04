@@ -16,7 +16,7 @@ namespace GameDatabase.EditorModel
         {
             var component = database.GetComponent(data.ComponentId);
             if (component == null)
-                throw new ArgumentException("Unknown component - " + data.ComponentId);
+                throw new ArgumentException("Unknown component ID - " + data.ComponentId);
 
             ComponentId = component.ItemId;
             Modification = data.Modification;

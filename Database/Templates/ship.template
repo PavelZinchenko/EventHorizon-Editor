@@ -1,0 +1,20 @@
+{
+  "Name": "Ship",
+  "NameDialog":"File Name",
+  "IdDialog":"ID",
+  "Items": [
+    {
+      "Filename": "{1}",
+	  "Type": "File",
+      "Content": {
+        "ItemType": 6,
+		"Name": "{1}",
+        "Id": "{0}",
+		"ModelImage": "",
+		"IconImage": "",
+        "BuiltinDevices": [],
+        "Barrels": []
+      }
+    }
+  ]
+}

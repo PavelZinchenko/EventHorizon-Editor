@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Model;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 

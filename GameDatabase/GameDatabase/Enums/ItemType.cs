@@ -29,6 +29,6 @@
         BulletPrefab = 27,
 
         ShipSettings = 100,
-        GalaxySettings = 101,
+        GalaxySettings = 101
     }
 }

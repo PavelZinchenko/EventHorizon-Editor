@@ -1,0 +1,41 @@
+{
+  "Name": "Templates/Component/With Device",
+  "NameDialog": "File Name",
+  "IdDialog": "ID",
+  "Items": [
+    {
+      "Filename": "{1}",
+      "Type": "Folder",
+      "Items": [
+        {
+          "Filename": "{1}_component",
+          "Content": {
+            "ItemType": 1,
+            "Id": "{0}",
+            "Name": "{1}",
+            "ComponentStatsId": 1,
+            "PossibleModifications": [
+              17,
+              18,
+              19,
+              20,
+              1,
+              2
+            ],
+            "DeviceId": "{0}"
+          },
+          "Type": "File"
+        },
+        {
+          "Filename": "{1}_device",
+          "Type": "File",
+          "Content": {
+            "ItemType": 2,
+            "Id": "{0}",
+            "ControlButtonIcon": "controls_boost"
+          }
+        }
+      ]
+    }
+  ]
+}

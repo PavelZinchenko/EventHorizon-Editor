@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Linq;
 using GameDatabase.EditorModel;
 using GameDatabase.EditorModel.Quests;
+using GameDatabase.GameDatabase.Model;
+using GameDatabase.GameDatabase.Serializable;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -108,6 +110,11 @@ namespace GameDatabase
             _jsonDatabase.SaveData(path);
         }
 
+        public SerializableItem DeserializeItem(string data, string path, string file)
+        {
+            return _jsonDatabase.DeserializeItem(data, path, file);
+        }
+
         public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = new ShipSettings(_jsonDatabase.ShipSettings, this));
         public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = new GalaxySettings(_jsonDatabase.GalaxySettings, this));
 
@@ -134,6 +141,8 @@ namespace GameDatabase
         public AmmunitionObsolete GetAmmunitionObsolete(int id) { return GetItem(id, _ammunitionObsolete, _jsonDatabase.GetAmmunitionObsolete(id)); }
         public Ammunition GetAmmunition(int id) { return GetItem(id, _ammunition, _jsonDatabase.GetAmmunition(id)); }
 
+        public SerializableTemplate GetTemplate(string name) { return _jsonDatabase.GetTemplate(name); }
+
         public IEnumerable<ItemId<Component>> ComponentIds { get { return _jsonDatabase.Components.Select(item => new ItemId<Component>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<Device>> DeviceIds { get { return _jsonDatabase.Devices.Select(item => new ItemId<Device>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<Weapon>> WeaponIds { get { return _jsonDatabase.Weapons.Select(item => new ItemId<Weapon>(item.Id, item.FileName)); } }
@@ -157,6 +166,8 @@ namespace GameDatabase
         public IEnumerable<ItemId<BulletPrefab>> BulletPerfabIds { get { return _jsonDatabase.BulletPrefabs.Select(item => new ItemId<BulletPrefab>(item.Id, item.FileName)); } }
         public IEnumerable<ItemId<VisualEffect>> VisualEffectIds { get { return _jsonDatabase.VisualEffects.Select(item => new ItemId<VisualEffect>(item.Id, item.FileName)); } }
 
+        public IEnumerable<SerializableTemplate> Templates { get { return _jsonDatabase.Templates; } } 
+
         public Image GetImage(string name) { return _jsonDatabase.GetImage(name); }
         public string GetLocalization(string language) { return _jsonDatabase.GetLocalization(language); }
 
@@ -179,10 +190,16 @@ namespace GameDatabase
         private T GetItem<T,U>(int id, Dictionary<int, T> cache, U source) where T : class
         {
             T item;
-            if (!cache.TryGetValue(id, out item) && source != null)
+            try
             {
-                item = (T)Activator.CreateInstance(typeof(T), source, this);
-                cache.Add(id, item);
+                if (!cache.TryGetValue(id, out item) && source != null)
+                {
+                    item = (T)Activator.CreateInstance(typeof(T), source, this);
+                    cache.Add(id, item);
+                }
+            } catch(System.Reflection.TargetInvocationException err)
+            {
+                throw err.InnerException;
             }
 
             return item;

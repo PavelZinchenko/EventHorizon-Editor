@@ -214,7 +214,7 @@ namespace GameDatabase
 
         private Control TryCreateIdItem<T>(object value, Type type, IEnumerable<ItemId<T>> items, int column, int row)
         {
-            if (type != typeof(ItemId<T>))
+            if (type != typeof(ItemId<T>) && (value==null || value.GetType()!=typeof(ItemId<T>)))
                 return null;
 
             var itemlist = Enumerable.Repeat(ItemId<T>.Empty, 1).Concat(items).Cast<object>();

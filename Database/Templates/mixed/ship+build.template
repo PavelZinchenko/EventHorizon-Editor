@@ -1,0 +1,36 @@
+{
+  "Name": "Templates/Ship with Build",
+  "NameDialog": "File Name",
+  "IdDialog": "ID",
+  "Items": [
+    {
+      "Filename": "{1}",
+      "Type": "Folder",
+      "Items": [
+        {
+          "Filename": "{1}_ship",
+          "Content": {
+            "ItemType": 6,
+            "Name": "{1}",
+            "Id": "{0}",
+			"ModelImage": "",
+			"IconImage": "",
+            "BuiltinDevices": [],
+            "Barrels": []
+          },
+          "Type": "File"
+        },
+        {
+          "Filename": "{1}_build",
+          "Type": "File",
+          "Content": {
+            "ItemType": 8,
+            "Id": "{0}",
+            "ShipId": "{0}",
+            "Components": []
+          }
+        }
+      ]
+    }
+  ]
+}

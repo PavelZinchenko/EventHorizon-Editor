@@ -10,6 +10,9 @@ namespace GameDatabase.Serializable
         [JsonIgnore]
         public string FileName { get; set; }
 
+        [JsonIgnore]
+        public string FilePath { get; set; }
+
         public ItemType ItemType;
         public int Id;
     }

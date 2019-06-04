@@ -52,6 +52,9 @@
     <StartupObject>
     </StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -114,6 +117,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GameDatabase\Database.cs" />
+    <Compile Include="GameDatabase\EditorModel\Technology.cs" />
     <Compile Include="GameDatabase\EditorModel\Weapon\AmmunitionObsolete.cs" />
     <Compile Include="GameDatabase\EditorModel\Barrel.cs" />
     <Compile Include="GameDatabase\EditorModel\Component.cs" />
@@ -141,7 +145,6 @@
     <Compile Include="GameDatabase\EditorModel\ShipBuild.cs" />
     <Compile Include="GameDatabase\EditorModel\ShipSettings.cs" />
     <Compile Include="GameDatabase\EditorModel\Skill.cs" />
-    <Compile Include="GameDatabase\EditorModel\Technology.cs" />
     <Compile Include="GameDatabase\EditorModel\Weapon\Weapon.cs" />
     <Compile Include="GameDatabase\EditorModel\Weapon\Ammunition.cs" />
     <Compile Include="GameDatabase\EditorModel\Weapon\BulletPrefab.cs" />
@@ -181,6 +184,8 @@
     <Compile Include="GameDatabase\Enums\Weapon\VisualEffectType.cs" />
     <Compile Include="GameDatabase\Enums\Weapon\WeaponClass.cs" />
     <Compile Include="GameDatabase\Helpers\DataAdapter.cs" />
+    <Compile Include="GameDatabase\Helpers\Prompt.cs" />
+    <Compile Include="GameDatabase\Model\EditorException.cs" />
     <Compile Include="GameDatabase\Model\ItemId.cs" />
     <Compile Include="GameDatabase\Model\Layout.cs" />
     <Compile Include="GameDatabase\Model\NumericValue.cs" />
@@ -221,6 +226,8 @@
     <Compile Include="Controls\LayoutEditor.Designer.cs">
       <DependentUpon>LayoutEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameDatabase\Serializable\SerializableTemplate.cs" />
+    <Compile Include="GameDatabase\Serializable\SerializableTemplateItem.cs" />
     <Compile Include="GameDatabase\Serializable\Weapon\SerializableAmmunition.cs" />
     <Compile Include="GameDatabase\Serializable\Weapon\SerializableBulletPrefab.cs" />
     <Compile Include="GameDatabase\Serializable\Weapon\SerializableVisualEffect.cs" />
@@ -322,6 +329,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

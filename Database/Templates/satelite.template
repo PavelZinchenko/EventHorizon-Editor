@@ -1,0 +1,17 @@
+{
+  "Name": "Satelite",
+  "NameDialog": "File Name",
+  "IdDialog": "ID",
+  "Items": [
+    {
+      "Filename": "{1}",
+      "Type": "File",
+      "Content": {
+        "ItemType": 7,
+        "Id": "{0}",
+        "Name": "{1}",
+        "Barrels": []
+      }
+    }
+  ]
+}
