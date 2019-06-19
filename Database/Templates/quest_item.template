@@ -1,0 +1,15 @@
+{
+	"Name": "Quest/Item",
+	"NameDialog": "File Name",
+	"IdDialog": "ID",
+	"Items": [
+		{
+			"Filename": "{1}",
+			"Type": "File",
+			"Content": {
+			    "ItemType": 20,
+			    "Id": "{0}"
+			}
+		}
+	]
+}

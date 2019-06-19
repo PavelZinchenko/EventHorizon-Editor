@@ -408,38 +408,47 @@ namespace GameDatabase
 
         private void TemplateMenuItem_Click(object sender, EventArgs e)
         {
+            ItemFromTemplate(sender, e, "", "");
+        }
+
+        private void ItemFromTemplate(object sender, EventArgs e, string name, string __id)
+        {
             if (sender is ToolStripMenuItem)
             {
 
                 var template = _database.GetTemplate((sender as ToolStripMenuItem).Tag.ToString());
 
-                var name = Prompt.ShowDialog(template.NameDialog, "");
+                name = Prompt.ShowDialog(template.NameDialog,"", name);
                 if (name == "") return;
                 var _node = DatabaseTreeView.SelectedNode;
                 if (Path.GetInvalidFileNameChars().Any(name.Contains))
                 {
                     MessageBox.Show("File Name contains invalid characters");
+                    ItemFromTemplate(sender, e, "", __id);
                     return;
                 }
                 if (_node.Tag == null || _node.Tag.ToString() != "Folder")
                 {
                     _node = _node.Parent;
                 }
+                var result = Prompt.ShowDialog(template.IdDialog, "", __id);
+                if (result == "") return;
                 int id;
                 try
                 {
-                    var result = Prompt.ShowDialog(template.IdDialog, "");
                     id = Int32.Parse(result);
                 }
                 catch (OverflowException)
                 {
                     MessageBox.Show("Id is too big");
+                    ItemFromTemplate(sender, e, name, "");
                     return;
                 }
                 catch (Exception ex)
                 {
                     //Console.WriteLine(ex.GetType());
                     MessageBox.Show("Invalid Id");
+                    ItemFromTemplate(sender, e, name, "");
                     return;
                 }
 
@@ -619,6 +628,7 @@ namespace GameDatabase
 
                     if (error)
                     {
+                        ItemFromTemplate(sender, e, name, id.ToString());
                         return;
                     }
 

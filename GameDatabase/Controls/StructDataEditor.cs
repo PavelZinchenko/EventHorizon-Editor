@@ -328,7 +328,7 @@ namespace GameDatabase
 
             layoutEditor.ValueChanged += OnLayoutChanged;
 
-            var sizeControl = CreateNumericContol(layout.Size, 1, 32, 1, 0, 1, row);
+            var sizeControl = CreateNumericContol(layout.Size, 1, 1024, 1, 0, 1, row);
             sizeControl.ValueChanged += OnLayoutSizeChanged;
 
             panel.Controls.Add(layoutEditor, 0, 0);
@@ -408,7 +408,7 @@ namespace GameDatabase
                 Maximum = max,
                 Minimum = min,
                 Increment = increment,
-                Value = value,
+                Value = value < min ? min : value > max ? max:value,
                 DecimalPlaces = decimalPlaces,
             };
 
