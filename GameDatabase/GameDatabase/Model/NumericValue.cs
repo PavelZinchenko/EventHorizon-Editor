@@ -6,7 +6,9 @@ namespace GameDatabase.Model
     {
         public NumericValue(T value, T min, T max)
         {
-            _value = value.CompareTo(max) > 0 ? max : value.CompareTo(min) < 0 ? min : value;
+            //This is made to prevent editor overriding values changed using text editors. StructDataEditor still cant go beyond bounds, but external text editors can.
+            _value = value;
+            //_value = value.CompareTo(max) > 0 ? max : value.CompareTo(min) < 0 ? min : value;
             Max = max;
             Min = min;
 
