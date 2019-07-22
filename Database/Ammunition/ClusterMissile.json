@@ -5,9 +5,9 @@
     "Type": 1,
     "Size": 0.5,
     "Velocity": 15.0,
-    "Range": 40.0,
+    "Range": 15.0,
     "Weight": 0.1,
-    "HitPoints": 5,
+    "HitPoints": 1,
     "Color": "#FFA57F",
     "BulletPrefab": 10,
     "EnergyCost": 40.0,
@@ -15,12 +15,14 @@
   },
   "Triggers": [
     {
-      "Condition": 2,
+      "Condition": 5,
       "EffectType": 2,
       "AudioClip": "explosion_02",
-      "Ammunition": 104,
-      "Quantity": 6,
-      "RandomFactor": 1.0
+      "Ammunition": 112,
+      "Quantity": 3,
+      "Size": 0.75,
+      "RandomFactor": 1.0,
+      "MaxNestingLevel": 3
     },
     {
       "Condition": 2,
@@ -28,11 +30,26 @@
       "VisualEffect": 1,
       "ColorMode": 2,
       "Size": 2.0
+    },
+    {
+      "Condition": 6,
+      "EffectType": 2,
+      "AudioClip": "explosion_02",
+      "Ammunition": 113,
+      "Color": "#FF0000",
+      "ColorMode": 2,
+      "Quantity": 1,
+      "Size": 5.0,
+      "PowerMultiplier": 5.0
+    },
+    {
+      "Condition": 7,
+      "EffectType": 3
     }
   ],
   "Effects": [
     {
-      "Power": 10.0
+      "Power": 1.0
     }
   ]
 }

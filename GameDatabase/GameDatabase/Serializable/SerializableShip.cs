@@ -19,10 +19,13 @@ namespace GameDatabase.Serializable
         [DefaultValue("")]
         public string ModelImage;
         public float ModelScale;
-        public Vector2 EnginePosition;
         [DefaultValue("")]
         public string EngineColor;
+
+        public Vector2 EnginePosition;
         public float EngineSize;
+
+        public Engine[] Engines;
 
         public float EnergyResistance;
         public float KineticResistance;
@@ -34,5 +37,12 @@ namespace GameDatabase.Serializable
         [DefaultValue("")]
         public string Layout;
         public SerializableBarrel[] Barrels;
+
+        [Serializable]
+        public struct Engine
+        {
+            public Vector2 Position;
+            public float Size;
+        }
     }
 }

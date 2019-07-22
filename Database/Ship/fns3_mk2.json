@@ -7,10 +7,10 @@
   "IconScale": 0.5,
   "ModelImage": "fns1_2",
   "ModelScale": 1.1,
+  "EngineColor": "#40E0E0FF",
   "EnginePosition": {
     "x": -0.9
   },
-  "EngineColor": "#40E0E0FF",
   "EngineSize": 0.2,
   "KineticResistance": 2.0,
   "BuiltinDevices": [],

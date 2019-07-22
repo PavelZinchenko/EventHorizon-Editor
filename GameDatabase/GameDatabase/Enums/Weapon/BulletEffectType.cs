@@ -5,5 +5,6 @@
         None,
         PlaySfx,
         SpawnBullet,
+        Detonate,
     }
 }

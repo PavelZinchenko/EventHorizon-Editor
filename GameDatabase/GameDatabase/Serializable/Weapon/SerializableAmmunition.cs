@@ -52,6 +52,7 @@ namespace GameDatabase.Serializable
             public float Cooldown;
             public float RandomFactor;
             public float PowerMultiplier;
+            public int MaxNestingLevel;
         }
 
         [Serializable]

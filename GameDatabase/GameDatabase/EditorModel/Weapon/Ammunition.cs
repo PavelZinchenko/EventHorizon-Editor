@@ -44,6 +44,7 @@ namespace GameDatabase.EditorModel
                 Cooldown = new NumericValue<float>(item.Cooldown, 0, 1000),
                 RandomFactor = new NumericValue<float>(item.RandomFactor, 0, 1),
                 PowerMultiplier = new NumericValue<float>(item.PowerMultiplier, 0, 100),
+                MaxNestingLevel = new NumericValue<int>(item.MaxNestingLevel, 0, 100),
             }).ToArray();
 
             ImpactType = serializable.ImpactType;
@@ -90,6 +91,7 @@ namespace GameDatabase.EditorModel
                 Cooldown = item.Cooldown.Value,
                 RandomFactor = item.RandomFactor.Value,
                 PowerMultiplier = item.PowerMultiplier.Value,
+                MaxNestingLevel = item.MaxNestingLevel.Value,
             }).ToArray();
 
             serializable.ImpactType = ImpactType;
@@ -152,6 +154,8 @@ namespace GameDatabase.EditorModel
             public NumericValue<float> Cooldown = new NumericValue<float>(0, 0, 1000);
             public NumericValue<float> RandomFactor = new NumericValue<float>(0, 0, 1);
             public NumericValue<float> PowerMultiplier = new NumericValue<float>(0, 0, 100);
+
+            public NumericValue<int> MaxNestingLevel = new NumericValue<int>(0, 0, 100);
         }
     }
 }

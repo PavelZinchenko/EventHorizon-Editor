@@ -9,10 +9,10 @@
   "IconScale": 1.2,
   "ModelImage": "flagship0",
   "ModelScale": 5.0,
+  "EngineColor": "#20FFFFFF",
   "EnginePosition": {
     "x": -0.88
   },
-  "EngineColor": "#20FFFFFF",
   "EngineSize": 0.3,
   "EnergyResistance": 0.5,
   "KineticResistance": 1.0,

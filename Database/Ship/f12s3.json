@@ -8,10 +8,10 @@
   "IconScale": 1.0,
   "ModelImage": "fns4",
   "ModelScale": 2.0,
+  "EngineColor": "#80FFFFFF",
   "EnginePosition": {
     "x": -0.95
   },
-  "EngineColor": "#80FFFFFF",
   "EngineSize": 0.3,
   "Regeneration": true,
   "BuiltinDevices": [],

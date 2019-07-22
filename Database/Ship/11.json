@@ -8,10 +8,10 @@
   "IconScale": 0.5,
   "ModelImage": "drone1",
   "ModelScale": 0.6,
+  "EngineColor": "#40FFF096",
   "EnginePosition": {
     "x": -0.8
   },
-  "EngineColor": "#40FFF096",
   "EngineSize": 0.1,
   "BuiltinDevices": [],
   "Layout": "040525111",

@@ -1,6 +1,4 @@
-﻿using GameDatabase.Controls;
-
-namespace GameDatabase
+﻿namespace GameDatabase
 {
     partial class MainWindow
     {
@@ -31,9 +29,10 @@ namespace GameDatabase
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.DatabaseTreeView = new System.Windows.Forms.TreeView();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.structDataView1 = new StructDataView();
+            this.structDataView1 = new Controls.StructDataView();
             this.EditButton = new System.Windows.Forms.Button();
             this.ItemTypeText = new System.Windows.Forms.Label();
             this.ItemTypeLabel = new System.Windows.Forms.Label();
@@ -67,7 +66,7 @@ namespace GameDatabase
             this.DatabaseTreeView.Location = new System.Drawing.Point(6, 3);
             this.DatabaseTreeView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DatabaseTreeView.Name = "DatabaseTreeView";
-            this.DatabaseTreeView.Size = new System.Drawing.Size(383, 565);
+            this.DatabaseTreeView.Size = new System.Drawing.Size(383, 568);
             this.DatabaseTreeView.TabIndex = 0;
             this.DatabaseTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DatabaseTreeView_AfterSelect);
             this.DatabaseTreeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DatabaseTreeView_MouseDoubleClick);
@@ -76,7 +75,7 @@ namespace GameDatabase
             // splitContainer
             // 
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 27);
+            this.splitContainer.Location = new System.Drawing.Point(0, 24);
             this.splitContainer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.splitContainer.Name = "splitContainer";
             // 
@@ -90,7 +89,7 @@ namespace GameDatabase
             this.splitContainer.Panel2.Controls.Add(this.EditButton);
             this.splitContainer.Panel2.Controls.Add(this.ItemTypeText);
             this.splitContainer.Panel2.Controls.Add(this.ItemTypeLabel);
-            this.splitContainer.Size = new System.Drawing.Size(800, 573);
+            this.splitContainer.Size = new System.Drawing.Size(800, 576);
             this.splitContainer.SplitterDistance = 393;
             this.splitContainer.SplitterWidth = 6;
             this.splitContainer.TabIndex = 1;
@@ -108,7 +107,7 @@ namespace GameDatabase
             this.structDataView1.Location = new System.Drawing.Point(4, 41);
             this.structDataView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.structDataView1.Name = "structDataView1";
-            this.structDataView1.Size = new System.Drawing.Size(357, 480);
+            this.structDataView1.Size = new System.Drawing.Size(355, 483);
             this.structDataView1.TabIndex = 5;
             // 
             // EditButton
@@ -116,7 +115,7 @@ namespace GameDatabase
             this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.EditButton.Enabled = false;
             this.EditButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditButton.Location = new System.Drawing.Point(8, 531);
+            this.EditButton.Location = new System.Drawing.Point(8, 534);
             this.EditButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(112, 35);
@@ -133,7 +132,7 @@ namespace GameDatabase
             this.ItemTypeText.Location = new System.Drawing.Point(90, 3);
             this.ItemTypeText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ItemTypeText.Name = "ItemTypeText";
-            this.ItemTypeText.Size = new System.Drawing.Size(19, 25);
+            this.ItemTypeText.Size = new System.Drawing.Size(14, 20);
             this.ItemTypeText.TabIndex = 3;
             this.ItemTypeText.Text = "-";
             // 
@@ -144,7 +143,7 @@ namespace GameDatabase
             this.ItemTypeLabel.Location = new System.Drawing.Point(3, 3);
             this.ItemTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ItemTypeLabel.Name = "ItemTypeLabel";
-            this.ItemTypeLabel.Size = new System.Drawing.Size(97, 25);
+            this.ItemTypeLabel.Size = new System.Drawing.Size(79, 20);
             this.ItemTypeLabel.TabIndex = 2;
             this.ItemTypeLabel.Text = "Item type:";
             // 
@@ -155,7 +154,7 @@ namespace GameDatabase
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -168,41 +167,41 @@ namespace GameDatabase
             this.reloadDatabaseToolStripMenuItem,
             this.createModMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(41, 23);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // loadMenuItem
             // 
             this.loadMenuItem.Name = "loadMenuItem";
-            this.loadMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.loadMenuItem.Size = new System.Drawing.Size(161, 22);
             this.loadMenuItem.Text = "Load";
             this.loadMenuItem.Click += new System.EventHandler(this.loadMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsMenuItem
             // 
             this.saveAsMenuItem.Name = "saveAsMenuItem";
-            this.saveAsMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.saveAsMenuItem.Size = new System.Drawing.Size(161, 22);
             this.saveAsMenuItem.Text = "Save As...";
             this.saveAsMenuItem.Click += new System.EventHandler(this.saveAsMenuItem_Click);
             // 
             // reloadDatabaseToolStripMenuItem
             // 
             this.reloadDatabaseToolStripMenuItem.Name = "reloadDatabaseToolStripMenuItem";
-            this.reloadDatabaseToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.reloadDatabaseToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.reloadDatabaseToolStripMenuItem.Text = "Reload Database";
             this.reloadDatabaseToolStripMenuItem.Click += new System.EventHandler(this.reloadDatabaseToolStripMenuItem_Click);
             // 
             // createModMenuItem
             // 
             this.createModMenuItem.Name = "createModMenuItem";
-            this.createModMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.createModMenuItem.Size = new System.Drawing.Size(161, 22);
             this.createModMenuItem.Text = "Create Mod...";
             this.createModMenuItem.Click += new System.EventHandler(this.createModMenuItem_Click);
             // 
@@ -216,13 +215,13 @@ namespace GameDatabase
             this.createToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.folderToolStripMenuItem});
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.createToolStripMenuItem.Text = "Create";
             // 
             // folderToolStripMenuItem
             // 
             this.folderToolStripMenuItem.Name = "folderToolStripMenuItem";
-            this.folderToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
+            this.folderToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.folderToolStripMenuItem.Text = "Folder";
             this.folderToolStripMenuItem.Click += new System.EventHandler(this.folderToolStripMenuItem_Click);
             // 
@@ -233,18 +232,18 @@ namespace GameDatabase
             this.createToolStripMenuItem,
             this.loadAsDatabaseToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(187, 52);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(166, 48);
             // 
             // loadAsDatabaseToolStripMenuItem
             // 
             this.loadAsDatabaseToolStripMenuItem.Name = "loadAsDatabaseToolStripMenuItem";
-            this.loadAsDatabaseToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
+            this.loadAsDatabaseToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.loadAsDatabaseToolStripMenuItem.Text = "Load as Database";
             this.loadAsDatabaseToolStripMenuItem.Click += new System.EventHandler(this.loadAsDatabaseToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = global::GameDatabase.Properties.Settings.Default.MainSize;
             this.Controls.Add(this.splitContainer);
@@ -254,6 +253,7 @@ namespace GameDatabase
             this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::GameDatabase.Properties.Settings.Default, "MainSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = global::GameDatabase.Properties.Settings.Default.MainPosition;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainWindow";

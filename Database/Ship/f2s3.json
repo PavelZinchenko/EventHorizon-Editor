@@ -8,10 +8,10 @@
   "IconScale": 0.7,
   "ModelImage": "f2s3",
   "ModelScale": 1.5,
+  "EngineColor": "#40FFBABA",
   "EnginePosition": {
     "x": -0.7
   },
-  "EngineColor": "#40FFBABA",
   "EngineSize": 0.3,
   "BuiltinDevices": [],
   "Layout": "0000000000000044000001114411100112222110113222231111322223111132222311111255211110055550010000000000",

@@ -8,10 +8,10 @@
   "IconScale": 1.0,
   "ModelImage": "mothership",
   "ModelScale": 5.0,
+  "EngineColor": "#40FFF096",
   "EnginePosition": {
     "x": -0.95
   },
-  "EngineColor": "#40FFF096",
   "EngineSize": 0.4,
   "BuiltinDevices": [],
   "Layout": "0000220000000222200000022220000002222000010222201001022220100102222010010222201001025520100100550010",

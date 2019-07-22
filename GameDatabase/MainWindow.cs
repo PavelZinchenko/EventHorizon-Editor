@@ -20,11 +20,6 @@ namespace GameDatabase
     {
         public MainWindow()
         {
-            //This check is necessary becouse setting icon from AppDomain.CurrentDomain fails if we are running the code from VisualStudio
-            if (!System.Diagnostics.Debugger.IsAttached)
-                //Setting icon this way makes it appear at higher resolution in taskbar
-                Icon = Icon.ExtractAssociatedIcon(AppDomain.CurrentDomain.FriendlyName);
-
             InitializeComponent();
         }
 
@@ -418,7 +413,7 @@ namespace GameDatabase
 
                 var template = _database.GetTemplate((sender as ToolStripMenuItem).Tag.ToString());
 
-                name = Prompt.ShowDialog(template.NameDialog,"", name);
+                name = Prompt.ShowDialog(template.NameDialog, "", name);
                 if (name == "") return;
                 var _node = DatabaseTreeView.SelectedNode;
                 if (Path.GetInvalidFileNameChars().Any(name.Contains))
@@ -460,7 +455,7 @@ namespace GameDatabase
                     HashSet<string> _files = new HashSet<string>();
                     HashSet<string> _dirs = new HashSet<string>();
 
-                    void FormatNumberField(Newtonsoft.Json.Linq.JObject target, string field, int placeholder=-1)
+                    void FormatNumberField(Newtonsoft.Json.Linq.JObject target, string field, int placeholder = -1)
                     {
                         var _field = target.GetValue(field);
                         if (_field != null)
@@ -468,9 +463,10 @@ namespace GameDatabase
                             _field = (int)new DataTable().Compute(String.Format((string)_field, id), null);
                             target.Remove(field);
                             target.Add(field, _field);
-                        } else
+                        }
+                        else
                         {
-                            if(placeholder!=-1)
+                            if (placeholder != -1)
                                 target.Add(field, placeholder);
                         }
                     }
@@ -492,7 +488,7 @@ namespace GameDatabase
                                     Name = path
                                 };
                                 nodes.Add(_newNode, _parentNode);
-                                BuildTemplateItems(item.Items,_newNode);
+                                BuildTemplateItems(item.Items, _newNode);
                                 continue;
                             }
                             path += ".json";
@@ -508,9 +504,9 @@ namespace GameDatabase
                             FormatNumberField(content, "Id");
                             var _id = (int)content.GetValue("Id");
 
-                            if (File.Exists(path)||ghostFiles.ContainsKey(path))
+                            if (File.Exists(path) || ghostFiles.ContainsKey(path))
                             {
-                                MessageBox.Show("File " +path + " already exists");
+                                MessageBox.Show("File " + path + " already exists");
                                 error = true;
                                 return;
                             }
@@ -553,11 +549,11 @@ namespace GameDatabase
                                     break;
                                 case ItemType.ShipBuild:
                                     if (_database.GetShipBuild(_id) != null) error = true;
-                                    FormatNumberField(content,"ShipId", _database.ShipIds.First().Id);
+                                    FormatNumberField(content, "ShipId", _database.ShipIds.First().Id);
                                     break;
                                 case ItemType.SatelliteBuild:
                                     if (_database.GetSatelliteBuild(_id) != null) error = true;
-                                    FormatNumberField(content, "SatelliteId",_database.SatelliteIds.First().Id);
+                                    FormatNumberField(content, "SatelliteId", _database.SatelliteIds.First().Id);
                                     break;
                                 case ItemType.Technology:
                                     if (_database.GetTechnology(_id) != null) error = true;
@@ -577,7 +573,7 @@ namespace GameDatabase
                                                 break;
                                         }
                                     }
-                                break;
+                                    break;
                                 case ItemType.ComponentStats:
                                     if (_database.GetComponentStats(_id) != null) error = true;
                                     break;
@@ -624,7 +620,7 @@ namespace GameDatabase
                         }
                     }
 
-                    BuildTemplateItems(template.Items,_node);
+                    BuildTemplateItems(template.Items, _node);
 
                     if (error)
                     {
@@ -632,20 +628,20 @@ namespace GameDatabase
                         return;
                     }
 
-                    foreach(string path in _files)
+                    foreach (string path in _files)
                     {
                         _database.DeserializeItem(files[path].ToString(), _lastDatabasePath, path);
                         ghostFiles.Add(path, files[path].ToString());
                     }
 
-                    foreach(TreeNode node in nodes.Keys)
+                    foreach (TreeNode node in nodes.Keys)
                     {
                         nodes[node].Nodes.Add(node);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unexpected error happened, most likely due to invalid template file.\nIf yoy sure your template file is correct, then report stacktrace bellow\n\n"+ex);
+                    MessageBox.Show("Unexpected error happened, most likely due to invalid template file.\nIf yoy sure your template file is correct, then report stacktrace bellow\n\n" + ex);
                     return;
                 }
             }

@@ -9,5 +9,6 @@
         Disarmed,
         Expired,
         Detonated,
+        OutOfAmmo,
     }
 }

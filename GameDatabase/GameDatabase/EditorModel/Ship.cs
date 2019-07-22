@@ -30,18 +30,10 @@ namespace GameDatabase.EditorModel
             Regeneration = ship.Regeneration;
             BaseWeightModifier = new NumericValue<float>(ship.BaseWeightModifier, -0.9f, 100);
 
-            if (ship.BuiltinDevices == null)
-            {
-                throw new EditorException("Ship file at "+ship.FilePath + " doesn't have requied field \"BuiltinDevices\".");
-            }
-            BuiltinDevices = ship.BuiltinDevices.Select(id => new Wrapper<Device> { Item = database.GetDevice(id).ItemId }).ToArray();
             Layout = new Layout(ship.Layout);
-
-            if (ship.Barrels == null)
-            {
-                throw new EditorException("Ship file at " + ship.FilePath + " doesn't have requied field \"Barrels\".");
-            }
-            Barrels = ship.Barrels.Select(item => new Barrel(item)).ToArray();
+            BuiltinDevices = ship.BuiltinDevices?.Select(id => new Wrapper<Device> { Item = database.GetDevice(id).ItemId }).ToArray();
+            Barrels = ship.Barrels?.Select(item => new Barrel(item)).ToArray();
+            Engines = ship.Engines?.Select(item => new Engine { Position = item.Position, Size = new NumericValue<float>(item.Size, 0, 1) }).ToArray();
         }
 
         public void Save(SerializableShip serializable)
@@ -63,9 +55,11 @@ namespace GameDatabase.EditorModel
             serializable.HeatResistance = HeatResistance.Value;
             serializable.Regeneration = Regeneration;
             serializable.BaseWeightModifier = BaseWeightModifier.Value;
-            serializable.BuiltinDevices = BuiltinDevices.Select(device => device.Item.Id).ToArray();
             serializable.Layout = Layout.Data;
-            serializable.Barrels = Barrels.Select(item => item.Serialize()).ToArray();
+
+            serializable.BuiltinDevices = BuiltinDevices?.Select(device => device.Item.Id).ToArray();
+            serializable.Barrels = Barrels?.Select(item => item.Serialize()).ToArray();
+            serializable.Engines = Engines?.Select(item => new SerializableShip.Engine { Position = item.Position, Size = item.Size.Value } ).ToArray();
         }
 
         public readonly ItemId<Ship> ItemId;
@@ -79,9 +73,12 @@ namespace GameDatabase.EditorModel
         public NumericValue<float> IconScale;
         public string ModelImage;
         public NumericValue<float> ModelScale;
-        public Vector2 EnginePosition;
         public Color EngineColor;
+
+        public Vector2 EnginePosition;
         public NumericValue<float> EngineSize;
+
+        public Engine[] Engines;
 
         public NumericValue<float> EnergyResistance;
         public NumericValue<float> KineticResistance;
@@ -92,5 +89,11 @@ namespace GameDatabase.EditorModel
 
         public Layout Layout;
         public Barrel[] Barrels;
+
+        public class Engine
+        {
+            public Vector2 Position;
+            public NumericValue<float> Size = new NumericValue<float>(0.5f,0,1);
+        }
     }
 }

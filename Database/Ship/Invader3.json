@@ -7,10 +7,10 @@
   "IconScale": 0.5,
   "ModelImage": "space_invader",
   "ModelScale": 3.0,
+  "EngineColor": "#40FFFFFF",
   "EnginePosition": {
     "x": -0.4
   },
-  "EngineColor": "#40FFFFFF",
   "EngineSize": 0.3,
   "BuiltinDevices": [],
   "Layout": "0000000000000000000000000400040001010000010110111111101111111111110113333311000533333500000500050000000000000000000000000",

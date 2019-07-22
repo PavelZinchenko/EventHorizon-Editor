@@ -12,6 +12,8 @@ namespace GameDatabase.Serializable
         public float Rotation;
         public float Offset;
         public PlatformType PlatformType;
+        public float AutoAimingArc;
+        public float RotationSpeed;
         [DefaultValue("")]
         public string WeaponClass;
         [DefaultValue("")]

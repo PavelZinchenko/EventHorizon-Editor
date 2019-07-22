@@ -9,10 +9,10 @@
   "IconScale": 1.2,
   "ModelImage": "flagship6",
   "ModelScale": 5.0,
+  "EngineColor": "#40FFBABA",
   "EnginePosition": {
     "x": -0.95
   },
-  "EngineColor": "#40FFBABA",
   "EngineSize": 0.5,
   "Regeneration": true,
   "BuiltinDevices": [],

@@ -8,10 +8,10 @@
   "IconScale": 0.5,
   "ModelImage": "space_invader",
   "ModelScale": 3.0,
+  "EngineColor": "#40FFFFFF",
   "EnginePosition": {
     "x": -0.4
   },
-  "EngineColor": "#40FFFFFF",
   "EngineSize": 0.3,
   "EnergyResistance": 1.0,
   "KineticResistance": 1.0,
