@@ -9,10 +9,14 @@
   "ModelImage": "santa_drone",
   "ModelScale": 0.8,
   "EngineColor": "#AA00FBFF",
-  "EnginePosition": {
-    "x": -0.8
-  },
-  "EngineSize": 0.1,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.8
+      },
+      "Size": 0.1
+    }
+  ],
   "BuiltinDevices": [],
   "Layout": "440022440022442222022220552255550055",
   "Barrels": [

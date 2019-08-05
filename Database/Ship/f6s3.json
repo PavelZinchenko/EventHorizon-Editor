@@ -9,10 +9,14 @@
   "ModelImage": "f6s3",
   "ModelScale": 1.6,
   "EngineColor": "#40FFAE23",
-  "EnginePosition": {
-    "x": -0.7
-  },
-  "EngineSize": 0.5,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.7
+      },
+      "Size": 0.5
+    }
+  ],
   "HeatResistance": 1.0,
   "Regeneration": true,
   "BuiltinDevices": [],

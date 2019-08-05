@@ -584,7 +584,7 @@ namespace GameDatabase
                                     if (_database.GetSkill(_id) != null) error = true;
                                     break;
                                 case ItemType.Faction:
-                                    if (_database.GetFaction(_id) != null) error = true;
+                                    if (_database.GetFaction(_id) != null && _database.GetFaction(_id) != Faction.Undefined) error = true;
                                     break;
                                 case ItemType.Quest:
                                     if (_database.GetQuest(_id) != null) error = true;

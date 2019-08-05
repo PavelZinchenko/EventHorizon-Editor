@@ -8,10 +8,14 @@
   "ModelImage": "space_invader",
   "ModelScale": 3.0,
   "EngineColor": "#40FFFFFF",
-  "EnginePosition": {
-    "x": -0.4
-  },
-  "EngineSize": 0.3,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.4
+      },
+      "Size": 0.3
+    }
+  ],
   "BuiltinDevices": [],
   "Layout": "111424151",
   "Barrels": [

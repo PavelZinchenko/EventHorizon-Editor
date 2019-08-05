@@ -9,10 +9,14 @@
   "ModelImage": "f6s2",
   "ModelScale": 1.2,
   "EngineColor": "#40B86A39",
-  "EnginePosition": {
-    "x": -0.1
-  },
-  "EngineSize": 0.4,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.1
+      },
+      "Size": 0.4
+    }
+  ],
   "Regeneration": true,
   "BuiltinDevices": [],
   "Layout": "0000111000000013223000001132221000011322210000044222000005442225000050040050000000400000000004000000000040000000000000000",

@@ -33,7 +33,9 @@ namespace GameDatabase
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShipEditorDialog));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.structDataEditor1 = new StructDataEditor();
+            this.enginesCollection = new CollectionEditor();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.layoutEditor1 = new LayoutEditor();
             this.barrelCollection = new CollectionEditor();
@@ -53,6 +55,10 @@ namespace GameDatabase
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -64,10 +70,10 @@ namespace GameDatabase
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 716);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 578);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1067, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -76,21 +82,41 @@ namespace GameDatabase
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.structDataEditor1);
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer3);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1067, 716);
-            this.splitContainer1.SplitterDistance = 362;
+            this.splitContainer1.Size = new System.Drawing.Size(800, 578);
+            this.splitContainer1.SplitterDistance = 271;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.structDataEditor1);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.enginesCollection);
+            this.splitContainer3.Size = new System.Drawing.Size(271, 578);
+            this.splitContainer3.SplitterDistance = 496;
+            this.splitContainer3.TabIndex = 1;
+            this.splitContainer3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer3_SplitterMoved);
             // 
             // structDataEditor1
             // 
@@ -103,9 +129,10 @@ namespace GameDatabase
             this.structDataEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.structDataEditor1.Exclusions = ((System.Collections.Generic.List<string>)(resources.GetObject("structDataEditor1.Exclusions")));
             this.structDataEditor1.Location = new System.Drawing.Point(0, 0);
-            this.structDataEditor1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.structDataEditor1.Margin = new System.Windows.Forms.Padding(5);
             this.structDataEditor1.Name = "structDataEditor1";
-            this.structDataEditor1.Size = new System.Drawing.Size(360, 714);
+            this.structDataEditor1.Padding = new System.Windows.Forms.Padding(5);
+            this.structDataEditor1.Size = new System.Drawing.Size(269, 494);
             this.structDataEditor1.TabIndex = 0;
             // 
             // splitContainer2
@@ -113,7 +140,7 @@ namespace GameDatabase
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -125,8 +152,8 @@ namespace GameDatabase
             // 
             this.splitContainer2.Panel2.Controls.Add(this.barrelCollection);
             this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer2.Size = new System.Drawing.Size(700, 716);
-            this.splitContainer2.SplitterDistance = 450;
+            this.splitContainer2.Size = new System.Drawing.Size(524, 578);
+            this.splitContainer2.SplitterDistance = 363;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 6;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
@@ -136,15 +163,31 @@ namespace GameDatabase
             this.layoutEditor1.Barrels = null;
             this.layoutEditor1.BorderSize = 32;
             this.layoutEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutEditor1.Engines = null;
             this.layoutEditor1.Image = null;
             this.layoutEditor1.Layout = "000000000";
             this.layoutEditor1.Location = new System.Drawing.Point(0, 0);
-            this.layoutEditor1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.layoutEditor1.Margin = new System.Windows.Forms.Padding(5);
             this.layoutEditor1.Name = "layoutEditor1";
             this.layoutEditor1.SelectedCategory = '1';
-            this.layoutEditor1.Size = new System.Drawing.Size(698, 448);
+            this.layoutEditor1.Size = new System.Drawing.Size(522, 361);
             this.layoutEditor1.TabIndex = 2;
             this.layoutEditor1.ValueChanged += new System.EventHandler(this.layoutEditor1_ValueChanged);
+            // 
+            // enginesCollection
+            // 
+            this.enginesCollection.AutoSize = true;
+            this.enginesCollection.ContentAutoScroll = true;
+            this.enginesCollection.Data = null;
+            this.enginesCollection.Database = null;
+            this.enginesCollection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.enginesCollection.Location = new System.Drawing.Point(0, 48);
+            this.enginesCollection.Margin = new System.Windows.Forms.Padding(5);
+            this.enginesCollection.Name = "enginesCollection";
+            this.enginesCollection.Size = new System.Drawing.Size(269, 76);
+            this.enginesCollection.TabIndex = 5;
+            this.enginesCollection.CollectionChanged += new System.EventHandler(this.enginesCollection_CollectionChanged);
+            this.enginesCollection.DataChanged += new System.EventHandler(this.enginesCollection_DataChanged);
             // 
             // barrelCollection
             // 
@@ -154,9 +197,9 @@ namespace GameDatabase
             this.barrelCollection.Database = null;
             this.barrelCollection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.barrelCollection.Location = new System.Drawing.Point(0, 48);
-            this.barrelCollection.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.barrelCollection.Margin = new System.Windows.Forms.Padding(5);
             this.barrelCollection.Name = "barrelCollection";
-            this.barrelCollection.Size = new System.Drawing.Size(698, 211);
+            this.barrelCollection.Size = new System.Drawing.Size(522, 160);
             this.barrelCollection.TabIndex = 5;
             this.barrelCollection.CollectionChanged += new System.EventHandler(this.barrelCollection_CollectionChanged);
             this.barrelCollection.DataChanged += new System.EventHandler(this.barrelCollection_DataChanged);
@@ -191,11 +234,11 @@ namespace GameDatabase
             this.tableLayoutPanel1.Controls.Add(this.layoutSize, 12, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(698, 48);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(522, 48);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // radioButton1
@@ -205,7 +248,7 @@ namespace GameDatabase
             this.radioButton1.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioButton1.Location = new System.Drawing.Point(4, 4);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(43, 39);
             this.radioButton1.TabIndex = 1;
@@ -221,7 +264,7 @@ namespace GameDatabase
             this.radioButton6.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioButton6.Location = new System.Drawing.Point(55, 4);
-            this.radioButton6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton6.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(43, 39);
             this.radioButton6.TabIndex = 1;
@@ -232,8 +275,8 @@ namespace GameDatabase
             // downButton
             // 
             this.downButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.downButton.Location = new System.Drawing.Point(558, 4);
-            this.downButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.downButton.Location = new System.Drawing.Point(382, 4);
+            this.downButton.Margin = new System.Windows.Forms.Padding(4);
             this.downButton.Name = "downButton";
             this.downButton.Size = new System.Drawing.Size(43, 39);
             this.downButton.TabIndex = 5;
@@ -248,7 +291,7 @@ namespace GameDatabase
             this.radioButton4.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioButton4.Location = new System.Drawing.Point(106, 4);
-            this.radioButton4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton4.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(43, 39);
             this.radioButton4.TabIndex = 1;
@@ -259,8 +302,8 @@ namespace GameDatabase
             // upButton
             // 
             this.upButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.upButton.Location = new System.Drawing.Point(507, 4);
-            this.upButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.upButton.Location = new System.Drawing.Point(331, 4);
+            this.upButton.Margin = new System.Windows.Forms.Padding(4);
             this.upButton.Name = "upButton";
             this.upButton.Size = new System.Drawing.Size(43, 39);
             this.upButton.TabIndex = 5;
@@ -275,7 +318,7 @@ namespace GameDatabase
             this.radioButton3.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioButton3.Location = new System.Drawing.Point(157, 4);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton3.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(43, 39);
             this.radioButton3.TabIndex = 1;
@@ -286,8 +329,8 @@ namespace GameDatabase
             // rightButton
             // 
             this.rightButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rightButton.Location = new System.Drawing.Point(456, 4);
-            this.rightButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rightButton.Location = new System.Drawing.Point(280, 4);
+            this.rightButton.Margin = new System.Windows.Forms.Padding(4);
             this.rightButton.Name = "rightButton";
             this.rightButton.Size = new System.Drawing.Size(43, 39);
             this.rightButton.TabIndex = 5;
@@ -302,7 +345,7 @@ namespace GameDatabase
             this.radioButton2.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioButton2.Location = new System.Drawing.Point(208, 4);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(43, 39);
             this.radioButton2.TabIndex = 1;
@@ -313,8 +356,8 @@ namespace GameDatabase
             // leftButton
             // 
             this.leftButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.leftButton.Location = new System.Drawing.Point(405, 4);
-            this.leftButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.leftButton.Location = new System.Drawing.Point(229, 4);
+            this.leftButton.Margin = new System.Windows.Forms.Padding(4);
             this.leftButton.Name = "leftButton";
             this.leftButton.Size = new System.Drawing.Size(43, 39);
             this.leftButton.TabIndex = 5;
@@ -329,7 +372,7 @@ namespace GameDatabase
             this.radioButton5.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioButton5.Location = new System.Drawing.Point(259, 4);
-            this.radioButton5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton5.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(43, 39);
             this.radioButton5.TabIndex = 1;
@@ -341,8 +384,8 @@ namespace GameDatabase
             // 
             this.layoutSize.AutoSize = true;
             this.layoutSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutSize.Location = new System.Drawing.Point(609, 4);
-            this.layoutSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.layoutSize.Location = new System.Drawing.Point(433, 4);
+            this.layoutSize.Margin = new System.Windows.Forms.Padding(4);
             this.layoutSize.Maximum = new decimal(new int[] {
             1024,
             0,
@@ -374,15 +417,20 @@ namespace GameDatabase
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::GameDatabase.Properties.Settings.Default, "ShipEditorPosition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::GameDatabase.Properties.Settings.Default, "ShipEditorSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::GameDatabase.Properties.Settings.Default.ShipEditorPosition;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ShipEditorDialog";
             this.Text = "ShipEditorDialog";
             this.Load += new System.EventHandler(this.ShipEditorDialog_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
@@ -416,5 +464,7 @@ namespace GameDatabase
         private System.Windows.Forms.Button leftButton;
         private CollectionEditor barrelCollection;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private CollectionEditor enginesCollection;
     }
 }

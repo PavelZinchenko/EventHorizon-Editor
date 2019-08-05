@@ -9,10 +9,14 @@
   "ModelImage": "f4s2",
   "ModelScale": 1.4,
   "EngineColor": "#40B4FFB4",
-  "EnginePosition": {
-    "x": -0.85
-  },
-  "EngineSize": 0.2,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.85
+      },
+      "Size": 0.2
+    }
+  ],
   "Regeneration": true,
   "BuiltinDevices": [],
   "Layout": "001000100001000100104444401112444211032222230003222300000222000000555000000151000",

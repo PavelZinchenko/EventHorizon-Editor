@@ -45,7 +45,15 @@ namespace GameDatabase
             public float Y;
             public float Rotation;
             public float Offset;
+            public float Arc;
             public string Text;
+        }
+
+        [Serializable]
+        public struct EngineData
+        {
+            public float X;
+            public float Y;
         }
 
         [Description("Barrels"), Category("Data")]
@@ -55,6 +63,17 @@ namespace GameDatabase
             set
             {
                 _barrels = value;
+                Invalidate();
+            }
+        }
+
+        [Description("Barrels"), Category("Data")]
+        public IList<EngineData> Engines
+        {
+            get { return _engines; }
+            set
+            {
+                _engines = value;
                 Invalidate();
             }
         }
@@ -79,7 +98,7 @@ namespace GameDatabase
         {
             data.Graphics.FillRectangle(GetBrush(_categories[(char)CellType.Empty]), new Rectangle(BorderSize, BorderSize, data.CanvasSize, data.CanvasSize));
 
-            if (Image != null)
+            if (Image != null && showImageToolStripMenuItem.Checked)
                 data.Graphics.DrawImage(Image, new Rectangle(BorderSize, BorderSize, data.CanvasSize, data.CanvasSize));
 
             if (!showLayoutToolStripMenuItem.Checked) return;
@@ -151,15 +170,44 @@ namespace GameDatabase
                 data.Graphics.DrawLine(pen, x - length, y, x + length, y);
                 data.Graphics.DrawLine(pen, x, y - length, x, y + length);
 
-                var dir = RotationHelpers.Direction(-barrel.Rotation);
+                var startAngle = barrel.Rotation - barrel.Arc / 2f;
+                var endAngle = startAngle + barrel.Arc;
+                var dir = RotationHelpers.Direction(-startAngle);
                 var p0 = new Point((int)(x + dir.x * offset), (int)(y + dir.y * offset));
                 var p1 = new Point((int)(x + dir.x * (offset + data.CellSize)), (int)(y + dir.y * (offset + data.CellSize)));
                 var d = new Point((int)(dir.x * data.CellSize / 2f), (int)(dir.y * data.CellSize / 2f));
                 var p2 = new Point(p1.X + d.X, p1.Y + d.Y);
-
                 data.Graphics.DrawLine(widePen, p0, p2);
                 data.Graphics.DrawLine(pen, p2.X, p2.Y, p1.X - d.Y, p1.Y + d.X);
+
+                dir = RotationHelpers.Direction(-endAngle);
+                p0 = new Point((int)(x + dir.x * offset), (int)(y + dir.y * offset));
+                p1 = new Point((int)(x + dir.x * (offset + data.CellSize)), (int)(y + dir.y * (offset + data.CellSize)));
+                d = new Point((int)(dir.x * data.CellSize / 2f), (int)(dir.y * data.CellSize / 2f));
+                p2 = new Point(p1.X + d.X, p1.Y + d.Y);
+                data.Graphics.DrawLine(widePen, p0, p2);
                 data.Graphics.DrawLine(pen, p2.X, p2.Y, p1.X + d.Y, p1.Y - d.X);
+
+                data.Graphics.DrawArc(pen, x - radius - data.CellSize, y - radius - data.CellSize, radius * 2 + data.CellSize*2f, radius * 2 + data.CellSize*2f,startAngle-90,barrel.Arc);
+            }
+        }
+
+        private void DrawEngines(PaintData data)
+        {
+            if (!showEnginesToolStripMenuItem.Checked || _engines == null) return;
+
+            var pen = new Pen(Color.DarkOrange, 2);
+            var widePen = new Pen(Color.DarkOrange, 3);
+
+            foreach(var engine in _engines)
+            {
+                var x = BorderSize + (1 - engine.X) * data.CanvasSize / 2;
+                var y = BorderSize + (1 - engine.Y) * data.CanvasSize / 2;
+
+                var length = data.CellSize/2;
+                data.Graphics.DrawLine(pen, x - length, y, x + length, y);
+                data.Graphics.DrawLine(widePen, x, y - length, x, y + length*3);
+                data.Graphics.DrawEllipse(pen, x - length, y - length, length* 2, length* 2);
             }
         }
 
@@ -176,6 +224,7 @@ namespace GameDatabase
             DrawGrid(paintData);
             DrawAxis(paintData);
             DrawBarrels(paintData);
+            DrawEngines(paintData);
         }
 
         public Brush GetBrush(Color color)
@@ -316,12 +365,23 @@ namespace GameDatabase
             Invalidate();
         }
 
+        private void showEnginesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
+
+        private void showImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
+
         private bool IsDragging { get { return _mouseButton != MouseButtons.None; } }
 
         private MouseButtons _mouseButton;
 
         private ILayoutBrush _selectedBrush;
         private IList<BarrelData> _barrels;
+        private IList<EngineData> _engines;
 
         private readonly Dictionary<Color, Brush> _brushes = new Dictionary<Color, Brush>();
         private readonly Dictionary<char, Color> _categories;

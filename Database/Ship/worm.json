@@ -10,6 +10,9 @@
   "ModelImage": "worm_head",
   "ModelScale": 2.0,
   "EngineColor": "#00000000",
+  "Engines": [
+    {}
+  ],
   "BuiltinDevices": [
     20
   ],

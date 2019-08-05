@@ -1,0 +1,43 @@
+{
+  "Name": "Templates/Component/With Technology/With Stats",
+  "NameDialog": "File Name",
+  "IdDialog": "ID",
+  "Items": [
+    {
+      "Filename": "{1}",
+      "Type": "Folder",
+      "Items": [
+        {
+          "Filename": "{1}_component",
+          "Content": {
+            "ItemType": 1,
+            "Id": "{0}",
+            "Name": "{1}",
+            "Layout": "1",
+            "ComponentStatsId": "{0}",
+            "PossibleModifications": []
+          },
+          "Type": "File"
+        },
+        {
+          "Filename": "{1}_stats",
+          "Type": "File",
+          "Content": {
+            "ItemType": 11,
+            "Id": "{0}"
+          }
+        },
+        {
+          "Filename": "{1}_technology",
+          "Type": "File",
+          "Content": {
+            "ItemType": 10,
+            "Id": "{0}",
+            "Type": 0,
+            "Dependencies": []
+          }
+        }
+      ]
+    }
+  ]
+}

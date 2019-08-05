@@ -13,6 +13,7 @@
             "ItemType": 1,
             "Id": "{0}",
             "Name": "{1}",
+            "Layout": "1",
             "ComponentStatsId": "{0}",
             "PossibleModifications": []
           },

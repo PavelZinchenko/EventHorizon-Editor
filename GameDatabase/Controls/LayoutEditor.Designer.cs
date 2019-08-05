@@ -35,6 +35,8 @@
             this.showGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showLayoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showBarrelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showEnginesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,9 +48,11 @@
             this.verticalSymmetryToolStripMenuItem,
             this.showGridToolStripMenuItem,
             this.showLayoutToolStripMenuItem,
-            this.showBarrelsToolStripMenuItem});
+            this.showBarrelsToolStripMenuItem,
+            this.showEnginesToolStripMenuItem,
+            this.showImageToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 134);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 214);
             // 
             // horizontalSymmetryToolStripMenuItem
             // 
@@ -101,6 +105,26 @@
             this.showBarrelsToolStripMenuItem.Text = "Show barrels";
             this.showBarrelsToolStripMenuItem.Click += new System.EventHandler(this.showBarrelsToolStripMenuItem_Click);
             // 
+            // showEnginesToolStripMenuItem
+            // 
+            this.showEnginesToolStripMenuItem.Checked = true;
+            this.showEnginesToolStripMenuItem.CheckOnClick = true;
+            this.showEnginesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showEnginesToolStripMenuItem.Name = "showEnginesToolStripMenuItem";
+            this.showEnginesToolStripMenuItem.Size = new System.Drawing.Size(197, 26);
+            this.showEnginesToolStripMenuItem.Text = "Show Engines";
+            this.showEnginesToolStripMenuItem.Click += new System.EventHandler(this.showEnginesToolStripMenuItem_Click);
+            // 
+            // showImageToolStripMenuItem
+            // 
+            this.showImageToolStripMenuItem.Checked = true;
+            this.showImageToolStripMenuItem.CheckOnClick = true;
+            this.showImageToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showImageToolStripMenuItem.Name = "showImageToolStripMenuItem";
+            this.showImageToolStripMenuItem.Size = new System.Drawing.Size(197, 26);
+            this.showImageToolStripMenuItem.Text = "Show Image";
+            this.showImageToolStripMenuItem.Click += new System.EventHandler(this.showImageToolStripMenuItem_Click);
+            // 
             // LayoutEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -126,5 +150,7 @@
         private System.Windows.Forms.ToolStripMenuItem showGridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showLayoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showBarrelsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showEnginesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showImageToolStripMenuItem;
     }
 }

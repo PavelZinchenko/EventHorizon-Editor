@@ -10,10 +10,14 @@
   "ModelImage": "flagship0",
   "ModelScale": 5.0,
   "EngineColor": "#20FFFFFF",
-  "EnginePosition": {
-    "x": -0.88
-  },
-  "EngineSize": 0.3,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.88
+      },
+      "Size": 0.3
+    }
+  ],
   "EnergyResistance": 0.5,
   "KineticResistance": 1.0,
   "HeatResistance": 0.5,

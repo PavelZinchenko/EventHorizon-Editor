@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Linq;
 using GameDatabase.Enums;
-using GameDatabase.GameDatabase.Model;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -34,6 +33,17 @@ namespace GameDatabase.EditorModel
             BuiltinDevices = ship.BuiltinDevices?.Select(id => new Wrapper<Device> { Item = database.GetDevice(id).ItemId }).ToArray();
             Barrels = ship.Barrels?.Select(item => new Barrel(item)).ToArray();
             Engines = ship.Engines?.Select(item => new Engine { Position = item.Position, Size = new NumericValue<float>(item.Size, 0, 1) }).ToArray();
+            if (EngineSize.Value>0)
+            {
+                Engines = Engines != null ? Engines : new Engine[0];
+                Engines = Engines.Concat(new Engine[] { new Engine()
+                    {
+                        Position=EnginePosition,
+                        Size=EngineSize
+                    }}).ToArray();
+                EnginePosition = Vector2.Zero;
+                EngineSize.Value = 0;
+            }
         }
 
         public void Save(SerializableShip serializable)

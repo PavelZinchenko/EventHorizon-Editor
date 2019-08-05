@@ -8,10 +8,14 @@
   "ModelImage": "f13s3",
   "ModelScale": 1.0,
   "EngineColor": "#80FF8D00",
-  "EnginePosition": {
-    "x": -0.9
-  },
-  "EngineSize": 0.2,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.9
+      },
+      "Size": 0.2
+    }
+  ],
   "EnergyResistance": 1.0,
   "BuiltinDevices": [],
   "Layout": "0001000001210000222004122214412221441555140055500",

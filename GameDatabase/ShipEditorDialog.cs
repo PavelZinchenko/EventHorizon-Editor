@@ -27,7 +27,7 @@ namespace GameDatabase
             _ignoreEvents = true;
 
             Text = _dialogName;
-            structDataEditor1.Exclusions = new List<string>() { "Layout", "Barrels" };
+            structDataEditor1.Exclusions = new List<string>() { "Layout", "Barrels", "Engines" };
             structDataEditor1.Database = _database;
             structDataEditor1.Data = _item as IDataAdapter ?? new DataAdapter(_item);
             layoutEditor1.Colors.Clear();
@@ -39,6 +39,7 @@ namespace GameDatabase
             layoutEditor1.Colors.Add((char)CellType.Outer, Color.FromArgb(192, 0, 128, 255));
 
             barrelCollection.Database = _database;
+            enginesCollection.Database = _database;
 
             Layout layout;
             if (_item is Ship)
@@ -46,6 +47,7 @@ namespace GameDatabase
                 var ship = (Ship)_item;
                 layout = ship.Layout;
                 barrelCollection.Data = ship.Barrels;
+                enginesCollection.Data = ship.Engines!=null?ship.Engines:new Ship.Engine[0];
                 layoutEditor1.Image = _database.GetImage(ship.ModelImage);
             }
             else if (_item is Satellite)
@@ -53,6 +55,8 @@ namespace GameDatabase
                 var satellite = (Satellite)_item;
                 layout = satellite.Layout;
                 barrelCollection.Data = satellite.Barrels;
+                splitContainer3.Panel2Collapsed = true;
+                splitContainer3.Panel2.Enabled = false;
                 layoutEditor1.Image = _database.GetImage(satellite.ModelImage);
             }
             else
@@ -64,9 +68,11 @@ namespace GameDatabase
             _ignoreEvents = false;
 
             UpdateBarrels();
+            UpdateEngines();
 
             splitContainer1.SplitterDistance = Settings.Default.ShipEditorHorizontalSplitter;
             splitContainer2.SplitterDistance = Settings.Default.ShipEditorVerticalSplitter;
+            splitContainer3.SplitterDistance = Settings.Default.ShipEditorEnginesSplitter;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -189,6 +195,10 @@ namespace GameDatabase
         {
             Settings.Default.ShipEditorVerticalSplitter = splitContainer2.SplitterDistance;
         }
+        private void splitContainer3_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            Settings.Default.ShipEditorEnginesSplitter = splitContainer3.SplitterDistance;
+        }
 
         private void barrelCollection_CollectionChanged(object sender, EventArgs e)
         {
@@ -213,13 +223,44 @@ namespace GameDatabase
 
         private void UpdateBarrels()
         {
-            layoutEditor1.Barrels = ((Barrel[]) barrelCollection.Data).Select(item => new LayoutEditor.BarrelData
+            layoutEditor1.Barrels = ((Barrel[])barrelCollection.Data).Select(item => new LayoutEditor.BarrelData
             {
                 X = item.Position.x,
                 Y = item.Position.y,
                 Text = item.WeaponClass,
                 Offset = item.Offset.Value,
                 Rotation = item.Rotation.Value,
+                Arc = item.AutoAimingArc.Value > 0 ? item.AutoAimingArc.Value :
+                    item.PlatformType == PlatformType.AutoTarget ? 360 :
+                    item.PlatformType == PlatformType.AutoTargetFrontal ? 160 :
+                    item.PlatformType == PlatformType.TargetingUnit ? 40 : 0
+            }).ToArray();
+        }
+
+
+        private void enginesCollection_CollectionChanged(object sender, EventArgs e)
+        {
+            if (_item is Ship)
+            {
+                ((Ship)_item).Engines = (Ship.Engine[])enginesCollection.Data;
+            }
+            else
+                throw new ArgumentException();
+
+            UpdateEngines();
+        }
+
+        private void enginesCollection_DataChanged(object sender, EventArgs e)
+        {
+            UpdateEngines();
+        }
+
+        private void UpdateEngines()
+        {
+            layoutEditor1.Engines = ((Ship.Engine[])enginesCollection.Data).Select(item => new LayoutEditor.EngineData
+            {
+                X = item.Position.y,
+                Y = item.Position.x
             }).ToArray();
         }
     }

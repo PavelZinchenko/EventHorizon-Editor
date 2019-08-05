@@ -8,10 +8,14 @@
   "ModelImage": "fas1",
   "ModelScale": 1.2,
   "EngineColor": "#40FFFFFF",
-  "EnginePosition": {
-    "x": -0.9
-  },
-  "EngineSize": 0.2,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.9
+      },
+      "Size": 0.2
+    }
+  ],
   "BuiltinDevices": [],
   "Layout": "000111000000222000000222000400222004400222004400030004450030054052252250003252300",
   "Barrels": [

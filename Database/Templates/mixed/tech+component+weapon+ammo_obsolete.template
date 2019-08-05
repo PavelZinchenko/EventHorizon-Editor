@@ -1,0 +1,69 @@
+{
+  "Name": "Templates/Component/With Technology/With Weapon and Obsolete Ammo",
+  "NameDialog": "File Name",
+  "IdDialog": "ID",
+  "Items": [
+    {
+      "Filename": "{1}",
+      "Type": "Folder",
+      "Items": [
+        {
+          "Filename": "{1}_component",
+          "Content": {
+            "ItemType": 1,
+            "Id": "{0}",
+            "Name": "{1}",
+            "ComponentStatsId": 1,
+            "DisplayCategory": 1,
+            "Layout": "1",
+            "CellType": "4",
+            "PossibleModifications": [
+              13,
+              8,
+              21,
+              6,
+              16,
+              5,
+              2,
+              7,
+              1
+            ],
+            "WeaponId": "{0}",
+            "AmmunitionId": "{0}"
+          },
+          "Type": "File"
+        },
+        {
+          "Filename": "{1}_weapon",
+          "Type": "File",
+          "Content": {
+            "ItemType": 3,
+            "Id": "{0}",
+            "FireRate": 1,
+            "ActivationType": 1,
+            "ShotEffectPrefab": "FlashAdditive",
+            "ControlButtonIcon": "controls_shot"
+          }
+        },
+        {
+          "Filename": "{1}_ammunition",
+          "Type": "File",
+          "Content": {
+            "ItemType": 4,
+            "Id": "{0}"
+          }
+        },
+        {
+          "Filename": "{1}_technology",
+	  "Type": "File",
+          "Content": {
+            "ItemType": 10,
+            "Id": "{0}",
+            "Type": 0,
+            "Dependencies": []
+          }
+        }
+      ]
+    }
+  ]
+}

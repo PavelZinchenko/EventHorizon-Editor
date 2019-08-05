@@ -13,6 +13,10 @@
             "ItemType": 1,
             "Id": "{0}",
             "Name": "{1}",
+            "Layout": "1",
+            "DisplayCategory": 1,
+            "Layout": "1",
+            "CellType": "4",
             "ComponentStatsId": 1,
             "PossibleModifications": [
               13,

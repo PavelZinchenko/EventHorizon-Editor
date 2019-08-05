@@ -1,0 +1,15 @@
+{
+	"Name": "Faction",
+	"NameDialog": "File Name",
+	"IdDialog": "ID",
+	"Items": [
+		{
+			"Filename": "{1}",
+			"Type": "File",
+			"Content": {
+				"ItemType": 14,
+				"Id": "{0}"
+			}
+		}
+	]
+}
