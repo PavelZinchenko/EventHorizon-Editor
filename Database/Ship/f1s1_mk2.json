@@ -9,14 +9,10 @@
   "ModelImage": "f1s1_2",
   "ModelScale": 1.0,
   "EngineColor": "#40FFF096",
-  "Engines": [
-    {
-      "Position": {
-        "x": -0.8
-      },
-      "Size": 0.15
-    }
-  ],
+  "EnginePosition": {
+    "x": -0.8
+  },
+  "EngineSize": 0.15,
   "BuiltinDevices": [],
   "Layout": "000040000000040000000141000000343000003222300032222230032555230000555000000000000",
   "Barrels": [

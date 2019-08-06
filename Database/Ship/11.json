@@ -9,14 +9,10 @@
   "ModelImage": "drone1",
   "ModelScale": 0.6,
   "EngineColor": "#40FFF096",
-  "Engines": [
-    {
-      "Position": {
-        "x": -0.8
-      },
-      "Size": 0.1
-    }
-  ],
+  "EnginePosition": {
+    "x": -0.8
+  },
+  "EngineSize": 0.1,
   "BuiltinDevices": [],
   "Layout": "040525111",
   "Barrels": [

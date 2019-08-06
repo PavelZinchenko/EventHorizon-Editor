@@ -88,6 +88,12 @@
     <Compile Include="Controls\CollectionEditor.Designer.cs">
       <DependentUpon>CollectionEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LayoutInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\LayoutInfo.Designer.cs">
+      <DependentUpon>LayoutInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ShipLayout\LayoutBrush.cs" />
     <Compile Include="Controls\ShipLayout\LayoutModel.cs" />
     <Compile Include="Controls\RotationHelpers.cs" />
@@ -262,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\LayoutEditor.resx">
       <DependentUpon>LayoutEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LayoutInfo.resx">
+      <DependentUpon>LayoutInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StructDataView.resx">
       <DependentUpon>StructDataView.cs</DependentUpon>

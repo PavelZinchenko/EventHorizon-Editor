@@ -9,14 +9,10 @@
   "ModelImage": "drone4",
   "ModelScale": 0.5,
   "EngineColor": "#40B4FFB4",
-  "Engines": [
-    {
-      "Position": {
-        "x": -0.8
-      },
-      "Size": 0.1
-    }
-  ],
+  "EnginePosition": {
+    "x": -0.8
+  },
+  "EngineSize": 0.1,
   "Regeneration": true,
   "BuiltinDevices": [
     18

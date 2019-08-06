@@ -118,17 +118,5 @@ namespace GameDatabase.Properties {
                 this["MainPosition"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("350")]
-        public int ShipEditorEnginesSplitter {
-            get {
-                return ((int)(this["ShipEditorEnginesSplitter"]));
-            }
-            set {
-                this["ShipEditorEnginesSplitter"] = value;
-            }
-        }
     }
 }

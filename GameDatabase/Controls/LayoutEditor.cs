@@ -188,7 +188,7 @@ namespace GameDatabase
                 data.Graphics.DrawLine(widePen, p0, p2);
                 data.Graphics.DrawLine(pen, p2.X, p2.Y, p1.X + d.Y, p1.Y - d.X);
 
-                data.Graphics.DrawArc(pen, x - radius - data.CellSize, y - radius - data.CellSize, radius * 2 + data.CellSize*2f, radius * 2 + data.CellSize*2f,startAngle-90,barrel.Arc);
+                data.Graphics.DrawArc(pen, x - radius - data.CellSize, y - radius - data.CellSize, radius * 2 + data.CellSize*2f, radius * 2 + data.CellSize*2f,-barrel.Rotation-barrel.Arc/2-90,barrel.Arc);
             }
         }
 
@@ -296,6 +296,11 @@ namespace GameDatabase
                 if (e.Button.HasFlag(MouseButtons.Right))
                 {
                     var p = PointToScreen(new Point(e.X, e.Y));
+
+                    if (_barrels == null) showBarrelsToolStripMenuItem.Enabled = showBarrelsToolStripMenuItem.Checked = false;
+                    if (Image == null) showImageToolStripMenuItem.Enabled = showImageToolStripMenuItem.Checked = false;
+                    if (_engines == null) showEnginesToolStripMenuItem.Enabled = showEnginesToolStripMenuItem.Checked = false;
+
                     contextMenuStrip1.Show(p);
                 }
                 return;

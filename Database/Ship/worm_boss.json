@@ -10,9 +10,6 @@
   "ModelImage": "worm_head2",
   "ModelScale": 3.0,
   "EngineColor": "#00000000",
-  "Engines": [
-    {}
-  ],
   "Regeneration": true,
   "BuiltinDevices": [
     21

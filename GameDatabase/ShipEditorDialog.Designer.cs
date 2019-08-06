@@ -33,12 +33,11 @@ namespace GameDatabase
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShipEditorDialog));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.structDataEditor1 = new StructDataEditor();
-            this.enginesCollection = new CollectionEditor();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.button1 = new System.Windows.Forms.Button();
             this.layoutEditor1 = new LayoutEditor();
-            this.barrelCollection = new CollectionEditor();
+            this.barrelCollection = new Controls.CollectionEditor();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
@@ -55,10 +54,6 @@ namespace GameDatabase
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -87,7 +82,7 @@ namespace GameDatabase
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.splitContainer3);
+            this.splitContainer1.Panel1.Controls.Add(this.structDataEditor1);
             // 
             // splitContainer1.Panel2
             // 
@@ -97,26 +92,6 @@ namespace GameDatabase
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.structDataEditor1);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.enginesCollection);
-            this.splitContainer3.Size = new System.Drawing.Size(271, 578);
-            this.splitContainer3.SplitterDistance = 496;
-            this.splitContainer3.TabIndex = 1;
-            this.splitContainer3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer3_SplitterMoved);
             // 
             // structDataEditor1
             // 
@@ -132,7 +107,7 @@ namespace GameDatabase
             this.structDataEditor1.Margin = new System.Windows.Forms.Padding(5);
             this.structDataEditor1.Name = "structDataEditor1";
             this.structDataEditor1.Padding = new System.Windows.Forms.Padding(5);
-            this.structDataEditor1.Size = new System.Drawing.Size(269, 494);
+            this.structDataEditor1.Size = new System.Drawing.Size(269, 576);
             this.structDataEditor1.TabIndex = 0;
             // 
             // splitContainer2
@@ -146,6 +121,7 @@ namespace GameDatabase
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.button1);
             this.splitContainer2.Panel1.Controls.Add(this.layoutEditor1);
             // 
             // splitContainer2.Panel2
@@ -157,6 +133,17 @@ namespace GameDatabase
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 6;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(522, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Show Ship Info";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // layoutEditor1
             // 
@@ -173,21 +160,6 @@ namespace GameDatabase
             this.layoutEditor1.Size = new System.Drawing.Size(522, 361);
             this.layoutEditor1.TabIndex = 2;
             this.layoutEditor1.ValueChanged += new System.EventHandler(this.layoutEditor1_ValueChanged);
-            // 
-            // enginesCollection
-            // 
-            this.enginesCollection.AutoSize = true;
-            this.enginesCollection.ContentAutoScroll = true;
-            this.enginesCollection.Data = null;
-            this.enginesCollection.Database = null;
-            this.enginesCollection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.enginesCollection.Location = new System.Drawing.Point(0, 48);
-            this.enginesCollection.Margin = new System.Windows.Forms.Padding(5);
-            this.enginesCollection.Name = "enginesCollection";
-            this.enginesCollection.Size = new System.Drawing.Size(269, 76);
-            this.enginesCollection.TabIndex = 5;
-            this.enginesCollection.CollectionChanged += new System.EventHandler(this.enginesCollection_CollectionChanged);
-            this.enginesCollection.DataChanged += new System.EventHandler(this.enginesCollection_DataChanged);
             // 
             // barrelCollection
             // 
@@ -422,15 +394,10 @@ namespace GameDatabase
             this.Text = "ShipEditorDialog";
             this.Load += new System.EventHandler(this.ShipEditorDialog_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel1.PerformLayout();
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            this.splitContainer3.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
@@ -448,7 +415,6 @@ namespace GameDatabase
 
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private StructDataEditor structDataEditor1;
         private LayoutEditor layoutEditor1;
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.RadioButton radioButton5;
@@ -464,7 +430,7 @@ namespace GameDatabase
         private System.Windows.Forms.Button leftButton;
         private CollectionEditor barrelCollection;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.SplitContainer splitContainer3;
-        private CollectionEditor enginesCollection;
+        private StructDataEditor structDataEditor1;
+        private System.Windows.Forms.Button button1;
     }
 }

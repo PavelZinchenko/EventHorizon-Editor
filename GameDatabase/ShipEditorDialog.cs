@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using GameDatabase.Controls;
 using GameDatabase.EditorModel;
 using GameDatabase.Enums;
 using GameDatabase.GameDatabase;
@@ -22,12 +23,14 @@ namespace GameDatabase
             InitializeComponent();
         }
 
+        public LayoutInfo layoutInfo;
+
         private void ShipEditorDialog_Load(object sender, EventArgs e)
         {
             _ignoreEvents = true;
 
             Text = _dialogName;
-            structDataEditor1.Exclusions = new List<string>() { "Layout", "Barrels", "Engines" };
+            structDataEditor1.Exclusions = new List<string>() { "Layout", "Barrels"};
             structDataEditor1.Database = _database;
             structDataEditor1.Data = _item as IDataAdapter ?? new DataAdapter(_item);
             layoutEditor1.Colors.Clear();
@@ -38,8 +41,8 @@ namespace GameDatabase
             layoutEditor1.Colors.Add((char)CellType.InnerOuter, Color.FromArgb(192, 0, 255, 255));
             layoutEditor1.Colors.Add((char)CellType.Outer, Color.FromArgb(192, 0, 128, 255));
 
+
             barrelCollection.Database = _database;
-            enginesCollection.Database = _database;
 
             Layout layout;
             if (_item is Ship)
@@ -47,16 +50,15 @@ namespace GameDatabase
                 var ship = (Ship)_item;
                 layout = ship.Layout;
                 barrelCollection.Data = ship.Barrels;
-                enginesCollection.Data = ship.Engines!=null?ship.Engines:new Ship.Engine[0];
                 layoutEditor1.Image = _database.GetImage(ship.ModelImage);
             }
             else if (_item is Satellite)
             {
+                button1.Hide();
+                button1.Enabled = false;
                 var satellite = (Satellite)_item;
                 layout = satellite.Layout;
                 barrelCollection.Data = satellite.Barrels;
-                splitContainer3.Panel2Collapsed = true;
-                splitContainer3.Panel2.Enabled = false;
                 layoutEditor1.Image = _database.GetImage(satellite.ModelImage);
             }
             else
@@ -72,7 +74,19 @@ namespace GameDatabase
 
             splitContainer1.SplitterDistance = Settings.Default.ShipEditorHorizontalSplitter;
             splitContainer2.SplitterDistance = Settings.Default.ShipEditorVerticalSplitter;
-            splitContainer3.SplitterDistance = Settings.Default.ShipEditorEnginesSplitter;
+        }
+
+        private void ShipEditorDialog_Shown(object sender, EventArgs e)
+        {
+        }
+
+        private void structDataEditor1_DataChanged(object sender, EventArgs e)
+        {
+            if(_item is Ship)
+            {
+                layoutInfo?.OnLayoutChanged();
+                UpdateEngines();
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -122,7 +136,10 @@ namespace GameDatabase
             if (_ignoreEvents) return;
 
             if (_item is Ship)
+            {
                 ((Ship)_item).Layout.Data = layoutEditor1.Layout;
+                layoutInfo.OnLayoutChanged();
+            }
             else if (_item is Satellite)
                 ((Satellite)_item).Layout.Data = layoutEditor1.Layout;
         }
@@ -182,6 +199,7 @@ namespace GameDatabase
                 ((Ship)_item).Layout = layout;
             else if (_item is Satellite)
                 ((Satellite)_item).Layout = layout;
+            layoutInfo?.OnLayoutChanged();
         }
 
         private bool _ignoreEvents;
@@ -194,10 +212,6 @@ namespace GameDatabase
         private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
         {
             Settings.Default.ShipEditorVerticalSplitter = splitContainer2.SplitterDistance;
-        }
-        private void splitContainer3_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-            Settings.Default.ShipEditorEnginesSplitter = splitContainer3.SplitterDistance;
         }
 
         private void barrelCollection_CollectionChanged(object sender, EventArgs e)
@@ -237,19 +251,6 @@ namespace GameDatabase
             }).ToArray();
         }
 
-
-        private void enginesCollection_CollectionChanged(object sender, EventArgs e)
-        {
-            if (_item is Ship)
-            {
-                ((Ship)_item).Engines = (Ship.Engine[])enginesCollection.Data;
-            }
-            else
-                throw new ArgumentException();
-
-            UpdateEngines();
-        }
-
         private void enginesCollection_DataChanged(object sender, EventArgs e)
         {
             UpdateEngines();
@@ -257,11 +258,43 @@ namespace GameDatabase
 
         private void UpdateEngines()
         {
-            layoutEditor1.Engines = ((Ship.Engine[])enginesCollection.Data).Select(item => new LayoutEditor.EngineData
+            if (!(_item is Ship)) return;
+
+            var ship = _item as Ship;
+
+            Ship.Engine[] engines = ship.Engines ?? new Ship.Engine[0];
+            if (ship.EngineSize.Value > 0)
+            {
+                engines = engines.Concat(new Ship.Engine[] {
+                    new Ship.Engine() {
+                        Position = ship.EnginePosition,
+                        Size = ship.EngineSize
+                    }
+                }).ToArray();
+            }
+            
+
+            layoutEditor1.Engines = (engines).Select(item => new LayoutEditor.EngineData
             {
                 X = item.Position.y,
                 Y = item.Position.x
             }).ToArray();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (layoutInfo != null && layoutInfo.Visible)
+            {
+                return;
+            }
+            layoutInfo = new LayoutInfo();
+            layoutInfo._database = _database;
+            layoutInfo._layout = layoutEditor1;
+            layoutInfo._shipData = _item as Ship;
+            structDataEditor1.DataChanged += structDataEditor1_DataChanged;
+            layoutInfo.Owner = this;
+            layoutInfo.OnLayoutChanged();
+            layoutInfo.Show();
         }
     }
 }
