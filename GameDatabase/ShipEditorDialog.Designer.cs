@@ -101,6 +101,7 @@ namespace GameDatabase
             this.structDataEditor1.ContentAutoScroll = true;
             this.structDataEditor1.Data = null;
             this.structDataEditor1.Database = null;
+            this.structDataEditor1.DataChanged += structDataEditor1_DataChanged;
             this.structDataEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.structDataEditor1.Exclusions = ((System.Collections.Generic.List<string>)(resources.GetObject("structDataEditor1.Exclusions")));
             this.structDataEditor1.Location = new System.Drawing.Point(0, 0);

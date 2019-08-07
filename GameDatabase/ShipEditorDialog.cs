@@ -138,7 +138,7 @@ namespace GameDatabase
             if (_item is Ship)
             {
                 ((Ship)_item).Layout.Data = layoutEditor1.Layout;
-                layoutInfo.OnLayoutChanged();
+                layoutInfo?.OnLayoutChanged();
             }
             else if (_item is Satellite)
                 ((Satellite)_item).Layout.Data = layoutEditor1.Layout;
@@ -199,7 +199,6 @@ namespace GameDatabase
                 ((Ship)_item).Layout = layout;
             else if (_item is Satellite)
                 ((Satellite)_item).Layout = layout;
-            layoutInfo?.OnLayoutChanged();
         }
 
         private bool _ignoreEvents;
@@ -251,11 +250,6 @@ namespace GameDatabase
             }).ToArray();
         }
 
-        private void enginesCollection_DataChanged(object sender, EventArgs e)
-        {
-            UpdateEngines();
-        }
-
         private void UpdateEngines()
         {
             if (!(_item is Ship)) return;
@@ -291,7 +285,6 @@ namespace GameDatabase
             layoutInfo._database = _database;
             layoutInfo._layout = layoutEditor1;
             layoutInfo._shipData = _item as Ship;
-            structDataEditor1.DataChanged += structDataEditor1_DataChanged;
             layoutInfo.Owner = this;
             layoutInfo.OnLayoutChanged();
             layoutInfo.Show();
