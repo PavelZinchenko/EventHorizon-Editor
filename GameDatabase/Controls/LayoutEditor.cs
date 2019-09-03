@@ -156,8 +156,12 @@ namespace GameDatabase
             var pen = new Pen(Color.Black, 2);
             var widePen = new Pen(Color.Black, 3);
 
+            if (data.CanvasSize < 0) return;
+
             foreach (var barrel in _barrels)
             {
+
+                Console.WriteLine(barrel);
                 var x = BorderSize + (1 - barrel.X) * data.CanvasSize / 2;
                 var y = BorderSize + (1 - barrel.Y) * data.CanvasSize / 2;
 

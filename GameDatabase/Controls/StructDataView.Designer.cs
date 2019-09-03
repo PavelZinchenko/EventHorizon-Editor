@@ -40,19 +40,21 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 1;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(503, 565);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(671, 695);
             this.tableLayoutPanel.TabIndex = 0;
             // 
             // StructDataView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "StructDataView";
-            this.Size = new System.Drawing.Size(503, 565);
+            this.Size = new System.Drawing.Size(671, 695);
             this.ResumeLayout(false);
             this.PerformLayout();
 

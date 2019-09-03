@@ -1,5 +1,5 @@
 {
-  "Name": "Templates/Ship with Build and Technology",
+  "Name": "Templates/Ship/With 0*, 1* and 2* builds",
   "NameDialog": "File Name",
   "IdDialog": "ID",
   "Items": [
@@ -13,8 +13,8 @@
             "ItemType": 6,
             "Name": "{1}",
             "Id": "{0}",
-      			"ModelImage": "",
-      			"IconImage": "",
+			"ModelImage": "",
+			"IconImage": "",
             "BuiltinDevices": [],
             "Barrels": []
           },
@@ -31,14 +31,26 @@
           }
         },
         {
-          "Filename": "{1}_technology",
-	  "Type": "File",
+          "Filename": "{1}_buildX",
+          "Type": "File",
           "Content": {
-            "ItemType": 10,
-            "Id": "{0}",
-            "Type": 1,
-            "Dependencies": []
-          }
+            "ItemType": 8,
+            "Id": "{0}+1",
+            "ShipId": "{0}",
+            "DifficultyClass": 1,
+            "Components": []
+           }
+        },
+        {
+          "Filename": "{1}_buildXX",
+          "Type": "File",
+          "Content": {
+            "ItemType": 8,
+            "Id": "{0}+2",
+            "ShipId": "{0}",
+            "DifficultyClass": 2,
+            "Components": []
+         }
         }
       ]
     }

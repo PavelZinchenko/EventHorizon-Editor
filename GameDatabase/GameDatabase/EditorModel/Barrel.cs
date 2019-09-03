@@ -11,7 +11,11 @@ namespace GameDatabase.EditorModel
             Position = Vector2.Zero;
             Rotation = new NumericValue<float>(0, -360, 360);
             Offset = new NumericValue<float>(0, 0f, 1f);
+            AutoAimingArc = new NumericValue<float>(0, 0, 360);
+            RotationSpeed = new NumericValue<float>(0, 0, 1000);
             WeaponClass = string.Empty;
+            ImageId = "";
+            Size = new NumericValue<float>(0, 0, 10f);
         }
 
         public Barrel(SerializableBarrel barrel)

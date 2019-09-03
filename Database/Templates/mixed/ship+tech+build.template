@@ -1,5 +1,5 @@
 {
-  "Name": "Templates/Ship/With Build",
+  "Name": "Templates/Ship/With Build and Technology",
   "NameDialog": "File Name",
   "IdDialog": "ID",
   "Items": [
@@ -13,8 +13,8 @@
             "ItemType": 6,
             "Name": "{1}",
             "Id": "{0}",
-			"ModelImage": "",
-			"IconImage": "",
+      			"ModelImage": "",
+      			"IconImage": "",
             "BuiltinDevices": [],
             "Barrels": []
           },
@@ -28,6 +28,16 @@
             "Id": "{0}",
             "ShipId": "{0}",
             "Components": []
+          }
+        },
+        {
+          "Filename": "{1}_technology",
+	  "Type": "File",
+          "Content": {
+            "ItemType": 10,
+            "Id": "{0}",
+            "Type": 1,
+            "Dependencies": []
           }
         }
       ]
