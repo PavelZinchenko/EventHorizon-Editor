@@ -160,8 +160,6 @@ namespace GameDatabase
 
             foreach (var barrel in _barrels)
             {
-
-                Console.WriteLine(barrel);
                 var x = BorderSize + (1 - barrel.X) * data.CanvasSize / 2;
                 var y = BorderSize + (1 - barrel.Y) * data.CanvasSize / 2;
 

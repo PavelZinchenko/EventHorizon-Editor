@@ -487,6 +487,7 @@ namespace GameDatabase
                                 {
                                     Name = path
                                 };
+                                _newNode.Tag = "Folder";
                                 nodes.Add(_newNode, _parentNode);
                                 BuildTemplateItems(item.Items, _newNode);
                                 continue;
