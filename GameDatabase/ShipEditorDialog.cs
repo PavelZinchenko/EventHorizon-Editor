@@ -243,7 +243,7 @@ namespace GameDatabase
                 Text = item.WeaponClass,
                 Offset = item.Offset.Value,
                 Rotation = item.Rotation.Value,
-                Arc = item.AutoAimingArc.Value > 0 ? item.AutoAimingArc.Value :
+                Arc = item.AutoAimingArc.Value > 0 ? item.AutoAimingArc.Value*2 :
                     item.PlatformType == PlatformType.AutoTarget ? 360 :
                     item.PlatformType == PlatformType.AutoTargetFrontal ? 160 :
                     item.PlatformType == PlatformType.TargetingUnit ? 40 : 0

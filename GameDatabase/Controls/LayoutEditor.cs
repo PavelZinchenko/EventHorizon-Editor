@@ -172,8 +172,8 @@ namespace GameDatabase
                 data.Graphics.DrawLine(pen, x - length, y, x + length, y);
                 data.Graphics.DrawLine(pen, x, y - length, x, y + length);
 
-                var startAngle = barrel.Rotation - barrel.Arc;
-                var endAngle = startAngle + barrel.Arc * 2f;
+                var startAngle = barrel.Rotation - barrel.Arc / 2f;
+                var endAngle = startAngle + barrel.Arc;
                 var dir = RotationHelpers.Direction(-startAngle);
                 var p0 = new Point((int)(x + dir.x * offset), (int)(y + dir.y * offset));
                 var p1 = new Point((int)(x + dir.x * (offset + data.CellSize)), (int)(y + dir.y * (offset + data.CellSize)));
@@ -190,7 +190,7 @@ namespace GameDatabase
                 data.Graphics.DrawLine(widePen, p0, p2);
                 data.Graphics.DrawLine(pen, p2.X, p2.Y, p1.X + d.Y, p1.Y - d.X);
 
-                data.Graphics.DrawArc(pen, x - radius - data.CellSize, y - radius - data.CellSize, radius * 2 + data.CellSize*2f, radius * 2 + data.CellSize*2f,-barrel.Rotation-barrel.Arc-90,barrel.Arc*2);
+                data.Graphics.DrawArc(pen, x - radius - data.CellSize, y - radius - data.CellSize, radius * 2 + data.CellSize * 2f, radius * 2 + data.CellSize * 2f, -barrel.Rotation - barrel.Arc / 2 - 90, barrel.Arc);
             }
         }
 
