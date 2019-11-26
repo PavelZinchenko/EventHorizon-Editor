@@ -73,7 +73,7 @@ namespace GameDatabase.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100, 100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
         public global::System.Drawing.Point EditorPosition {
             get {
                 return ((global::System.Drawing.Point)(this["EditorPosition"]));
@@ -116,6 +116,18 @@ namespace GameDatabase.Properties {
             }
             set {
                 this["MainPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ClosingConfirmation {
+            get {
+                return ((bool)(this["ClosingConfirmation"]));
+            }
+            set {
+                this["ClosingConfirmation"] = value;
             }
         }
     }

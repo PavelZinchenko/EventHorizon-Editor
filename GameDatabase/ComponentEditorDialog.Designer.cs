@@ -35,8 +35,10 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Location = new System.Drawing.Point(0, 378);
             this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.statusStrip1.Size = new System.Drawing.Size(400, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
@@ -51,6 +53,7 @@
             this.structDataEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.structDataEditor1.Exclusions = ((System.Collections.Generic.List<string>)(resources.GetObject("structDataEditor1.Exclusions")));
             this.structDataEditor1.Location = new System.Drawing.Point(0, 0);
+            this.structDataEditor1.Margin = new System.Windows.Forms.Padding(5);
             this.structDataEditor1.Name = "structDataEditor1";
             this.structDataEditor1.Size = new System.Drawing.Size(400, 378);
             this.structDataEditor1.TabIndex = 1;
@@ -58,17 +61,17 @@
             // 
             // ComponentEditorDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = global::GameDatabase.Properties.Settings.Default.EditorSize;
             this.Controls.Add(this.structDataEditor1);
             this.Controls.Add(this.statusStrip1);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::GameDatabase.Properties.Settings.Default, "EditorPosition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::GameDatabase.Properties.Settings.Default, "EditorSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::GameDatabase.Properties.Settings.Default.EditorPosition;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ComponentEditorDialog";
             this.Text = "ComponentEditorDialog";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ComponentEditorDialog_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

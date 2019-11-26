@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using GameDatabase.GameDatabase;
 
@@ -25,5 +26,17 @@ namespace GameDatabase
         private readonly string _dialogName;
         private readonly object _item;
         private readonly Database _database;
+
+        private void EditorDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            foreach (var key in new List<string>(MainWindow.OppenedWindows.Keys))
+            {
+                if (MainWindow.OppenedWindows[key] == this)
+                {
+                    MainWindow.OppenedWindows.Remove(key);
+                    return;
+                }
+            }
+        }
     }
 }

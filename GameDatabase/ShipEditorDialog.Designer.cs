@@ -101,7 +101,6 @@ namespace GameDatabase
             this.structDataEditor1.ContentAutoScroll = true;
             this.structDataEditor1.Data = null;
             this.structDataEditor1.Database = null;
-            this.structDataEditor1.DataChanged += structDataEditor1_DataChanged;
             this.structDataEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.structDataEditor1.Exclusions = ((System.Collections.Generic.List<string>)(resources.GetObject("structDataEditor1.Exclusions")));
             this.structDataEditor1.Location = new System.Drawing.Point(0, 0);
@@ -387,12 +386,11 @@ namespace GameDatabase
             this.ClientSize = global::GameDatabase.Properties.Settings.Default.ShipEditorSize;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::GameDatabase.Properties.Settings.Default, "ShipEditorPosition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::GameDatabase.Properties.Settings.Default, "ShipEditorSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Location = global::GameDatabase.Properties.Settings.Default.ShipEditorPosition;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ShipEditorDialog";
             this.Text = "ShipEditorDialog";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ShipEditorDialog_FormClosed);
             this.Load += new System.EventHandler(this.ShipEditorDialog_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

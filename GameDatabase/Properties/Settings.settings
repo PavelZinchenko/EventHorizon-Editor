@@ -15,7 +15,7 @@
       <Value Profile="(Default)">364</Value>
     </Setting>
     <Setting Name="EditorPosition" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">100, 100</Value>
+      <Value Profile="(Default)">0, 0</Value>
     </Setting>
     <Setting Name="EditorSize" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">400, 400</Value>
@@ -25,6 +25,9 @@
     </Setting>
     <Setting Name="MainPosition" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">100, 100</Value>
+    </Setting>
+    <Setting Name="ClosingConfirmation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
