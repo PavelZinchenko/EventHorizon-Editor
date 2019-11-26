@@ -11,6 +11,7 @@ using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.GameDatabase.Model;
 using GameDatabase.GameDatabase.Serializable;
 using GameDatabase.Model;
+using GameDatabase.Properties;
 using GameDatabase.Serializable;
 using Newtonsoft.Json;
 
@@ -21,6 +22,10 @@ namespace GameDatabase
         public MainWindow()
         {
             InitializeComponent();
+
+            OppenedWindows = new Dictionary<string, Form>();
+
+            closeConfrmationToolStripMenuItem.Checked = Settings.Default.ClosingConfirmation;
         }
 
         private void MainWindow_Load(object sender, EventArgs eventArgs)
@@ -33,6 +38,7 @@ namespace GameDatabase
             try
             {
                 DatabaseTreeView.Nodes.Clear();
+                CloseAllChilds();
                 _database = new Database(path, true); // TODO:
                 BuildFilesTree(path, DatabaseTreeView.Nodes);
                 _lastDatabasePath = path;
@@ -150,6 +156,7 @@ namespace GameDatabase
                 var name = Helpers.FileName(path);
                 var item = JsonConvert.DeserializeObject<SerializableItem>(data);
                 item.FileName = name;
+                item.FilePath = path;
                 if ((ItemType)item.ItemType == ItemType.Undefined)
                     return;
 
@@ -223,25 +230,32 @@ namespace GameDatabase
             EditButton_Click(sender, e);
         }
 
+        public static Dictionary<string, Form> OppenedWindows;
+
         private void EditButton_Click(object sender, EventArgs e)
         {
             var item = GetItem();
             if (item == null)
                 return;
-
+            if (OppenedWindows.ContainsKey(_selectedItem.FilePath))
+            {
+                return;
+            }
+            Form window;
             switch ((ItemType)_selectedItem.ItemType)
             {
                 case ItemType.Component:
-                    new ComponentEditorDialog(_database, (Component)item).ShowDialog();
+                    (window=new ComponentEditorDialog(_database, (Component)item)).Show();
                     break;
                 case ItemType.Satellite:
                 case ItemType.Ship:
-                    new ShipEditorDialog(_database, item, _selectedItem.FileName).ShowDialog();
+                    (window = new ShipEditorDialog(_database, item, _selectedItem.FileName)).Show();
                     break;
                 default:
-                    new EditorDialog(_database, item, _selectedItem.FileName).ShowDialog();
+                    (window = new EditorDialog(_database, item, _selectedItem.FileName)).Show();
                     break;
             }
+            OppenedWindows.Add(_selectedItem.FilePath, window);
         }
 
         private object GetItem()
@@ -320,10 +334,33 @@ namespace GameDatabase
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            save();
+        }
+
+        private void save()
+        {
             if (!string.IsNullOrWhiteSpace(_lastDatabasePath))
             {
                 _database.SaveAs(_lastDatabasePath);
                 ghostFiles.Clear();
+            }
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if ( _lastDatabasePath != null && Settings.Default.ClosingConfirmation)
+            {
+                var result = MessageBox.Show("Do you want to save database before closing?", "About to exit program?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        save();
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
             }
         }
 
@@ -646,6 +683,22 @@ namespace GameDatabase
                     return;
                 }
             }
+        }
+
+        private void closeConfrmationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.Default.ClosingConfirmation = closeConfrmationToolStripMenuItem.Checked;
+            Settings.Default.Save();
+        }
+
+        private void CloseAllChilds()
+        {
+            foreach(var key in new List<string>(OppenedWindows.Keys))
+            {
+                if (!OppenedWindows.ContainsKey(key)) continue;
+                OppenedWindows[key].Close();
+            }
+            OppenedWindows = new Dictionary<string, Form>();
         }
     }
 }

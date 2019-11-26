@@ -289,5 +289,17 @@ namespace GameDatabase
             layoutInfo.OnLayoutChanged();
             layoutInfo.Show();
         }
+
+        private void ShipEditorDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            foreach (var key in new List<string>(MainWindow.OppenedWindows.Keys))
+            {
+                if (MainWindow.OppenedWindows[key] == this)
+                {
+                    MainWindow.OppenedWindows.Remove(key);
+                    return;
+                }
+            }
+        }
     }
 }
