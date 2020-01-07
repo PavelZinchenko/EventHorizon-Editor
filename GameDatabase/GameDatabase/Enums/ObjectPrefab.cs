@@ -5,6 +5,7 @@
         None,
         Area,
         Asteroid,
+        CloudEffect,
         DeceleratingField,
         Decoy,
         EnergyShield,
@@ -13,6 +14,7 @@
         Planet,
         PointDefense,
         RepairBot,
+        Shield,
         WormSegment,
         WormSegment2
     }

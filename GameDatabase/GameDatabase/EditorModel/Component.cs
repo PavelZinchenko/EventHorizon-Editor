@@ -72,7 +72,7 @@ namespace GameDatabase.EditorModel
             serializable.DeviceId = DeviceId.Id;
             serializable.WeaponId = WeaponId.Id;
             serializable.AmmunitionId = AmmunitionId.IsNull ? AmmunitionObsoleteId.Id : AmmunitionId.Id;
-            serializable.WeaponSlotType = WeaponSlotType.Length > 0 ? WeaponSlotType[0].ToString() : string.Empty;
+            serializable.WeaponSlotType = (WeaponSlotType != null && WeaponSlotType.Length > 0) ? WeaponSlotType[0].ToString() : string.Empty;
             serializable.DroneBayId = DroneBayId.Id;
             serializable.DroneId = DroneId.Id;
 
