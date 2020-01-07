@@ -1,0 +1,73 @@
+{
+  "Name": "Templates/Component/With Stats and 3 Sizes",
+  "NameDialog": "File Name",
+  "IdDialog": "ID",
+  "Items": [
+    {
+      "Filename": "{1}",
+      "Type": "Folder",
+      "Items": [
+        {
+          "Filename": "{1}_S_component",
+          "Content": {
+            "ItemType": 1,
+            "Id": "{0}",
+            "Name": "Small {1}",
+            "Layout": "1",
+            "ComponentStatsId": "{0}",
+            "PossibleModifications": []
+          },
+          "Type": "File"
+        },
+        {
+          "Filename": "{1}_M_component",
+          "Content": {
+            "ItemType": 1,
+            "Id": "{0}+1",
+            "Name": "Medium {1}",
+            "Layout": "1",
+            "ComponentStatsId": "{0}+1",
+            "PossibleModifications": []
+          },
+          "Type": "File"
+        },
+        {
+          "Filename": "{1}_L_component",
+          "Content": {
+            "ItemType": 1,
+            "Id": "{0}+2",
+            "Name": "Large {1}",
+            "Layout": "1",
+            "ComponentStatsId": "{0}+2",
+            "PossibleModifications": []
+          },
+          "Type": "File"
+        },
+        {
+          "Filename": "{1}_S_stats",
+          "Type": "File",
+          "Content": {
+            "ItemType": 11,
+            "Id": "{0}"
+          }
+        },
+        {
+          "Filename": "{1}_M_stats",
+          "Type": "File",
+          "Content": {
+            "ItemType": 11,
+            "Id": "{0}+1"
+          }
+        },
+        {
+          "Filename": "{1}_L_stats",
+          "Type": "File",
+          "Content": {
+            "ItemType": 11,
+            "Id": "{0}+2"
+          }
+        }
+      ]
+    }
+  ]
+}

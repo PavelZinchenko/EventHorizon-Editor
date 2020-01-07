@@ -59,6 +59,7 @@
           "Content": {
             "ItemType": 10,
             "Id": "{0}",
+            "ItemId": "{0}",
             "Type": 0,
             "Dependencies": []
           }

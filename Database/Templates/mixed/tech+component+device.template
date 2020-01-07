@@ -38,10 +38,11 @@
         },
         {
           "Filename": "{1}_technology",
-	  "Type": "File",
+	        "Type": "File",
           "Content": {
             "ItemType": 10,
             "Id": "{0}",
+            "ItemId": "{0}",
             "Type": 0,
             "Dependencies": []
           }
