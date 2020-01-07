@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using GameDatabase.Enums;
+using GameDatabase.Enums.Weapon;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -22,8 +25,10 @@ namespace GameDatabase.EditorModel
             ActivationType = device.ActivationType;
             Color = Helpers.ColorFromString(device.Color);
             Sound = device.Sound;
-            EffectPrefab = device.EffectPrefab;
-            ObjectPrefab = device.ObjectPrefab;
+
+            Enum.TryParse(device.EffectPrefab, out EffectPrefab);
+            Enum.TryParse(device.ObjectPrefab, out ObjectPrefab);
+
             ControlButtonIcon = device.ControlButtonIcon;
         }
 
@@ -41,8 +46,8 @@ namespace GameDatabase.EditorModel
             serializable.ActivationType = ActivationType;
             serializable.Color = Helpers.ColorToString(Color);
             serializable.Sound = Sound;
-            serializable.EffectPrefab = EffectPrefab;
-            serializable.ObjectPrefab = ObjectPrefab;
+            serializable.EffectPrefab = EffectPrefab == EffectObsolete.None ? String.Empty : EffectPrefab.ToString();
+            serializable.ObjectPrefab = ObjectPrefab == ObjectPrefab.None ? String.Empty : ObjectPrefab.ToString();
             serializable.ControlButtonIcon = ControlButtonIcon;
         }
 
@@ -61,9 +66,14 @@ namespace GameDatabase.EditorModel
         public ActivationType ActivationType;
 
         public Color Color;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.SoundObsolete)]
         public string Sound;
-        public string EffectPrefab;
-        public string ObjectPrefab;
+        public EffectObsolete EffectPrefab;
+        
+        public ObjectPrefab ObjectPrefab;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.Controls)]
         public string ControlButtonIcon;
     }
 }

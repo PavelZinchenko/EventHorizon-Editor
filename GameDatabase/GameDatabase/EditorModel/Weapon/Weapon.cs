@@ -1,6 +1,9 @@
 ﻿using GameDatabase.Enums;
+using GameDatabase.Enums.Weapon;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
+using System;
 
 namespace GameDatabase.EditorModel
 {
@@ -16,7 +19,7 @@ namespace GameDatabase.EditorModel
             ActivationType = weapon.ActivationType;
             ShotSound = weapon.ShotSound;
             ChargeSound = weapon.ChargeSound;
-            ShotEffectPrefab = weapon.ShotEffectPrefab;
+            Enum.TryParse(weapon.ShotEffectPrefab, out ShotEffectPrefab);
             ControlButtonIcon = weapon.ControlButtonIcon;
         }
 
@@ -30,7 +33,7 @@ namespace GameDatabase.EditorModel
 
             serializable.ShotSound = ShotSound;
             serializable.ChargeSound = ChargeSound;
-            serializable.ShotEffectPrefab = ShotEffectPrefab;
+            serializable.ShotEffectPrefab = ShotEffectPrefab == EffectObsolete.None ? string.Empty : ShotEffectPrefab.ToString();
             serializable.ControlButtonIcon = ControlButtonIcon;
         }
 
@@ -43,9 +46,15 @@ namespace GameDatabase.EditorModel
 
         public ActivationType ActivationType;
 
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.SoundObsolete)]
         public string ShotSound;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.SoundObsolete)]
         public string ChargeSound;
-        public string ShotEffectPrefab;
+
+        public EffectObsolete ShotEffectPrefab;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.Controls)]
         public string ControlButtonIcon;
     }
 }

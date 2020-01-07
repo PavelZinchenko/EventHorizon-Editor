@@ -35,9 +35,10 @@ namespace GameDatabase
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.structDataEditor1 = new StructDataEditor();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.layoutEditor1 = new LayoutEditor();
-            this.barrelCollection = new Controls.CollectionEditor();
+            this.button1 = new System.Windows.Forms.Button();
+            this.barrelCollection = new BarrelsCollectionEditor();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
@@ -58,6 +59,7 @@ namespace GameDatabase
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutSize)).BeginInit();
             this.SuspendLayout();
@@ -88,7 +90,7 @@ namespace GameDatabase
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(800, 578);
-            this.splitContainer1.SplitterDistance = 271;
+            this.splitContainer1.SplitterDistance = 216;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
@@ -107,8 +109,9 @@ namespace GameDatabase
             this.structDataEditor1.Margin = new System.Windows.Forms.Padding(5);
             this.structDataEditor1.Name = "structDataEditor1";
             this.structDataEditor1.Padding = new System.Windows.Forms.Padding(5);
-            this.structDataEditor1.Size = new System.Drawing.Size(269, 576);
+            this.structDataEditor1.Size = new System.Drawing.Size(214, 576);
             this.structDataEditor1.TabIndex = 0;
+            this.structDataEditor1.DataChanged += new System.EventHandler(this.structDataEditor1_DataChanged);
             // 
             // splitContainer2
             // 
@@ -121,33 +124,33 @@ namespace GameDatabase
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.panel1);
             this.splitContainer2.Panel1.Controls.Add(this.button1);
-            this.splitContainer2.Panel1.Controls.Add(this.layoutEditor1);
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.barrelCollection);
             this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer2.Size = new System.Drawing.Size(524, 578);
+            this.splitContainer2.Size = new System.Drawing.Size(579, 578);
             this.splitContainer2.SplitterDistance = 363;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 6;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
-            // button1
+            // panel1
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(522, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Show Ship Info";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.layoutEditor1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 23);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(577, 338);
+            this.panel1.TabIndex = 4;
             // 
             // layoutEditor1
             // 
             this.layoutEditor1.Barrels = null;
+            this.layoutEditor1.BarrelsCollection = this.barrelCollection;
             this.layoutEditor1.BorderSize = 32;
             this.layoutEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutEditor1.Engines = null;
@@ -157,13 +160,26 @@ namespace GameDatabase
             this.layoutEditor1.Margin = new System.Windows.Forms.Padding(5);
             this.layoutEditor1.Name = "layoutEditor1";
             this.layoutEditor1.SelectedCategory = '1';
-            this.layoutEditor1.Size = new System.Drawing.Size(522, 361);
+            this.layoutEditor1.Size = new System.Drawing.Size(577, 338);
             this.layoutEditor1.TabIndex = 2;
             this.layoutEditor1.ValueChanged += new System.EventHandler(this.layoutEditor1_ValueChanged);
+            this.layoutEditor1.Load += new System.EventHandler(this.layoutEditor1_Load);
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(577, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Show Ship Info";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // barrelCollection
             // 
             this.barrelCollection.AutoSize = true;
+            this.barrelCollection.Collapseable = true;
             this.barrelCollection.ContentAutoScroll = true;
             this.barrelCollection.Data = null;
             this.barrelCollection.Database = null;
@@ -171,7 +187,8 @@ namespace GameDatabase
             this.barrelCollection.Location = new System.Drawing.Point(0, 48);
             this.barrelCollection.Margin = new System.Windows.Forms.Padding(5);
             this.barrelCollection.Name = "barrelCollection";
-            this.barrelCollection.Size = new System.Drawing.Size(522, 160);
+            this.barrelCollection.ShowItemsNumbers = true;
+            this.barrelCollection.Size = new System.Drawing.Size(577, 160);
             this.barrelCollection.TabIndex = 5;
             this.barrelCollection.CollectionChanged += new System.EventHandler(this.barrelCollection_CollectionChanged);
             this.barrelCollection.DataChanged += new System.EventHandler(this.barrelCollection_DataChanged);
@@ -210,7 +227,7 @@ namespace GameDatabase
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(522, 48);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(577, 48);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // radioButton1
@@ -247,7 +264,7 @@ namespace GameDatabase
             // downButton
             // 
             this.downButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.downButton.Location = new System.Drawing.Point(382, 4);
+            this.downButton.Location = new System.Drawing.Point(437, 4);
             this.downButton.Margin = new System.Windows.Forms.Padding(4);
             this.downButton.Name = "downButton";
             this.downButton.Size = new System.Drawing.Size(43, 39);
@@ -274,7 +291,7 @@ namespace GameDatabase
             // upButton
             // 
             this.upButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.upButton.Location = new System.Drawing.Point(331, 4);
+            this.upButton.Location = new System.Drawing.Point(386, 4);
             this.upButton.Margin = new System.Windows.Forms.Padding(4);
             this.upButton.Name = "upButton";
             this.upButton.Size = new System.Drawing.Size(43, 39);
@@ -301,7 +318,7 @@ namespace GameDatabase
             // rightButton
             // 
             this.rightButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rightButton.Location = new System.Drawing.Point(280, 4);
+            this.rightButton.Location = new System.Drawing.Point(335, 4);
             this.rightButton.Margin = new System.Windows.Forms.Padding(4);
             this.rightButton.Name = "rightButton";
             this.rightButton.Size = new System.Drawing.Size(43, 39);
@@ -328,7 +345,7 @@ namespace GameDatabase
             // leftButton
             // 
             this.leftButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.leftButton.Location = new System.Drawing.Point(229, 4);
+            this.leftButton.Location = new System.Drawing.Point(284, 4);
             this.leftButton.Margin = new System.Windows.Forms.Padding(4);
             this.leftButton.Name = "leftButton";
             this.leftButton.Size = new System.Drawing.Size(43, 39);
@@ -356,7 +373,7 @@ namespace GameDatabase
             // 
             this.layoutSize.AutoSize = true;
             this.layoutSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutSize.Location = new System.Drawing.Point(433, 4);
+            this.layoutSize.Location = new System.Drawing.Point(488, 4);
             this.layoutSize.Margin = new System.Windows.Forms.Padding(4);
             this.layoutSize.Maximum = new decimal(new int[] {
             1024,
@@ -402,6 +419,7 @@ namespace GameDatabase
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutSize)).EndInit();
@@ -427,9 +445,10 @@ namespace GameDatabase
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.Button rightButton;
         private System.Windows.Forms.Button leftButton;
-        private CollectionEditor barrelCollection;
+        private BarrelsCollectionEditor barrelCollection;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private StructDataEditor structDataEditor1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

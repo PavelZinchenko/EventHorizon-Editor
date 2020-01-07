@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Linq;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -68,8 +69,12 @@ namespace GameDatabase.EditorModel
         public string Name;
         public ItemId<Faction> FactionId;
         public SizeClass SizeClass;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.ShipIcon)]
         public string IconImage;
         public NumericValue<float> IconScale;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.ShipSprite)]
         public string ModelImage;
         public NumericValue<float> ModelScale;
         public Color EngineColor;

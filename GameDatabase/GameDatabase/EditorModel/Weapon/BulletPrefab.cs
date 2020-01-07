@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -42,6 +43,8 @@ namespace GameDatabase.EditorModel
         public ColorMode MainColorMode;
         public Color SecondColor;
         public ColorMode SecondColorMode;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.BulletSprite)]
         public string Image;
     }
 }

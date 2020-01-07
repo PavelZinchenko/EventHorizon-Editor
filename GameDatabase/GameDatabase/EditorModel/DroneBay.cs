@@ -1,6 +1,9 @@
 ﻿using GameDatabase.Enums;
+using GameDatabase.Enums.Weapon;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
+using System;
 
 namespace GameDatabase.EditorModel
 {
@@ -18,7 +21,7 @@ namespace GameDatabase.EditorModel
             Capacity = new NumericValue<int>(droneBay.Capacity, 1, 100);
             ActivationType = droneBay.ActivationType;
             LaunchSound = droneBay.LaunchSound;
-            LaunchEffectPrefab = droneBay.LaunchEffectPrefab;
+            Enum.TryParse(droneBay.LaunchEffectPrefab, out LaunchEffectPrefab);
             ControlButtonIcon = droneBay.ControlButtonIcon;
             ImprovedAi = droneBay.ImprovedAi;
         }
@@ -34,7 +37,7 @@ namespace GameDatabase.EditorModel
             serializable.Capacity = Capacity.Value;
             serializable.ActivationType = ActivationType;
             serializable.LaunchSound = LaunchSound;
-            serializable.LaunchEffectPrefab = LaunchEffectPrefab;
+            serializable.LaunchEffectPrefab = LaunchEffectPrefab == EffectObsolete.None ? string.Empty : LaunchEffectPrefab.ToString();
             serializable.ControlButtonIcon = ControlButtonIcon;
             serializable.ImprovedAi = ImprovedAi;
         }
@@ -52,8 +55,12 @@ namespace GameDatabase.EditorModel
 
         public ActivationType ActivationType;
 
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.SoundObsolete)]
         public string LaunchSound;
-        public string LaunchEffectPrefab;
+        
+        public EffectObsolete LaunchEffectPrefab;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.Controls)]
         public string ControlButtonIcon;
     }
 }

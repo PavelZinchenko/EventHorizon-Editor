@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using GameDatabase.Enums;
+using GameDatabase.Enums.Weapon;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -32,8 +35,9 @@ namespace GameDatabase.EditorModel
             Color = Helpers.ColorFromString(ammunitionObsolete.Color);
             FireSound = ammunitionObsolete.FireSound;
             HitSound = ammunitionObsolete.HitSound;
-            HitEffectPrefab = ammunitionObsolete.HitEffectPrefab;
-            BulletPrefab = ammunitionObsolete.BulletPrefab;
+
+            Enum.TryParse(ammunitionObsolete.HitEffectPrefab, out HitEffectPrefab);
+            Enum.TryParse(ammunitionObsolete.BulletPrefab, out BulletPrefab);
         }
 
         public void Save(SerializableAmmunitionObsolete serializable)
@@ -56,8 +60,8 @@ namespace GameDatabase.EditorModel
             serializable.Color = Helpers.ColorToString(Color);
             serializable.FireSound = FireSound;
             serializable.HitSound = HitSound;
-            serializable.HitEffectPrefab = HitEffectPrefab;
-            serializable.BulletPrefab = BulletPrefab;
+            serializable.HitEffectPrefab = HitEffectPrefab == EffectObsolete.None ? string.Empty : HitEffectPrefab.ToString();
+            serializable.BulletPrefab = BulletPrefab == BulletPrefabObsolete.None ? string.Empty : BulletPrefab.ToString();
         }
 
         public readonly ItemId<AmmunitionObsolete> ItemId;
@@ -79,9 +83,13 @@ namespace GameDatabase.EditorModel
         public ItemId<AmmunitionObsolete> CoupledAmmunitionId = ItemId<AmmunitionObsolete>.Empty;
 
         public Color Color;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.SoundObsolete)]
         public string FireSound;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.SoundObsolete)]
         public string HitSound;
-        public string HitEffectPrefab;
-        public string BulletPrefab;
+        public EffectObsolete HitEffectPrefab;
+        public BulletPrefabObsolete BulletPrefab;
     }
 }

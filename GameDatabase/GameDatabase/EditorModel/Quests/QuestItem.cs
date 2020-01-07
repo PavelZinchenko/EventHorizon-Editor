@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -29,6 +30,8 @@ namespace GameDatabase.EditorModel.Quests
         public readonly ItemId<QuestItem> ItemId;
         public string Name;
         public string Description;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.ArtifactSprite)]
         public string Icon;
         public Color Color;
         public NumericValue<int> Price;

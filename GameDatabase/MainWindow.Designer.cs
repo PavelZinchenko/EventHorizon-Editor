@@ -45,6 +45,10 @@
             this.createModMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeConfrmationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listsSortingTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byIdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +72,7 @@
             this.DatabaseTreeView.Location = new System.Drawing.Point(6, 3);
             this.DatabaseTreeView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DatabaseTreeView.Name = "DatabaseTreeView";
-            this.DatabaseTreeView.Size = new System.Drawing.Size(383, 565);
+            this.DatabaseTreeView.Size = new System.Drawing.Size(383, 564);
             this.DatabaseTreeView.TabIndex = 0;
             this.DatabaseTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DatabaseTreeView_AfterSelect);
             this.DatabaseTreeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DatabaseTreeView_MouseDoubleClick);
@@ -77,7 +81,7 @@
             // splitContainer
             // 
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 27);
+            this.splitContainer.Location = new System.Drawing.Point(0, 28);
             this.splitContainer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.splitContainer.Name = "splitContainer";
             // 
@@ -91,7 +95,7 @@
             this.splitContainer.Panel2.Controls.Add(this.EditButton);
             this.splitContainer.Panel2.Controls.Add(this.ItemTypeText);
             this.splitContainer.Panel2.Controls.Add(this.ItemTypeLabel);
-            this.splitContainer.Size = new System.Drawing.Size(800, 573);
+            this.splitContainer.Size = new System.Drawing.Size(800, 572);
             this.splitContainer.SplitterDistance = 393;
             this.splitContainer.SplitterWidth = 6;
             this.splitContainer.TabIndex = 1;
@@ -109,7 +113,7 @@
             this.structDataView1.Location = new System.Drawing.Point(4, 41);
             this.structDataView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.structDataView1.Name = "structDataView1";
-            this.structDataView1.Size = new System.Drawing.Size(337, 480);
+            this.structDataView1.Size = new System.Drawing.Size(333, 479);
             this.structDataView1.TabIndex = 5;
             // 
             // EditButton
@@ -117,7 +121,7 @@
             this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.EditButton.Enabled = false;
             this.EditButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditButton.Location = new System.Drawing.Point(8, 531);
+            this.EditButton.Location = new System.Drawing.Point(8, 530);
             this.EditButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(112, 35);
@@ -157,7 +161,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -170,7 +174,7 @@
             this.reloadDatabaseToolStripMenuItem,
             this.createModMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(41, 23);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(41, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // loadMenuItem
@@ -211,9 +215,10 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.closeConfrmationToolStripMenuItem});
+            this.closeConfrmationToolStripMenuItem,
+            this.listsSortingTypeToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(70, 23);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // closeConfrmationToolStripMenuItem
@@ -222,9 +227,40 @@
             this.closeConfrmationToolStripMenuItem.CheckOnClick = true;
             this.closeConfrmationToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.closeConfrmationToolStripMenuItem.Name = "closeConfrmationToolStripMenuItem";
-            this.closeConfrmationToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.closeConfrmationToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.closeConfrmationToolStripMenuItem.Text = "Exit Confirmation";
             this.closeConfrmationToolStripMenuItem.Click += new System.EventHandler(this.closeConfrmationToolStripMenuItem_Click);
+            // 
+            // listsSortingTypeToolStripMenuItem
+            // 
+            this.listsSortingTypeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.byFolderToolStripMenuItem,
+            this.byNameToolStripMenuItem,
+            this.byIdToolStripMenuItem});
+            this.listsSortingTypeToolStripMenuItem.Name = "listsSortingTypeToolStripMenuItem";
+            this.listsSortingTypeToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.listsSortingTypeToolStripMenuItem.Text = "Lists Sorting Type";
+            // 
+            // byFolderToolStripMenuItem
+            // 
+            this.byFolderToolStripMenuItem.Name = "byFolderToolStripMenuItem";
+            this.byFolderToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.byFolderToolStripMenuItem.Text = "By Folder";
+            this.byFolderToolStripMenuItem.Click += new System.EventHandler(this.byFolderToolStripMenuItem_Click);
+            // 
+            // byNameToolStripMenuItem
+            // 
+            this.byNameToolStripMenuItem.Name = "byNameToolStripMenuItem";
+            this.byNameToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.byNameToolStripMenuItem.Text = "By Name";
+            this.byNameToolStripMenuItem.Click += new System.EventHandler(this.byNameToolStripMenuItem_Click);
+            // 
+            // byIdToolStripMenuItem
+            // 
+            this.byIdToolStripMenuItem.Name = "byIdToolStripMenuItem";
+            this.byIdToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.byIdToolStripMenuItem.Text = "By Id";
+            this.byIdToolStripMenuItem.Click += new System.EventHandler(this.byIdToolStripMenuItem_Click);
             // 
             // saveFileDialog
             // 
@@ -315,6 +351,10 @@
         private System.Windows.Forms.ToolStripMenuItem loadAsDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeConfrmationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listsSortingTypeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem byFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem byNameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem byIdToolStripMenuItem;
     }
 }
 

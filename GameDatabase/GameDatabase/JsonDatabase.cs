@@ -302,6 +302,11 @@ namespace GameDatabase
             return _images.TryGetValue(name, out image) ? image : null;
         }
 
+        public Dictionary<string, Image> GetImages()
+        {
+            return _images;
+        }
+
         public string GetLocalization(string language)
         {
             string data;

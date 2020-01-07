@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Linq;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -34,7 +35,7 @@ namespace GameDatabase.EditorModel
             if (weapon != null)
                 WeaponId = weapon.ItemId;
 
-            WeaponSlotType = string.IsNullOrEmpty(component.WeaponSlotType) ? WeaponSlotType.Default : (WeaponSlotType)component.WeaponSlotType.First();
+            WeaponSlotType = component.WeaponSlotType;
 
             AmmunitionId = database.GetAmmunitionId(component.AmmunitionId);
             if (AmmunitionId.IsNull)
@@ -61,6 +62,7 @@ namespace GameDatabase.EditorModel
             serializable.DisplayCategory = DisplayCategory;
             serializable.Availability = Availability;
             serializable.ComponentStatsId = StatsId.Id;
+            serializable.ComponentStatsId = StatsId.Id;
             serializable.Faction = FactionId.Id;
             serializable.Level = Level.Value;
             serializable.Icon = IconId;
@@ -70,7 +72,7 @@ namespace GameDatabase.EditorModel
             serializable.DeviceId = DeviceId.Id;
             serializable.WeaponId = WeaponId.Id;
             serializable.AmmunitionId = AmmunitionId.IsNull ? AmmunitionObsoleteId.Id : AmmunitionId.Id;
-            serializable.WeaponSlotType = WeaponSlotType == WeaponSlotType.Default ? string.Empty : ((char)WeaponSlotType).ToString();
+            serializable.WeaponSlotType = WeaponSlotType.Length > 0 ? WeaponSlotType[0].ToString() : string.Empty;
             serializable.DroneBayId = DroneBayId.Id;
             serializable.DroneId = DroneId.Id;
 
@@ -96,11 +98,12 @@ namespace GameDatabase.EditorModel
         public ItemId<Weapon> WeaponId = ItemId<Weapon>.Empty;
         public ItemId<Ammunition> AmmunitionId = ItemId<Ammunition>.Empty;
         public ItemId<AmmunitionObsolete> AmmunitionObsoleteId = ItemId<AmmunitionObsolete>.Empty;
-        public WeaponSlotType WeaponSlotType;
+        public string WeaponSlotType;
 
         public ItemId<DroneBay> DroneBayId = ItemId<DroneBay>.Empty;
         public ItemId<ShipBuild> DroneId = ItemId<ShipBuild>.Empty;
 
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.ComponentIcon)]
         public string IconId;
         public Color Color;
 

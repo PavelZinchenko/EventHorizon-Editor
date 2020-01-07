@@ -187,6 +187,8 @@ namespace GameDatabase
         public ItemId<Ammunition> GetAmmunitionId(int id) { return new ItemId<Ammunition>(_jsonDatabase.GetAmmunition(id)); }
         public ItemId<AmmunitionObsolete> GetAmmunitionObsoleteId(int id) { return new ItemId<AmmunitionObsolete>(_jsonDatabase.GetAmmunitionObsolete(id)); }
 
+        public Dictionary<string, Image> GetImages() { return _jsonDatabase.GetImages(); }
+
         private T GetItem<T,U>(int id, Dictionary<int, T> cache, U source) where T : class
         {
             T item;

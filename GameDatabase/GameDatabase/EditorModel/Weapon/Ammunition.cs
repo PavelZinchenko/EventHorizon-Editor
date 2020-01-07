@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -143,6 +144,8 @@ namespace GameDatabase.EditorModel
 
             public ItemId<VisualEffect> VisualEffect = ItemId<VisualEffect>.Empty;
             public ItemId<Ammunition> Ammunition = ItemId<Ammunition>.Empty;
+
+            [AutoCompleteAtribute(AutoCompleteAtribute.Type.SoundObsolete)]
             public string AudioClip;
 
             public ColorMode ColorMode;

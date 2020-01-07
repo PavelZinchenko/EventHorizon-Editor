@@ -1,0 +1,41 @@
+﻿namespace GameDatabase.Enums
+{
+    public enum BulletPrefabObsolete
+    {
+        None,
+        AreaOfEffect,
+        BlackHole,
+        Bomb,
+        Bomb2,
+        Bullet,
+        Bullet2,
+        Cloud,
+        CommonProjectile,
+        CommonRocket,
+        Empty,
+        Energy1,
+        Energy2,
+        EnergyBall1,
+        EnergyBall2,
+        EnergyBeam,
+        EnergyField1,
+        EnergyField2,
+        Flame,
+        FragBomb,
+        Fragment,
+        HeavyRocket,
+        IonBeam1,
+        IonBeam2,
+        Laser,
+        Lightning,
+        Mine,
+        Plasma1,
+        Plasma2,
+        Rocket,
+        SatelliteRocket,
+        Spark,
+        TractorBeam,
+        TutorialBullet,
+        TutorialRocket
+    }
+}

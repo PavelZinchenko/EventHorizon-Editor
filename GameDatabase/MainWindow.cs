@@ -26,6 +26,8 @@ namespace GameDatabase
             OppenedWindows = new Dictionary<string, Form>();
 
             closeConfrmationToolStripMenuItem.Checked = Settings.Default.ClosingConfirmation;
+
+            ChangeSorting(Settings.Default.SortingType);
         }
 
         private void MainWindow_Load(object sender, EventArgs eventArgs)
@@ -699,6 +701,30 @@ namespace GameDatabase
                 OppenedWindows[key].Close();
             }
             OppenedWindows = new Dictionary<string, Form>();
+        }
+
+        private void ChangeSorting(int type)
+        {
+            byFolderToolStripMenuItem.Checked = type == 0;
+            byNameToolStripMenuItem.Checked = type == 1;
+            byIdToolStripMenuItem.Checked = type == 2;
+            Settings.Default.SortingType = type;
+            Settings.Default.Save();
+        }
+
+        private void byFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeSorting(0);
+        }
+
+        private void byNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeSorting(1);
+        }
+
+        private void byIdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeSorting(2);
         }
     }
 }

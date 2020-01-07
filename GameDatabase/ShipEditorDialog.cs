@@ -80,15 +80,6 @@ namespace GameDatabase
         {
         }
 
-        private void structDataEditor1_DataChanged(object sender, EventArgs e)
-        {
-            if(_item is Ship)
-            {
-                layoutInfo?.OnLayoutChanged();
-                UpdateEngines();
-            }
-        }
-
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (_ignoreEvents) return;
@@ -299,6 +290,21 @@ namespace GameDatabase
                     MainWindow.OppenedWindows.Remove(key);
                     return;
                 }
+            }
+        }
+
+        private void layoutEditor1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void structDataEditor1_DataChanged(object sender, EventArgs e)
+        {
+            if (_item is Ship)
+            {
+                layoutInfo?.OnLayoutChanged();
+                UpdateEngines();
             }
         }
     }

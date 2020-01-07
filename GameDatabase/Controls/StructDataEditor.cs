@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using Cyotek.Windows.Forms;
 using GameDatabase.Controls;
 using GameDatabase.EditorModel;
 using GameDatabase.EditorModel.Quests;
 using GameDatabase.GameDatabase;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 
 namespace GameDatabase
@@ -107,7 +109,7 @@ namespace GameDatabase
                 CreateLabel(name, 0, rowId);
 
                 var value = item.Value;
-                var control = item.IsReadOnly ? null : CreateControl(value, item.Type, rowId);
+                var control = item.IsReadOnly ? null : CreateControl(value, item.Type, rowId, item);
                 if (control != null)
                     _binding.Add(control, item);
                 else
@@ -120,8 +122,59 @@ namespace GameDatabase
 
             tableLayoutPanel.ResumeLayout();
         }
+        
+        public void UpdateControls()
+        {
+            foreach(var bind in _binding)
+            {
+                var control = bind.Key;
+                var value = bind.Value;
+                if (bind.Value.Type.IsEnum)
+                {
+                    ((ComboBox)control).SelectedItem = value.Value;
+                }
+                else if (value.Type == typeof(NumericValue<int>))
+                {
+                    var numVal = (NumericUpDown)control;
+                    numVal.Value = ((NumericValue<int>)value.Value).Value;
+                }
+                else if (value.Type == typeof(NumericValue<float>))
+                {
+                    var numVal = (NumericUpDown)control;
+                    numVal.Value = (decimal)((NumericValue<float>)value.Value).Value;
+                }
+                else if (value.Type == typeof(string))
+                {
+                    ((TextBox)control).Text = (string)value.Value;
+                }
+                else if (value.Type == typeof(bool))
+                {
+                    ((CheckBox)control).Checked = (bool)value.Value;
+                }
+                else if (value.Type.IsArray)
+                {
+                    ((CollectionEditor)control).UpdateControls();
+                }
+                else if (value.Type == typeof(Vector2))
+                {
+                    ((VectorEditor)control).Value = (Vector2)value.Value;
+                }
+                else if (typeof(IItemId).IsAssignableFrom(value.Type))
+                {
+                    ((ComboBox)value).SelectedValue = value.Value;
+                }
+                else if (typeof(IDataAdapter).IsAssignableFrom(value.Type))
+                {
+                    ((StructDataEditor)control).UpdateControls();
+                }
+                else if (value.Type.IsClass)
+                {
+                    ((StructDataEditor)control).UpdateControls();
+                }
+            }
+        }
 
-        private Control CreateControl(object value, Type type, int rowId)
+        private Control CreateControl(object value, Type type, int rowId, IProperty property)
         {
             if (type.IsEnum)
             {
@@ -142,7 +195,7 @@ namespace GameDatabase
             }
 
             if (type == typeof(string))
-                return CreateTextBox((string)value, 1, rowId);
+                return CreateTextBox((string)value, 1, rowId, property);
 
             if (type == typeof(bool))
                 return CreateCheckBox((bool)value, 1, rowId);
@@ -217,9 +270,12 @@ namespace GameDatabase
             if (type != typeof(ItemId<T>) && (value==null || value.GetType()!=typeof(ItemId<T>)))
                 return null;
 
-            var itemlist = Enumerable.Repeat(ItemId<T>.Empty, 1).Concat(items).Cast<object>();
-
-            return CreateComboBox(itemlist, value, column, row);
+            var itemlist = Enumerable.Repeat(ItemId<T>.Empty, 1).Concat(items);
+            if (Properties.Settings.Default.SortingType == 1)
+                itemlist=itemlist.OrderBy(o => o.Name).ToList();
+            else if (Properties.Settings.Default.SortingType == 2)
+                itemlist = itemlist.OrderBy(o => o.Id).ToList();
+            return CreateComboBox(itemlist.Cast<object>(), value, column, row);
         }
 
         private Label CreateLabel(string text, int column, int row)
@@ -237,14 +293,40 @@ namespace GameDatabase
             return label;
         }
 
-        private TextBox CreateTextBox(string text, int column, int row)
+        private TextBox CreateTextBox(string text, int column, int row, IProperty iProperty = null)
         {
+            var property = iProperty as Property;
+            AutoCompleteStringCollection autoCompleteStringCollection = new AutoCompleteStringCollection();
+            if (property != null)
+            {
+                var attributes = property.GetCustomAttributes(typeof(AutoCompleteAtribute), false);
+                bool addImages = false;
+                for (int i = 0; i < attributes.Length; i++) { 
+                    AutoCompleteAtribute customAttribute = attributes[i] as AutoCompleteAtribute;
+                    if (customAttribute != null)
+                    {
+                        autoCompleteStringCollection.AddRange(customAttribute.getCompletion());
+                        if (customAttribute.AddImages())
+                        {
+                            addImages = true;
+                        }
+                    }
+                }
+                if (addImages)
+                {
+                    autoCompleteStringCollection.AddRange(Database.GetImages().Keys.ToArray<string>());
+                }
+            }
+
             var textbox = new TextBox()
             {
                 Text = text,
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left,
                 BorderStyle = BorderStyle.FixedSingle,
                 Dock = DockStyle.Fill,
+                AutoCompleteCustomSource = autoCompleteStringCollection,
+                AutoCompleteMode = AutoCompleteMode.Suggest,
+                AutoCompleteSource = AutoCompleteSource.CustomSource
             };
 
             textbox.TextChanged += OnTextBoxValueChanged;
@@ -344,10 +426,6 @@ namespace GameDatabase
 
         private Control CreateCollection(Array value, int column, int row)
         {
-            if (value.Length > 15)
-            {
-                return CreateLabel("List is too long", column, row);
-            }
 
             var collection = new CollectionEditor
             {

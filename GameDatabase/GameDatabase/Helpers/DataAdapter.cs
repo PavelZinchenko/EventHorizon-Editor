@@ -58,6 +58,11 @@ namespace GameDatabase.GameDatabase
         public Type Type => _fieldInfo.FieldType;
         public bool IsReadOnly => _fieldInfo.IsInitOnly;
 
+        public object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return _fieldInfo.GetCustomAttributes(attributeType, inherit);
+        }
+
         public object Value
         {
             get { return _fieldInfo.GetValue(_data); }

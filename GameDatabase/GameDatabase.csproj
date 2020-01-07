@@ -30,10 +30,10 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -83,6 +83,18 @@
     </Compile>
     <Compile Include="ComponentEditorDialog.Designer.cs">
       <DependentUpon>ComponentEditorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BarrelsCollectionEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BarrelsCollectionEditor.Designer.cs">
+      <DependentUpon>BarrelsCollectionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BarrelsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\BarrelsEditor.Designer.cs">
+      <DependentUpon>BarrelsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CollectionEditor.cs">
       <SubType>UserControl</SubType>
@@ -161,6 +173,8 @@
     <Compile Include="GameDatabase\EditorModel\Wrapper.cs" />
     <Compile Include="GameDatabase\Enums\ActivationType.cs" />
     <Compile Include="GameDatabase\Enums\AmmunitionClassObsolete.cs" />
+    <Compile Include="GameDatabase\Enums\ObjectPrefab.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\BulletPrefabObsolete.cs" />
     <Compile Include="GameDatabase\Enums\ComponentCategory.cs" />
     <Compile Include="GameDatabase\Enums\ComponentStatsType.cs" />
     <Compile Include="GameDatabase\Enums\DeviceClass.cs" />
@@ -189,9 +203,11 @@
     <Compile Include="GameDatabase\Enums\Weapon\BulletType.cs" />
     <Compile Include="GameDatabase\Enums\Weapon\ColorMode.cs" />
     <Compile Include="GameDatabase\Enums\Weapon\DamageType.cs" />
+    <Compile Include="GameDatabase\Enums\Weapon\EffectObsolete.cs" />
     <Compile Include="GameDatabase\Enums\Weapon\ImpactEffectType.cs" />
     <Compile Include="GameDatabase\Enums\Weapon\VisualEffectType.cs" />
     <Compile Include="GameDatabase\Enums\Weapon\WeaponClass.cs" />
+    <Compile Include="GameDatabase\Helpers\AutoCompleteAtribute.cs" />
     <Compile Include="GameDatabase\Helpers\DataAdapter.cs" />
     <Compile Include="GameDatabase\Helpers\Prompt.cs" />
     <Compile Include="GameDatabase\Model\EditorException.cs" />
@@ -265,20 +281,8 @@
     <EmbeddedResource Include="ComponentEditorDialog.resx">
       <DependentUpon>ComponentEditorDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CollectionEditor.resx">
-      <DependentUpon>CollectionEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\LayoutEditor.resx">
-      <DependentUpon>LayoutEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\LayoutInfo.resx">
-      <DependentUpon>LayoutInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\StructDataView.resx">
-      <DependentUpon>StructDataView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\VectorEditor.resx">
-      <DependentUpon>VectorEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\StructDataEditor.resx">
+      <DependentUpon>StructDataEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditorDialog.resx">
       <DependentUpon>EditorDialog.cs</DependentUpon>
@@ -299,9 +303,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Controls\StructDataEditor.resx">
-      <DependentUpon>StructDataEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ShipEditorDialog.resx">
       <DependentUpon>ShipEditorDialog.cs</DependentUpon>
       <SubType>Designer</SubType>

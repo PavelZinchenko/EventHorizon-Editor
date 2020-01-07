@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Linq;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -44,6 +45,9 @@ namespace GameDatabase.EditorModel
         {
             public VisualEffectType Type;
             public ColorMode ColorMode;
+
+
+            [AutoCompleteAtribute(AutoCompleteAtribute.Type.EffectSprite)]
             public string Image;
             public Color Color = Color.White;
             public NumericValue<float> Size = new NumericValue<float>(0, 0, 100);

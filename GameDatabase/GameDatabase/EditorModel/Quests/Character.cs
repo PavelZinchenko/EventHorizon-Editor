@@ -1,4 +1,5 @@
-﻿using GameDatabase.Model;
+﻿using GameDatabase.GameDatabase.Helpers;
+using GameDatabase.Model;
 using GameDatabase.Serializable;
 
 namespace GameDatabase.EditorModel.Quests
@@ -26,6 +27,8 @@ namespace GameDatabase.EditorModel.Quests
         public readonly ItemId<Character> ItemId;
 
         public string Name;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.SoundObsolete)]
         public string AvatarIcon;
         public ItemId<Faction> Faction;
         public NumericValue<int> Relations;

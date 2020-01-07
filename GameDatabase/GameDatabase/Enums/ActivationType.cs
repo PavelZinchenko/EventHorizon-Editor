@@ -2,7 +2,7 @@
 {
     public enum ActivationType
     {
-        None,
+        Automatic,
         Manual,
         Mixed,
     }

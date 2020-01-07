@@ -5,7 +5,10 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Conrols;
+using GameDatabase.Controls;
+using GameDatabase.EditorModel;
 using GameDatabase.Enums;
+using GameDatabase.Model;
 using GameDatabase.ShipLayout;
 
 namespace GameDatabase
@@ -23,6 +26,7 @@ namespace GameDatabase
             SelectedCategory = _categories.Last().Key;
 
             _selectedBrush = _defaultBrush;
+
         }
 
         [Description("Layout"), Category("Margins")]
@@ -86,6 +90,9 @@ namespace GameDatabase
 
         [Description("SelectedCategory"), Category("Data")]
         public char SelectedCategory { get; set; }
+
+        [Description("BarrelsCollectionEditor"), Category("Data")]
+        public BarrelsCollectionEditor BarrelsCollection { get; set; }
 
         public event EventHandler ValueChanged;
 
@@ -152,19 +159,28 @@ namespace GameDatabase
         private void DrawBarrels(PaintData data)
         {
             if (!showBarrelsToolStripMenuItem.Checked || _barrels == null) return;
-            
-            var pen = new Pen(Color.Black, 2);
-            var widePen = new Pen(Color.Black, 3);
+
 
             if (data.CanvasSize < 0) return;
 
-            foreach (var barrel in _barrels)
+            for (int i = 0; i < _barrels.Count; i++)
             {
+                var pen = new Pen(Color.Black, 2);
+                var widePen = new Pen(Color.Black, 3);
+
+                if (barrelsEditingModeToolStripMenuItem.Checked && BarrelsCollection.GetSelectedItemId() == i)
+                {
+                    pen = new Pen(Color.DarkRed, 2);
+                    widePen = new Pen(Color.DarkRed, 3);
+                }
+
+                var barrel = _barrels.ElementAt(i);
                 var x = BorderSize + (1 - barrel.X) * data.CanvasSize / 2;
                 var y = BorderSize + (1 - barrel.Y) * data.CanvasSize / 2;
 
                 var offset = barrel.Offset * data.CanvasSize / 2;
                 var radius = Math.Max(data.CellSize / 4, offset);
+
 
                 data.Graphics.DrawEllipse(widePen, x - radius, y - radius, radius * 2, radius * 2);
 
@@ -191,6 +207,22 @@ namespace GameDatabase
                 data.Graphics.DrawLine(pen, p2.X, p2.Y, p1.X + d.Y, p1.Y - d.X);
 
                 data.Graphics.DrawArc(pen, x - radius - data.CellSize, y - radius - data.CellSize, radius * 2 + data.CellSize * 2f, radius * 2 + data.CellSize * 2f, -barrel.Rotation - barrel.Arc / 2 - 90, barrel.Arc);
+
+                if (showBarrelsNumbersToolStripMenuItem.Checked)
+                {
+                    float fontSize = Math.Max(24f,radius*7f/4f);
+                    float r = fontSize * 4f / 7f;
+                    SolidBrush myBrush = new SolidBrush(Color.White);
+                    data.Graphics.FillEllipse(myBrush, x - r, y - r, r * 2, r * 2);
+                    data.Graphics.DrawEllipse(widePen, x - r, y - r, r * 2, r * 2);
+
+                    StringFormat format = new StringFormat();
+                    format.LineAlignment = StringAlignment.Center;
+                    format.Alignment = StringAlignment.Center;
+                    Font drawFont = new Font("Arial", fontSize, GraphicsUnit.Pixel);
+                    SolidBrush textBrush = new SolidBrush(Color.Black);
+                    data.Graphics.DrawString((i+1).ToString(), drawFont, textBrush, x, y, format);
+                }
             }
         }
 
@@ -241,9 +273,75 @@ namespace GameDatabase
             return brush;
         }
 
+        public Vector2 PointToBarrelPos(float x, float y)
+        {
+            var canvasSize = Math.Min(Width, Height) - BorderSize * 2 - 1;
+            var ret = new Vector2();
+            ret.x = (canvasSize - 2f * (x - BorderSize)) / canvasSize;
+            ret.y = (canvasSize - 2f * (y - BorderSize)) / canvasSize;
+            return ret;
+        }
+        public Vector2 BarrelPosToPoint(Vector2 pos)
+        {
+            var canvasSize = Math.Min(Width, Height) - BorderSize * 2 - 1;
+            var ret = new Vector2();
+            ret.x = BorderSize + (1 - pos.x) * canvasSize / 2;
+            ret.y = BorderSize + (1 - pos.y) * canvasSize / 2;
+            return ret;
+        }
+
+        private void BarrelPlace(MouseEventArgs e)
+        {
+            if (BarrelsCollection != null)
+            {
+                switch (ModifierKeys)
+                {
+                    case Keys.Alt:
+                        BarrelsCollection.clickClone();
+                        var barrel = BarrelsCollection.SelectedBarrel();
+                        barrel.Position = PointToBarrelPos(e.X, e.Y);
+                        BarrelsCollection.SetSelectedObject(barrel);
+                        _barrelsEditor.SetBarrel(barrel);
+                        break;
+                    case Keys.Control:
+                        barrel = BarrelsCollection.SelectedBarrel();
+                        barrel.Position = PointToBarrelPos(e.X, e.Y);
+                        BarrelsCollection.SetSelectedObject(barrel);
+                        _barrelsEditor.UpdateBarrel();
+                        break;
+                    case Keys.Shift:
+                        var closestId = 0;
+                        var closestSqareDist = float.MaxValue;
+                        var barrels = BarrelsCollection.GetBarrels().ToArray();
+                        for (int i = 0; i < barrels.Length; i++)
+                        {
+                            var pos = BarrelPosToPoint(barrels[i].Position);
+                            var dx = pos.x - e.X;
+                            var dy = pos.y - e.Y;
+                            if (dx * dx + dy * dy < closestSqareDist)
+                            {
+                                closestSqareDist = dx * dx + dy * dy;
+                                closestId = i;
+                            }
+                        }
+                        BarrelsCollection.SetSelectedId(closestId);
+                        _barrelsEditor.SetBarrel(barrels[closestId]);
+                        Invalidate();
+                        break;
+                }
+                return;
+            }
+        }
+
         private void LayoutEditor_MouseDown(object sender, MouseEventArgs e)
         {
             if (IsDragging) return;
+            
+            if (barrelsEditingModeToolStripMenuItem.Checked)
+            {
+                BarrelPlace(e);
+                return;
+            }
 
             var cellIndex = PointToCellIndex(e.X, e.Y);
             if (cellIndex < 0) return;
@@ -299,7 +397,13 @@ namespace GameDatabase
                 {
                     var p = PointToScreen(new Point(e.X, e.Y));
 
-                    if (_barrels == null) showBarrelsToolStripMenuItem.Enabled = showBarrelsToolStripMenuItem.Checked = false;
+                    if (_barrels == null)
+                    {
+                        showBarrelsToolStripMenuItem.Enabled = showBarrelsToolStripMenuItem.Checked = false;
+
+                        barrelsEditingModeToolStripMenuItem.Enabled = barrelsEditingModeToolStripMenuItem.Checked = false;
+                        showBarrelsNumbersToolStripMenuItem.Enabled = showBarrelsNumbersToolStripMenuItem.Checked = false;
+                    }
                     if (Image == null) showImageToolStripMenuItem.Enabled = showImageToolStripMenuItem.Checked = false;
                     if (_engines == null) showEnginesToolStripMenuItem.Enabled = showEnginesToolStripMenuItem.Checked = false;
 
@@ -369,6 +473,12 @@ namespace GameDatabase
 
         private void showBarrelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            showBarrelsNumbersToolStripMenuItem.Enabled = showBarrelsToolStripMenuItem.Checked;
+            Invalidate();
+        }
+
+        private void showBarrelsNumbersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             Invalidate();
         }
 
@@ -405,6 +515,117 @@ namespace GameDatabase
         {
             public char Id { get; set; }
             public Color Color { get; set; }
+        }
+
+        private int lastId = -1;
+
+        private void Parent_ResizeEnd(object sender, EventArgs e)
+        {
+            ResizeCanvas(lastId);
+        }
+
+        private void ResizeCanvas(int id)
+        {
+            if(lastId==-1 && Parent!=null)
+                Parent.Resize += Parent_ResizeEnd;
+
+            lastId = id;
+
+            var items = new ToolStripMenuItem[] { defaultToolStripMenuItem,
+                xToolStripMenuItem,
+                xToolStripMenuItem1,
+                xToolStripMenuItem2,
+                xToolStripMenuItem3,
+                xToolStripMenuItem4
+            };
+            for(var i = 0; i < items.Length; i++)
+            {
+                items[i].Checked = false;
+            }
+            items[id].Checked = true;
+
+            var sizes = new int[]{ -1,20,40,60,80,100};
+            if (id == 0)
+            {
+                Dock = DockStyle.Fill;
+            } else
+            {
+                Dock = DockStyle.None;
+                Width = this.Height = _layout.Size * sizes[id] + BorderSize * 2 + 1;
+                if (Width < Parent.Width)
+                {
+                    Width = Parent.Width;
+                } else if (Height < Parent.Height)
+                {
+                    Height = Parent.Height;
+                } else
+                {
+                    Width += Parent.Width / 10;
+                }
+            }
+        }
+
+        private void defaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResizeCanvas(0);
+        }
+
+        private void xToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResizeCanvas(1);
+        }
+
+        private void xToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Dock = DockStyle.None;
+            this.Width = this.Height = _layout.Size * 20 + BorderSize * 2 + 1;
+            ResizeCanvas(2);
+        }
+
+        private void xToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ResizeCanvas(3);
+        }
+
+        private void xToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            ResizeCanvas(4);
+        }
+
+        private void xToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            ResizeCanvas(5);
+        }
+
+        private BarrelsEditor _barrelsEditor;
+
+        private void barrelsEditingModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (barrelsEditingModeToolStripMenuItem.Checked)
+            {
+                BarrelsCollection.Visible = false;
+                _barrelsEditor = new BarrelsEditor(BarrelsCollection);
+                _barrelsEditor.FormClosed += barrelEditor_Closed;
+                _barrelsEditor.Show();
+                _barrelsEditor.Owner = FindForm();
+                if (BarrelsCollection.Data == null || BarrelsCollection.Data.Length == 0)
+                {
+                    BarrelsCollection.Data = new Barrel[] { new Barrel() };
+                }
+                BarrelsCollection.SetSelectedId(0);
+            } else
+            {
+                _barrelsEditor?.Close();
+                BarrelsCollection.Visible = true;
+                _barrelsEditor = null;
+            }
+        }
+
+        private void barrelEditor_Closed(object sender, EventArgs e)
+        {
+            BarrelsCollection.Visible = true;
+            barrelsEditingModeToolStripMenuItem.Checked = false;
+            _barrelsEditor = null;
         }
     }
 }

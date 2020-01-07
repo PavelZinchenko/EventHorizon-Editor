@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Collections.Generic;
+using GameDatabase.Model;
 
 namespace GameDatabase.ShipLayout
 {
@@ -47,6 +48,18 @@ namespace GameDatabase.ShipLayout
         public IEnumerable<int> GetMirrorCells(int cell)
         {
             return GetMirrorCells(cell % LayoutSize, cell / LayoutSize);
+        }
+
+        public IEnumerable<Vector2> GetMirrorPositions(Vector2 position)
+        {
+            yield return position;
+
+            if (MirrorVertical)
+                yield return new Vector2(CanvasSize - position.x, position.y);
+            if (MirrorHorizontal)
+                yield return new Vector2(position.x, CanvasSize - position.y);
+            if (MirrorHorizontal && MirrorVertical)
+                yield return new Vector2(CanvasSize - position.x, CanvasSize - position.y);
         }
 
         public IEnumerable<int> GetMirrorCells(int x, int y)

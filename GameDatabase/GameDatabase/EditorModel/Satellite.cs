@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using GameDatabase.Enums;
+using GameDatabase.GameDatabase.Helpers;
 using GameDatabase.Model;
 using GameDatabase.Serializable;
 
@@ -32,6 +33,8 @@ namespace GameDatabase.EditorModel
         public readonly ItemId<Satellite> ItemId;
 
         public string Name;
+
+        [AutoCompleteAtribute(AutoCompleteAtribute.Type.SateliteSprite)]
         public string ModelImage;
         public NumericValue<float> ModelScale;
         public SizeClass SizeClass;
