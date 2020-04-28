@@ -5,11 +5,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Cyotek.Windows.Forms;
+using EditorDatabase;
+using EditorDatabase.Model;
 using GameDatabase.Controls;
-using GameDatabase.EditorModel;
-using GameDatabase.EditorModel.Quests;
-using GameDatabase.GameDatabase;
-using GameDatabase.Model;
 
 namespace GameDatabase
 {
@@ -160,48 +158,8 @@ namespace GameDatabase
                 return CreateVectorEditor((Vector2)value, 1, rowId);
 
             Control result;
-            if ((result = TryCreateIdItem(value, type, _database.ComponentIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.WeaponIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.DeviceIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.AmmunitionIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.AmmunitionObsoleteIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.DroneBayIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.ShipIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.ShipBuildIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.SatelliteIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.SatelliteBuildIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.TechnologyIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.ComponentStatsIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.ComponentModIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.FactionIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.QuestIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.LootIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.FleetIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.CharacterIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.QuestItemIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.BulletPerfabIds, 1, rowId)) != null)
-                return result;
-            if ((result = TryCreateIdItem(value, type, _database.VisualEffectIds, 1, rowId)) != null)
-                return result;
+            if (typeof(IItemId).IsAssignableFrom(type))
+                return CreateObjectList(value, 1, rowId);
 
             if (typeof(IDataAdapter).IsAssignableFrom(type))
                 return CreateStructEditor((IDataAdapter)value, 1, rowId);
@@ -212,14 +170,13 @@ namespace GameDatabase
             return null;
         }
 
-        private Control TryCreateIdItem<T>(object value, Type type, IEnumerable<ItemId<T>> items, int column, int row)
+        private Control CreateObjectList(object value, int column, int row)
         {
-            if (type != typeof(ItemId<T>))
-                return null;
+            var itemType = ((IItemId)value).ItemType;
+            var empty = Activator.CreateInstance(typeof(ItemId<>).MakeGenericType(itemType));
+            var itemList = Enumerable.Repeat(empty, 1).Concat(_database.GetItemList(itemType));
 
-            var itemlist = Enumerable.Repeat(ItemId<T>.Empty, 1).Concat(items).Cast<object>();
-
-            return CreateComboBox(itemlist, value, column, row);
+            return CreateComboBox(itemList, value, column, row);
         }
 
         private Label CreateLabel(string text, int column, int row)

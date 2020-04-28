@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using GameDatabase.EditorModel;
-using GameDatabase.Enums;
-using GameDatabase.GameDatabase;
-using GameDatabase.Model;
+using EditorDatabase;
+using EditorDatabase.DataModel;
+using EditorDatabase.Enums;
+using EditorDatabase.Model;
 using GameDatabase.Properties;
 
 namespace GameDatabase
@@ -46,14 +46,14 @@ namespace GameDatabase
                 var ship = (Ship)_item;
                 layout = ship.Layout;
                 barrelCollection.Data = ship.Barrels;
-                layoutEditor1.Image = _database.GetImage(ship.ModelImage);
+                layoutEditor1.Image = _database.GetImage(ship.ModelImage).Image;
             }
             else if (_item is Satellite)
             {
                 var satellite = (Satellite)_item;
                 layout = satellite.Layout;
                 barrelCollection.Data = satellite.Barrels;
-                layoutEditor1.Image = _database.GetImage(satellite.ModelImage);
+                layoutEditor1.Image = _database.GetImage(satellite.ModelImage).Image;
             }
             else
                 throw new ArgumentException();

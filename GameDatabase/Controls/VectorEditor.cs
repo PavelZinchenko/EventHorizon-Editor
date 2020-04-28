@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using GameDatabase.Model;
+using EditorDatabase.Model;
 
 namespace GameDatabase.Controls
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameDatabase.Model
+namespace EditorDatabase.Model
 {
     public struct NumericValue<T> where T : struct, IComparable
     {

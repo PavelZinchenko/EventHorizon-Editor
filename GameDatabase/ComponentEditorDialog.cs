@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using GameDatabase.EditorModel;
-using GameDatabase.GameDatabase;
+using EditorDatabase;
+using EditorDatabase.DataModel;
 
 namespace GameDatabase
 {
@@ -17,7 +17,7 @@ namespace GameDatabase
 
         private void ComponentEditorDialog_Load(object sender, EventArgs e)
         {
-            Text = _component.ItemId.Name;
+            Text = _component.Id.Name;
             structDataEditor1.Database = _database;
             structDataEditor1.Data = new DataAdapter(_component);
         }

@@ -20,7 +20,8 @@
       "Position": {
         "x": -0.5
       },
-      "PlatformType": 1,
+      "AutoAimingArc": 360.0,
+      "RotationSpeed": 180.0,
       "WeaponClass": "C",
       "Image": "holy_gun",
       "Size": 0.5

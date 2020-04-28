@@ -1,7 +1,7 @@
 ﻿using System;
-using GameDatabase.Model;
+using EditorDatabase.Model;
 
-namespace Conrols
+namespace Controls
 {
     public static class RotationHelpers
     {

@@ -1,0 +1,34 @@
+﻿using System;
+using System.Drawing;
+using System.IO;
+
+namespace EditorDatabase.Model
+{
+    public class ImageData
+    {
+        public ImageData(string fileName)
+        {
+            _fileName = fileName;
+            _image = null;
+        }
+
+        public string Name => string.IsNullOrEmpty(_fileName) ? string.Empty : Path.GetFileName(_fileName);
+        public Image Image
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_fileName)) return null;
+
+                if (_image == null)
+                    _image = Image.FromFile(_fileName);
+
+                return _image;
+            }
+        }
+
+        private readonly string _fileName;
+        private Image _image;
+
+        public static ImageData Empty = new ImageData(string.Empty);
+    }
+}

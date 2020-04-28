@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace GameDatabase
+namespace EditorDatabase
 {
     public static class Helpers
     {

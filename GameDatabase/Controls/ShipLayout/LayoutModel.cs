@@ -1,4 +1,5 @@
 ﻿using System;
+using EditorDatabase.Model;
 
 namespace GameDatabase.ShipLayout
 {
@@ -8,7 +9,7 @@ namespace GameDatabase.ShipLayout
 
         public LayoutModel()
         {
-            _layout = new Model.Layout(_defaultLayout);
+            _layout = new Layout(_defaultLayout);
         }
 
         public string Data
@@ -150,7 +151,7 @@ namespace GameDatabase.ShipLayout
             if (MirrorVertical && MirrorHorizontal) _layout[size - x - 1, size - y - 1] = value;
         }
 
-        private readonly Model.Layout _layout;
+        private readonly Layout _layout;
         private const string _defaultLayout = "000000000";
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace GameDatabase.Model
+﻿namespace EditorDatabase.Model
 {
     public struct Vector2
     {

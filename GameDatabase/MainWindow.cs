@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using GameDatabase.EditorModel;
-using GameDatabase.Enums;
-using GameDatabase.Model;
-using GameDatabase.Serializable;
+using EditorDatabase;
+using EditorDatabase.DataModel;
+using EditorDatabase.Enums;
+using EditorDatabase.Model;
+using EditorDatabase.Serializable;
+using EditorDatabase.Storage;
 using Newtonsoft.Json;
 
 namespace GameDatabase
@@ -29,7 +30,7 @@ namespace GameDatabase
             try
             {
                 DatabaseTreeView.Nodes.Clear();
-                _database = new Database(path, true); // TODO:
+                _database = new Database(new DatabaseStorage(path));
                 BuildFilesTree(path, DatabaseTreeView.Nodes);
                 _lastDatabasePath = path;
             }
@@ -161,7 +162,7 @@ namespace GameDatabase
             if (item == null)
                 return;
 
-            switch ((ItemType)_selectedItem.ItemType)
+            switch (_selectedItem.ItemType)
             {
                 case ItemType.Component:
                     new ComponentEditorDialog(_database, (Component)item).ShowDialog();
@@ -178,59 +179,7 @@ namespace GameDatabase
 
         private object GetItem()
         {
-            switch (_selectedItem.ItemType)
-            {
-                case ItemType.Component:
-                    return _database.GetComponent(_selectedItem.Id);
-                case ItemType.Device:
-                    return _database.GetDevice(_selectedItem.Id);
-                case ItemType.Weapon:
-                    return _database.GetWeapon(_selectedItem.Id);
-                case ItemType.Ammunition:
-                    return _database.GetAmmunition(_selectedItem.Id);
-                case ItemType.AmmunitionObsolete:
-                    return _database.GetAmmunitionObsolete(_selectedItem.Id);
-                case ItemType.DroneBay:
-                    return _database.GetDroneBay(_selectedItem.Id);
-                case ItemType.Ship:
-                    return _database.GetShip(_selectedItem.Id);
-                case ItemType.ShipBuild:
-                    return _database.GetShipBuild(_selectedItem.Id);
-                case ItemType.Satellite:
-                    return _database.GetSatellite(_selectedItem.Id);
-                case ItemType.SatelliteBuild:
-                    return _database.GetSatelliteBuild(_selectedItem.Id);
-                case ItemType.Technology:
-                    return _database.GetTechnology(_selectedItem.Id);
-                case ItemType.Skill:
-                    return _database.GetSkill(_selectedItem.Id);
-                case ItemType.ComponentStats:
-                    return _database.GetComponentStats(_selectedItem.Id);
-                case ItemType.ComponentMod:
-                    return _database.GetComponentMods(_selectedItem.Id);
-                case ItemType.ShipSettings:
-                    return _database.ShipSettings;
-                case ItemType.GalaxySettings:
-                    return _database.GalaxySettings;
-                case ItemType.Faction:
-                    return _database.GetFaction(_selectedItem.Id);
-                case ItemType.Quest:
-                    return _database.GetQuest(_selectedItem.Id);
-                case ItemType.Loot:
-                    return _database.GetLoot(_selectedItem.Id);
-                case ItemType.Fleet:
-                    return _database.GetFleet(_selectedItem.Id);
-                case ItemType.Character:
-                    return _database.GetCharacter(_selectedItem.Id);
-                case ItemType.QuestItem:
-                    return _database.GetQuestItem(_selectedItem.Id);
-                case ItemType.BulletPrefab:
-                    return _database.GetBulletPrefab(_selectedItem.Id);
-                case ItemType.VisualEffect:
-                    return _database.GetVisualEffect(_selectedItem.Id);
-                default:
-                    return null;
-            }
+            return _database.GetItem(_selectedItem.ItemType, _selectedItem.Id);
         }
 
         private void loadMenuItem_Click(object sender, EventArgs e)
@@ -245,14 +194,14 @@ namespace GameDatabase
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                _database.SaveAs(folderBrowserDialog1.SelectedPath);
+                _database.Save(new DatabaseStorage(folderBrowserDialog1.SelectedPath));
             }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(_lastDatabasePath))
-                _database.SaveAs(_lastDatabasePath);
+                _database.Save(new DatabaseStorage(_lastDatabasePath));
         }
 
         private void createModMenuItem_Click(object sender, EventArgs e)
@@ -262,8 +211,7 @@ namespace GameDatabase
 
             try
             {
-                string name, guid;
-                if (!ModBuilder.TryReadSignature(_lastDatabasePath, out name, out guid))
+                if (!ModBuilder.TryReadSignature(_lastDatabasePath, out var name, out var guid))
                 {
                     var dialog = new NameForm();
                     if (dialog.ShowDialog() != DialogResult.OK || string.IsNullOrWhiteSpace(dialog.Name))
@@ -278,7 +226,7 @@ namespace GameDatabase
                 if (saveFileDialog.ShowDialog() != DialogResult.OK)
                     return;
 
-                _database.SaveAs(_lastDatabasePath);
+                _database.Save(new DatabaseStorage(_lastDatabasePath));
                 var builder = ModBuilder.Create(_lastDatabasePath);
                 builder.Build((FileStream)saveFileDialog.OpenFile());
             }

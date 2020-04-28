@@ -1,60 +1,60 @@
-﻿using GameDatabase.Serializable;
+﻿using System;
+using EditorDatabase.Serializable;
 
-namespace GameDatabase.Model
+namespace EditorDatabase.Model
 {
     public interface IItemId
     {
-        int Id { get; }
+        int Value { get; }
         string Name { get; }
+        Type ItemType { get; }
         bool IsNull { get; }
     }
 
     public class ItemId<T> : IItemId
     {
+        public ItemId() { }
+
         public ItemId(int id, string name)
         {
-            _id = id;
-            _name = name;
+            Value = id;
+            Name = name;
         }
 
         public ItemId(SerializableItem item)
         {
             if (item == null)
             {
-                _id = 0;
-                _name = string.Empty;
+                Value = 0;
+                Name = string.Empty;
                 return;
             }
 
-            _id = item.Id;
-            _name = item.FileName;
+            Value = item.Id;
+            Name = item.FileName;
         }
 
-        public int Id { get { return _id; } }
-        public string Name { get { return _name; } }
-        public bool IsNull { get { return Id <= 0; } }
+        public int Value { get; }
+        public string Name { get; }
+        public Type ItemType => typeof(T);
+        public bool IsNull => Value <= 0;
 
-        public override int GetHashCode() { return Id; }
+        public override int GetHashCode() { return Value; }
 
         public override bool Equals(object obj)
         {
-            if (obj is ItemId<T>)
+            switch (obj)
             {
-                return _id == ((ItemId<T>)obj)._id;
+                case ItemId<T> id:
+                    return Value == id.Value;
+                case int i:
+                    return Value == i;
+                default:
+                    return false;
             }
-
-            if (obj is int)
-            {
-                return _id == (int)obj;
-            }
-
-            return false;
         }
 
-        public override string ToString() { return string.IsNullOrEmpty(_name) ? "[EMPTY]" : _name; }
-
-        private readonly int _id;
-        private readonly string _name;
+        public override string ToString() { return string.IsNullOrEmpty(Name) ? "[EMPTY]" : Name; }
 
         public static readonly ItemId<T> Empty = new ItemId<T>(0, string.Empty);
     }

@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Conrols;
-using GameDatabase.Enums;
+using Controls;
+using EditorDatabase.Enums;
 using GameDatabase.ShipLayout;
 
 namespace GameDatabase

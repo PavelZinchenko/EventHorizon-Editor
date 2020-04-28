@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace GameDatabase.Model
+namespace EditorDatabase.Model
 {
     public class Layout
     {

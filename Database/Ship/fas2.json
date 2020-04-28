@@ -8,11 +8,23 @@
   "IconScale": 0.9,
   "ModelImage": "fas3",
   "ModelScale": 1.7,
-  "EnginePosition": {
-    "x": -0.9
-  },
   "EngineColor": "#40FFFFFF",
-  "EngineSize": 0.2,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.65,
+        "y": 0.48
+      },
+      "Size": 0.2
+    },
+    {
+      "Position": {
+        "x": -0.65,
+        "y": -0.48
+      },
+      "Size": 0.2
+    }
+  ],
   "BuiltinDevices": [],
   "Layout": "000004400000000014410000000014410000000022220000004422224400111222222111111222222111111222222111111222222111001155551100000055550000000005500000",
   "Barrels": [

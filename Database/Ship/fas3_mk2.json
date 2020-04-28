@@ -4,7 +4,6 @@
   "ShipCategory": 1,
   "Name": "$fa_Scout2",
   "Faction": 9,
-  "SizeClass": 1,
   "IconImage": "fas1_2",
   "IconScale": 0.7,
   "ModelImage": "fas1_2",

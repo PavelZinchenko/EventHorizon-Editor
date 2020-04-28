@@ -1,0 +1,414 @@
+//-------------------------------------------------------------------------------
+//                                                                               
+//    This code was automatically generated.                                     
+//    Changes to this file may cause incorrect behavior and will be lost if      
+//    the code is regenerated.                                                   
+//                                                                               
+//-------------------------------------------------------------------------------
+
+using System.Linq;
+using System.Collections.Generic;
+using EditorDatabase.Enums;
+using EditorDatabase.Serializable;
+using EditorDatabase.Model;
+
+namespace EditorDatabase.DataModel
+{
+
+	public interface IRequirementContent
+	{
+		void Load(RequirementSerializable serializable, Database database);
+		void Save(RequirementSerializable serializable);
+	}
+
+	public partial class Requirement : IDataAdapter
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		private static IRequirementContent CreateContent(RequirementType type)
+		{
+			switch (type)
+			{
+				case RequirementType.Empty:
+					return new RequirementEmptyContent();
+				case RequirementType.Any:
+					return new Requirement_Any();
+				case RequirementType.All:
+					return new Requirement_All();
+				case RequirementType.None:
+					return new Requirement_None();
+				case RequirementType.PlayerPosition:
+					return new Requirement_PlayerPosition();
+				case RequirementType.RandomStarSystem:
+					return new Requirement_RandomStarSystem();
+				case RequirementType.AggressiveOccupants:
+					return new RequirementEmptyContent();
+				case RequirementType.QuestCompleted:
+					return new Requirement_QuestCompleted();
+				case RequirementType.QuestActive:
+					return new Requirement_QuestActive();
+				case RequirementType.CharacterRelations:
+					return new Requirement_CharacterRelations();
+				case RequirementType.FactionRelations:
+					return new Requirement_FactionRelations();
+				case RequirementType.Faction:
+					return new Requirement_Faction();
+				case RequirementType.HaveQuestItem:
+					return new Requirement_HaveQuestItem();
+				case RequirementType.HaveItem:
+					return new Requirement_HaveItem();
+				case RequirementType.HaveItemById:
+					return new Requirement_HaveItemById();
+				case RequirementType.ComeBack:
+					return new RequirementEmptyContent();
+				default:
+					throw new DatabaseException("Requirement: Invalid content type - " + type);
+			}
+		}
+
+		public Requirement()
+		{
+			_content = new RequirementEmptyContent();
+		}
+
+		public Requirement(RequirementSerializable serializable, Database database)
+		{
+			Type = serializable.Type;
+			_content = CreateContent(serializable.Type);
+			_content.Load(serializable, database);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public RequirementSerializable Serialize()
+		{
+			var serializable = new RequirementSerializable();
+			serializable.ItemId = 0;
+			serializable.ItemId = 0;
+			serializable.ItemId = 0;
+			serializable.MinValue = 0;
+			serializable.MaxValue = 0;
+			serializable.MinValue = 0;
+			serializable.MaxValue = 0;
+			serializable.MinValue = 0;
+			serializable.Character = 0;
+			serializable.Faction = 0;
+			serializable.Loot = new LootContentSerializable();
+			serializable.Requirements = null;
+			_content.Save(serializable);
+			serializable.Type = Type;
+			return serializable;
+
+		}
+
+		public event System.Action LayoutChangedEvent;
+		public event System.Action DataChangedEvent;
+
+		public IEnumerable<IProperty> Properties
+		{
+			get
+			{
+				var type = GetType();
+
+				yield return new Property(this, type.GetField("Type"), OnTypeChanged);
+
+				foreach (var item in _content.GetType().GetFields().Where(f => f.IsPublic && !f.IsStatic))
+					yield return new Property(_content, item, DataChangedEvent);
+			}
+		}
+
+		private void OnTypeChanged()
+		{
+			_content = CreateContent(Type);
+			DataChangedEvent?.Invoke();
+			LayoutChangedEvent?.Invoke();
+		}
+
+		private IRequirementContent _content;
+		public RequirementType Type;
+
+		public static Requirement DefaultValue { get; private set; }
+	}
+
+	public class RequirementEmptyContent : IRequirementContent
+	{
+		public void Load(RequirementSerializable serializable, Database database) {}
+		public void Save(RequirementSerializable serializable) {}
+	}
+
+	public partial class Requirement_Any : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			Requirements = serializable.Requirements?.Select(item => new Requirement(item, database)).ToArray();
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			if (Requirements == null || Requirements.Length == 0)
+			    serializable.Requirements = null;
+			else
+			    serializable.Requirements = Requirements.Select(item => item.Serialize()).ToArray();
+		}
+
+		public Requirement[] Requirements;
+	}
+
+	public partial class Requirement_All : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			Requirements = serializable.Requirements?.Select(item => new Requirement(item, database)).ToArray();
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			if (Requirements == null || Requirements.Length == 0)
+			    serializable.Requirements = null;
+			else
+			    serializable.Requirements = Requirements.Select(item => item.Serialize()).ToArray();
+		}
+
+		public Requirement[] Requirements;
+	}
+
+	public partial class Requirement_None : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			Requirements = serializable.Requirements?.Select(item => new Requirement(item, database)).ToArray();
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			if (Requirements == null || Requirements.Length == 0)
+			    serializable.Requirements = null;
+			else
+			    serializable.Requirements = Requirements.Select(item => item.Serialize()).ToArray();
+		}
+
+		public Requirement[] Requirements;
+	}
+
+	public partial class Requirement_PlayerPosition : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			MinValue = new NumericValue<int>(serializable.MinValue, 0, 1000);
+			MaxValue = new NumericValue<int>(serializable.MaxValue, 0, 1000);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			serializable.MinValue = MinValue.Value;
+			serializable.MaxValue = MaxValue.Value;
+		}
+
+		public NumericValue<int> MinValue = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<int> MaxValue = new NumericValue<int>(0, 0, 1000);
+	}
+
+	public partial class Requirement_RandomStarSystem : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			MinValue = new NumericValue<int>(serializable.MinValue, 0, 1000);
+			MaxValue = new NumericValue<int>(serializable.MaxValue, 0, 1000);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			serializable.MinValue = MinValue.Value;
+			serializable.MaxValue = MaxValue.Value;
+		}
+
+		public NumericValue<int> MinValue = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<int> MaxValue = new NumericValue<int>(0, 0, 1000);
+	}
+
+	public partial class Requirement_QuestCompleted : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			Quest = database.GetQuestId(serializable.ItemId);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			serializable.ItemId = Quest.Value;
+		}
+
+		public ItemId<QuestModel> Quest = ItemId<QuestModel>.Empty;
+	}
+
+	public partial class Requirement_QuestActive : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			Quest = database.GetQuestId(serializable.ItemId);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			serializable.ItemId = Quest.Value;
+		}
+
+		public ItemId<QuestModel> Quest = ItemId<QuestModel>.Empty;
+	}
+
+	public partial class Requirement_CharacterRelations : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			MinValue = new NumericValue<int>(serializable.MinValue, -100, 100);
+			MaxValue = new NumericValue<int>(serializable.MaxValue, -100, 100);
+			Character = database.GetCharacterId(serializable.Character);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			serializable.MinValue = MinValue.Value;
+			serializable.MaxValue = MaxValue.Value;
+			serializable.Character = Character.Value;
+		}
+
+		public NumericValue<int> MinValue = new NumericValue<int>(0, -100, 100);
+		public NumericValue<int> MaxValue = new NumericValue<int>(0, -100, 100);
+		public ItemId<Character> Character = ItemId<Character>.Empty;
+	}
+
+	public partial class Requirement_FactionRelations : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			MinValue = new NumericValue<int>(serializable.MinValue, -100, 100);
+			MaxValue = new NumericValue<int>(serializable.MaxValue, -100, 100);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			serializable.MinValue = MinValue.Value;
+			serializable.MaxValue = MaxValue.Value;
+		}
+
+		public NumericValue<int> MinValue = new NumericValue<int>(0, -100, 100);
+		public NumericValue<int> MaxValue = new NumericValue<int>(0, -100, 100);
+	}
+
+	public partial class Requirement_Faction : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			Faction = database.GetFactionId(serializable.Faction);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			serializable.Faction = Faction.Value;
+		}
+
+		public ItemId<Faction> Faction = ItemId<Faction>.Empty;
+	}
+
+	public partial class Requirement_HaveQuestItem : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			QuestItem = database.GetQuestItemId(serializable.ItemId);
+			Amount = new NumericValue<int>(serializable.MinValue, 1, 1000000);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			serializable.ItemId = QuestItem.Value;
+			serializable.MinValue = Amount.Value;
+		}
+
+		public ItemId<QuestItem> QuestItem = ItemId<QuestItem>.Empty;
+		public NumericValue<int> Amount = new NumericValue<int>(0, 1, 1000000);
+	}
+
+	public partial class Requirement_HaveItem : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			Loot = new LootContent(serializable.Loot, database);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			serializable.Loot = Loot.Serialize();
+		}
+
+		public LootContent Loot = new LootContent();
+	}
+
+	public partial class Requirement_HaveItemById : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			Loot = database.GetLootId(serializable.ItemId);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(RequirementSerializable serializable)
+		{
+			serializable.ItemId = Loot.Value;
+		}
+
+		public ItemId<LootModel> Loot = ItemId<LootModel>.Empty;
+	}
+
+}
+
