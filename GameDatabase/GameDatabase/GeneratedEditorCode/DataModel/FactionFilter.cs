@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class RequiredFactions
 	{
 		partial void OnDataDeserialized(FactionFilterSerializable serializable, Database database);
+		partial void OnDataSerialized(ref FactionFilterSerializable serializable);
 
 		public RequiredFactions() {}
 
@@ -35,6 +36,7 @@ namespace EditorDatabase.DataModel
 			    serializable.List = null;
 			else
 			    serializable.List = List.Select(wrapper => wrapper.Item.Value).ToArray();
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

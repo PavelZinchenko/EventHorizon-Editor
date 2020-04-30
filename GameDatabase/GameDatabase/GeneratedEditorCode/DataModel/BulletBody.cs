@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class BulletBody
 	{
 		partial void OnDataDeserialized(BulletBodySerializable serializable, Database database);
+		partial void OnDataSerialized(ref BulletBodySerializable serializable);
 
 		public BulletBody() {}
 
@@ -52,6 +53,7 @@ namespace EditorDatabase.DataModel
 			serializable.EnergyCost = EnergyCost.Value;
 			serializable.CanBeDisarmed = CanBeDisarmed;
 			serializable.FriendlyFire = FriendlyFire;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

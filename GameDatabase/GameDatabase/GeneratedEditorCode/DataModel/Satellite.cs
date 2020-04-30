@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Satellite
 	{
 		partial void OnDataDeserialized(SatelliteSerializable serializable, Database database);
+		partial void OnDataSerialized(ref SatelliteSerializable serializable);
 
 
 		public Satellite(SatelliteSerializable serializable, Database database)
@@ -42,6 +43,7 @@ namespace EditorDatabase.DataModel
 			    serializable.Barrels = null;
 			else
 			    serializable.Barrels = Barrels.Select(item => item.Serialize()).ToArray();
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<Satellite> Id;

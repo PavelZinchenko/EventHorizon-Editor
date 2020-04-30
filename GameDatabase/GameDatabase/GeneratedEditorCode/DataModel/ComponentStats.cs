@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class ComponentStats
 	{
 		partial void OnDataDeserialized(ComponentStatsSerializable serializable, Database database);
+		partial void OnDataSerialized(ref ComponentStatsSerializable serializable);
 
 
 		public ComponentStats(ComponentStatsSerializable serializable, Database database)
@@ -87,6 +88,7 @@ namespace EditorDatabase.DataModel
 			serializable.WeaponRangeModifier = WeaponRangeModifier.Value;
 			serializable.WeaponEnergyCostModifier = WeaponEnergyCostModifier.Value;
 			serializable.AlterWeaponPlatform = AlterWeaponPlatform;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<ComponentStats> Id;

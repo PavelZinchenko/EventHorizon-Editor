@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class NodeAction
 	{
 		partial void OnDataDeserialized(NodeActionSerializable serializable, Database database);
+		partial void OnDataSerialized(ref NodeActionSerializable serializable);
 
 		public NodeAction() {}
 
@@ -34,6 +35,7 @@ namespace EditorDatabase.DataModel
 			serializable.TargetNode = TargetNode.Value;
 			serializable.Requirement = Requirement.Serialize();
 			serializable.ButtonText = ButtonText;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

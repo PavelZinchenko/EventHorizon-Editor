@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class InstalledComponent
 	{
 		partial void OnDataDeserialized(InstalledComponentSerializable serializable, Database database);
+		partial void OnDataSerialized(ref InstalledComponentSerializable serializable);
 
 		public InstalledComponent() {}
 
@@ -48,6 +49,7 @@ namespace EditorDatabase.DataModel
 			serializable.BarrelId = BarrelId.Value;
 			serializable.Behaviour = Behaviour.Value;
 			serializable.KeyBinding = KeyBinding.Value;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

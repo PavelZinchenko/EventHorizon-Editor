@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class VisualEffectElement
 	{
 		partial void OnDataDeserialized(VisualEffectElementSerializable serializable, Database database);
+		partial void OnDataSerialized(ref VisualEffectElementSerializable serializable);
 
 		public VisualEffectElement() {}
 
@@ -42,6 +43,7 @@ namespace EditorDatabase.DataModel
 			serializable.Size = Size.Value;
 			serializable.StartTime = StartTime.Value;
 			serializable.Lifetime = Lifetime.Value;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

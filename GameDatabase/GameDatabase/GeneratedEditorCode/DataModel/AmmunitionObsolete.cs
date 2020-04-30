@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class AmmunitionObsolete
 	{
 		partial void OnDataDeserialized(AmmunitionObsoleteSerializable serializable, Database database);
+		partial void OnDataSerialized(ref AmmunitionObsoleteSerializable serializable);
 
 
 		public AmmunitionObsolete(AmmunitionObsoleteSerializable serializable, Database database)
@@ -67,6 +68,7 @@ namespace EditorDatabase.DataModel
 			serializable.HitSound = HitSound;
 			serializable.HitEffectPrefab = HitEffectPrefab;
 			serializable.BulletPrefab = BulletPrefab;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<AmmunitionObsolete> Id;

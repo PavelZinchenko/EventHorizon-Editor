@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class ComponentRestrictions
 	{
 		partial void OnDataDeserialized(ComponentRestrictionsSerializable serializable, Database database);
+		partial void OnDataSerialized(ref ComponentRestrictionsSerializable serializable);
 
 		public ComponentRestrictions() {}
 
@@ -24,7 +25,7 @@ namespace EditorDatabase.DataModel
 			ShipSizes = (SizeClass[])serializable.ShipSizes?.Clone();
 			NotForOrganicShips = serializable.NotForOrganicShips;
 			NotForMechanicShips = serializable.NotForMechanicShips;
-			UniqueId = serializable.UniqueId;
+			UniqueComponentTag = serializable.UniqueComponentTag;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -38,14 +39,15 @@ namespace EditorDatabase.DataModel
 			    serializable.ShipSizes = (SizeClass[])ShipSizes.Clone();
 			serializable.NotForOrganicShips = NotForOrganicShips;
 			serializable.NotForMechanicShips = NotForMechanicShips;
-			serializable.UniqueId = UniqueId;
+			serializable.UniqueComponentTag = UniqueComponentTag;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 
 		public SizeClass[] ShipSizes;
 		public bool NotForOrganicShips;
 		public bool NotForMechanicShips;
-		public string UniqueId;
+		public string UniqueComponentTag;
 
 		public static ComponentRestrictions DefaultValue { get; private set; }
 	}

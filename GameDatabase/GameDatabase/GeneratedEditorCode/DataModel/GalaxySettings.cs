@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class GalaxySettings
 	{
 		partial void OnDataDeserialized(GalaxySettingsSerializable serializable, Database database);
+		partial void OnDataSerialized(ref GalaxySettingsSerializable serializable);
 
 
 		public GalaxySettings(GalaxySettingsSerializable serializable, Database database)
@@ -33,6 +34,7 @@ namespace EditorDatabase.DataModel
 			    serializable.StartingShipBuilds = null;
 			else
 			    serializable.StartingShipBuilds = StartingShipBuilds.Select(wrapper => wrapper.Item.Value).ToArray();
+			OnDataSerialized(ref serializable);
 		}
 
 		public ItemId<Faction> AbandonedStarbaseFaction = ItemId<Faction>.Empty;

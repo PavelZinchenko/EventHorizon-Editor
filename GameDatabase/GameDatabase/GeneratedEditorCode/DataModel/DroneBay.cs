@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class DroneBay
 	{
 		partial void OnDataDeserialized(DroneBaySerializable serializable, Database database);
+		partial void OnDataSerialized(ref DroneBaySerializable serializable);
 
 
 		public DroneBay(DroneBaySerializable serializable, Database database)
@@ -51,6 +52,7 @@ namespace EditorDatabase.DataModel
 			serializable.LaunchSound = LaunchSound;
 			serializable.LaunchEffectPrefab = LaunchEffectPrefab;
 			serializable.ControlButtonIcon = ControlButtonIcon;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<DroneBay> Id;

@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class DatabaseSettings
 	{
 		partial void OnDataDeserialized(DatabaseSettingsSerializable serializable, Database database);
+		partial void OnDataSerialized(ref DatabaseSettingsSerializable serializable);
 
 
 		public DatabaseSettings(DatabaseSettingsSerializable serializable, Database database)
@@ -34,6 +35,7 @@ namespace EditorDatabase.DataModel
 			serializable.ModName = ModName;
 			serializable.ModId = ModId;
 			serializable.ModVersion = ModVersion.Value;
+			OnDataSerialized(ref serializable);
 		}
 
 		public NumericValue<int> DatabaseVersion = new NumericValue<int>(0, 1, 2147483647);

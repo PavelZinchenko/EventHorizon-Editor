@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class LootItem
 	{
 		partial void OnDataDeserialized(LootItemSerializable serializable, Database database);
+		partial void OnDataSerialized(ref LootItemSerializable serializable);
 
 		public LootItem() {}
 
@@ -32,6 +33,7 @@ namespace EditorDatabase.DataModel
 			var serializable = new LootItemSerializable();
 			serializable.Weight = Weight.Value;
 			serializable.Loot = Loot.Serialize();
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

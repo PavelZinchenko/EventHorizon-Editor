@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class VisualEffect
 	{
 		partial void OnDataDeserialized(VisualEffectSerializable serializable, Database database);
+		partial void OnDataSerialized(ref VisualEffectSerializable serializable);
 
 
 		public VisualEffect(VisualEffectSerializable serializable, Database database)
@@ -32,6 +33,7 @@ namespace EditorDatabase.DataModel
 			    serializable.Elements = null;
 			else
 			    serializable.Elements = Elements.Select(item => item.Serialize()).ToArray();
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<VisualEffect> Id;

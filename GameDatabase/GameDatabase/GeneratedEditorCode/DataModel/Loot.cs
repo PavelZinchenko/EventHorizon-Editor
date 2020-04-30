@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class LootModel
 	{
 		partial void OnDataDeserialized(LootSerializable serializable, Database database);
+		partial void OnDataSerialized(ref LootSerializable serializable);
 
 
 		public LootModel(LootSerializable serializable, Database database)
@@ -29,6 +30,7 @@ namespace EditorDatabase.DataModel
 		public void Save(LootSerializable serializable)
 		{
 			serializable.Loot = Loot.Serialize();
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<LootModel> Id;

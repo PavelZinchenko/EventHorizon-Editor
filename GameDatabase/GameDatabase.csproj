@@ -113,6 +113,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameDatabase\DataModel\Barrel.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Database.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DatabaseException.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\Ammunition.cs" />

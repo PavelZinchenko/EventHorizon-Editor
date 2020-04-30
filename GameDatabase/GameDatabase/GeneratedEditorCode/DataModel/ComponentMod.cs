@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class ComponentMod
 	{
 		partial void OnDataDeserialized(ComponentModSerializable serializable, Database database);
+		partial void OnDataSerialized(ref ComponentModSerializable serializable);
 
 
 		public ComponentMod(ComponentModSerializable serializable, Database database)
@@ -29,6 +30,7 @@ namespace EditorDatabase.DataModel
 		public void Save(ComponentModSerializable serializable)
 		{
 			serializable.Type = Type;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<ComponentMod> Id;

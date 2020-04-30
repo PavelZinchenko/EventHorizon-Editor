@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Character
 	{
 		partial void OnDataDeserialized(CharacterSerializable serializable, Database database);
+		partial void OnDataSerialized(ref CharacterSerializable serializable);
 
 
 		public Character(CharacterSerializable serializable, Database database)
@@ -41,6 +42,7 @@ namespace EditorDatabase.DataModel
 			serializable.Fleet = Fleet.Value;
 			serializable.Relations = Relations.Value;
 			serializable.IsUnique = IsUnique;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<Character> Id;

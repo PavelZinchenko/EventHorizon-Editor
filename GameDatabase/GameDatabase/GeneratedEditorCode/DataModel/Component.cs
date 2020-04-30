@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Component
 	{
 		partial void OnDataDeserialized(ComponentSerializable serializable, Database database);
+		partial void OnDataSerialized(ref ComponentSerializable serializable);
 
 
 		public Component(ComponentSerializable serializable, Database database)
@@ -72,6 +73,7 @@ namespace EditorDatabase.DataModel
 			    serializable.PossibleModifications = null;
 			else
 			    serializable.PossibleModifications = PossibleModifications.Select(wrapper => wrapper.Item.Value).ToArray();
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<Component> Id;

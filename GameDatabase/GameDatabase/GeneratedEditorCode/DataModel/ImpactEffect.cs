@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class ImpactEffect
 	{
 		partial void OnDataDeserialized(ImpactEffectSerializable serializable, Database database);
+		partial void OnDataSerialized(ref ImpactEffectSerializable serializable);
 
 		public ImpactEffect() {}
 
@@ -36,6 +37,7 @@ namespace EditorDatabase.DataModel
 			serializable.DamageType = DamageType;
 			serializable.Power = Power.Value;
 			serializable.Factor = Factor.Value;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

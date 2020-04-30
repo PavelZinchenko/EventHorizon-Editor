@@ -20,10 +20,30 @@ namespace EditorDatabase.Model
                 if (string.IsNullOrEmpty(_fileName)) return null;
 
                 if (_image == null)
-                    _image = Image.FromFile(_fileName);
+                    _image = LoadImage(_fileName);
 
                 return _image;
             }
+        }
+
+        private static Image LoadImage(string name)
+        {
+            Image image;
+            try
+            {
+                image = Image.FromFile(name);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+
+            if (image.Width != image.Height)
+                return null;
+
+            image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            return image;
         }
 
         private readonly string _fileName;

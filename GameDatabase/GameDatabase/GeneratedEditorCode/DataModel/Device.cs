@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Device
 	{
 		partial void OnDataDeserialized(DeviceSerializable serializable, Database database);
+		partial void OnDataSerialized(ref DeviceSerializable serializable);
 
 
 		public Device(DeviceSerializable serializable, Database database)
@@ -57,6 +58,7 @@ namespace EditorDatabase.DataModel
 			serializable.EffectPrefab = EffectPrefab;
 			serializable.ObjectPrefab = ObjectPrefab;
 			serializable.ControlButtonIcon = ControlButtonIcon;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<Device> Id;

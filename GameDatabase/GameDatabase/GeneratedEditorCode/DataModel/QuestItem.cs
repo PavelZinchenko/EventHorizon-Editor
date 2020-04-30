@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class QuestItem
 	{
 		partial void OnDataDeserialized(QuestItemSerializable serializable, Database database);
+		partial void OnDataSerialized(ref QuestItemSerializable serializable);
 
 
 		public QuestItem(QuestItemSerializable serializable, Database database)
@@ -37,6 +38,7 @@ namespace EditorDatabase.DataModel
 			serializable.Icon = Icon;
 			serializable.Color = Helpers.ColorToString(Color);
 			serializable.Price = Price.Value;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<QuestItem> Id;

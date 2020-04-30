@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class QuestModel
 	{
 		partial void OnDataDeserialized(QuestSerializable serializable, Database database);
+		partial void OnDataSerialized(ref QuestSerializable serializable);
 
 
 		public QuestModel(QuestSerializable serializable, Database database)
@@ -44,6 +45,7 @@ namespace EditorDatabase.DataModel
 			    serializable.Nodes = null;
 			else
 			    serializable.Nodes = Nodes.Select(item => item.Serialize()).ToArray();
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<QuestModel> Id;

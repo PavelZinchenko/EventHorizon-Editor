@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Skill
 	{
 		partial void OnDataDeserialized(SkillSerializable serializable, Database database);
+		partial void OnDataSerialized(ref SkillSerializable serializable);
 
 
 		public Skill(SkillSerializable serializable, Database database)
@@ -43,6 +44,7 @@ namespace EditorDatabase.DataModel
 			serializable.BasePrice = BasePrice.Value;
 			serializable.PricePerLevel = PricePerLevel.Value;
 			serializable.MaxLevel = MaxLevel.Value;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<Skill> Id;

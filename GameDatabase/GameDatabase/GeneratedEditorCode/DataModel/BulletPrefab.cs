@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class BulletPrefab
 	{
 		partial void OnDataDeserialized(BulletPrefabSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BulletPrefabSerializable serializable);
 
 
 		public BulletPrefab(BulletPrefabSerializable serializable, Database database)
@@ -43,6 +44,7 @@ namespace EditorDatabase.DataModel
 			serializable.MainColorMode = MainColorMode;
 			serializable.SecondColor = Helpers.ColorToString(SecondColor);
 			serializable.SecondColorMode = SecondColorMode;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<BulletPrefab> Id;

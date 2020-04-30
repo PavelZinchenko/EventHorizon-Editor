@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class BulletTrigger
 	{
 		partial void OnDataDeserialized(BulletTriggerSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BulletTriggerSerializable serializable);
 
 		public BulletTrigger() {}
 
@@ -56,6 +57,7 @@ namespace EditorDatabase.DataModel
 			serializable.RandomFactor = RandomFactor.Value;
 			serializable.PowerMultiplier = PowerMultiplier.Value;
 			serializable.MaxNestingLevel = MaxNestingLevel.Value;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

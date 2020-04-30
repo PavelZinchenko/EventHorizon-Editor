@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Engine
 	{
 		partial void OnDataDeserialized(EngineSerializable serializable, Database database);
+		partial void OnDataSerialized(ref EngineSerializable serializable);
 
 		public Engine() {}
 
@@ -32,6 +33,7 @@ namespace EditorDatabase.DataModel
 			var serializable = new EngineSerializable();
 			serializable.Position = Position;
 			serializable.Size = Size.Value;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

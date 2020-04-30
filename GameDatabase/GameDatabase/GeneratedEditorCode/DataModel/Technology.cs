@@ -24,6 +24,7 @@ namespace EditorDatabase.DataModel
 	public partial class Technology : IDataAdapter
 	{
 		partial void OnDataDeserialized(TechnologySerializable serializable, Database database);
+		partial void OnDataSerialized(ref TechnologySerializable serializable);
 
 		private static ITechnologyContent CreateContent(TechType type)
 		{
@@ -75,7 +76,7 @@ namespace EditorDatabase.DataModel
 			    serializable.Dependencies = null;
 			else
 			    serializable.Dependencies = Dependencies.Select(wrapper => wrapper.Item.Value).ToArray();
-
+			OnDataSerialized(ref serializable);
 		}
 
 		public event System.Action LayoutChangedEvent;
@@ -126,6 +127,7 @@ namespace EditorDatabase.DataModel
 	public partial class Technology_Component : ITechnologyContent
 	{
 		partial void OnDataDeserialized(TechnologySerializable serializable, Database database);
+		partial void OnDataSerialized(ref TechnologySerializable serializable);
 
 		public void Load(TechnologySerializable serializable, Database database)
 		{
@@ -141,6 +143,7 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.ItemId = Component.Value;
 			serializable.Faction = Faction.Value;
+			OnDataSerialized(ref serializable);
 		}
 
 		public ItemId<Component> Component = ItemId<Component>.Empty;
@@ -150,6 +153,7 @@ namespace EditorDatabase.DataModel
 	public partial class Technology_Ship : ITechnologyContent
 	{
 		partial void OnDataDeserialized(TechnologySerializable serializable, Database database);
+		partial void OnDataSerialized(ref TechnologySerializable serializable);
 
 		public void Load(TechnologySerializable serializable, Database database)
 		{
@@ -163,6 +167,7 @@ namespace EditorDatabase.DataModel
 		public void Save(TechnologySerializable serializable)
 		{
 			serializable.ItemId = Ship.Value;
+			OnDataSerialized(ref serializable);
 		}
 
 		public ItemId<Ship> Ship = ItemId<Ship>.Empty;
@@ -171,6 +176,7 @@ namespace EditorDatabase.DataModel
 	public partial class Technology_Satellite : ITechnologyContent
 	{
 		partial void OnDataDeserialized(TechnologySerializable serializable, Database database);
+		partial void OnDataSerialized(ref TechnologySerializable serializable);
 
 		public void Load(TechnologySerializable serializable, Database database)
 		{
@@ -186,6 +192,7 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.ItemId = Satellite.Value;
 			serializable.Faction = Faction.Value;
+			OnDataSerialized(ref serializable);
 		}
 
 		public ItemId<Satellite> Satellite = ItemId<Satellite>.Empty;

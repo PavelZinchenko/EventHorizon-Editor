@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class ShipBuild
 	{
 		partial void OnDataDeserialized(ShipBuildSerializable serializable, Database database);
+		partial void OnDataSerialized(ref ShipBuildSerializable serializable);
 
 
 		public ShipBuild(ShipBuildSerializable serializable, Database database)
@@ -42,6 +43,7 @@ namespace EditorDatabase.DataModel
 			    serializable.Components = null;
 			else
 			    serializable.Components = Components.Select(item => item.Serialize()).ToArray();
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<ShipBuild> Id;

@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Weapon
 	{
 		partial void OnDataDeserialized(WeaponSerializable serializable, Database database);
+		partial void OnDataSerialized(ref WeaponSerializable serializable);
 
 
 		public Weapon(WeaponSerializable serializable, Database database)
@@ -45,6 +46,7 @@ namespace EditorDatabase.DataModel
 			serializable.ChargeSound = ChargeSound;
 			serializable.ShotEffectPrefab = ShotEffectPrefab;
 			serializable.ControlButtonIcon = ControlButtonIcon;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<Weapon> Id;

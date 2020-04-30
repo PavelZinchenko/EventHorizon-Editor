@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class ShipSettings
 	{
 		partial void OnDataDeserialized(ShipSettingsSerializable serializable, Database database);
+		partial void OnDataSerialized(ref ShipSettingsSerializable serializable);
 
 
 		public ShipSettings(ShipSettingsSerializable serializable, Database database)
@@ -52,6 +53,7 @@ namespace EditorDatabase.DataModel
 			serializable.BaseDroneReconstructionSpeed = BaseDroneReconstructionSpeed.Value;
 			serializable.MaxVelocity = MaxVelocity.Value;
 			serializable.MaxTurnRate = MaxTurnRate.Value;
+			OnDataSerialized(ref serializable);
 		}
 
 		public NumericValue<float> DefaultWeightPerCell = new NumericValue<float>(0, 1f, 1000f);

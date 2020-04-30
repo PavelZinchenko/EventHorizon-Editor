@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Ammunition
 	{
 		partial void OnDataDeserialized(AmmunitionSerializable serializable, Database database);
+		partial void OnDataSerialized(ref AmmunitionSerializable serializable);
 
 
 		public Ammunition(AmmunitionSerializable serializable, Database database)
@@ -41,6 +42,7 @@ namespace EditorDatabase.DataModel
 			    serializable.Effects = null;
 			else
 			    serializable.Effects = Effects.Select(item => item.Serialize()).ToArray();
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<Ammunition> Id;

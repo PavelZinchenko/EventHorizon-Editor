@@ -20,6 +20,6 @@ namespace EditorDatabase.Serializable
 		public bool NotForOrganicShips;
 		public bool NotForMechanicShips;
 		[DefaultValue("")]
-		public string UniqueId;
+		public string UniqueComponentTag;
 	}
 }

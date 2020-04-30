@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class SatelliteBuild
 	{
 		partial void OnDataDeserialized(SatelliteBuildSerializable serializable, Database database);
+		partial void OnDataSerialized(ref SatelliteBuildSerializable serializable);
 
 
 		public SatelliteBuild(SatelliteBuildSerializable serializable, Database database)
@@ -40,6 +41,7 @@ namespace EditorDatabase.DataModel
 			    serializable.Components = null;
 			else
 			    serializable.Components = Components.Select(item => item.Serialize()).ToArray();
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<SatelliteBuild> Id;

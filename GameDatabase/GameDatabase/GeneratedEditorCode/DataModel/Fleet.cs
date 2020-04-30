@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Fleet
 	{
 		partial void OnDataDeserialized(FleetSerializable serializable, Database database);
+		partial void OnDataSerialized(ref FleetSerializable serializable);
 
 
 		public Fleet(FleetSerializable serializable, Database database)
@@ -44,6 +45,7 @@ namespace EditorDatabase.DataModel
 			    serializable.SpecificShips = null;
 			else
 			    serializable.SpecificShips = SpecificShips.Select(wrapper => wrapper.Item.Value).ToArray();
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<Fleet> Id;

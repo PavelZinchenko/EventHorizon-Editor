@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Faction
 	{
 		partial void OnDataDeserialized(FactionSerializable serializable, Database database);
+		partial void OnDataSerialized(ref FactionSerializable serializable);
 
 
 		public Faction(FactionSerializable serializable, Database database)
@@ -37,6 +38,7 @@ namespace EditorDatabase.DataModel
 			serializable.HomeStarDistance = HomeStarDistance.Value;
 			serializable.WanderingShipsDistance = WanderingShipsDistance.Value;
 			serializable.Hidden = Hidden;
+			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<Faction> Id;

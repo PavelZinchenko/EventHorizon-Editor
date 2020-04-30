@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class NodeTransition
 	{
 		partial void OnDataDeserialized(NodeTransitionSerializable serializable, Database database);
+		partial void OnDataSerialized(ref NodeTransitionSerializable serializable);
 
 		public NodeTransition() {}
 
@@ -34,6 +35,7 @@ namespace EditorDatabase.DataModel
 			serializable.TargetNode = TargetNode.Value;
 			serializable.Requirement = Requirement.Serialize();
 			serializable.Weight = Weight.Value;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 

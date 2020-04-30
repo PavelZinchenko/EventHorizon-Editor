@@ -16,6 +16,7 @@ namespace EditorDatabase.DataModel
 	public partial class Barrel
 	{
 		partial void OnDataDeserialized(BarrelSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BarrelSerializable serializable);
 
 		public Barrel() {}
 
@@ -46,6 +47,7 @@ namespace EditorDatabase.DataModel
 			serializable.WeaponClass = WeaponClass;
 			serializable.Image = Image;
 			serializable.Size = Size.Value;
+			OnDataSerialized(ref serializable);
 			return serializable;
 		}
 
