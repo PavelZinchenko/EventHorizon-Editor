@@ -18,7 +18,7 @@ namespace EditorDatabase.DataModel
 	public interface IRequirementContent
 	{
 		void Load(RequirementSerializable serializable, Database database);
-		void Save(RequirementSerializable serializable);
+		void Save(ref RequirementSerializable serializable);
 	}
 
 	public partial class Requirement : IDataAdapter
@@ -96,7 +96,7 @@ namespace EditorDatabase.DataModel
 			serializable.Faction = 0;
 			serializable.Loot = new LootContentSerializable();
 			serializable.Requirements = null;
-			_content.Save(serializable);
+			_content.Save(ref serializable);
 			serializable.Type = Type;
 			OnDataSerialized(ref serializable);
 			return serializable;
@@ -134,7 +134,7 @@ namespace EditorDatabase.DataModel
 	public class RequirementEmptyContent : IRequirementContent
 	{
 		public void Load(RequirementSerializable serializable, Database database) {}
-		public void Save(RequirementSerializable serializable) {}
+		public void Save(ref RequirementSerializable serializable) {}
 	}
 
 	public partial class Requirement_Any : IRequirementContent
@@ -149,7 +149,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			if (Requirements == null || Requirements.Length == 0)
 			    serializable.Requirements = null;
@@ -173,7 +173,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			if (Requirements == null || Requirements.Length == 0)
 			    serializable.Requirements = null;
@@ -197,7 +197,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			if (Requirements == null || Requirements.Length == 0)
 			    serializable.Requirements = null;
@@ -222,7 +222,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			serializable.MinValue = MinValue.Value;
 			serializable.MaxValue = MaxValue.Value;
@@ -246,7 +246,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			serializable.MinValue = MinValue.Value;
 			serializable.MaxValue = MaxValue.Value;
@@ -269,7 +269,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			serializable.ItemId = Quest.Value;
 			OnDataSerialized(ref serializable);
@@ -290,7 +290,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			serializable.ItemId = Quest.Value;
 			OnDataSerialized(ref serializable);
@@ -313,7 +313,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			serializable.MinValue = MinValue.Value;
 			serializable.MaxValue = MaxValue.Value;
@@ -339,7 +339,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			serializable.MinValue = MinValue.Value;
 			serializable.MaxValue = MaxValue.Value;
@@ -362,7 +362,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			serializable.Faction = Faction.Value;
 			OnDataSerialized(ref serializable);
@@ -384,7 +384,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			serializable.ItemId = QuestItem.Value;
 			serializable.MinValue = Amount.Value;
@@ -407,7 +407,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			serializable.Loot = Loot.Serialize();
 			OnDataSerialized(ref serializable);
@@ -428,7 +428,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(RequirementSerializable serializable)
+		public void Save(ref RequirementSerializable serializable)
 		{
 			serializable.ItemId = Loot.Value;
 			OnDataSerialized(ref serializable);

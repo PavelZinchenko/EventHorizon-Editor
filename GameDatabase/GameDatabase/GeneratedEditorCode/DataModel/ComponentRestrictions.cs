@@ -22,7 +22,7 @@ namespace EditorDatabase.DataModel
 
 		public ComponentRestrictions(ComponentRestrictionsSerializable serializable, Database database)
 		{
-			ShipSizes = (SizeClass[])serializable.ShipSizes?.Clone();
+			ShipSizes = serializable.ShipSizes?.Select(item => new ValueWrapper<SizeClass> { Value = item }).ToArray();
 			NotForOrganicShips = serializable.NotForOrganicShips;
 			NotForMechanicShips = serializable.NotForMechanicShips;
 			UniqueComponentTag = serializable.UniqueComponentTag;
@@ -36,7 +36,7 @@ namespace EditorDatabase.DataModel
 			if (ShipSizes == null || ShipSizes.Length == 0)
 			    serializable.ShipSizes = null;
 			else
-			    serializable.ShipSizes = (SizeClass[])ShipSizes.Clone();
+			    serializable.ShipSizes = ShipSizes.Select(item => item.Value).ToArray();
 			serializable.NotForOrganicShips = NotForOrganicShips;
 			serializable.NotForMechanicShips = NotForMechanicShips;
 			serializable.UniqueComponentTag = UniqueComponentTag;
@@ -44,7 +44,7 @@ namespace EditorDatabase.DataModel
 			return serializable;
 		}
 
-		public SizeClass[] ShipSizes;
+		public ValueWrapper<SizeClass>[] ShipSizes;
 		public bool NotForOrganicShips;
 		public bool NotForMechanicShips;
 		public string UniqueComponentTag;

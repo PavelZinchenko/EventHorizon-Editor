@@ -6,8 +6,8 @@
   "Availability": 2,
   "ComponentStatsId": 3,
   "Faction": 16,
-  "Level": 250,
-  "Icon": "egg0",
+  "Level": 20,
+  "Icon": "zygote1",
   "Layout": "110110110",
   "CellType": "2",
   "DeviceId": 22,
@@ -19,7 +19,7 @@
   },
   "PossibleModifications": [
     1,
-    17,
-    18
+    2,
+    6
   ]
 }

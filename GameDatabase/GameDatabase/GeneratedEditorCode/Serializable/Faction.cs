@@ -23,5 +23,6 @@ namespace EditorDatabase.Serializable
 		public int HomeStarDistance;
 		public int WanderingShipsDistance;
 		public bool Hidden;
+		public bool Hostile;
 	}
 }

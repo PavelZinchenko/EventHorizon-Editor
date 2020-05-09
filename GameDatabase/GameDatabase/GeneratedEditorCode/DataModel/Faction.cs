@@ -27,6 +27,7 @@ namespace EditorDatabase.DataModel
 			HomeStarDistance = new NumericValue<int>(serializable.HomeStarDistance, 0, 1000);
 			WanderingShipsDistance = new NumericValue<int>(serializable.WanderingShipsDistance, 0, 1000);
 			Hidden = serializable.Hidden;
+			Hostile = serializable.Hostile;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -38,6 +39,7 @@ namespace EditorDatabase.DataModel
 			serializable.HomeStarDistance = HomeStarDistance.Value;
 			serializable.WanderingShipsDistance = WanderingShipsDistance.Value;
 			serializable.Hidden = Hidden;
+			serializable.Hostile = Hostile;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -48,6 +50,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<int> HomeStarDistance = new NumericValue<int>(0, 0, 1000);
 		public NumericValue<int> WanderingShipsDistance = new NumericValue<int>(0, 0, 1000);
 		public bool Hidden;
+		public bool Hostile;
 
 		public static Faction DefaultValue { get; private set; }
 	}

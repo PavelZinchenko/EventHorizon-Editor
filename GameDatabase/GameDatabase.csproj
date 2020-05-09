@@ -114,6 +114,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GameDatabase\DataModel\Barrel.cs" />
+    <Compile Include="GameDatabase\DataModel\Component.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Database.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DatabaseException.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\Ammunition.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\Device.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\DroneBay.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\Engine.cs" />
+    <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\ExplorationSettings.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\Faction.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\FactionFilter.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\Fleet.cs" />
@@ -206,6 +208,7 @@
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\Device.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\DroneBay.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\Engine.cs" />
+    <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\ExplorationSettings.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\Faction.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\FactionFilter.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\Fleet.cs" />

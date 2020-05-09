@@ -36,5 +36,6 @@ namespace EditorDatabase.Enums
 		ShipSettings = 100,
 		GalaxySettings = 101,
 		DatabaseSettings = 102,
+		ExplorationSettings = 103,
 	}
 }

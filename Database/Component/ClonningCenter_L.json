@@ -6,11 +6,11 @@
   "Availability": 2,
   "ComponentStatsId": 3,
   "Faction": 16,
-  "Level": 250,
-  "Icon": "egg2",
-  "Layout": "0110011110111101111011110",
+  "Level": 100,
+  "Icon": "zygote3",
+  "Layout": "0110111111110110",
   "CellType": "2",
-  "DeviceId": 22,
+  "DeviceId": 25,
   "Restrictions": {
     "ShipSizes": [
       0,
@@ -22,7 +22,7 @@
   },
   "PossibleModifications": [
     1,
-    17,
-    18
+    2,
+    6
   ]
 }

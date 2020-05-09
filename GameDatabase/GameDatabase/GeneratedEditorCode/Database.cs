@@ -49,6 +49,7 @@ namespace EditorDatabase
             foreach (var item in _visualEffectMap) item.Value.Save(_content.GetVisualEffect(item.Key));
             foreach (var item in _weaponMap) item.Value.Save(_content.GetWeapon(item.Key));
 			_databaseSettings?.Save(_content.DatabaseSettings);
+			_explorationSettings?.Save(_content.ExplorationSettings);
 			_galaxySettings?.Save(_content.GalaxySettings);
 			_shipSettings?.Save(_content.ShipSettings);
 		
@@ -109,6 +110,7 @@ namespace EditorDatabase
 				case ItemType.VisualEffect: return GetVisualEffect(id);
 				case ItemType.Weapon: return GetWeapon(id);
 				case ItemType.DatabaseSettings: return DatabaseSettings;
+				case ItemType.ExplorationSettings: return ExplorationSettings;
 				case ItemType.GalaxySettings: return GalaxySettings;
 				case ItemType.ShipSettings: return ShipSettings;
                 default: return null;
@@ -117,6 +119,7 @@ namespace EditorDatabase
 
 
 		public DatabaseSettings DatabaseSettings => _databaseSettings ?? (_databaseSettings = new DatabaseSettings(_content.DatabaseSettings, this));
+		public ExplorationSettings ExplorationSettings => _explorationSettings ?? (_explorationSettings = new ExplorationSettings(_content.ExplorationSettings, this));
 		public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = new GalaxySettings(_content.GalaxySettings, this));
 		public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = new ShipSettings(_content.ShipSettings, this));
 
@@ -413,6 +416,7 @@ namespace EditorDatabase
 			_weaponMap.Clear();
 
 			_databaseSettings = null;
+			_explorationSettings = null;
 			_galaxySettings = null;
 			_shipSettings = null;
         }
@@ -441,6 +445,7 @@ namespace EditorDatabase
 		private readonly Dictionary<int, Weapon> _weaponMap = new Dictionary<int, Weapon>();
 
 		private DatabaseSettings _databaseSettings;
+		private ExplorationSettings _explorationSettings;
 		private GalaxySettings _galaxySettings;
 		private ShipSettings _shipSettings;
 	

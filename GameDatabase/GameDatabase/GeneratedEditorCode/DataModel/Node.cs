@@ -18,7 +18,7 @@ namespace EditorDatabase.DataModel
 	public interface INodeContent
 	{
 		void Load(NodeSerializable serializable, Database database);
-		void Save(NodeSerializable serializable);
+		void Save(ref NodeSerializable serializable);
 	}
 
 	public partial class Node : IDataAdapter
@@ -114,7 +114,7 @@ namespace EditorDatabase.DataModel
 			serializable.Value = 0;
 			serializable.Actions = null;
 			serializable.Transitions = null;
-			_content.Save(serializable);
+			_content.Save(ref serializable);
 			serializable.Id = Id.Value;
 			serializable.Type = Type;
 			OnDataSerialized(ref serializable);
@@ -155,7 +155,7 @@ namespace EditorDatabase.DataModel
 	public class NodeEmptyContent : INodeContent
 	{
 		public void Load(NodeSerializable serializable, Database database) {}
-		public void Save(NodeSerializable serializable) {}
+		public void Save(ref NodeSerializable serializable) {}
 	}
 
 	public partial class Node_ShowDialog : INodeContent
@@ -175,7 +175,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.RequiredView = RequiredView;
 			serializable.Message = Message;
@@ -211,7 +211,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			serializable.Faction = Faction.Value;
@@ -238,7 +238,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.Message = Message;
 			serializable.DefaultTransition = DefaultTransition.Value;
@@ -268,7 +268,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.Message = Message;
 			serializable.DefaultTransition = DefaultTransition.Value;
@@ -297,7 +297,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.Message = Message;
 			if (Transitions == null || Transitions.Length == 0)
@@ -326,7 +326,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = VictoryTransition.Value;
 			serializable.FailureTransition = FailureTransition.Value;
@@ -354,7 +354,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = VictoryTransition.Value;
 			serializable.FailureTransition = FailureTransition.Value;
@@ -377,7 +377,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			OnDataSerialized(ref serializable);
@@ -398,7 +398,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			OnDataSerialized(ref serializable);
@@ -419,7 +419,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			OnDataSerialized(ref serializable);
@@ -441,7 +441,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			serializable.Loot = Loot.Value;
@@ -465,7 +465,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			serializable.Loot = Loot.Value;
@@ -489,7 +489,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			serializable.Loot = Loot.Value;
@@ -513,7 +513,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			serializable.Quest = Quest.Value;
@@ -538,7 +538,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			serializable.Character = Character.Value;
@@ -564,7 +564,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			serializable.Value = Value.Value;
@@ -589,7 +589,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			serializable.Character = Character.Value;
@@ -615,7 +615,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(NodeSerializable serializable)
+		public void Save(ref NodeSerializable serializable)
 		{
 			serializable.DefaultTransition = Transition.Value;
 			serializable.Value = Value.Value;

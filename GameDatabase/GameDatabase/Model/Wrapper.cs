@@ -9,4 +9,14 @@
             return Item.ToString();
         }
     }
+
+    public class ValueWrapper<T> where T : struct
+    {
+        public T Value;
+
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+    }
 }

@@ -27,5 +27,6 @@ namespace EditorDatabase.Enums
 		ToxicWaste,
 		WormTail,
 		ClonningCenter,
+		TimeMachine,
 	}
 }

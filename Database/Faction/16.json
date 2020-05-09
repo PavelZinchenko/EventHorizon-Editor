@@ -3,6 +3,6 @@
   "Id": 16,
   "Name": "$Faction16",
   "Color": "#00FF00",
-  "WanderingShipsDistance": 100,
-  "Hidden": true
+  "WanderingShipsDistance": 200,
+  "Hostile": true
 }

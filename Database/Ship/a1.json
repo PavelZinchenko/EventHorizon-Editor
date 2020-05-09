@@ -3,7 +3,6 @@
   "Id": 93,
   "ShipCategory": 6,
   "Name": "Drone",
-  "Faction": -1,
   "IconImage": "dronea",
   "IconScale": 0.5,
   "ModelImage": "dronea",
@@ -13,7 +12,6 @@
   },
   "EngineColor": "#40FFFFFF",
   "EngineSize": 0.1,
-  "BuiltinDevices": [],
   "Layout": "040242515",
   "Barrels": [
     {

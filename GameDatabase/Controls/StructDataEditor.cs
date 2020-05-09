@@ -136,7 +136,7 @@ namespace GameDatabase
             if (type == typeof(NumericValue<float>))
             {
                 var numeric = (NumericValue<float>)value;
-                return CreateNumericContol((decimal)numeric.Value, (decimal)numeric.Min, (decimal)numeric.Max, (decimal)0.1f, 5, 1, rowId);
+                return CreateNumericContol((decimal)numeric.Value, FloatToDecimal(numeric.Min), FloatToDecimal(numeric.Max), (decimal)0.1f, 5, 1, rowId);
             }
 
             if (type == typeof(string))
@@ -168,6 +168,13 @@ namespace GameDatabase
                 return CreateStructEditor(new DataAdapter(value), 1, rowId);
 
             return null;
+        }
+
+        private static decimal FloatToDecimal(float value)
+        {
+            if (value >= (float)decimal.MaxValue) return decimal.MaxValue;
+            if (value <= (float)decimal.MinValue) return decimal.MinValue;
+            return (decimal)value;
         }
 
         private Control CreateObjectList(object value, int column, int row)

@@ -18,7 +18,7 @@ namespace EditorDatabase.DataModel
 	public interface ITechnologyContent
 	{
 		void Load(TechnologySerializable serializable, Database database);
-		void Save(TechnologySerializable serializable);
+		void Save(ref TechnologySerializable serializable);
 	}
 
 	public partial class Technology : IDataAdapter
@@ -67,7 +67,7 @@ namespace EditorDatabase.DataModel
 			serializable.ItemId = 0;
 			serializable.ItemId = 0;
 			serializable.Faction = 0;
-			_content.Save(serializable);
+			_content.Save(ref serializable);
 			serializable.Type = Type;
 			serializable.Price = Price.Value;
 			serializable.Hidden = Hidden;
@@ -121,7 +121,7 @@ namespace EditorDatabase.DataModel
 	public class TechnologyEmptyContent : ITechnologyContent
 	{
 		public void Load(TechnologySerializable serializable, Database database) {}
-		public void Save(TechnologySerializable serializable) {}
+		public void Save(ref TechnologySerializable serializable) {}
 	}
 
 	public partial class Technology_Component : ITechnologyContent
@@ -139,7 +139,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(TechnologySerializable serializable)
+		public void Save(ref TechnologySerializable serializable)
 		{
 			serializable.ItemId = Component.Value;
 			serializable.Faction = Faction.Value;
@@ -164,7 +164,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(TechnologySerializable serializable)
+		public void Save(ref TechnologySerializable serializable)
 		{
 			serializable.ItemId = Ship.Value;
 			OnDataSerialized(ref serializable);
@@ -188,7 +188,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(TechnologySerializable serializable)
+		public void Save(ref TechnologySerializable serializable)
 		{
 			serializable.ItemId = Satellite.Value;
 			serializable.Faction = Faction.Value;

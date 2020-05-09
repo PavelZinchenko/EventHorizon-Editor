@@ -18,7 +18,7 @@
   ],
   "KineticResistance": 5.0,
   "Regeneration": true,
-  "BaseWeightModifier": -0.5,
+  "BaseWeightModifier": -0.75,
   "BuiltinDevices": [
     18
   ],
@@ -28,6 +28,7 @@
       "Position": {
         "x": 0.9
       },
+      "PlatformType": 2,
       "WeaponClass": "C"
     }
   ]

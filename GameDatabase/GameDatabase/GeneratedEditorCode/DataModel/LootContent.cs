@@ -18,7 +18,7 @@ namespace EditorDatabase.DataModel
 	public interface ILootContentContent
 	{
 		void Load(LootContentSerializable serializable, Database database);
-		void Save(LootContentSerializable serializable);
+		void Save(ref LootContentSerializable serializable);
 	}
 
 	public partial class LootContent : IDataAdapter
@@ -89,7 +89,7 @@ namespace EditorDatabase.DataModel
 			serializable.ValueRatio = 0f;
 			serializable.Factions = new FactionFilterSerializable();
 			serializable.Items = null;
-			_content.Save(serializable);
+			_content.Save(ref serializable);
 			serializable.Type = Type;
 			OnDataSerialized(ref serializable);
 			return serializable;
@@ -127,7 +127,7 @@ namespace EditorDatabase.DataModel
 	public class LootContentEmptyContent : ILootContentContent
 	{
 		public void Load(LootContentSerializable serializable, Database database) {}
-		public void Save(LootContentSerializable serializable) {}
+		public void Save(ref LootContentSerializable serializable) {}
 	}
 
 	public partial class LootContent_SomeMoney : ILootContentContent
@@ -142,7 +142,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			serializable.ValueRatio = ValueRatio.Value;
 			OnDataSerialized(ref serializable);
@@ -164,7 +164,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			serializable.MinAmount = MinAmount.Value;
 			serializable.MaxAmount = MaxAmount.Value;
@@ -188,7 +188,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			serializable.MinAmount = MinAmount.Value;
 			serializable.MaxAmount = MaxAmount.Value;
@@ -212,7 +212,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			serializable.MinAmount = MinAmount.Value;
 			serializable.MaxAmount = MaxAmount.Value;
@@ -238,7 +238,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			serializable.MinAmount = MinAmount.Value;
 			serializable.MaxAmount = MaxAmount.Value;
@@ -267,7 +267,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			serializable.MinAmount = MinAmount.Value;
 			serializable.MaxAmount = MaxAmount.Value;
@@ -295,7 +295,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			if (Items == null || Items.Length == 0)
 			    serializable.Items = null;
@@ -319,7 +319,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			if (Items == null || Items.Length == 0)
 			    serializable.Items = null;
@@ -347,7 +347,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			serializable.ItemId = QuestItem.Value;
 			serializable.MinAmount = MinAmount.Value;
@@ -374,7 +374,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			serializable.ItemId = ShipBuild.Value;
 			OnDataSerialized(ref serializable);
@@ -397,7 +397,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			serializable.ItemId = Ship.Value;
 			OnDataSerialized(ref serializable);
@@ -422,7 +422,7 @@ namespace EditorDatabase.DataModel
 			OnDataDeserialized(serializable, database);
 		}
 
-		public void Save(LootContentSerializable serializable)
+		public void Save(ref LootContentSerializable serializable)
 		{
 			serializable.ItemId = Component.Value;
 			serializable.MinAmount = MinAmount.Value;
