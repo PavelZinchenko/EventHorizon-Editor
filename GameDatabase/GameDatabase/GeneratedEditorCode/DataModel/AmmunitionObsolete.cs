@@ -29,7 +29,7 @@ namespace EditorDatabase.DataModel
 			Size = new NumericValue<float>(serializable.Size, 0f, 1000f);
 			InitialPosition = serializable.InitialPosition;
 			AreaOfEffect = new NumericValue<float>(serializable.AreaOfEffect, 0f, 1000f);
-			Damage = new NumericValue<float>(serializable.Damage, 0f, 1000f);
+			Damage = new NumericValue<float>(serializable.Damage, 0f, 1000000f);
 			Range = new NumericValue<float>(serializable.Range, 0f, 1000f);
 			Velocity = new NumericValue<float>(serializable.Velocity, 0f, 1000f);
 			LifeTime = new NumericValue<float>(serializable.LifeTime, 0f, 1000f);
@@ -80,7 +80,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 1000f);
 		public Vector2 InitialPosition;
 		public NumericValue<float> AreaOfEffect = new NumericValue<float>(0, 0f, 1000f);
-		public NumericValue<float> Damage = new NumericValue<float>(0, 0f, 1000f);
+		public NumericValue<float> Damage = new NumericValue<float>(0, 0f, 1000000f);
 		public NumericValue<float> Range = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> Velocity = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> LifeTime = new NumericValue<float>(0, 0f, 1000f);
