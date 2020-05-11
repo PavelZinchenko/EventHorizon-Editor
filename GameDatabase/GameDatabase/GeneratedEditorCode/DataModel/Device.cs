@@ -23,8 +23,8 @@ namespace EditorDatabase.DataModel
 		{
 			Id = new ItemId<Device>(serializable.Id, serializable.FileName);
 			DeviceClass = serializable.DeviceClass;
-			EnergyConsumption = new NumericValue<float>(serializable.EnergyConsumption, 0f, 1000f);
-			PassiveEnergyConsumption = new NumericValue<float>(serializable.PassiveEnergyConsumption, 0f, 1000f);
+			EnergyConsumption = new NumericValue<float>(serializable.EnergyConsumption, 0f, 1E+09f);
+			PassiveEnergyConsumption = new NumericValue<float>(serializable.PassiveEnergyConsumption, 0f, 1E+09f);
 			Power = new NumericValue<float>(serializable.Power, 0f, 1000f);
 			Range = new NumericValue<float>(serializable.Range, 0f, 1000f);
 			Size = new NumericValue<float>(serializable.Size, 0f, 1000f);
@@ -64,8 +64,8 @@ namespace EditorDatabase.DataModel
 		public readonly ItemId<Device> Id;
 
 		public DeviceClass DeviceClass;
-		public NumericValue<float> EnergyConsumption = new NumericValue<float>(0, 0f, 1000f);
-		public NumericValue<float> PassiveEnergyConsumption = new NumericValue<float>(0, 0f, 1000f);
+		public NumericValue<float> EnergyConsumption = new NumericValue<float>(0, 0f, 1E+09f);
+		public NumericValue<float> PassiveEnergyConsumption = new NumericValue<float>(0, 0f, 1E+09f);
 		public NumericValue<float> Power = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> Range = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 1000f);

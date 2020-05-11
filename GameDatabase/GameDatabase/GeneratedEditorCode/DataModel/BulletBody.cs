@@ -25,13 +25,13 @@ namespace EditorDatabase.DataModel
 			Type = serializable.Type;
 			Size = new NumericValue<float>(serializable.Size, 0f, 1000f);
 			Velocity = new NumericValue<float>(serializable.Velocity, 0f, 1000f);
-			Range = new NumericValue<float>(serializable.Range, 0f, 1000f);
-			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
-			Weight = new NumericValue<float>(serializable.Weight, 0f, 1000f);
-			HitPoints = new NumericValue<int>(serializable.HitPoints, 0, 1000);
+			Range = new NumericValue<float>(serializable.Range, 0f, 1E+09f);
+			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1E+09f);
+			Weight = new NumericValue<float>(serializable.Weight, 0f, 1E+09f);
+			HitPoints = new NumericValue<int>(serializable.HitPoints, 0, 999999999);
 			Color = Helpers.ColorFromString(serializable.Color);
 			BulletPrefab = database.GetBulletPrefabId(serializable.BulletPrefab);
-			EnergyCost = new NumericValue<float>(serializable.EnergyCost, 0f, 1000f);
+			EnergyCost = new NumericValue<float>(serializable.EnergyCost, 0f, 1E+09f);
 			CanBeDisarmed = serializable.CanBeDisarmed;
 			FriendlyFire = serializable.FriendlyFire;
 
@@ -60,13 +60,13 @@ namespace EditorDatabase.DataModel
 		public BulletType Type;
 		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> Velocity = new NumericValue<float>(0, 0f, 1000f);
-		public NumericValue<float> Range = new NumericValue<float>(0, 0f, 1000f);
-		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1000f);
-		public NumericValue<float> Weight = new NumericValue<float>(0, 0f, 1000f);
-		public NumericValue<int> HitPoints = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<float> Range = new NumericValue<float>(0, 0f, 1E+09f);
+		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1E+09f);
+		public NumericValue<float> Weight = new NumericValue<float>(0, 0f, 1E+09f);
+		public NumericValue<int> HitPoints = new NumericValue<int>(0, 0, 999999999);
 		public System.Drawing.Color Color;
 		public ItemId<BulletPrefab> BulletPrefab = ItemId<BulletPrefab>.Empty;
-		public NumericValue<float> EnergyCost = new NumericValue<float>(0, 0f, 1000f);
+		public NumericValue<float> EnergyCost = new NumericValue<float>(0, 0f, 1E+09f);
 		public bool CanBeDisarmed;
 		public bool FriendlyFire;
 

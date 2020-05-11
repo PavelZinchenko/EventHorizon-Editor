@@ -216,8 +216,8 @@ namespace EditorDatabase.DataModel
 
 		public void Load(RequirementSerializable serializable, Database database)
 		{
-			MinValue = new NumericValue<int>(serializable.MinValue, 0, 1000);
-			MaxValue = new NumericValue<int>(serializable.MaxValue, 0, 1000);
+			MinValue = new NumericValue<int>(serializable.MinValue, 0, 10000);
+			MaxValue = new NumericValue<int>(serializable.MaxValue, 0, 10000);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -229,8 +229,8 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
-		public NumericValue<int> MinValue = new NumericValue<int>(0, 0, 1000);
-		public NumericValue<int> MaxValue = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<int> MinValue = new NumericValue<int>(0, 0, 10000);
+		public NumericValue<int> MaxValue = new NumericValue<int>(0, 0, 10000);
 	}
 
 	public partial class Requirement_RandomStarSystem : IRequirementContent
@@ -240,8 +240,8 @@ namespace EditorDatabase.DataModel
 
 		public void Load(RequirementSerializable serializable, Database database)
 		{
-			MinValue = new NumericValue<int>(serializable.MinValue, 0, 1000);
-			MaxValue = new NumericValue<int>(serializable.MaxValue, 0, 1000);
+			MinValue = new NumericValue<int>(serializable.MinValue, 0, 10000);
+			MaxValue = new NumericValue<int>(serializable.MaxValue, 0, 10000);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -253,8 +253,8 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
-		public NumericValue<int> MinValue = new NumericValue<int>(0, 0, 1000);
-		public NumericValue<int> MaxValue = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<int> MinValue = new NumericValue<int>(0, 0, 10000);
+		public NumericValue<int> MaxValue = new NumericValue<int>(0, 0, 10000);
 	}
 
 	public partial class Requirement_QuestCompleted : IRequirementContent

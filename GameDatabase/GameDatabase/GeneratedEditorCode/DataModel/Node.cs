@@ -206,7 +206,7 @@ namespace EditorDatabase.DataModel
 		{
 			Transition = new NumericValue<int>(serializable.DefaultTransition, 1, 1000);
 			Faction = database.GetFactionId(serializable.Faction);
-			Level = new NumericValue<int>(serializable.Value, 0, 1000);
+			Level = new NumericValue<int>(serializable.Value, 0, 10000);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -221,7 +221,7 @@ namespace EditorDatabase.DataModel
 
 		public NumericValue<int> Transition = new NumericValue<int>(0, 1, 1000);
 		public ItemId<Faction> Faction = ItemId<Faction>.Empty;
-		public NumericValue<int> Level = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<int> Level = new NumericValue<int>(0, 0, 10000);
 	}
 
 	public partial class Node_Switch : INodeContent

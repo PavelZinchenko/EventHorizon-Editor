@@ -27,7 +27,7 @@ namespace EditorDatabase.DataModel
 			Faction = database.GetFactionId(serializable.Faction);
 			Inventory = database.GetLootId(serializable.Inventory);
 			Fleet = database.GetFleetId(serializable.Fleet);
-			Relations = new NumericValue<int>(serializable.Relations, 0, 100);
+			Relations = new NumericValue<int>(serializable.Relations, -100, 100);
 			IsUnique = serializable.IsUnique;
 
 			OnDataDeserialized(serializable, database);
@@ -52,7 +52,7 @@ namespace EditorDatabase.DataModel
 		public ItemId<Faction> Faction = ItemId<Faction>.Empty;
 		public ItemId<LootModel> Inventory = ItemId<LootModel>.Empty;
 		public ItemId<Fleet> Fleet = ItemId<Fleet>.Empty;
-		public NumericValue<int> Relations = new NumericValue<int>(0, 0, 100);
+		public NumericValue<int> Relations = new NumericValue<int>(0, -100, 100);
 		public bool IsUnique;
 
 		public static Character DefaultValue { get; private set; }

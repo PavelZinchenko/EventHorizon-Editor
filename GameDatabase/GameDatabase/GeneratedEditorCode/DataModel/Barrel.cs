@@ -30,7 +30,7 @@ namespace EditorDatabase.DataModel
 			RotationSpeed = new NumericValue<float>(serializable.RotationSpeed, 0f, 1000f);
 			WeaponClass = serializable.WeaponClass;
 			Image = serializable.Image;
-			Size = new NumericValue<float>(serializable.Size, 0f, 10f);
+			Size = new NumericValue<float>(serializable.Size, 0f, 100f);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -59,7 +59,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> RotationSpeed = new NumericValue<float>(0, 0f, 1000f);
 		public string WeaponClass;
 		public string Image;
-		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 10f);
+		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 100f);
 
 		public static Barrel DefaultValue { get; private set; }
 	}

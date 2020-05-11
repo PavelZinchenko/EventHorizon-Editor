@@ -158,8 +158,8 @@ namespace EditorDatabase.DataModel
 
 		public void Load(LootContentSerializable serializable, Database database)
 		{
-			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 100000000);
-			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 100000000);
+			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
+			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -171,8 +171,8 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
-		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 100000000);
-		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 100000000);
+		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
+		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
 	}
 
 	public partial class LootContent_Money : ILootContentContent
@@ -182,8 +182,8 @@ namespace EditorDatabase.DataModel
 
 		public void Load(LootContentSerializable serializable, Database database)
 		{
-			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 100000000);
-			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 100000000);
+			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
+			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -195,8 +195,8 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
-		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 100000000);
-		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 100000000);
+		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
+		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
 	}
 
 	public partial class LootContent_Stars : ILootContentContent
@@ -206,8 +206,8 @@ namespace EditorDatabase.DataModel
 
 		public void Load(LootContentSerializable serializable, Database database)
 		{
-			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 100000000);
-			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 100000000);
+			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
+			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -219,8 +219,8 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
-		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 100000000);
-		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 100000000);
+		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
+		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
 	}
 
 	public partial class LootContent_RandomComponents : ILootContentContent
@@ -230,8 +230,8 @@ namespace EditorDatabase.DataModel
 
 		public void Load(LootContentSerializable serializable, Database database)
 		{
-			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 100000000);
-			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 100000000);
+			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
+			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
 			ValueRatio = new NumericValue<float>(serializable.ValueRatio, 0.001f, 1000f);
 			Factions = new RequiredFactions(serializable.Factions, database);
 
@@ -247,8 +247,8 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
-		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 100000000);
-		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 100000000);
+		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
+		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
 		public NumericValue<float> ValueRatio = new NumericValue<float>(0, 0.001f, 1000f);
 		public RequiredFactions Factions = new RequiredFactions();
 	}
@@ -260,8 +260,8 @@ namespace EditorDatabase.DataModel
 
 		public void Load(LootContentSerializable serializable, Database database)
 		{
-			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 100000000);
-			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 100000000);
+			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
+			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
 			Items = serializable.Items?.Select(item => new LootItem(item, database)).ToArray();
 
 			OnDataDeserialized(serializable, database);
@@ -278,8 +278,8 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
-		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 100000000);
-		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 100000000);
+		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
+		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
 		public LootItem[] Items;
 	}
 
@@ -341,8 +341,8 @@ namespace EditorDatabase.DataModel
 			QuestItem = database.GetQuestItemId(serializable.ItemId);
 			if (QuestItem.IsNull)
 			    throw new DatabaseException(this.GetType().Name + ".QuestItem cannot be null");
-			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 100000000);
-			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 100000000);
+			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
+			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -356,8 +356,8 @@ namespace EditorDatabase.DataModel
 		}
 
 		public ItemId<QuestItem> QuestItem = ItemId<QuestItem>.Empty;
-		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 100000000);
-		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 100000000);
+		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
+		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
 	}
 
 	public partial class LootContent_Ship : ILootContentContent
@@ -416,8 +416,8 @@ namespace EditorDatabase.DataModel
 			Component = database.GetComponentId(serializable.ItemId);
 			if (Component.IsNull)
 			    throw new DatabaseException(this.GetType().Name + ".Component cannot be null");
-			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 100000000);
-			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 100000000);
+			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
+			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -431,8 +431,8 @@ namespace EditorDatabase.DataModel
 		}
 
 		public ItemId<Component> Component = ItemId<Component>.Empty;
-		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 100000000);
-		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 100000000);
+		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
+		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
 	}
 
 }

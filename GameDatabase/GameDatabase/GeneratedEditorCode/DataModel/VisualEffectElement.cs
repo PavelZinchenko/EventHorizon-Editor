@@ -27,8 +27,8 @@ namespace EditorDatabase.DataModel
 			ColorMode = serializable.ColorMode;
 			Color = Helpers.ColorFromString(serializable.Color);
 			Size = new NumericValue<float>(serializable.Size, 0.001f, 100f);
-			StartTime = new NumericValue<float>(serializable.StartTime, 0f, 100f);
-			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 100f);
+			StartTime = new NumericValue<float>(serializable.StartTime, 0f, 1000f);
+			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -52,8 +52,8 @@ namespace EditorDatabase.DataModel
 		public ColorMode ColorMode;
 		public System.Drawing.Color Color;
 		public NumericValue<float> Size = new NumericValue<float>(0, 0.001f, 100f);
-		public NumericValue<float> StartTime = new NumericValue<float>(0, 0f, 100f);
-		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 100f);
+		public NumericValue<float> StartTime = new NumericValue<float>(0, 0f, 1000f);
+		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1000f);
 
 		public static VisualEffectElement DefaultValue { get; private set; }
 	}

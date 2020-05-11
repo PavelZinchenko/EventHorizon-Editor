@@ -20,5 +20,6 @@ namespace EditorDatabase.Serializable
 
         public ItemType ItemType;
         public int Id;
+        public bool Disabled;
     }
 }

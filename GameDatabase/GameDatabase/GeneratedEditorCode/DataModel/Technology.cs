@@ -51,7 +51,7 @@ namespace EditorDatabase.DataModel
 			Id = new ItemId<Technology>(serializable);
 
 			Type = serializable.Type;
-			Price = new NumericValue<int>(serializable.Price, 0, 1000);
+			Price = new NumericValue<int>(serializable.Price, 0, 10000);
 			Hidden = serializable.Hidden;
 			Special = serializable.Special;
 			Dependencies = serializable.Dependencies?.Select(id => new Wrapper<Technology> { Item = database.GetTechnologyId(id) }).ToArray();
@@ -110,7 +110,7 @@ namespace EditorDatabase.DataModel
 
 		private ITechnologyContent _content;
 		public TechType Type;
-		public NumericValue<int> Price = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<int> Price = new NumericValue<int>(0, 0, 10000);
 		public bool Hidden;
 		public bool Special;
 		public Wrapper<Technology>[] Dependencies;

@@ -23,7 +23,7 @@ namespace EditorDatabase.DataModel
 		{
 			Id = new ItemId<Fleet>(serializable.Id, serializable.FileName);
 			Factions = new RequiredFactions(serializable.Factions, database);
-			LevelBonus = new NumericValue<int>(serializable.LevelBonus, -100, 100);
+			LevelBonus = new NumericValue<int>(serializable.LevelBonus, -10000, 10000);
 			NoRandomShips = serializable.NoRandomShips;
 			CombatTimeLimit = new NumericValue<int>(serializable.CombatTimeLimit, 0, 999);
 			LootCondition = serializable.LootCondition;
@@ -51,7 +51,7 @@ namespace EditorDatabase.DataModel
 		public readonly ItemId<Fleet> Id;
 
 		public RequiredFactions Factions = new RequiredFactions();
-		public NumericValue<int> LevelBonus = new NumericValue<int>(0, -100, 100);
+		public NumericValue<int> LevelBonus = new NumericValue<int>(0, -10000, 10000);
 		public bool NoRandomShips;
 		public NumericValue<int> CombatTimeLimit = new NumericValue<int>(0, 0, 999);
 		public RewardCondition LootCondition;

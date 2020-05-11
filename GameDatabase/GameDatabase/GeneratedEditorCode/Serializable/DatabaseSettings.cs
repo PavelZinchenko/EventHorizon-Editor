@@ -22,5 +22,6 @@ namespace EditorDatabase.Serializable
 		[DefaultValue("")]
 		public string ModId;
 		public int ModVersion;
+		public bool UnloadOriginalDatabase;
 	}
 }

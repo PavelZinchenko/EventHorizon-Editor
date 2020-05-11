@@ -28,9 +28,9 @@ namespace EditorDatabase.DataModel
 			Modification = serializable.Modification;
 			Quality = serializable.Quality;
 			Locked = serializable.Locked;
-			X = new NumericValue<int>(serializable.X, -128, 127);
-			Y = new NumericValue<int>(serializable.Y, -128, 127);
-			BarrelId = new NumericValue<int>(serializable.BarrelId, 0, 32);
+			X = new NumericValue<int>(serializable.X, -32768, 32767);
+			Y = new NumericValue<int>(serializable.Y, -32768, 32767);
+			BarrelId = new NumericValue<int>(serializable.BarrelId, 0, 255);
 			Behaviour = new NumericValue<int>(serializable.Behaviour, 0, 10);
 			KeyBinding = new NumericValue<int>(serializable.KeyBinding, -10, 10);
 
@@ -57,9 +57,9 @@ namespace EditorDatabase.DataModel
 		public ComponentModType Modification;
 		public ModificationQuality Quality;
 		public bool Locked;
-		public NumericValue<int> X = new NumericValue<int>(0, -128, 127);
-		public NumericValue<int> Y = new NumericValue<int>(0, -128, 127);
-		public NumericValue<int> BarrelId = new NumericValue<int>(0, 0, 32);
+		public NumericValue<int> X = new NumericValue<int>(0, -32768, 32767);
+		public NumericValue<int> Y = new NumericValue<int>(0, -32768, 32767);
+		public NumericValue<int> BarrelId = new NumericValue<int>(0, 0, 255);
 		public NumericValue<int> Behaviour = new NumericValue<int>(0, 0, 10);
 		public NumericValue<int> KeyBinding = new NumericValue<int>(0, -10, 10);
 

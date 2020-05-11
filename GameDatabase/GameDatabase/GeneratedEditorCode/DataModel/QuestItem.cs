@@ -26,7 +26,7 @@ namespace EditorDatabase.DataModel
 			Description = serializable.Description;
 			Icon = serializable.Icon;
 			Color = Helpers.ColorFromString(serializable.Color);
-			Price = new NumericValue<int>(serializable.Price, 0, 100000000);
+			Price = new NumericValue<int>(serializable.Price, 0, 999999999);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -47,7 +47,7 @@ namespace EditorDatabase.DataModel
 		public string Description;
 		public string Icon;
 		public System.Drawing.Color Color;
-		public NumericValue<int> Price = new NumericValue<int>(0, 0, 100000000);
+		public NumericValue<int> Price = new NumericValue<int>(0, 0, 999999999);
 
 		public static QuestItem DefaultValue { get; private set; }
 	}

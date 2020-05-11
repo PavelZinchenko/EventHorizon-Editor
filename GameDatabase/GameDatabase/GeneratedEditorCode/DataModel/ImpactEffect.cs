@@ -24,7 +24,7 @@ namespace EditorDatabase.DataModel
 		{
 			Type = serializable.Type;
 			DamageType = serializable.DamageType;
-			Power = new NumericValue<float>(serializable.Power, 0f, 1000000f);
+			Power = new NumericValue<float>(serializable.Power, 0f, 1E+09f);
 			Factor = new NumericValue<float>(serializable.Factor, 0f, 1f);
 
 			OnDataDeserialized(serializable, database);
@@ -43,7 +43,7 @@ namespace EditorDatabase.DataModel
 
 		public ImpactEffectType Type;
 		public DamageType DamageType;
-		public NumericValue<float> Power = new NumericValue<float>(0, 0f, 1000000f);
+		public NumericValue<float> Power = new NumericValue<float>(0, 0f, 1E+09f);
 		public NumericValue<float> Factor = new NumericValue<float>(0, 0f, 1f);
 
 		public static ImpactEffect DefaultValue { get; private set; }
