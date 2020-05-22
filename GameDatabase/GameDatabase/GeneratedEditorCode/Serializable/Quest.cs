@@ -21,6 +21,7 @@ namespace EditorDatabase.Serializable
 		public QuestType QuestType;
 		public StartCondition StartCondition;
 		public float Weight;
+		public QuestOriginSerializable Origin;
 		public RequirementSerializable Requirement;
 		public int Level;
 		public NodeSerializable[] Nodes;

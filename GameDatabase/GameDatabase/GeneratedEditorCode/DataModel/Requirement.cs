@@ -52,6 +52,8 @@ namespace EditorDatabase.DataModel
 					return new Requirement_CharacterRelations();
 				case RequirementType.FactionRelations:
 					return new Requirement_FactionRelations();
+				case RequirementType.StarbaseCaptured:
+					return new RequirementEmptyContent();
 				case RequirementType.Faction:
 					return new Requirement_Faction();
 				case RequirementType.HaveQuestItem:
@@ -60,8 +62,12 @@ namespace EditorDatabase.DataModel
 					return new Requirement_HaveItem();
 				case RequirementType.HaveItemById:
 					return new Requirement_HaveItemById();
-				case RequirementType.ComeBack:
+				case RequirementType.ComeToOrigin:
 					return new RequirementEmptyContent();
+				case RequirementType.TimeSinceQuestStart:
+					return new Requirement_TimeSinceQuestStart();
+				case RequirementType.TimeSinceLastCompletion:
+					return new Requirement_TimeSinceLastCompletion();
 				default:
 					throw new DatabaseException("Requirement: Invalid content type - " + type);
 			}
@@ -92,6 +98,8 @@ namespace EditorDatabase.DataModel
 			serializable.MinValue = 0;
 			serializable.MaxValue = 0;
 			serializable.MinValue = 0;
+			serializable.MinValue = 0;
+			serializable.MaxValue = 0;
 			serializable.Character = 0;
 			serializable.Faction = 0;
 			serializable.Loot = new LootContentSerializable();
@@ -435,6 +443,54 @@ namespace EditorDatabase.DataModel
 		}
 
 		public ItemId<LootModel> Loot = ItemId<LootModel>.Empty;
+	}
+
+	public partial class Requirement_TimeSinceQuestStart : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+		partial void OnDataSerialized(ref RequirementSerializable serializable);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			Minutes = new NumericValue<int>(serializable.MinValue, 0, 999999);
+			Hours = new NumericValue<int>(serializable.MaxValue, 0, 999999);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref RequirementSerializable serializable)
+		{
+			serializable.MinValue = Minutes.Value;
+			serializable.MaxValue = Hours.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public NumericValue<int> Minutes = new NumericValue<int>(0, 0, 999999);
+		public NumericValue<int> Hours = new NumericValue<int>(0, 0, 999999);
+	}
+
+	public partial class Requirement_TimeSinceLastCompletion : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+		partial void OnDataSerialized(ref RequirementSerializable serializable);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			Minutes = new NumericValue<int>(serializable.MinValue, 0, 999999);
+			Hours = new NumericValue<int>(serializable.MaxValue, 0, 999999);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref RequirementSerializable serializable)
+		{
+			serializable.MinValue = Minutes.Value;
+			serializable.MaxValue = Hours.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public NumericValue<int> Minutes = new NumericValue<int>(0, 0, 999999);
+		public NumericValue<int> Hours = new NumericValue<int>(0, 0, 999999);
 	}
 
 }

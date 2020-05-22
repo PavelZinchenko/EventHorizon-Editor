@@ -147,6 +147,7 @@
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\NodeTransition.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\Quest.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\QuestItem.cs" />
+    <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\QuestOrigin.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\Requirement.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\Satellite.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\DataModel\SatelliteBuild.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="GameDatabase\GeneratedEditorCode\Enums\ModificationQuality.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Enums\NodeType.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Enums\PlatformType.cs" />
+    <Compile Include="GameDatabase\GeneratedEditorCode\Enums\QuestOriginType.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Enums\QuestType.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Enums\RequiredViewMode.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Enums\RequirementType.cs" />
@@ -223,6 +225,7 @@
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\NodeTransition.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\Quest.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\QuestItem.cs" />
+    <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\QuestOrigin.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\Requirement.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\Satellite.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\Serializable\SatelliteBuild.cs" />
