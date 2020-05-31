@@ -94,11 +94,15 @@ namespace GameDatabase
                 if (ext == ".json")
                 {
                     yield return (byte)FileType.Data;
+                    foreach (var value in SerializeTextFile(file.FullName))
+                        yield return value;
                 }
                 else if (ext == ".png" || ext == ".jpg" || ext == ".jpeg")
                 {
                     yield return (byte)FileType.Image;
                     foreach (var value in Serialize(file.Name))
+                        yield return value;
+                    foreach (var value in SerializeBinaryFile(file.FullName))
                         yield return value;
                 }
                 else if (ext == ".wav")
@@ -106,26 +110,39 @@ namespace GameDatabase
                     yield return (byte)FileType.WaveAudio;
                     foreach (var value in Serialize(Path.GetFileNameWithoutExtension(file.Name)))
                         yield return value;
+                    foreach (var value in SerializeBinaryFile(file.FullName))
+                        yield return value;
                 }
                 else if (ext == ".xml")
                 {
                     yield return (byte)FileType.Localization;
                     foreach (var value in Serialize(Path.GetFileNameWithoutExtension(file.Name)))
                         yield return value;
+                    foreach (var value in SerializeTextFile(file.FullName))
+                        yield return value;
                 }
                 else
                 {
                     continue;
                 }
-
-                var fileData = File.ReadAllBytes(file.FullName);
-                foreach (var value in BitConverter.GetBytes(fileData.Length))
-                    yield return value;
-                foreach (var value in fileData)
-                    yield return value;
             }
 
             yield return (byte)FileType.None;
+        }
+
+        private IEnumerable<byte> SerializeBinaryFile(string name)
+        {
+            var fileData = File.ReadAllBytes(name);
+            foreach (var value in BitConverter.GetBytes(fileData.Length))
+                yield return value;
+            foreach (var value in fileData)
+                yield return value;
+        }
+
+        private IEnumerable<byte> SerializeTextFile(string name)
+        {
+            var fileData = File.ReadAllText(name);
+            return Serialize(fileData);
         }
 
         private static IEnumerable<byte> Serialize(string data)
