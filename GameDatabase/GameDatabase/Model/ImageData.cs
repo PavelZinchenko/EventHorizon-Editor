@@ -12,7 +12,7 @@ namespace EditorDatabase.Model
             _image = null;
         }
 
-        public string Name => string.IsNullOrEmpty(_fileName) ? string.Empty : Path.GetFileName(_fileName);
+        public string Name => string.IsNullOrEmpty(_fileName) ? string.Empty : Path.GetFileNameWithoutExtension(_fileName);
         public Image Image
         {
             get

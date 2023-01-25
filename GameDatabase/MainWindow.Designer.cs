@@ -32,7 +32,7 @@ namespace GameDatabase
         {
             this.DatabaseTreeView = new System.Windows.Forms.TreeView();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.structDataView1 = new StructDataView();
+            this.structDataView1 = new GameDatabase.Controls.StructDataView();
             this.EditButton = new System.Windows.Forms.Button();
             this.ItemTypeText = new System.Windows.Forms.Label();
             this.ItemTypeLabel = new System.Windows.Forms.Label();
@@ -100,7 +100,7 @@ namespace GameDatabase
             this.structDataView1.Location = new System.Drawing.Point(4, 41);
             this.structDataView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.structDataView1.Name = "structDataView1";
-            this.structDataView1.Size = new System.Drawing.Size(383, 483);
+            this.structDataView1.Size = new System.Drawing.Size(381, 483);
             this.structDataView1.TabIndex = 5;
             // 
             // EditButton
@@ -164,28 +164,28 @@ namespace GameDatabase
             // loadMenuItem
             // 
             this.loadMenuItem.Name = "loadMenuItem";
-            this.loadMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadMenuItem.Text = "Load";
             this.loadMenuItem.Click += new System.EventHandler(this.loadMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsMenuItem
             // 
             this.saveAsMenuItem.Name = "saveAsMenuItem";
-            this.saveAsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsMenuItem.Text = "Save As...";
             this.saveAsMenuItem.Click += new System.EventHandler(this.saveAsMenuItem_Click);
             // 
             // createModMenuItem
             // 
             this.createModMenuItem.Name = "createModMenuItem";
-            this.createModMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.createModMenuItem.Size = new System.Drawing.Size(180, 22);
             this.createModMenuItem.Text = "Create Mod...";
             this.createModMenuItem.Click += new System.EventHandler(this.createModMenuItem_Click);
             // 

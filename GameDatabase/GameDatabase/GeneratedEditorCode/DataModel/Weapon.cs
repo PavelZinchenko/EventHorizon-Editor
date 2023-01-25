@@ -30,6 +30,8 @@ namespace EditorDatabase.DataModel
 			ShotSound = serializable.ShotSound;
 			ChargeSound = serializable.ChargeSound;
 			ShotEffectPrefab = serializable.ShotEffectPrefab;
+			VisualEffect = database.GetVisualEffectId(serializable.VisualEffect);
+			EffectSize = new NumericValue<float>(serializable.EffectSize, 0f, 100f);
 			ControlButtonIcon = serializable.ControlButtonIcon;
 
 			OnDataDeserialized(serializable, database);
@@ -45,6 +47,8 @@ namespace EditorDatabase.DataModel
 			serializable.ShotSound = ShotSound;
 			serializable.ChargeSound = ChargeSound;
 			serializable.ShotEffectPrefab = ShotEffectPrefab;
+			serializable.VisualEffect = VisualEffect.Value;
+			serializable.EffectSize = EffectSize.Value;
 			serializable.ControlButtonIcon = ControlButtonIcon;
 			OnDataSerialized(ref serializable);
 		}
@@ -59,6 +63,8 @@ namespace EditorDatabase.DataModel
 		public string ShotSound;
 		public string ChargeSound;
 		public string ShotEffectPrefab;
+		public ItemId<VisualEffect> VisualEffect = ItemId<VisualEffect>.Empty;
+		public NumericValue<float> EffectSize = new NumericValue<float>(0, 0f, 100f);
 		public string ControlButtonIcon;
 
 		public static Weapon DefaultValue { get; private set; }

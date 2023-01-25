@@ -38,6 +38,8 @@ namespace EditorDatabase.DataModel
 					return new BulletTrigger_SpawnBullet();
 				case BulletEffectType.Detonate:
 					return new BulletTriggerEmptyContent();
+				case BulletEffectType.SpawnStaticSfx:
+					return new BulletTrigger_SpawnStaticSfx();
 				default:
 					throw new DatabaseException("BulletTrigger: Invalid content type - " + type);
 			}
@@ -199,6 +201,42 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> RandomFactor = new NumericValue<float>(0, 0f, 1f);
 		public NumericValue<float> PowerMultiplier = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<int> MaxNestingLevel = new NumericValue<int>(0, 0, 100);
+	}
+
+	public partial class BulletTrigger_SpawnStaticSfx : IBulletTriggerContent
+	{
+		partial void OnDataDeserialized(BulletTriggerSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BulletTriggerSerializable serializable);
+
+		public void Load(BulletTriggerSerializable serializable, Database database)
+		{
+			VisualEffect = database.GetVisualEffectId(serializable.VisualEffect);
+			AudioClip = serializable.AudioClip;
+			Color = Helpers.ColorFromString(serializable.Color);
+			ColorMode = serializable.ColorMode;
+			Size = new NumericValue<float>(serializable.Size, 0f, 100f);
+			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BulletTriggerSerializable serializable)
+		{
+			serializable.VisualEffect = VisualEffect.Value;
+			serializable.AudioClip = AudioClip;
+			serializable.Color = Helpers.ColorToString(Color);
+			serializable.ColorMode = ColorMode;
+			serializable.Size = Size.Value;
+			serializable.Lifetime = Lifetime.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public ItemId<VisualEffect> VisualEffect = ItemId<VisualEffect>.Empty;
+		public string AudioClip;
+		public System.Drawing.Color Color;
+		public ColorMode ColorMode;
+		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 100f);
+		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1000f);
 	}
 
 }

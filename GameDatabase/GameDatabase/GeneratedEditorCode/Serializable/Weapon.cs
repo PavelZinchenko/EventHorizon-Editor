@@ -27,6 +27,8 @@ namespace EditorDatabase.Serializable
 		public string ChargeSound;
 		[DefaultValue("")]
 		public string ShotEffectPrefab;
+		public int VisualEffect;
+		public float EffectSize;
 		[DefaultValue("")]
 		public string ControlButtonIcon;
 	}

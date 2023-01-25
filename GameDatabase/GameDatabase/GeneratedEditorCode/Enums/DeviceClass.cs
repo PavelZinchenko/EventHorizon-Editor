@@ -28,5 +28,8 @@ namespace EditorDatabase.Enums
 		WormTail,
 		ClonningCenter,
 		TimeMachine,
+		Jammer,
+		DroneCamouflage,
+		MissileCamouflage,
 	}
 }

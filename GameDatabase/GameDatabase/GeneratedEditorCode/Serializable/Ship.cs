@@ -36,7 +36,9 @@ namespace EditorDatabase.Serializable
 		public float KineticResistance;
 		public float HeatResistance;
 		public bool Regeneration;
-		public float BaseWeightModifier;
+		public float WeightModifier;
+		public float VelocityModifier;
+		public float TurnRateModifier;
 		public int[] BuiltinDevices;
 		[DefaultValue("")]
 		public string Layout;

@@ -23,6 +23,8 @@ namespace EditorDatabase.Serializable
 		[DefaultValue("")]
 		public string Color;
 		public float Size;
+		public float GrowthRate;
+		public float TurnRate;
 		public float StartTime;
 		public float Lifetime;
 	}

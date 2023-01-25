@@ -21,6 +21,7 @@ namespace EditorDatabase.Serializable
 		public string Image;
 		public float Size;
 		public float Margins;
+		public float Deformation;
 		[DefaultValue("")]
 		public string MainColor;
 		public ColorMode MainColorMode;

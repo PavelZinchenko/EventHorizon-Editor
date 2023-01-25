@@ -38,7 +38,9 @@ namespace EditorDatabase.DataModel
 			KineticResistance = new NumericValue<float>(serializable.KineticResistance, -100f, 100f);
 			HeatResistance = new NumericValue<float>(serializable.HeatResistance, -100f, 100f);
 			Regeneration = serializable.Regeneration;
-			BaseWeightModifier = new NumericValue<float>(serializable.BaseWeightModifier, -0.9f, 1000f);
+			WeightModifier = new NumericValue<float>(serializable.WeightModifier, -0.99f, 10f);
+			VelocityModifier = new NumericValue<float>(serializable.VelocityModifier, -0.99f, 10f);
+			TurnRateModifier = new NumericValue<float>(serializable.TurnRateModifier, -0.99f, 10f);
 			BuiltinDevices = serializable.BuiltinDevices?.Select(id => new Wrapper<Device> { Item = database.GetDeviceId(id) }).ToArray();
 			Layout = new Layout(serializable.Layout);
 			Barrels = serializable.Barrels?.Select(item => new Barrel(item, database)).ToArray();
@@ -67,7 +69,9 @@ namespace EditorDatabase.DataModel
 			serializable.KineticResistance = KineticResistance.Value;
 			serializable.HeatResistance = HeatResistance.Value;
 			serializable.Regeneration = Regeneration;
-			serializable.BaseWeightModifier = BaseWeightModifier.Value;
+			serializable.WeightModifier = WeightModifier.Value;
+			serializable.VelocityModifier = VelocityModifier.Value;
+			serializable.TurnRateModifier = TurnRateModifier.Value;
 			if (BuiltinDevices == null || BuiltinDevices.Length == 0)
 			    serializable.BuiltinDevices = null;
 			else
@@ -98,7 +102,9 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> KineticResistance = new NumericValue<float>(0, -100f, 100f);
 		public NumericValue<float> HeatResistance = new NumericValue<float>(0, -100f, 100f);
 		public bool Regeneration;
-		public NumericValue<float> BaseWeightModifier = new NumericValue<float>(0, -0.9f, 1000f);
+		public NumericValue<float> WeightModifier = new NumericValue<float>(0, -0.99f, 10f);
+		public NumericValue<float> VelocityModifier = new NumericValue<float>(0, -0.99f, 10f);
+		public NumericValue<float> TurnRateModifier = new NumericValue<float>(0, -0.99f, 10f);
 		public Wrapper<Device>[] BuiltinDevices;
 		public Layout Layout;
 		public Barrel[] Barrels;

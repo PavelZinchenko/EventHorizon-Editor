@@ -1,0 +1,1 @@
+..\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\bin\Release\DatabaseCodeGenerator.exe ..\Database\DatabaseCodeGenerator\Schema GameDatabase\GameDatabase editor

@@ -30,7 +30,7 @@ namespace EditorDatabase.DataModel
 			if (Stats.IsNull)
 			    throw new DatabaseException(this.GetType().Name + ".Stats cannot be null");
 			Faction = database.GetFactionId(serializable.Faction);
-			Level = new NumericValue<int>(serializable.Level, 0, 1000);
+			Level = new NumericValue<int>(serializable.Level, 0, 2147483647);
 			Icon = serializable.Icon;
 			Color = Helpers.ColorFromString(serializable.Color);
 			Layout = new Layout(serializable.Layout);
@@ -84,7 +84,7 @@ namespace EditorDatabase.DataModel
 		public Availability Availability;
 		public ItemId<ComponentStats> Stats = ItemId<ComponentStats>.Empty;
 		public ItemId<Faction> Faction = ItemId<Faction>.Empty;
-		public NumericValue<int> Level = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<int> Level = new NumericValue<int>(0, 0, 2147483647);
 		public string Icon;
 		public System.Drawing.Color Color;
 		public Layout Layout;

@@ -1,12 +1,4 @@
-﻿//-------------------------------------------------------------------------------
-//                                                                               
-//    This code was automatically generated.                                     
-//    Changes to this file may cause incorrect behavior and will be lost if      
-//    the code is regenerated.                                                   
-//                                                                               
-//-------------------------------------------------------------------------------
-
-using System.Linq;
+﻿using System.Linq;
 using EditorDatabase.Enums;
 using EditorDatabase.Serializable;
 using EditorDatabase.Model;
