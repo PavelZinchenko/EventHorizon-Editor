@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDatabase", "GameDatabase\GameDatabase.csproj", "{0C2B292E-5AD0-455B-A005-66B21959A3B2}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -11,6 +11,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyotek.Windows.Forms.ColorPicker", "Cyotek.Windows.Forms.ColorPicker\Cyotek.Windows.Forms.ColorPicker\Cyotek.Windows.Forms.ColorPicker.csproj", "{FB2A5786-CD2E-42CE-BC5D-0FCE90034221}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IonicZlib", "IonicZlib\IonicZlib.csproj", "{8F5D39A0-9A9C-404E-A3BE-AA79DD44E235}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analyzer", "Analyzer\Analyzer.csproj", "{722D47DD-2428-4120-8111-D84C67118A57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,8 +32,15 @@ Global
 		{8F5D39A0-9A9C-404E-A3BE-AA79DD44E235}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F5D39A0-9A9C-404E-A3BE-AA79DD44E235}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F5D39A0-9A9C-404E-A3BE-AA79DD44E235}.Release|Any CPU.Build.0 = Release|Any CPU
+		{722D47DD-2428-4120-8111-D84C67118A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{722D47DD-2428-4120-8111-D84C67118A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{722D47DD-2428-4120-8111-D84C67118A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{722D47DD-2428-4120-8111-D84C67118A57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD3E743D-B66D-4621-9C3E-E34241F0FD36}
 	EndGlobalSection
 EndGlobal

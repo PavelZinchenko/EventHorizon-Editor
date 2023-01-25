@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Analyzer": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\Projects\\Database\\Analyzer\\Database"
+    }
+  }
+}
