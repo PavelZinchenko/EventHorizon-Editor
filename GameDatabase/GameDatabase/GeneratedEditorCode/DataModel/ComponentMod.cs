@@ -21,9 +21,15 @@ namespace EditorDatabase.DataModel
 
 		public ComponentMod(ComponentModSerializable serializable, Database database)
 		{
-			Id = new ItemId<ComponentMod>(serializable.Id, serializable.FileName);
-			Type = serializable.Type;
-
+			try
+			{
+				Id = new ItemId<ComponentMod>(serializable.Id, serializable.FileName);
+				Type = serializable.Type;
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

@@ -24,7 +24,6 @@ namespace EditorDatabase.DataModel
 		{
 			Weight = new NumericValue<float>(serializable.Weight, -3.402823E+38f, 3.402823E+38f);
 			Loot = new LootContent(serializable.Loot, database);
-
 			OnDataDeserialized(serializable, database);
 		}
 

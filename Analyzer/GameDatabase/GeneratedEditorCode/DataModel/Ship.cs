@@ -21,30 +21,36 @@ namespace EditorDatabase.DataModel
 
 		public Ship(ShipSerializable serializable, Database database)
 		{
-			Id = new ItemId<Ship>(serializable.Id, serializable.FileName);
-			ShipCategory = serializable.ShipCategory;
-			Name = serializable.Name;
-			Faction = database.GetFactionId(serializable.Faction);
-			SizeClass = serializable.SizeClass;
-			IconImage = serializable.IconImage;
-			IconScale = new NumericValue<float>(serializable.IconScale, 0.1f, 100f);
-			ModelImage = serializable.ModelImage;
-			ModelScale = new NumericValue<float>(serializable.ModelScale, 0.1f, 100f);
-			EnginePosition = serializable.EnginePosition;
-			EngineColor = Helpers.ColorFromString(serializable.EngineColor);
-			EngineSize = new NumericValue<float>(serializable.EngineSize, 0f, 1f);
-			Engines = serializable.Engines?.Select(item => new Engine(item, database)).ToArray();
-			EnergyResistance = new NumericValue<float>(serializable.EnergyResistance, -100f, 100f);
-			KineticResistance = new NumericValue<float>(serializable.KineticResistance, -100f, 100f);
-			HeatResistance = new NumericValue<float>(serializable.HeatResistance, -100f, 100f);
-			Regeneration = serializable.Regeneration;
-			WeightModifier = new NumericValue<float>(serializable.WeightModifier, -0.99f, 10f);
-			VelocityModifier = new NumericValue<float>(serializable.VelocityModifier, -0.99f, 10f);
-			TurnRateModifier = new NumericValue<float>(serializable.TurnRateModifier, -0.99f, 10f);
-			BuiltinDevices = serializable.BuiltinDevices?.Select(id => new Wrapper<Device> { Item = database.GetDeviceId(id) }).ToArray();
-			Layout = new Layout(serializable.Layout);
-			Barrels = serializable.Barrels?.Select(item => new Barrel(item, database)).ToArray();
-
+			try
+			{
+				Id = new ItemId<Ship>(serializable.Id, serializable.FileName);
+				ShipCategory = serializable.ShipCategory;
+				Name = serializable.Name;
+				Faction = database.GetFactionId(serializable.Faction);
+				SizeClass = serializable.SizeClass;
+				IconImage = serializable.IconImage;
+				IconScale = new NumericValue<float>(serializable.IconScale, 0.1f, 100f);
+				ModelImage = serializable.ModelImage;
+				ModelScale = new NumericValue<float>(serializable.ModelScale, 0.1f, 100f);
+				EnginePosition = serializable.EnginePosition;
+				EngineColor = Helpers.ColorFromString(serializable.EngineColor);
+				EngineSize = new NumericValue<float>(serializable.EngineSize, 0f, 1f);
+				Engines = serializable.Engines?.Select(item => new Engine(item, database)).ToArray();
+				EnergyResistance = new NumericValue<float>(serializable.EnergyResistance, -100f, 100f);
+				KineticResistance = new NumericValue<float>(serializable.KineticResistance, -100f, 100f);
+				HeatResistance = new NumericValue<float>(serializable.HeatResistance, -100f, 100f);
+				Regeneration = serializable.Regeneration;
+				WeightModifier = new NumericValue<float>(serializable.WeightModifier, -0.99f, 10f);
+				VelocityModifier = new NumericValue<float>(serializable.VelocityModifier, -0.99f, 10f);
+				TurnRateModifier = new NumericValue<float>(serializable.TurnRateModifier, -0.99f, 10f);
+				BuiltinDevices = serializable.BuiltinDevices?.Select(id => new Wrapper<Device> { Item = database.GetDeviceId(id) }).ToArray();
+				Layout = new Layout(serializable.Layout);
+				Barrels = serializable.Barrels?.Select(item => new Barrel(item, database)).ToArray();
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

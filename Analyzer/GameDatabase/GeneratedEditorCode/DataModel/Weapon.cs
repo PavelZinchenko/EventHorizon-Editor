@@ -21,19 +21,25 @@ namespace EditorDatabase.DataModel
 
 		public Weapon(WeaponSerializable serializable, Database database)
 		{
-			Id = new ItemId<Weapon>(serializable.Id, serializable.FileName);
-			WeaponClass = serializable.WeaponClass;
-			FireRate = new NumericValue<float>(serializable.FireRate, 0f, 100f);
-			Spread = new NumericValue<float>(serializable.Spread, 0f, 360f);
-			Magazine = new NumericValue<int>(serializable.Magazine, 0, 999999999);
-			ActivationType = serializable.ActivationType;
-			ShotSound = serializable.ShotSound;
-			ChargeSound = serializable.ChargeSound;
-			ShotEffectPrefab = serializable.ShotEffectPrefab;
-			VisualEffect = database.GetVisualEffectId(serializable.VisualEffect);
-			EffectSize = new NumericValue<float>(serializable.EffectSize, 0f, 100f);
-			ControlButtonIcon = serializable.ControlButtonIcon;
-
+			try
+			{
+				Id = new ItemId<Weapon>(serializable.Id, serializable.FileName);
+				WeaponClass = serializable.WeaponClass;
+				FireRate = new NumericValue<float>(serializable.FireRate, 0f, 100f);
+				Spread = new NumericValue<float>(serializable.Spread, 0f, 360f);
+				Magazine = new NumericValue<int>(serializable.Magazine, 0, 999999999);
+				ActivationType = serializable.ActivationType;
+				ShotSound = serializable.ShotSound;
+				ChargeSound = serializable.ChargeSound;
+				ShotEffectPrefab = serializable.ShotEffectPrefab;
+				VisualEffect = database.GetVisualEffectId(serializable.VisualEffect);
+				EffectSize = new NumericValue<float>(serializable.EffectSize, 0f, 100f);
+				ControlButtonIcon = serializable.ControlButtonIcon;
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

@@ -21,16 +21,22 @@ namespace EditorDatabase.DataModel
 
 		public QuestModel(QuestSerializable serializable, Database database)
 		{
-			Id = new ItemId<QuestModel>(serializable.Id, serializable.FileName);
-			Name = serializable.Name;
-			QuestType = serializable.QuestType;
-			StartCondition = serializable.StartCondition;
-			Weight = new NumericValue<float>(serializable.Weight, 0f, 1000f);
-			Origin = new QuestOrigin(serializable.Origin, database);
-			Requirement = new Requirement(serializable.Requirement, database);
-			Level = new NumericValue<int>(serializable.Level, 0, 1000);
-			Nodes = serializable.Nodes?.Select(item => new Node(item, database)).ToArray();
-
+			try
+			{
+				Id = new ItemId<QuestModel>(serializable.Id, serializable.FileName);
+				Name = serializable.Name;
+				QuestType = serializable.QuestType;
+				StartCondition = serializable.StartCondition;
+				Weight = new NumericValue<float>(serializable.Weight, 0f, 1000f);
+				Origin = new QuestOrigin(serializable.Origin, database);
+				Requirement = new Requirement(serializable.Requirement, database);
+				Level = new NumericValue<int>(serializable.Level, 0, 1000);
+				Nodes = serializable.Nodes?.Select(item => new Node(item, database)).ToArray();
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

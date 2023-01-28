@@ -21,30 +21,36 @@ namespace EditorDatabase.DataModel
 
 		public Component(ComponentSerializable serializable, Database database)
 		{
-			Id = new ItemId<Component>(serializable.Id, serializable.FileName);
-			Name = serializable.Name;
-			Description = serializable.Description;
-			DisplayCategory = serializable.DisplayCategory;
-			Availability = serializable.Availability;
-			Stats = database.GetComponentStatsId(serializable.ComponentStatsId);
-			if (Stats.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ".Stats cannot be null");
-			Faction = database.GetFactionId(serializable.Faction);
-			Level = new NumericValue<int>(serializable.Level, 0, 2147483647);
-			Icon = serializable.Icon;
-			Color = Helpers.ColorFromString(serializable.Color);
-			Layout = new Layout(serializable.Layout);
-			CellType = serializable.CellType;
-			Device = database.GetDeviceId(serializable.DeviceId);
-			Weapon = database.GetWeaponId(serializable.WeaponId);
-			Ammunition = database.GetAmmunitionId(serializable.AmmunitionId);
-			AmmunitionObsolete = database.GetAmmunitionObsoleteId(serializable.AmmunitionId);
-			WeaponSlotType = serializable.WeaponSlotType;
-			DroneBay = database.GetDroneBayId(serializable.DroneBayId);
-			Drone = database.GetShipBuildId(serializable.DroneId);
-			Restrictions = new ComponentRestrictions(serializable.Restrictions, database);
-			PossibleModifications = serializable.PossibleModifications?.Select(id => new Wrapper<ComponentMod> { Item = database.GetComponentModId(id) }).ToArray();
-
+			try
+			{
+				Id = new ItemId<Component>(serializable.Id, serializable.FileName);
+				Name = serializable.Name;
+				Description = serializable.Description;
+				DisplayCategory = serializable.DisplayCategory;
+				Availability = serializable.Availability;
+				Stats = database.GetComponentStatsId(serializable.ComponentStatsId);
+				if (Stats.IsNull)
+				    throw new DatabaseException(this.GetType().Name + ": Stats cannot be null");
+				Faction = database.GetFactionId(serializable.Faction);
+				Level = new NumericValue<int>(serializable.Level, 0, 2147483647);
+				Icon = serializable.Icon;
+				Color = Helpers.ColorFromString(serializable.Color);
+				Layout = new Layout(serializable.Layout);
+				CellType = serializable.CellType;
+				Device = database.GetDeviceId(serializable.DeviceId);
+				Weapon = database.GetWeaponId(serializable.WeaponId);
+				Ammunition = database.GetAmmunitionId(serializable.AmmunitionId);
+				AmmunitionObsolete = database.GetAmmunitionObsoleteId(serializable.AmmunitionId);
+				WeaponSlotType = serializable.WeaponSlotType;
+				DroneBay = database.GetDroneBayId(serializable.DroneBayId);
+				Drone = database.GetShipBuildId(serializable.DroneId);
+				Restrictions = new ComponentRestrictions(serializable.Restrictions, database);
+				PossibleModifications = serializable.PossibleModifications?.Select(id => new Wrapper<ComponentMod> { Item = database.GetComponentModId(id) }).ToArray();
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

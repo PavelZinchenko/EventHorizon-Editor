@@ -26,7 +26,6 @@ namespace EditorDatabase.DataModel
 			DamageType = serializable.DamageType;
 			Power = new NumericValue<float>(serializable.Power, 0f, 1E+09f);
 			Factor = new NumericValue<float>(serializable.Factor, 0f, 1f);
-
 			OnDataDeserialized(serializable, database);
 		}
 

@@ -24,7 +24,6 @@ namespace EditorDatabase.DataModel
 		{
 			Type = serializable.Type;
 			List = serializable.List?.Select(id => new Wrapper<Faction> { Item = database.GetFactionId(id) }).ToArray();
-
 			OnDataDeserialized(serializable, database);
 		}
 

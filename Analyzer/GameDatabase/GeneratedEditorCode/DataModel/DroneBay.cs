@@ -21,20 +21,26 @@ namespace EditorDatabase.DataModel
 
 		public DroneBay(DroneBaySerializable serializable, Database database)
 		{
-			Id = new ItemId<DroneBay>(serializable.Id, serializable.FileName);
-			EnergyConsumption = new NumericValue<float>(serializable.EnergyConsumption, 0f, 1E+09f);
-			PassiveEnergyConsumption = new NumericValue<float>(serializable.PassiveEnergyConsumption, 0f, 1E+09f);
-			Range = new NumericValue<float>(serializable.Range, 1f, 1000f);
-			DamageMultiplier = new NumericValue<float>(serializable.DamageMultiplier, 0.01f, 1000f);
-			DefenseMultiplier = new NumericValue<float>(serializable.DefenseMultiplier, 0.01f, 1000f);
-			SpeedMultiplier = new NumericValue<float>(serializable.SpeedMultiplier, 0.01f, 1000f);
-			ImprovedAi = serializable.ImprovedAi;
-			Capacity = new NumericValue<int>(serializable.Capacity, 1, 1000);
-			ActivationType = serializable.ActivationType;
-			LaunchSound = serializable.LaunchSound;
-			LaunchEffectPrefab = serializable.LaunchEffectPrefab;
-			ControlButtonIcon = serializable.ControlButtonIcon;
-
+			try
+			{
+				Id = new ItemId<DroneBay>(serializable.Id, serializable.FileName);
+				EnergyConsumption = new NumericValue<float>(serializable.EnergyConsumption, 0f, 1E+09f);
+				PassiveEnergyConsumption = new NumericValue<float>(serializable.PassiveEnergyConsumption, 0f, 1E+09f);
+				Range = new NumericValue<float>(serializable.Range, 1f, 1000f);
+				DamageMultiplier = new NumericValue<float>(serializable.DamageMultiplier, 0.01f, 1000f);
+				DefenseMultiplier = new NumericValue<float>(serializable.DefenseMultiplier, 0.01f, 1000f);
+				SpeedMultiplier = new NumericValue<float>(serializable.SpeedMultiplier, 0.01f, 1000f);
+				ImprovedAi = serializable.ImprovedAi;
+				Capacity = new NumericValue<int>(serializable.Capacity, 1, 1000);
+				ActivationType = serializable.ActivationType;
+				LaunchSound = serializable.LaunchSound;
+				LaunchEffectPrefab = serializable.LaunchEffectPrefab;
+				ControlButtonIcon = serializable.ControlButtonIcon;
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

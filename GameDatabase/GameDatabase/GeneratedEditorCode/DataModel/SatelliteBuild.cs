@@ -21,14 +21,20 @@ namespace EditorDatabase.DataModel
 
 		public SatelliteBuild(SatelliteBuildSerializable serializable, Database database)
 		{
-			Id = new ItemId<SatelliteBuild>(serializable.Id, serializable.FileName);
-			Satellite = database.GetSatelliteId(serializable.SatelliteId);
-			if (Satellite.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ".Satellite cannot be null");
-			NotAvailableInGame = serializable.NotAvailableInGame;
-			DifficultyClass = serializable.DifficultyClass;
-			Components = serializable.Components?.Select(item => new InstalledComponent(item, database)).ToArray();
-
+			try
+			{
+				Id = new ItemId<SatelliteBuild>(serializable.Id, serializable.FileName);
+				Satellite = database.GetSatelliteId(serializable.SatelliteId);
+				if (Satellite.IsNull)
+				    throw new DatabaseException(this.GetType().Name + ": Satellite cannot be null");
+				NotAvailableInGame = serializable.NotAvailableInGame;
+				DifficultyClass = serializable.DifficultyClass;
+				Components = serializable.Components?.Select(item => new InstalledComponent(item, database)).ToArray();
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

@@ -31,7 +31,6 @@ namespace EditorDatabase.DataModel
 			WeaponClass = serializable.WeaponClass;
 			Image = serializable.Image;
 			Size = new NumericValue<float>(serializable.Size, 0f, 100f);
-
 			OnDataDeserialized(serializable, database);
 		}
 

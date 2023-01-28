@@ -28,7 +28,6 @@ namespace EditorDatabase.DataModel
 			MaxDistance = new NumericValue<int>(serializable.MaxDistance, 0, 9999);
 			MinRelations = new NumericValue<int>(serializable.MinRelations, -100, 100);
 			MaxRelations = new NumericValue<int>(serializable.MaxRelations, -100, 100);
-
 			OnDataDeserialized(serializable, database);
 		}
 

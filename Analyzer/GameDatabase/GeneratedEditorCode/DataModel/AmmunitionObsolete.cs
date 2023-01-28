@@ -21,28 +21,34 @@ namespace EditorDatabase.DataModel
 
 		public AmmunitionObsolete(AmmunitionObsoleteSerializable serializable, Database database)
 		{
-			Id = new ItemId<AmmunitionObsolete>(serializable.Id, serializable.FileName);
-			AmmunitionClass = serializable.AmmunitionClass;
-			DamageType = serializable.DamageType;
-			Impulse = new NumericValue<float>(serializable.Impulse, 0f, 10f);
-			Recoil = new NumericValue<float>(serializable.Recoil, 0f, 10f);
-			Size = new NumericValue<float>(serializable.Size, 0f, 1000f);
-			InitialPosition = serializable.InitialPosition;
-			AreaOfEffect = new NumericValue<float>(serializable.AreaOfEffect, 0f, 1000f);
-			Damage = new NumericValue<float>(serializable.Damage, 0f, 1E+09f);
-			Range = new NumericValue<float>(serializable.Range, 0f, 1000f);
-			Velocity = new NumericValue<float>(serializable.Velocity, 0f, 1000f);
-			LifeTime = new NumericValue<float>(serializable.LifeTime, 0f, 1E+09f);
-			HitPoints = new NumericValue<int>(serializable.HitPoints, 0, 999999999);
-			IgnoresShipVelocity = serializable.IgnoresShipVelocity;
-			EnergyCost = new NumericValue<float>(serializable.EnergyCost, 0f, 1E+09f);
-			CoupledAmmunition = database.GetAmmunitionObsoleteId(serializable.CoupledAmmunitionId);
-			Color = Helpers.ColorFromString(serializable.Color);
-			FireSound = serializable.FireSound;
-			HitSound = serializable.HitSound;
-			HitEffectPrefab = serializable.HitEffectPrefab;
-			BulletPrefab = serializable.BulletPrefab;
-
+			try
+			{
+				Id = new ItemId<AmmunitionObsolete>(serializable.Id, serializable.FileName);
+				AmmunitionClass = serializable.AmmunitionClass;
+				DamageType = serializable.DamageType;
+				Impulse = new NumericValue<float>(serializable.Impulse, 0f, 10f);
+				Recoil = new NumericValue<float>(serializable.Recoil, 0f, 10f);
+				Size = new NumericValue<float>(serializable.Size, 0f, 1000f);
+				InitialPosition = serializable.InitialPosition;
+				AreaOfEffect = new NumericValue<float>(serializable.AreaOfEffect, 0f, 1000f);
+				Damage = new NumericValue<float>(serializable.Damage, 0f, 1E+09f);
+				Range = new NumericValue<float>(serializable.Range, 0f, 1000f);
+				Velocity = new NumericValue<float>(serializable.Velocity, 0f, 1000f);
+				LifeTime = new NumericValue<float>(serializable.LifeTime, 0f, 1E+09f);
+				HitPoints = new NumericValue<int>(serializable.HitPoints, 0, 999999999);
+				IgnoresShipVelocity = serializable.IgnoresShipVelocity;
+				EnergyCost = new NumericValue<float>(serializable.EnergyCost, 0f, 1E+09f);
+				CoupledAmmunition = database.GetAmmunitionObsoleteId(serializable.CoupledAmmunitionId);
+				Color = Helpers.ColorFromString(serializable.Color);
+				FireSound = serializable.FireSound;
+				HitSound = serializable.HitSound;
+				HitEffectPrefab = serializable.HitEffectPrefab;
+				BulletPrefab = serializable.BulletPrefab;
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

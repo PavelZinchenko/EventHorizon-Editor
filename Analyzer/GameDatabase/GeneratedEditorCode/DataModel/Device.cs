@@ -21,23 +21,29 @@ namespace EditorDatabase.DataModel
 
 		public Device(DeviceSerializable serializable, Database database)
 		{
-			Id = new ItemId<Device>(serializable.Id, serializable.FileName);
-			DeviceClass = serializable.DeviceClass;
-			EnergyConsumption = new NumericValue<float>(serializable.EnergyConsumption, 0f, 1E+09f);
-			PassiveEnergyConsumption = new NumericValue<float>(serializable.PassiveEnergyConsumption, 0f, 1E+09f);
-			Power = new NumericValue<float>(serializable.Power, 0f, 1000f);
-			Range = new NumericValue<float>(serializable.Range, 0f, 1000f);
-			Size = new NumericValue<float>(serializable.Size, 0f, 1000f);
-			Cooldown = new NumericValue<float>(serializable.Cooldown, 0f, 1000f);
-			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
-			Offset = serializable.Offset;
-			ActivationType = serializable.ActivationType;
-			Color = Helpers.ColorFromString(serializable.Color);
-			Sound = serializable.Sound;
-			EffectPrefab = serializable.EffectPrefab;
-			ObjectPrefab = serializable.ObjectPrefab;
-			ControlButtonIcon = serializable.ControlButtonIcon;
-
+			try
+			{
+				Id = new ItemId<Device>(serializable.Id, serializable.FileName);
+				DeviceClass = serializable.DeviceClass;
+				EnergyConsumption = new NumericValue<float>(serializable.EnergyConsumption, 0f, 1E+09f);
+				PassiveEnergyConsumption = new NumericValue<float>(serializable.PassiveEnergyConsumption, 0f, 1E+09f);
+				Power = new NumericValue<float>(serializable.Power, 0f, 1000f);
+				Range = new NumericValue<float>(serializable.Range, 0f, 1000f);
+				Size = new NumericValue<float>(serializable.Size, 0f, 1000f);
+				Cooldown = new NumericValue<float>(serializable.Cooldown, 0f, 1000f);
+				Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
+				Offset = serializable.Offset;
+				ActivationType = serializable.ActivationType;
+				Color = Helpers.ColorFromString(serializable.Color);
+				Sound = serializable.Sound;
+				EffectPrefab = serializable.EffectPrefab;
+				ObjectPrefab = serializable.ObjectPrefab;
+				ControlButtonIcon = serializable.ControlButtonIcon;
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

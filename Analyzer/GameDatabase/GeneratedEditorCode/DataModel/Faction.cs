@@ -21,14 +21,20 @@ namespace EditorDatabase.DataModel
 
 		public Faction(FactionSerializable serializable, Database database)
 		{
-			Id = new ItemId<Faction>(serializable.Id, serializable.FileName);
-			Name = serializable.Name;
-			Color = Helpers.ColorFromString(serializable.Color);
-			HomeStarDistance = new NumericValue<int>(serializable.HomeStarDistance, 0, 1000);
-			WanderingShipsDistance = new NumericValue<int>(serializable.WanderingShipsDistance, 0, 1000);
-			Hidden = serializable.Hidden;
-			Hostile = serializable.Hostile;
-
+			try
+			{
+				Id = new ItemId<Faction>(serializable.Id, serializable.FileName);
+				Name = serializable.Name;
+				Color = Helpers.ColorFromString(serializable.Color);
+				HomeStarDistance = new NumericValue<int>(serializable.HomeStarDistance, 0, 1000);
+				WanderingShipsDistance = new NumericValue<int>(serializable.WanderingShipsDistance, 0, 1000);
+				Hidden = serializable.Hidden;
+				Hostile = serializable.Hostile;
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

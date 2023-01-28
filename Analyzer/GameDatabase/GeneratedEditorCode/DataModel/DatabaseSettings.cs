@@ -26,7 +26,6 @@ namespace EditorDatabase.DataModel
 			ModId = serializable.ModId;
 			ModVersion = new NumericValue<int>(serializable.ModVersion, -2147483648, 2147483647);
 			UnloadOriginalDatabase = serializable.UnloadOriginalDatabase;
-
 			OnDataDeserialized(serializable, database);
 		}
 

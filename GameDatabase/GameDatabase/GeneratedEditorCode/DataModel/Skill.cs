@@ -21,16 +21,22 @@ namespace EditorDatabase.DataModel
 
 		public Skill(SkillSerializable serializable, Database database)
 		{
-			Id = new ItemId<Skill>(serializable.Id, serializable.FileName);
-			Name = serializable.Name;
-			Icon = serializable.Icon;
-			Description = serializable.Description;
-			BaseRequirement = new NumericValue<float>(serializable.BaseRequirement, 0f, 100f);
-			RequirementPerLevel = new NumericValue<float>(serializable.RequirementPerLevel, 0f, 100f);
-			BasePrice = new NumericValue<float>(serializable.BasePrice, 0f, 100f);
-			PricePerLevel = new NumericValue<float>(serializable.PricePerLevel, 0f, 100f);
-			MaxLevel = new NumericValue<int>(serializable.MaxLevel, 1, 1000);
-
+			try
+			{
+				Id = new ItemId<Skill>(serializable.Id, serializable.FileName);
+				Name = serializable.Name;
+				Icon = serializable.Icon;
+				Description = serializable.Description;
+				BaseRequirement = new NumericValue<float>(serializable.BaseRequirement, 0f, 100f);
+				RequirementPerLevel = new NumericValue<float>(serializable.RequirementPerLevel, 0f, 100f);
+				BasePrice = new NumericValue<float>(serializable.BasePrice, 0f, 100f);
+				PricePerLevel = new NumericValue<float>(serializable.PricePerLevel, 0f, 100f);
+				MaxLevel = new NumericValue<int>(serializable.MaxLevel, 1, 1000);
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

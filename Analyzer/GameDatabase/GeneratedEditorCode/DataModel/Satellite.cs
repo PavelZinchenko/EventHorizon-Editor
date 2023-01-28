@@ -21,14 +21,20 @@ namespace EditorDatabase.DataModel
 
 		public Satellite(SatelliteSerializable serializable, Database database)
 		{
-			Id = new ItemId<Satellite>(serializable.Id, serializable.FileName);
-			Name = serializable.Name;
-			ModelImage = serializable.ModelImage;
-			ModelScale = new NumericValue<float>(serializable.ModelScale, 0.1f, 100f);
-			SizeClass = serializable.SizeClass;
-			Layout = new Layout(serializable.Layout);
-			Barrels = serializable.Barrels?.Select(item => new Barrel(item, database)).ToArray();
-
+			try
+			{
+				Id = new ItemId<Satellite>(serializable.Id, serializable.FileName);
+				Name = serializable.Name;
+				ModelImage = serializable.ModelImage;
+				ModelScale = new NumericValue<float>(serializable.ModelScale, 0.1f, 100f);
+				SizeClass = serializable.SizeClass;
+				Layout = new Layout(serializable.Layout);
+				Barrels = serializable.Barrels?.Select(item => new Barrel(item, database)).ToArray();
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

@@ -26,7 +26,6 @@ namespace EditorDatabase.DataModel
 			NotForOrganicShips = serializable.NotForOrganicShips;
 			NotForMechanicShips = serializable.NotForMechanicShips;
 			UniqueComponentTag = serializable.UniqueComponentTag;
-
 			OnDataDeserialized(serializable, database);
 		}
 

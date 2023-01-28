@@ -34,7 +34,6 @@ namespace EditorDatabase.DataModel
 			BaseDroneReconstructionSpeed = new NumericValue<float>(serializable.BaseDroneReconstructionSpeed, 0f, 100f);
 			MaxVelocity = new NumericValue<float>(serializable.MaxVelocity, 5f, 30f);
 			MaxTurnRate = new NumericValue<float>(serializable.MaxTurnRate, 5f, 30f);
-
 			OnDataDeserialized(serializable, database);
 		}
 

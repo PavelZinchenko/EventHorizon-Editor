@@ -21,9 +21,15 @@ namespace EditorDatabase.DataModel
 
 		public LootModel(LootSerializable serializable, Database database)
 		{
-			Id = new ItemId<LootModel>(serializable.Id, serializable.FileName);
-			Loot = new LootContent(serializable.Loot, database);
-
+			try
+			{
+				Id = new ItemId<LootModel>(serializable.Id, serializable.FileName);
+				Loot = new LootContent(serializable.Loot, database);
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

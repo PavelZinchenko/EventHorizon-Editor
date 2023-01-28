@@ -25,7 +25,6 @@ namespace EditorDatabase.DataModel
 			TargetNode = new NumericValue<int>(serializable.TargetNode, 1, 1000);
 			Requirement = new Requirement(serializable.Requirement, database);
 			Weight = new NumericValue<float>(serializable.Weight, 0f, 1000f);
-
 			OnDataDeserialized(serializable, database);
 		}
 

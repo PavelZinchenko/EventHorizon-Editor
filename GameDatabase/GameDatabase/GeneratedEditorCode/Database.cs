@@ -83,6 +83,89 @@ namespace EditorDatabase
             return Enumerable.Empty<IItemId>();
         }
 
+        public IEnumerable<object> GetAllItems()
+        {
+            foreach (var item in _content.AmmunitionObsoleteList)
+                yield return GetAmmunitionObsolete(item.Id);
+            foreach (var item in _content.ComponentList)
+                yield return GetComponent(item.Id);
+            foreach (var item in _content.ComponentModList)
+                yield return GetComponentMod(item.Id);
+            foreach (var item in _content.ComponentStatsList)
+                yield return GetComponentStats(item.Id);
+            foreach (var item in _content.DeviceList)
+                yield return GetDevice(item.Id);
+            foreach (var item in _content.DroneBayList)
+                yield return GetDroneBay(item.Id);
+            foreach (var item in _content.FactionList)
+                yield return GetFaction(item.Id);
+            foreach (var item in _content.SatelliteList)
+                yield return GetSatellite(item.Id);
+            foreach (var item in _content.SatelliteBuildList)
+                yield return GetSatelliteBuild(item.Id);
+            foreach (var item in _content.ShipList)
+                yield return GetShip(item.Id);
+            foreach (var item in _content.ShipBuildList)
+                yield return GetShipBuild(item.Id);
+            foreach (var item in _content.SkillList)
+                yield return GetSkill(item.Id);
+            foreach (var item in _content.TechnologyList)
+                yield return GetTechnology(item.Id);
+            foreach (var item in _content.CharacterList)
+                yield return GetCharacter(item.Id);
+            foreach (var item in _content.FleetList)
+                yield return GetFleet(item.Id);
+            foreach (var item in _content.LootList)
+                yield return GetLoot(item.Id);
+            foreach (var item in _content.QuestList)
+                yield return GetQuest(item.Id);
+            foreach (var item in _content.QuestItemList)
+                yield return GetQuestItem(item.Id);
+            foreach (var item in _content.AmmunitionList)
+                yield return GetAmmunition(item.Id);
+            foreach (var item in _content.BulletPrefabList)
+                yield return GetBulletPrefab(item.Id);
+            foreach (var item in _content.VisualEffectList)
+                yield return GetVisualEffect(item.Id);
+            foreach (var item in _content.WeaponList)
+                yield return GetWeapon(item.Id);
+            if (_content.DatabaseSettings != null)
+				yield return DatabaseSettings;
+            if (_content.ExplorationSettings != null)
+				yield return ExplorationSettings;
+            if (_content.GalaxySettings != null)
+				yield return GalaxySettings;
+            if (_content.ShipSettings != null)
+				yield return ShipSettings;
+        }
+
+        public IItemId GetItemId(Type type, int id)
+        {
+            if (type == typeof(AmmunitionObsolete)) return GetAmmunitionObsoleteId(id);
+            if (type == typeof(Component)) return GetComponentId(id);
+            if (type == typeof(ComponentMod)) return GetComponentModId(id);
+            if (type == typeof(ComponentStats)) return GetComponentStatsId(id);
+            if (type == typeof(Device)) return GetDeviceId(id);
+            if (type == typeof(DroneBay)) return GetDroneBayId(id);
+            if (type == typeof(Faction)) return GetFactionId(id);
+            if (type == typeof(Satellite)) return GetSatelliteId(id);
+            if (type == typeof(SatelliteBuild)) return GetSatelliteBuildId(id);
+            if (type == typeof(Ship)) return GetShipId(id);
+            if (type == typeof(ShipBuild)) return GetShipBuildId(id);
+            if (type == typeof(Skill)) return GetSkillId(id);
+            if (type == typeof(Technology)) return GetTechnologyId(id);
+            if (type == typeof(Character)) return GetCharacterId(id);
+            if (type == typeof(Fleet)) return GetFleetId(id);
+            if (type == typeof(LootModel)) return GetLootId(id);
+            if (type == typeof(QuestModel)) return GetQuestId(id);
+            if (type == typeof(QuestItem)) return GetQuestItemId(id);
+            if (type == typeof(Ammunition)) return GetAmmunitionId(id);
+            if (type == typeof(BulletPrefab)) return GetBulletPrefabId(id);
+            if (type == typeof(VisualEffect)) return GetVisualEffectId(id);
+            if (type == typeof(Weapon)) return GetWeaponId(id);
+            return ItemId<Type>.Empty;
+        }
+
         public object GetItem(ItemType type, int id)
         {
             switch (type)

@@ -21,15 +21,21 @@ namespace EditorDatabase.DataModel
 
 		public Character(CharacterSerializable serializable, Database database)
 		{
-			Id = new ItemId<Character>(serializable.Id, serializable.FileName);
-			Name = serializable.Name;
-			AvatarIcon = serializable.AvatarIcon;
-			Faction = database.GetFactionId(serializable.Faction);
-			Inventory = database.GetLootId(serializable.Inventory);
-			Fleet = database.GetFleetId(serializable.Fleet);
-			Relations = new NumericValue<int>(serializable.Relations, -100, 100);
-			IsUnique = serializable.IsUnique;
-
+			try
+			{
+				Id = new ItemId<Character>(serializable.Id, serializable.FileName);
+				Name = serializable.Name;
+				AvatarIcon = serializable.AvatarIcon;
+				Faction = database.GetFactionId(serializable.Faction);
+				Inventory = database.GetLootId(serializable.Inventory);
+				Fleet = database.GetFleetId(serializable.Fleet);
+				Relations = new NumericValue<int>(serializable.Relations, -100, 100);
+				IsUnique = serializable.IsUnique;
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

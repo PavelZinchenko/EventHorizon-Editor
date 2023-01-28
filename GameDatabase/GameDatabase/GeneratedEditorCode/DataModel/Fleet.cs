@@ -21,15 +21,21 @@ namespace EditorDatabase.DataModel
 
 		public Fleet(FleetSerializable serializable, Database database)
 		{
-			Id = new ItemId<Fleet>(serializable.Id, serializable.FileName);
-			Factions = new RequiredFactions(serializable.Factions, database);
-			LevelBonus = new NumericValue<int>(serializable.LevelBonus, -10000, 10000);
-			NoRandomShips = serializable.NoRandomShips;
-			CombatTimeLimit = new NumericValue<int>(serializable.CombatTimeLimit, 0, 999);
-			LootCondition = serializable.LootCondition;
-			ExpCondition = serializable.ExpCondition;
-			SpecificShips = serializable.SpecificShips?.Select(id => new Wrapper<ShipBuild> { Item = database.GetShipBuildId(id) }).ToArray();
-
+			try
+			{
+				Id = new ItemId<Fleet>(serializable.Id, serializable.FileName);
+				Factions = new RequiredFactions(serializable.Factions, database);
+				LevelBonus = new NumericValue<int>(serializable.LevelBonus, -10000, 10000);
+				NoRandomShips = serializable.NoRandomShips;
+				CombatTimeLimit = new NumericValue<int>(serializable.CombatTimeLimit, 0, 999);
+				LootCondition = serializable.LootCondition;
+				ExpCondition = serializable.ExpCondition;
+				SpecificShips = serializable.SpecificShips?.Select(id => new Wrapper<ShipBuild> { Item = database.GetShipBuildId(id) }).ToArray();
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

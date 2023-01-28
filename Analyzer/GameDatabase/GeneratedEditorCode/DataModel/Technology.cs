@@ -133,7 +133,7 @@ namespace EditorDatabase.DataModel
 		{
 			Component = database.GetComponentId(serializable.ItemId);
 			if (Component.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ".Component cannot be null");
+			    throw new DatabaseException(this.GetType().Name + ": Component cannot be null");
 			Faction = database.GetFactionId(serializable.Faction);
 
 			OnDataDeserialized(serializable, database);
@@ -159,7 +159,7 @@ namespace EditorDatabase.DataModel
 		{
 			Ship = database.GetShipId(serializable.ItemId);
 			if (Ship.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ".Ship cannot be null");
+			    throw new DatabaseException(this.GetType().Name + ": Ship cannot be null");
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -182,7 +182,7 @@ namespace EditorDatabase.DataModel
 		{
 			Satellite = database.GetSatelliteId(serializable.ItemId);
 			if (Satellite.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ".Satellite cannot be null");
+			    throw new DatabaseException(this.GetType().Name + ": Satellite cannot be null");
 			Faction = database.GetFactionId(serializable.Faction);
 
 			OnDataDeserialized(serializable, database);

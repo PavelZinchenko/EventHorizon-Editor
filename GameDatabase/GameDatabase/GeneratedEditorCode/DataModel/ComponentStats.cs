@@ -21,38 +21,44 @@ namespace EditorDatabase.DataModel
 
 		public ComponentStats(ComponentStatsSerializable serializable, Database database)
 		{
-			Id = new ItemId<ComponentStats>(serializable.Id, serializable.FileName);
-			Type = serializable.Type;
-			ArmorPoints = new NumericValue<float>(serializable.ArmorPoints, -1000000f, 1000000f);
-			ArmorRepairRate = new NumericValue<float>(serializable.ArmorRepairRate, -1000000f, 1000000f);
-			ArmorRepairCooldownModifier = new NumericValue<float>(serializable.ArmorRepairCooldownModifier, -1f, 1f);
-			EnergyPoints = new NumericValue<float>(serializable.EnergyPoints, -1000000f, 1000000f);
-			EnergyRechargeRate = new NumericValue<float>(serializable.EnergyRechargeRate, -1000000f, 1000000f);
-			EnergyRechargeCooldownModifier = new NumericValue<float>(serializable.EnergyRechargeCooldownModifier, -5f, 5f);
-			ShieldPoints = new NumericValue<float>(serializable.ShieldPoints, -1000000f, 1000000f);
-			ShieldRechargeRate = new NumericValue<float>(serializable.ShieldRechargeRate, -1000000f, 1000000f);
-			ShieldRechargeCooldownModifier = new NumericValue<float>(serializable.ShieldRechargeCooldownModifier, -5f, 5f);
-			Weight = new NumericValue<float>(serializable.Weight, -1000000f, 1000000f);
-			RammingDamage = new NumericValue<float>(serializable.RammingDamage, -1000000f, 1000000f);
-			EnergyAbsorption = new NumericValue<float>(serializable.EnergyAbsorption, -1000000f, 1000000f);
-			KineticResistance = new NumericValue<float>(serializable.KineticResistance, -1000000f, 1000000f);
-			EnergyResistance = new NumericValue<float>(serializable.EnergyResistance, -1000000f, 1000000f);
-			ThermalResistance = new NumericValue<float>(serializable.ThermalResistance, -1000000f, 1000000f);
-			EnginePower = new NumericValue<float>(serializable.EnginePower, 0f, 2000f);
-			TurnRate = new NumericValue<float>(serializable.TurnRate, 0f, 2000f);
-			Autopilot = serializable.Autopilot;
-			DroneRangeModifier = new NumericValue<float>(serializable.DroneRangeModifier, -50f, 50f);
-			DroneDamageModifier = new NumericValue<float>(serializable.DroneDamageModifier, -50f, 50f);
-			DroneDefenseModifier = new NumericValue<float>(serializable.DroneDefenseModifier, -50f, 50f);
-			DroneSpeedModifier = new NumericValue<float>(serializable.DroneSpeedModifier, -50f, 50f);
-			DronesBuiltPerSecond = new NumericValue<float>(serializable.DronesBuiltPerSecond, 0f, 100f);
-			DroneBuildTimeModifier = new NumericValue<float>(serializable.DroneBuildTimeModifier, 0f, 100f);
-			WeaponFireRateModifier = new NumericValue<float>(serializable.WeaponFireRateModifier, -100f, 100f);
-			WeaponDamageModifier = new NumericValue<float>(serializable.WeaponDamageModifier, -100f, 100f);
-			WeaponRangeModifier = new NumericValue<float>(serializable.WeaponRangeModifier, -100f, 100f);
-			WeaponEnergyCostModifier = new NumericValue<float>(serializable.WeaponEnergyCostModifier, -100f, 100f);
-			AlterWeaponPlatform = serializable.AlterWeaponPlatform;
-
+			try
+			{
+				Id = new ItemId<ComponentStats>(serializable.Id, serializable.FileName);
+				Type = serializable.Type;
+				ArmorPoints = new NumericValue<float>(serializable.ArmorPoints, -1000000f, 1000000f);
+				ArmorRepairRate = new NumericValue<float>(serializable.ArmorRepairRate, -1000000f, 1000000f);
+				ArmorRepairCooldownModifier = new NumericValue<float>(serializable.ArmorRepairCooldownModifier, -1f, 1f);
+				EnergyPoints = new NumericValue<float>(serializable.EnergyPoints, -1000000f, 1000000f);
+				EnergyRechargeRate = new NumericValue<float>(serializable.EnergyRechargeRate, -1000000f, 1000000f);
+				EnergyRechargeCooldownModifier = new NumericValue<float>(serializable.EnergyRechargeCooldownModifier, -5f, 5f);
+				ShieldPoints = new NumericValue<float>(serializable.ShieldPoints, -1000000f, 1000000f);
+				ShieldRechargeRate = new NumericValue<float>(serializable.ShieldRechargeRate, -1000000f, 1000000f);
+				ShieldRechargeCooldownModifier = new NumericValue<float>(serializable.ShieldRechargeCooldownModifier, -5f, 5f);
+				Weight = new NumericValue<float>(serializable.Weight, -1000000f, 1000000f);
+				RammingDamage = new NumericValue<float>(serializable.RammingDamage, -1000000f, 1000000f);
+				EnergyAbsorption = new NumericValue<float>(serializable.EnergyAbsorption, -1000000f, 1000000f);
+				KineticResistance = new NumericValue<float>(serializable.KineticResistance, -1000000f, 1000000f);
+				EnergyResistance = new NumericValue<float>(serializable.EnergyResistance, -1000000f, 1000000f);
+				ThermalResistance = new NumericValue<float>(serializable.ThermalResistance, -1000000f, 1000000f);
+				EnginePower = new NumericValue<float>(serializable.EnginePower, 0f, 2000f);
+				TurnRate = new NumericValue<float>(serializable.TurnRate, 0f, 2000f);
+				Autopilot = serializable.Autopilot;
+				DroneRangeModifier = new NumericValue<float>(serializable.DroneRangeModifier, -50f, 50f);
+				DroneDamageModifier = new NumericValue<float>(serializable.DroneDamageModifier, -50f, 50f);
+				DroneDefenseModifier = new NumericValue<float>(serializable.DroneDefenseModifier, -50f, 50f);
+				DroneSpeedModifier = new NumericValue<float>(serializable.DroneSpeedModifier, -50f, 50f);
+				DronesBuiltPerSecond = new NumericValue<float>(serializable.DronesBuiltPerSecond, 0f, 100f);
+				DroneBuildTimeModifier = new NumericValue<float>(serializable.DroneBuildTimeModifier, 0f, 100f);
+				WeaponFireRateModifier = new NumericValue<float>(serializable.WeaponFireRateModifier, -100f, 100f);
+				WeaponDamageModifier = new NumericValue<float>(serializable.WeaponDamageModifier, -100f, 100f);
+				WeaponRangeModifier = new NumericValue<float>(serializable.WeaponRangeModifier, -100f, 100f);
+				WeaponEnergyCostModifier = new NumericValue<float>(serializable.WeaponEnergyCostModifier, -100f, 100f);
+				AlterWeaponPlatform = serializable.AlterWeaponPlatform;
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

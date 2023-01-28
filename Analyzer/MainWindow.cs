@@ -21,6 +21,7 @@ namespace Analyzer
             {
                 var database = new Database(new DatabaseStorage(path));
                 _statistics = new Analyzer.Statistics(database);
+                _integrityChecker = new Analyzer.IntegrityChecker(database);
             
                 console.AppendText("Database loaded\n");
                 console.AppendText("Total weapons - " + _statistics.WeaponCount + "\n\n");
@@ -65,6 +66,16 @@ namespace Analyzer
             OpenDatabase(Directory.GetCurrentDirectory());
         }
 
+        private Analyzer.IntegrityChecker _integrityChecker;
         private Analyzer.Statistics _statistics;
+
+        private void deadLinksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            console.Clear();
+            console.AppendText("Dead links:\n");
+
+            foreach (var item in _integrityChecker.LookForDeadLinks())
+                console.AppendText(item + "\n");
+        }
     }
 }

@@ -25,7 +25,6 @@ namespace EditorDatabase.DataModel
 			TurretShip = database.GetShipId(serializable.TurretShip);
 			InfectedPlanetFaction = database.GetFactionId(serializable.InfectedPlanetFaction);
 			HiveShipBuild = database.GetShipBuildId(serializable.HiveShipBuild);
-
 			OnDataDeserialized(serializable, database);
 		}
 

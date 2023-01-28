@@ -21,12 +21,18 @@ namespace EditorDatabase.DataModel
 
 		public Ammunition(AmmunitionSerializable serializable, Database database)
 		{
-			Id = new ItemId<Ammunition>(serializable.Id, serializable.FileName);
-			Body = new BulletBody(serializable.Body, database);
-			Triggers = serializable.Triggers?.Select(item => new BulletTrigger(item, database)).ToArray();
-			ImpactType = serializable.ImpactType;
-			Effects = serializable.Effects?.Select(item => new ImpactEffect(item, database)).ToArray();
-
+			try
+			{
+				Id = new ItemId<Ammunition>(serializable.Id, serializable.FileName);
+				Body = new BulletBody(serializable.Body, database);
+				Triggers = serializable.Triggers?.Select(item => new BulletTrigger(item, database)).ToArray();
+				ImpactType = serializable.ImpactType;
+				Effects = serializable.Effects?.Select(item => new ImpactEffect(item, database)).ToArray();
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

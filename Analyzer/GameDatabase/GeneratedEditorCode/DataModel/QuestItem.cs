@@ -21,13 +21,19 @@ namespace EditorDatabase.DataModel
 
 		public QuestItem(QuestItemSerializable serializable, Database database)
 		{
-			Id = new ItemId<QuestItem>(serializable.Id, serializable.FileName);
-			Name = serializable.Name;
-			Description = serializable.Description;
-			Icon = serializable.Icon;
-			Color = Helpers.ColorFromString(serializable.Color);
-			Price = new NumericValue<int>(serializable.Price, 0, 999999999);
-
+			try
+			{
+				Id = new ItemId<QuestItem>(serializable.Id, serializable.FileName);
+				Name = serializable.Name;
+				Description = serializable.Description;
+				Icon = serializable.Icon;
+				Color = Helpers.ColorFromString(serializable.Color);
+				Price = new NumericValue<int>(serializable.Price, 0, 999999999);
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

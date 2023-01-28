@@ -34,6 +34,7 @@
             this.analyzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cannonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.console = new System.Windows.Forms.RichTextBox();
+            this.deadLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +67,7 @@
             // analyzeToolStripMenuItem
             // 
             this.analyzeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deadLinksToolStripMenuItem,
             this.cannonsToolStripMenuItem});
             this.analyzeToolStripMenuItem.Name = "analyzeToolStripMenuItem";
             this.analyzeToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
@@ -73,7 +75,7 @@
             // 
             // cannonsToolStripMenuItem
             // 
-            this.cannonsToolStripMenuItem.Name = "ammunitionToolStripMenuItem";
+            this.cannonsToolStripMenuItem.Name = "cannonsToolStripMenuItem";
             this.cannonsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cannonsToolStripMenuItem.Text = "Ammunition";
             this.cannonsToolStripMenuItem.Click += new System.EventHandler(this.ammunitionToolStripMenuItem_Click);
@@ -91,6 +93,13 @@
             this.console.Size = new System.Drawing.Size(1184, 737);
             this.console.TabIndex = 2;
             this.console.Text = "";
+            // 
+            // deadLinksToolStripMenuItem
+            // 
+            this.deadLinksToolStripMenuItem.Name = "deadLinksToolStripMenuItem";
+            this.deadLinksToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deadLinksToolStripMenuItem.Text = "Dead links";
+            this.deadLinksToolStripMenuItem.Click += new System.EventHandler(this.deadLinksToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -117,5 +126,6 @@
         private ToolStripMenuItem analyzeToolStripMenuItem;
         private RichTextBox console;
         private ToolStripMenuItem cannonsToolStripMenuItem;
+        private ToolStripMenuItem deadLinksToolStripMenuItem;
     }
 }

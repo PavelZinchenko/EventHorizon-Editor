@@ -23,7 +23,6 @@ namespace EditorDatabase.DataModel
 		{
 			AbandonedStarbaseFaction = database.GetFactionId(serializable.AbandonedStarbaseFaction);
 			StartingShipBuilds = serializable.StartingShipBuilds?.Select(id => new Wrapper<ShipBuild> { Item = database.GetShipBuildId(id) }).ToArray();
-
 			OnDataDeserialized(serializable, database);
 		}
 

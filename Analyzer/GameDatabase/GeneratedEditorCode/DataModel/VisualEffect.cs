@@ -21,9 +21,15 @@ namespace EditorDatabase.DataModel
 
 		public VisualEffect(VisualEffectSerializable serializable, Database database)
 		{
-			Id = new ItemId<VisualEffect>(serializable.Id, serializable.FileName);
-			Elements = serializable.Elements?.Select(item => new VisualEffectElement(item, database)).ToArray();
-
+			try
+			{
+				Id = new ItemId<VisualEffect>(serializable.Id, serializable.FileName);
+				Elements = serializable.Elements?.Select(item => new VisualEffectElement(item, database)).ToArray();
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

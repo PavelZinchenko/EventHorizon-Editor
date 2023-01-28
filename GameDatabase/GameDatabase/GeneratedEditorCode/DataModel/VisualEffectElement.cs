@@ -31,7 +31,6 @@ namespace EditorDatabase.DataModel
 			TurnRate = new NumericValue<float>(serializable.TurnRate, -1000f, 1000f);
 			StartTime = new NumericValue<float>(serializable.StartTime, 0f, 1000f);
 			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
-
 			OnDataDeserialized(serializable, database);
 		}
 

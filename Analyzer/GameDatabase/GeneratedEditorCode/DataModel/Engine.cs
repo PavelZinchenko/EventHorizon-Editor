@@ -24,7 +24,6 @@ namespace EditorDatabase.DataModel
 		{
 			Position = serializable.Position;
 			Size = new NumericValue<float>(serializable.Size, 0f, 1f);
-
 			OnDataDeserialized(serializable, database);
 		}
 

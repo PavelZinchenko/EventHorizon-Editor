@@ -21,17 +21,23 @@ namespace EditorDatabase.DataModel
 
 		public BulletPrefab(BulletPrefabSerializable serializable, Database database)
 		{
-			Id = new ItemId<BulletPrefab>(serializable.Id, serializable.FileName);
-			Shape = serializable.Shape;
-			Image = serializable.Image;
-			Size = new NumericValue<float>(serializable.Size, 0.01f, 100f);
-			Margins = new NumericValue<float>(serializable.Margins, 0f, 1f);
-			Deformation = new NumericValue<float>(serializable.Deformation, -100f, 100f);
-			MainColor = Helpers.ColorFromString(serializable.MainColor);
-			MainColorMode = serializable.MainColorMode;
-			SecondColor = Helpers.ColorFromString(serializable.SecondColor);
-			SecondColorMode = serializable.SecondColorMode;
-
+			try
+			{
+				Id = new ItemId<BulletPrefab>(serializable.Id, serializable.FileName);
+				Shape = serializable.Shape;
+				Image = serializable.Image;
+				Size = new NumericValue<float>(serializable.Size, 0.01f, 100f);
+				Margins = new NumericValue<float>(serializable.Margins, 0f, 1f);
+				Deformation = new NumericValue<float>(serializable.Deformation, -100f, 100f);
+				MainColor = Helpers.ColorFromString(serializable.MainColor);
+				MainColorMode = serializable.MainColorMode;
+				SecondColor = Helpers.ColorFromString(serializable.SecondColor);
+				SecondColorMode = serializable.SecondColorMode;
+			}
+			catch (DatabaseException e)
+			{
+				throw new DatabaseException(this.GetType() + ": deserialization failed. " + serializable.FileName + " (" + serializable.Id + ")", e);
+			}
 			OnDataDeserialized(serializable, database);
 		}
 

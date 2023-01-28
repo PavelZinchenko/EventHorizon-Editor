@@ -24,7 +24,7 @@ namespace EditorDatabase.DataModel
 		{
 			Component = database.GetComponentId(serializable.ComponentId);
 			if (Component.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ".Component cannot be null");
+			    throw new DatabaseException(this.GetType().Name + ": Component cannot be null");
 			Modification = serializable.Modification;
 			Quality = serializable.Quality;
 			Locked = serializable.Locked;
@@ -33,7 +33,6 @@ namespace EditorDatabase.DataModel
 			BarrelId = new NumericValue<int>(serializable.BarrelId, 0, 255);
 			Behaviour = new NumericValue<int>(serializable.Behaviour, 0, 10);
 			KeyBinding = new NumericValue<int>(serializable.KeyBinding, -10, 10);
-
 			OnDataDeserialized(serializable, database);
 		}
 

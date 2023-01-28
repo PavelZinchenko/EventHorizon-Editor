@@ -2,7 +2,7 @@
   "profiles": {
     "Analyzer": {
       "commandName": "Project",
-      "workingDirectory": "D:\\Projects\\Database\\Analyzer\\Database"
+      "workingDirectory": "D:\\Projects\\EventHorizonFrontier\\Starship\\Assets\\Resources\\Database"
     }
   }
 }

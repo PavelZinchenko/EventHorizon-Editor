@@ -34,7 +34,6 @@ namespace EditorDatabase.DataModel
 			EnergyCost = new NumericValue<float>(serializable.EnergyCost, 0f, 1E+09f);
 			CanBeDisarmed = serializable.CanBeDisarmed;
 			FriendlyFire = serializable.FriendlyFire;
-
 			OnDataDeserialized(serializable, database);
 		}
 

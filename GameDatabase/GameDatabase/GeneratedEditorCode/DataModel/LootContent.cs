@@ -340,7 +340,7 @@ namespace EditorDatabase.DataModel
 		{
 			QuestItem = database.GetQuestItemId(serializable.ItemId);
 			if (QuestItem.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ".QuestItem cannot be null");
+			    throw new DatabaseException(this.GetType().Name + ": QuestItem cannot be null");
 			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
 			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
 
@@ -369,7 +369,7 @@ namespace EditorDatabase.DataModel
 		{
 			ShipBuild = database.GetShipBuildId(serializable.ItemId);
 			if (ShipBuild.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ".ShipBuild cannot be null");
+			    throw new DatabaseException(this.GetType().Name + ": ShipBuild cannot be null");
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -392,7 +392,7 @@ namespace EditorDatabase.DataModel
 		{
 			Ship = database.GetShipId(serializable.ItemId);
 			if (Ship.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ".Ship cannot be null");
+			    throw new DatabaseException(this.GetType().Name + ": Ship cannot be null");
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -415,7 +415,7 @@ namespace EditorDatabase.DataModel
 		{
 			Component = database.GetComponentId(serializable.ItemId);
 			if (Component.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ".Component cannot be null");
+			    throw new DatabaseException(this.GetType().Name + ": Component cannot be null");
 			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
 			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
 
