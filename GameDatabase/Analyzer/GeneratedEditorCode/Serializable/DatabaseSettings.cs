@@ -6,16 +6,22 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace EditorDatabase.Enums
+using System;
+using System.ComponentModel;
+using EditorDatabase.Enums;
+using EditorDatabase.Model;
+
+namespace EditorDatabase.Serializable
 {
-	public enum ShipCategory
+	[Serializable]
+	public class DatabaseSettingsSerializable : SerializableItem
 	{
-		Common,
-		Rare,
-		Flagship,
-		Special,
-		Starbase,
-		Hidden,
-		Drone,
+		public int DatabaseVersion;
+		[DefaultValue("")]
+		public string ModName;
+		[DefaultValue("")]
+		public string ModId;
+		public int ModVersion;
+		public bool UnloadOriginalDatabase;
 	}
 }

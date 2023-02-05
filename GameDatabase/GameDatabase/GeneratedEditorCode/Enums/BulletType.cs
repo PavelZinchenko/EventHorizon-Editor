@@ -14,5 +14,6 @@ namespace EditorDatabase.Enums
 		Homing,
 		Static,
 		Continuous,
+		Magnetic,
 	}
 }

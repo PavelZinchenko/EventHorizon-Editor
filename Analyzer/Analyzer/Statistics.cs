@@ -66,7 +66,7 @@ namespace Analyzer.Analyzer
                     stats.dps = continuous ? GetContinuousDPS(ammunition) : GetDPS(ammunition, fireRate);
                     stats.eps = continuous ? ammunition.Body.EnergyCost.Value : ammunition.Body.EnergyCost.Value * energyRate;
                     stats.range = ammunition.Body.Range.Value;
-                    stats.homing = ammunition.Body.Type == BulletType.Homing;
+                    stats.homing = ammunition.Body.Type == BulletType.Homing || ammunition.Body.Type == BulletType.Magnetic;
                 }
                 else if (ammunitionOld != null)
                 {
@@ -183,12 +183,14 @@ namespace Analyzer.Analyzer
         {
             float damage = 0f;
 
+            if (nestingLevel >= 100) return damage;
+
             if (ammunition.Triggers != null)
                 foreach (var trigger in ammunition.Triggers.
                     Where(item => item.EffectType == BulletEffectType.SpawnBullet).
                     Select(item => item.Content as BulletTrigger_SpawnBullet))
                 {
-                    if (nestingLevel > trigger.MaxNestingLevel.Value) continue;
+                    if (trigger.MaxNestingLevel.Value > 0 && nestingLevel > trigger.MaxNestingLevel.Value) continue;
 
                     var bulletPower = trigger.PowerMultiplier.Value > 0 ? trigger.PowerMultiplier.Value : 1.0f;
                     var quantity = trigger.Quantity.Value > 0 ? trigger.Quantity.Value : 1;
