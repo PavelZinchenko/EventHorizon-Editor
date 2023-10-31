@@ -22,7 +22,11 @@ namespace GameDatabase
 
         private void MainWindow_Load(object sender, EventArgs eventArgs)
         {
-            OpenDatabase(Directory.GetCurrentDirectory());
+            var args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+                OpenDatabase(args[1]);
+            else
+                OpenDatabase(Directory.GetCurrentDirectory());
         }
 
         private void OpenDatabase(string path)

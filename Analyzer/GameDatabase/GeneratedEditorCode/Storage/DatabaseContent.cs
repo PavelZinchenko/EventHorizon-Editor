@@ -72,6 +72,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(DatabaseSettings.FileName, jsonSerializer.ToJson(DatabaseSettings));            
             if (ExplorationSettings != null)
                 storage.SaveJson(ExplorationSettings.FileName, jsonSerializer.ToJson(ExplorationSettings));            
+            if (FrontierSettings != null)
+                storage.SaveJson(FrontierSettings.FileName, jsonSerializer.ToJson(FrontierSettings));            
             if (GalaxySettings != null)
                 storage.SaveJson(GalaxySettings.FileName, jsonSerializer.ToJson(GalaxySettings));            
             if (ShipSettings != null)
@@ -257,6 +259,15 @@ namespace EditorDatabase.Storage
                     throw new DatabaseException("Duplicate ExplorationSettings file found - " + name);
                 ExplorationSettings = data;
             }
+            else if (type == ItemType.FrontierSettings)
+            {
+                var data = _serializer.FromJson<FrontierSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (FrontierSettings != null)
+                    throw new DatabaseException("Duplicate FrontierSettings file found - " + name);
+                FrontierSettings = data;
+            }
             else if (type == ItemType.GalaxySettings)
             {
                 var data = _serializer.FromJson<GalaxySettingsSerializable>(content);
@@ -293,6 +304,7 @@ namespace EditorDatabase.Storage
         
 		public DatabaseSettingsSerializable DatabaseSettings { get; private set; }
 		public ExplorationSettingsSerializable ExplorationSettings { get; private set; }
+		public FrontierSettingsSerializable FrontierSettings { get; private set; }
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
 		public ShipSettingsSerializable ShipSettings { get; private set; }
 

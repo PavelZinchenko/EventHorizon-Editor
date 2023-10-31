@@ -40,6 +40,8 @@ namespace EditorDatabase.DataModel
 					return new BulletTriggerEmptyContent();
 				case BulletEffectType.SpawnStaticSfx:
 					return new BulletTrigger_SpawnStaticSfx();
+				case BulletEffectType.GravityField:
+					return new BulletTrigger_GravityField();
 				default:
 					throw new DatabaseException("BulletTrigger: Invalid content type - " + type);
 			}
@@ -237,6 +239,30 @@ namespace EditorDatabase.DataModel
 		public ColorMode ColorMode;
 		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 100f);
 		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1000f);
+	}
+
+	public partial class BulletTrigger_GravityField : IBulletTriggerContent
+	{
+		partial void OnDataDeserialized(BulletTriggerSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BulletTriggerSerializable serializable);
+
+		public void Load(BulletTriggerSerializable serializable, Database database)
+		{
+			Size = new NumericValue<float>(serializable.Size, 0f, 100f);
+			PowerMultiplier = new NumericValue<float>(serializable.PowerMultiplier, 0f, 1000f);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BulletTriggerSerializable serializable)
+		{
+			serializable.Size = Size.Value;
+			serializable.PowerMultiplier = PowerMultiplier.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 100f);
+		public NumericValue<float> PowerMultiplier = new NumericValue<float>(0, 0f, 1000f);
 	}
 
 }

@@ -36,12 +36,10 @@ namespace EditorDatabase.DataModel
 				Icon = serializable.Icon;
 				Color = Helpers.ColorFromString(serializable.Color);
 				Layout = new Layout(serializable.Layout);
-				CellType = serializable.CellType;
 				Device = database.GetDeviceId(serializable.DeviceId);
 				Weapon = database.GetWeaponId(serializable.WeaponId);
 				Ammunition = database.GetAmmunitionId(serializable.AmmunitionId);
 				AmmunitionObsolete = database.GetAmmunitionObsoleteId(serializable.AmmunitionId);
-				WeaponSlotType = serializable.WeaponSlotType;
 				DroneBay = database.GetDroneBayId(serializable.DroneBayId);
 				Drone = database.GetShipBuildId(serializable.DroneId);
 				Restrictions = new ComponentRestrictions(serializable.Restrictions, database);
@@ -66,12 +64,10 @@ namespace EditorDatabase.DataModel
 			serializable.Icon = Icon;
 			serializable.Color = Helpers.ColorToString(Color);
 			serializable.Layout = Layout.Data;
-			serializable.CellType = CellType;
 			serializable.DeviceId = Device.Value;
 			serializable.WeaponId = Weapon.Value;
 			serializable.AmmunitionId = Ammunition.Value;
 			serializable.AmmunitionId = AmmunitionObsolete.Value;
-			serializable.WeaponSlotType = WeaponSlotType;
 			serializable.DroneBayId = DroneBay.Value;
 			serializable.DroneId = Drone.Value;
 			serializable.Restrictions = Restrictions.Serialize();
@@ -94,12 +90,10 @@ namespace EditorDatabase.DataModel
 		public string Icon;
 		public System.Drawing.Color Color;
 		public Layout Layout;
-		public string CellType;
 		public ItemId<Device> Device = ItemId<Device>.Empty;
 		public ItemId<Weapon> Weapon = ItemId<Weapon>.Empty;
 		public ItemId<Ammunition> Ammunition = ItemId<Ammunition>.Empty;
 		public ItemId<AmmunitionObsolete> AmmunitionObsolete = ItemId<AmmunitionObsolete>.Empty;
-		public string WeaponSlotType;
 		public ItemId<DroneBay> DroneBay = ItemId<DroneBay>.Empty;
 		public ItemId<ShipBuild> Drone = ItemId<ShipBuild>.Empty;
 		public ComponentRestrictions Restrictions = new ComponentRestrictions();

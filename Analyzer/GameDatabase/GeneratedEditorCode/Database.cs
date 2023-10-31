@@ -50,6 +50,7 @@ namespace EditorDatabase
             foreach (var item in _weaponMap) item.Value.Save(_content.GetWeapon(item.Key));
 			_databaseSettings?.Save(_content.DatabaseSettings);
 			_explorationSettings?.Save(_content.ExplorationSettings);
+			_frontierSettings?.Save(_content.FrontierSettings);
 			_galaxySettings?.Save(_content.GalaxySettings);
 			_shipSettings?.Save(_content.ShipSettings);
 		
@@ -133,6 +134,8 @@ namespace EditorDatabase
 				yield return DatabaseSettings;
             if (_content.ExplorationSettings != null)
 				yield return ExplorationSettings;
+            if (_content.FrontierSettings != null)
+				yield return FrontierSettings;
             if (_content.GalaxySettings != null)
 				yield return GalaxySettings;
             if (_content.ShipSettings != null)
@@ -194,6 +197,7 @@ namespace EditorDatabase
 				case ItemType.Weapon: return GetWeapon(id);
 				case ItemType.DatabaseSettings: return DatabaseSettings;
 				case ItemType.ExplorationSettings: return ExplorationSettings;
+				case ItemType.FrontierSettings: return FrontierSettings;
 				case ItemType.GalaxySettings: return GalaxySettings;
 				case ItemType.ShipSettings: return ShipSettings;
                 default: return null;
@@ -203,6 +207,7 @@ namespace EditorDatabase
 
 		public DatabaseSettings DatabaseSettings => _databaseSettings ?? (_databaseSettings = new DatabaseSettings(_content.DatabaseSettings, this));
 		public ExplorationSettings ExplorationSettings => _explorationSettings ?? (_explorationSettings = new ExplorationSettings(_content.ExplorationSettings, this));
+		public FrontierSettings FrontierSettings => _frontierSettings ?? (_frontierSettings = new FrontierSettings(_content.FrontierSettings, this));
 		public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = new GalaxySettings(_content.GalaxySettings, this));
 		public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = new ShipSettings(_content.ShipSettings, this));
 
@@ -500,6 +505,7 @@ namespace EditorDatabase
 
 			_databaseSettings = null;
 			_explorationSettings = null;
+			_frontierSettings = null;
 			_galaxySettings = null;
 			_shipSettings = null;
         }
@@ -529,6 +535,7 @@ namespace EditorDatabase
 
 		private DatabaseSettings _databaseSettings;
 		private ExplorationSettings _explorationSettings;
+		private FrontierSettings _frontierSettings;
 		private GalaxySettings _galaxySettings;
 		private ShipSettings _shipSettings;
 	

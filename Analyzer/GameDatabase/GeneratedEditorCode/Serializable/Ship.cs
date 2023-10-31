@@ -16,32 +16,33 @@ namespace EditorDatabase.Serializable
 	[Serializable]
 	public class ShipSerializable : SerializableItem
 	{
-		public ShipCategory ShipCategory;
+		public ShipType ShipType;
+		public ShipRarity ShipRarity;
+		public SizeClass SizeClass;
 		[DefaultValue("")]
 		public string Name;
 		public int Faction;
-		public SizeClass SizeClass;
 		[DefaultValue("")]
 		public string IconImage;
 		public float IconScale;
 		[DefaultValue("")]
 		public string ModelImage;
 		public float ModelScale;
-		public Vector2 EnginePosition;
 		[DefaultValue("")]
 		public string EngineColor;
-		public float EngineSize;
 		public EngineSerializable[] Engines;
+		[DefaultValue("")]
+		public string Layout;
+		public BarrelSerializable[] Barrels;
+		public ShipFeaturesSerializable Features;
+		public Vector2 EnginePosition;
+		public float EngineSize;
+		public int ShipCategory;
 		public float EnergyResistance;
 		public float KineticResistance;
 		public float HeatResistance;
 		public bool Regeneration;
-		public float WeightModifier;
-		public float VelocityModifier;
-		public float TurnRateModifier;
 		public int[] BuiltinDevices;
-		[DefaultValue("")]
-		public string Layout;
-		public BarrelSerializable[] Barrels;
+		public float BaseWeightModifier;
 	}
 }
