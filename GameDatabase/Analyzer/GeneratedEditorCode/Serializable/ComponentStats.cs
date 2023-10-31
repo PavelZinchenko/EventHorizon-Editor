@@ -45,6 +45,8 @@ namespace EditorDatabase.Serializable
 		public float WeaponDamageModifier;
 		public float WeaponRangeModifier;
 		public float WeaponEnergyCostModifier;
-		public PlatformType AlterWeaponPlatform;
+		public int AlterWeaponPlatform;
+		public float AutoAimingArc;
+		public float TurretTurnSpeed;
 	}
 }

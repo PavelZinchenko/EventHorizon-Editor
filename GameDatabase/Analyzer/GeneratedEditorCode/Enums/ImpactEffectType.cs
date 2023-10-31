@@ -18,5 +18,8 @@ namespace EditorDatabase.Enums
 		SlowDown,
 		CaptureDrones,
 		Repair,
+		RestoreLifetime,
+		Devour,
+		Teleport,
 	}
 }

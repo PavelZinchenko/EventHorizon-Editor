@@ -17,7 +17,7 @@ namespace EditorDatabase.Serializable
 	public class ShipSerializable : SerializableItem
 	{
 		public ShipType ShipType;
-		public WayToGetShip WayToGetShip;
+		public ShipRarity ShipRarity;
 		public SizeClass SizeClass;
 		[DefaultValue("")]
 		public string Name;

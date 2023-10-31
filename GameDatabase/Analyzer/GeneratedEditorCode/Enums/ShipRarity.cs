@@ -8,10 +8,11 @@
 
 namespace EditorDatabase.Enums
 {
-	public enum WayToGetShip
+	public enum ShipRarity
 	{
-		Default = 0,
-		Purchase = 1,
-		Special = 2,
+		Normal,
+		Rare,
+		Hidden,
+		Unique,
 	}
 }

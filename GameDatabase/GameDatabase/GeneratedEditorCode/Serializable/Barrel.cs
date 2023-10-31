@@ -19,7 +19,7 @@ namespace EditorDatabase.Serializable
 		public Vector2 Position;
 		public float Rotation;
 		public float Offset;
-		public PlatformType PlatformType;
+		public int PlatformType;
 		public float AutoAimingArc;
 		public float RotationSpeed;
 		[DefaultValue("")]

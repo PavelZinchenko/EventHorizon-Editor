@@ -18,9 +18,25 @@ namespace EditorDatabase.DataModel
 
             switch (serializable.ShipCategory)
             {
-                case 1: ShipType = Enums.ShipType.Rare; break;
-                case 3: ShipType = Enums.ShipType.Special; break;
-                case 5: ShipType = Enums.ShipType.Hidden; break;
+                case 1: // Rare
+                    ShipRarity = Enums.ShipRarity.Rare;
+                    break;
+                case 2: // Flagship
+                    break;
+                case 3: // Special
+                    ShipType = Enums.ShipType.Special;
+                    break;
+                case 4: // Starbase
+                    SizeClass = Enums.SizeClass.Starbase;
+                    ShipType = Enums.ShipType.Station;
+                    break;
+                case 5: // Hidden
+                    ShipRarity = Enums.ShipRarity.Hidden;
+                    break;
+                case 6: // Drone
+                    SizeClass = Enums.SizeClass.Drone;
+                    ShipType = Enums.ShipType.Drone;
+                    break;
             }
 
             if (serializable.EnergyResistance != 0 ||

@@ -18,5 +18,6 @@ namespace EditorDatabase.Enums
 		Spark,
 		Mine,
 		Wave,
+		BlackHole,
 	}
 }

@@ -25,7 +25,6 @@ namespace EditorDatabase.DataModel
 			Position = serializable.Position;
 			Rotation = new NumericValue<float>(serializable.Rotation, -360f, 360f);
 			Offset = new NumericValue<float>(serializable.Offset, 0f, 1f);
-			PlatformType = serializable.PlatformType;
 			AutoAimingArc = new NumericValue<float>(serializable.AutoAimingArc, 0f, 360f);
 			RotationSpeed = new NumericValue<float>(serializable.RotationSpeed, 0f, 1000f);
 			WeaponClass = serializable.WeaponClass;
@@ -40,7 +39,6 @@ namespace EditorDatabase.DataModel
 			serializable.Position = Position;
 			serializable.Rotation = Rotation.Value;
 			serializable.Offset = Offset.Value;
-			serializable.PlatformType = PlatformType;
 			serializable.AutoAimingArc = AutoAimingArc.Value;
 			serializable.RotationSpeed = RotationSpeed.Value;
 			serializable.WeaponClass = WeaponClass;
@@ -53,7 +51,6 @@ namespace EditorDatabase.DataModel
 		public Vector2 Position;
 		public NumericValue<float> Rotation = new NumericValue<float>(0, -360f, 360f);
 		public NumericValue<float> Offset = new NumericValue<float>(0, 0f, 1f);
-		public PlatformType PlatformType;
 		public NumericValue<float> AutoAimingArc = new NumericValue<float>(0, 0f, 360f);
 		public NumericValue<float> RotationSpeed = new NumericValue<float>(0, 0f, 1000f);
 		public string WeaponClass;

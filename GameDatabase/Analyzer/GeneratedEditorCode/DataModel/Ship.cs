@@ -25,7 +25,7 @@ namespace EditorDatabase.DataModel
 			{
 				Id = new ItemId<Ship>(serializable.Id, serializable.FileName);
 				ShipType = serializable.ShipType;
-				WayToGetShip = serializable.WayToGetShip;
+				ShipRarity = serializable.ShipRarity;
 				SizeClass = serializable.SizeClass;
 				Name = serializable.Name;
 				Faction = database.GetFactionId(serializable.Faction);
@@ -49,7 +49,7 @@ namespace EditorDatabase.DataModel
 		public void Save(ShipSerializable serializable)
 		{
 			serializable.ShipType = ShipType;
-			serializable.WayToGetShip = WayToGetShip;
+			serializable.ShipRarity = ShipRarity;
 			serializable.SizeClass = SizeClass;
 			serializable.Name = Name;
 			serializable.Faction = Faction.Value;
@@ -74,7 +74,7 @@ namespace EditorDatabase.DataModel
 		public readonly ItemId<Ship> Id;
 
 		public ShipType ShipType;
-		public WayToGetShip WayToGetShip;
+		public ShipRarity ShipRarity;
 		public SizeClass SizeClass;
 		public string Name;
 		public ItemId<Faction> Faction = ItemId<Faction>.Empty;

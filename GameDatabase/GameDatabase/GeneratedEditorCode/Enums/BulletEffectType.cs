@@ -15,5 +15,6 @@ namespace EditorDatabase.Enums
 		SpawnBullet,
 		Detonate,
 		SpawnStaticSfx,
+		GravityField,
 	}
 }

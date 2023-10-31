@@ -53,7 +53,8 @@ namespace EditorDatabase.DataModel
 				WeaponDamageModifier = new NumericValue<float>(serializable.WeaponDamageModifier, -100f, 100f);
 				WeaponRangeModifier = new NumericValue<float>(serializable.WeaponRangeModifier, -100f, 100f);
 				WeaponEnergyCostModifier = new NumericValue<float>(serializable.WeaponEnergyCostModifier, -100f, 100f);
-				AlterWeaponPlatform = serializable.AlterWeaponPlatform;
+				AutoAimingArc = new NumericValue<float>(serializable.AutoAimingArc, 0f, 360f);
+				TurretTurnSpeed = new NumericValue<float>(serializable.TurretTurnSpeed, -1000f, 1000f);
 			}
 			catch (DatabaseException e)
 			{
@@ -93,7 +94,8 @@ namespace EditorDatabase.DataModel
 			serializable.WeaponDamageModifier = WeaponDamageModifier.Value;
 			serializable.WeaponRangeModifier = WeaponRangeModifier.Value;
 			serializable.WeaponEnergyCostModifier = WeaponEnergyCostModifier.Value;
-			serializable.AlterWeaponPlatform = AlterWeaponPlatform;
+			serializable.AutoAimingArc = AutoAimingArc.Value;
+			serializable.TurretTurnSpeed = TurretTurnSpeed.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -128,7 +130,8 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> WeaponDamageModifier = new NumericValue<float>(0, -100f, 100f);
 		public NumericValue<float> WeaponRangeModifier = new NumericValue<float>(0, -100f, 100f);
 		public NumericValue<float> WeaponEnergyCostModifier = new NumericValue<float>(0, -100f, 100f);
-		public PlatformType AlterWeaponPlatform;
+		public NumericValue<float> AutoAimingArc = new NumericValue<float>(0, 0f, 360f);
+		public NumericValue<float> TurretTurnSpeed = new NumericValue<float>(0, -1000f, 1000f);
 
 		public static ComponentStats DefaultValue { get; private set; }
 	}

@@ -1,0 +1,3 @@
+..\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\bin\Release\DatabaseCodeGenerator.exe ..\Database\DatabaseCodeGenerator\Schema GameDatabase\Analyzer editor
+..\Database\DatabaseCodeGenerator\DatabaseCodeGenerator\bin\Release\DatabaseCodeGenerator.exe ..\Database\DatabaseCodeGenerator\Schema GameDatabase\GameDatabase editor
+"D:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" GameDatabase.sln /property:Configuration=Release
