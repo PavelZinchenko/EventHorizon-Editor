@@ -31,6 +31,7 @@ namespace EditorDatabase.DataModel
 				LootCondition = serializable.LootCondition;
 				ExpCondition = serializable.ExpCondition;
 				SpecificShips = serializable.SpecificShips?.Select(id => new Wrapper<ShipBuild> { Item = database.GetShipBuildId(id) }).ToArray();
+				NoShipChanging = serializable.NoShipChanging;
 			}
 			catch (DatabaseException e)
 			{
@@ -51,6 +52,7 @@ namespace EditorDatabase.DataModel
 			    serializable.SpecificShips = null;
 			else
 			    serializable.SpecificShips = SpecificShips.Select(wrapper => wrapper.Item.Value).ToArray();
+			serializable.NoShipChanging = NoShipChanging;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -63,6 +65,7 @@ namespace EditorDatabase.DataModel
 		public RewardCondition LootCondition;
 		public RewardCondition ExpCondition;
 		public Wrapper<ShipBuild>[] SpecificShips;
+		public bool NoShipChanging;
 
 		public static Fleet DefaultValue { get; private set; }
 	}

@@ -23,5 +23,6 @@ namespace EditorDatabase.Serializable
 		public RewardCondition LootCondition;
 		public RewardCondition ExpCondition;
 		public int[] SpecificShips;
+		public bool NoShipChanging;
 	}
 }
