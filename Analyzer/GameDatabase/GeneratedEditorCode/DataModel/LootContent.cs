@@ -58,6 +58,8 @@ namespace EditorDatabase.DataModel
 					return new LootContent_EmptyShip();
 				case LootItemType.Component:
 					return new LootContent_Component();
+				case LootItemType.Blueprint:
+					return new LootContent_Blueprint();
 				default:
 					throw new DatabaseException("LootContent: Invalid content type - " + type);
 			}
@@ -80,6 +82,7 @@ namespace EditorDatabase.DataModel
 		public LootContentSerializable Serialize()
 		{
 			var serializable = new LootContentSerializable();
+			serializable.ItemId = 0;
 			serializable.ItemId = 0;
 			serializable.ItemId = 0;
 			serializable.ItemId = 0;
@@ -433,6 +436,29 @@ namespace EditorDatabase.DataModel
 		public ItemId<Component> Component = ItemId<Component>.Empty;
 		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
 		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
+	}
+
+	public partial class LootContent_Blueprint : ILootContentContent
+	{
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataSerialized(ref LootContentSerializable serializable);
+
+		public void Load(LootContentSerializable serializable, Database database)
+		{
+			Blueprint = database.GetTechnologyId(serializable.ItemId);
+			if (Blueprint.IsNull)
+			    throw new DatabaseException(this.GetType().Name + ": Blueprint cannot be null");
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref LootContentSerializable serializable)
+		{
+			serializable.ItemId = Blueprint.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public ItemId<Technology> Blueprint = ItemId<Technology>.Empty;
 	}
 
 }
