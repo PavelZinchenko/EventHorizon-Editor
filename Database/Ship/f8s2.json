@@ -1,9 +1,9 @@
 {
   "ItemType": 6,
   "Id": 56,
+  "SizeClass": 1,
   "Name": "$f8_Destroyer",
   "Faction": 10,
-  "SizeClass": 1,
   "IconImage": "f8s2",
   "IconScale": 0.7,
   "ModelImage": "f8s2",

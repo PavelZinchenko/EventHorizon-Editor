@@ -1,19 +1,22 @@
 {
   "ItemType": 6,
   "Id": 45,
-  "ShipCategory": 1,
+  "ShipRarity": 1,
   "Name": "$f6_Scout2",
   "Faction": 6,
   "IconImage": "f6s1_2",
   "IconScale": 0.7,
   "ModelImage": "f6s1_2",
   "ModelScale": 1.0,
-  "EnginePosition": {
-    "x": -0.1
-  },
   "EngineColor": "#10A0FFA0",
-  "EngineSize": 0.5,
-  "Regeneration": true,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.1
+      },
+      "Size": 0.5
+    }
+  ],
   "Layout": "000222000001222100001222100004525400004545400004040400004040400000040000000000000",
   "Barrels": [
     {
@@ -39,5 +42,8 @@
       "Rotation": 180.0,
       "WeaponClass": "C"
     }
-  ]
+  ],
+  "Features": {
+    "Regeneration": true
+  }
 }

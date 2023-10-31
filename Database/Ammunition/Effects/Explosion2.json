@@ -14,6 +14,7 @@
       "Image": "CloudWhite",
       "ColorMode": 2,
       "Size": 1.0,
+      "GrowthRate": 0.1,
       "Lifetime": 1.0
     },
     {
@@ -22,6 +23,7 @@
       "ColorMode": 1,
       "Color": "#80202020",
       "Size": 1.5,
+      "GrowthRate": 0.2,
       "Lifetime": 3.0
     },
     {

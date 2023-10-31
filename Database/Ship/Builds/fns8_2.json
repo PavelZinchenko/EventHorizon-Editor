@@ -1,6 +1,6 @@
 {
   "ItemType": 8,
-  "Id": 229,
+  "Id": 195,
   "ShipId": 77,
   "DifficultyClass": 1,
   "BuildFaction": -1,
@@ -122,14 +122,6 @@
       "KeyBinding": 1
     },
     {
-      "ComponentId": 74,
-      "Locked": true,
-      "X": 5,
-      "Y": 7,
-      "BarrelId": -1,
-      "KeyBinding": 1
-    },
-    {
       "ComponentId": 177,
       "Locked": true,
       "X": 5,
@@ -198,6 +190,16 @@
       "Locked": true,
       "X": 5,
       "Y": 3,
+      "BarrelId": -1,
+      "KeyBinding": 1
+    },
+    {
+      "ComponentId": 74,
+      "Modification": 12,
+      "Quality": 5,
+      "Locked": true,
+      "X": 5,
+      "Y": 7,
       "BarrelId": -1,
       "KeyBinding": 1
     }

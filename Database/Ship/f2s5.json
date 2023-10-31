@@ -1,18 +1,22 @@
 {
   "ItemType": 6,
   "Id": 28,
+  "SizeClass": 1,
   "Name": "$f2_Destroyer2",
   "Faction": 2,
-  "SizeClass": 1,
   "IconImage": "f2s5",
   "IconScale": 0.7,
   "ModelImage": "f2s5",
   "ModelScale": 1.5,
-  "EnginePosition": {
-    "x": -0.95
-  },
   "EngineColor": "#40FFBABA",
-  "EngineSize": 0.3,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.95
+      },
+      "Size": 0.3
+    }
+  ],
   "Layout": "0000110000000011000004001100400400220040040022004001002200100112222110011522511000055550000005555000",
   "Barrels": [
     {

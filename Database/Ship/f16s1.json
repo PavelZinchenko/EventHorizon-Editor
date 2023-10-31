@@ -16,20 +16,22 @@
       "Size": 0.5
     }
   ],
-  "KineticResistance": 5.0,
-  "Regeneration": true,
-  "BaseWeightModifier": -0.75,
-  "BuiltinDevices": [
-    18
-  ],
   "Layout": "0044400022222002222202222222222222233555330055500",
   "Barrels": [
     {
       "Position": {
         "x": 0.9
       },
-      "PlatformType": 2,
+      "AutoAimingArc": 80.0,
       "WeaponClass": "C"
     }
-  ]
+  ],
+  "Features": {
+    "KineticResistance": 5.0,
+    "WeightBonus": -0.5,
+    "Regeneration": true,
+    "BuiltinDevices": [
+      18
+    ]
+  }
 }

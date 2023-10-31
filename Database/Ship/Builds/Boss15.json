@@ -1,6 +1,6 @@
 {
   "ItemType": 8,
-  "Id": 235,
+  "Id": 271,
   "ShipId": 113,
   "Components": [
     {
@@ -58,6 +58,19 @@
       "X": 15,
       "Y": 11,
       "BarrelId": -1
+    },
+    {
+      "ComponentId": 120,
+      "Locked": true,
+      "X": 7,
+      "Y": 8
+    },
+    {
+      "ComponentId": 120,
+      "Locked": true,
+      "X": 25,
+      "Y": 8,
+      "BarrelId": 1
     },
     {
       "ComponentId": 91,
@@ -620,23 +633,6 @@
       "Y": 7,
       "BarrelId": -1,
       "KeyBinding": 2
-    },
-    {
-      "ComponentId": 250,
-      "Modification": 7,
-      "Quality": 5,
-      "Locked": true,
-      "X": 25,
-      "Y": 7,
-      "BarrelId": 1
-    },
-    {
-      "ComponentId": 250,
-      "Modification": 7,
-      "Quality": 5,
-      "Locked": true,
-      "X": 6,
-      "Y": 7
     }
   ]
 }

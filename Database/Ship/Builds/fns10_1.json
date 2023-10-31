@@ -286,27 +286,18 @@
       "KeyBinding": 2
     },
     {
-      "ComponentId": 67,
-      "Modification": 9,
+      "ComponentId": 148,
+      "Modification": 6,
       "Quality": 5,
-      "Locked": true,
-      "X": 6,
-      "Y": 5,
-      "KeyBinding": 2
-    },
-    {
-      "ComponentId": 67,
-      "Modification": 9,
-      "Quality": 5,
-      "Locked": true,
-      "X": 7,
-      "Y": 5,
-      "KeyBinding": 2
-    },
-    {
-      "ComponentId": 228,
       "Locked": true,
       "X": 5
+    },
+    {
+      "ComponentId": 66,
+      "Locked": true,
+      "X": 6,
+      "Y": 4,
+      "KeyBinding": 2
     }
   ]
 }

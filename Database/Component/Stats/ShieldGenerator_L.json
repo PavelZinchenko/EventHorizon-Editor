@@ -1,7 +1,7 @@
 {
   "ItemType": 11,
   "Id": 177,
-  "EnergyRechargeRate": -8.0,
-  "ShieldRechargeRate": 8.0,
+  "EnergyRechargeRate": -5.0,
+  "ShieldRechargeRate": 15.0,
   "Weight": 450.0
 }

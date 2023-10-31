@@ -1,8 +1,7 @@
 {
   "ItemType": 8,
-  "Id": 267,
+  "Id": 274,
   "ShipId": 117,
-  "DifficultyClass": 1,
   "BuildFaction": -1,
   "Components": [
     {
@@ -45,17 +44,17 @@
     {
       "ComponentId": 221,
       "Locked": true,
-      "X": 3,
+      "X": 11,
       "Y": 5,
-      "BarrelId": 1,
+      "BarrelId": 2,
       "KeyBinding": 2
     },
     {
       "ComponentId": 221,
       "Locked": true,
-      "X": 11,
+      "X": 3,
       "Y": 5,
-      "BarrelId": 2,
+      "BarrelId": 1,
       "KeyBinding": 2
     }
   ]

@@ -5,7 +5,7 @@
   "Power": 5.0,
   "Size": 1.0,
   "Lifetime": 4.0,
-  "Color": "#FF5800",
+  "Color": "#80BE945D",
   "ObjectPrefab": "CloudEffect",
   "ControlButtonIcon": "controls_gear"
 }

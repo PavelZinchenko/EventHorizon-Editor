@@ -13,9 +13,6 @@
   "DeviceId": 25,
   "Restrictions": {
     "ShipSizes": [
-      0,
-      1,
-      2,
       3
     ],
     "NotForMechanicShips": true

@@ -1,6 +1,6 @@
 {
   "ItemType": 8,
-  "Id": 234,
+  "Id": 232,
   "ShipId": 97,
   "Components": [
     {
@@ -320,6 +320,30 @@
       "Y": 3,
       "BarrelId": -1,
       "KeyBinding": -1
+    },
+    {
+      "ComponentId": 77,
+      "Locked": true,
+      "X": 14,
+      "Y": 19,
+      "BarrelId": -1,
+      "KeyBinding": 2
+    },
+    {
+      "ComponentId": 77,
+      "Locked": true,
+      "X": 14,
+      "Y": 17,
+      "BarrelId": -1,
+      "KeyBinding": 2
+    },
+    {
+      "ComponentId": 77,
+      "Locked": true,
+      "X": 14,
+      "Y": 15,
+      "BarrelId": -1,
+      "KeyBinding": 2
     }
   ]
 }

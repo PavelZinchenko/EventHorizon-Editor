@@ -6,6 +6,7 @@
   "BuildFaction": -1,
   "Components": [
     {
+      "ComponentId": 195,
       "Locked": true,
       "X": 5,
       "Y": 8,

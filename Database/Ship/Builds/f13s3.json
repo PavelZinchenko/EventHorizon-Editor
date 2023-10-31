@@ -5,20 +5,6 @@
   "BuildFaction": -1,
   "Components": [
     {
-      "ComponentId": 112,
-      "Locked": true,
-      "X": -1,
-      "Y": 3
-    },
-    {
-      "ComponentId": 166,
-      "Locked": true,
-      "X": 5,
-      "Y": 3,
-      "BarrelId": 1,
-      "KeyBinding": 1
-    },
-    {
       "ComponentId": 58,
       "Locked": true,
       "X": 2,
@@ -122,10 +108,23 @@
       "KeyBinding": 2
     },
     {
-      "ComponentId": 76,
+      "ComponentId": 115,
       "Locked": true,
-      "X": 2,
-      "Y": 2,
+      "Y": 4
+    },
+    {
+      "ComponentId": 165,
+      "Locked": true,
+      "X": 6,
+      "Y": 4,
+      "BarrelId": 1,
+      "KeyBinding": 1
+    },
+    {
+      "ComponentId": 77,
+      "Locked": true,
+      "X": 3,
+      "Y": 3,
       "BarrelId": -1,
       "KeyBinding": 2
     }

@@ -1,9 +1,9 @@
 {
   "ItemType": 6,
   "Id": 65,
+  "SizeClass": 2,
   "Name": "$fa_Cruiser",
   "Faction": 9,
-  "SizeClass": 2,
   "IconImage": "fas3",
   "IconScale": 0.9,
   "ModelImage": "fas3",

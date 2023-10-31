@@ -1,10 +1,9 @@
 {
   "ItemType": 6,
   "Id": 10,
-  "ShipCategory": 2,
+  "SizeClass": 4,
   "Name": "$f9_Flagship",
   "Faction": 11,
-  "SizeClass": 4,
   "IconImage": "flagship9",
   "IconScale": 1.2,
   "ModelImage": "flagship9",
@@ -32,7 +31,7 @@
       "Position": {
         "x": 1.0
       },
-      "PlatformType": 3,
+      "AutoAimingArc": 20.0,
       "WeaponClass": "C"
     },
     {
@@ -41,7 +40,7 @@
         "y": -0.5
       },
       "Rotation": -70.0,
-      "PlatformType": 3,
+      "AutoAimingArc": 20.0,
       "WeaponClass": "C"
     },
     {
@@ -50,7 +49,7 @@
         "y": 0.5
       },
       "Rotation": 70.0,
-      "PlatformType": 3,
+      "AutoAimingArc": 20.0,
       "WeaponClass": "C"
     },
     {
@@ -59,7 +58,7 @@
         "y": -0.5
       },
       "Rotation": -90.0,
-      "PlatformType": 3,
+      "AutoAimingArc": 20.0,
       "WeaponClass": "C"
     },
     {
@@ -68,7 +67,7 @@
         "y": 0.5
       },
       "Rotation": 90.0,
-      "PlatformType": 3,
+      "AutoAimingArc": 20.0,
       "WeaponClass": "C"
     },
     {
@@ -77,7 +76,7 @@
         "y": -0.5
       },
       "Rotation": -110.0,
-      "PlatformType": 3,
+      "AutoAimingArc": 20.0,
       "WeaponClass": "C"
     },
     {
@@ -86,7 +85,7 @@
         "y": 0.5
       },
       "Rotation": 110.0,
-      "PlatformType": 3,
+      "AutoAimingArc": 20.0,
       "WeaponClass": "C"
     }
   ]

@@ -7,11 +7,15 @@
   "IconScale": 0.5,
   "ModelImage": "f2s1",
   "ModelScale": 1.0,
-  "EnginePosition": {
-    "x": -0.8
-  },
   "EngineColor": "#40FFBABA",
-  "EngineSize": 0.1,
+  "Engines": [
+    {
+      "Position": {
+        "x": -0.8
+      },
+      "Size": 0.1
+    }
+  ],
   "Layout": "0014100001410000222000022200000200001252100125210",
   "Barrels": [
     {
