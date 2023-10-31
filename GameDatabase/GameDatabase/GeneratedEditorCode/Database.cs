@@ -52,6 +52,7 @@ namespace EditorDatabase
 			_explorationSettings?.Save(_content.ExplorationSettings);
 			_frontierSettings?.Save(_content.FrontierSettings);
 			_galaxySettings?.Save(_content.GalaxySettings);
+			_shipModSettings?.Save(_content.ShipModSettings);
 			_shipSettings?.Save(_content.ShipSettings);
 		
 			_content.Save(storage, _serializer);
@@ -138,6 +139,8 @@ namespace EditorDatabase
 				yield return FrontierSettings;
             if (_content.GalaxySettings != null)
 				yield return GalaxySettings;
+            if (_content.ShipModSettings != null)
+				yield return ShipModSettings;
             if (_content.ShipSettings != null)
 				yield return ShipSettings;
         }
@@ -199,6 +202,7 @@ namespace EditorDatabase
 				case ItemType.ExplorationSettings: return ExplorationSettings;
 				case ItemType.FrontierSettings: return FrontierSettings;
 				case ItemType.GalaxySettings: return GalaxySettings;
+				case ItemType.ShipModSettings: return ShipModSettings;
 				case ItemType.ShipSettings: return ShipSettings;
                 default: return null;
             }
@@ -209,6 +213,7 @@ namespace EditorDatabase
 		public ExplorationSettings ExplorationSettings => _explorationSettings ?? (_explorationSettings = new ExplorationSettings(_content.ExplorationSettings, this));
 		public FrontierSettings FrontierSettings => _frontierSettings ?? (_frontierSettings = new FrontierSettings(_content.FrontierSettings, this));
 		public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = new GalaxySettings(_content.GalaxySettings, this));
+		public ShipModSettings ShipModSettings => _shipModSettings ?? (_shipModSettings = new ShipModSettings(_content.ShipModSettings, this));
 		public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = new ShipSettings(_content.ShipSettings, this));
 
 		public ItemId<AmmunitionObsolete> GetAmmunitionObsoleteId(int id) { return new ItemId<AmmunitionObsolete>(_content.GetAmmunitionObsolete(id)); }
@@ -507,6 +512,7 @@ namespace EditorDatabase
 			_explorationSettings = null;
 			_frontierSettings = null;
 			_galaxySettings = null;
+			_shipModSettings = null;
 			_shipSettings = null;
         }
 
@@ -537,6 +543,7 @@ namespace EditorDatabase
 		private ExplorationSettings _explorationSettings;
 		private FrontierSettings _frontierSettings;
 		private GalaxySettings _galaxySettings;
+		private ShipModSettings _shipModSettings;
 		private ShipSettings _shipSettings;
 	
         private readonly IJsonSerializer _serializer;

@@ -76,6 +76,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(FrontierSettings.FileName, jsonSerializer.ToJson(FrontierSettings));            
             if (GalaxySettings != null)
                 storage.SaveJson(GalaxySettings.FileName, jsonSerializer.ToJson(GalaxySettings));            
+            if (ShipModSettings != null)
+                storage.SaveJson(ShipModSettings.FileName, jsonSerializer.ToJson(ShipModSettings));            
             if (ShipSettings != null)
                 storage.SaveJson(ShipSettings.FileName, jsonSerializer.ToJson(ShipSettings));            
         }
@@ -277,6 +279,15 @@ namespace EditorDatabase.Storage
                     throw new DatabaseException("Duplicate GalaxySettings file found - " + name);
                 GalaxySettings = data;
             }
+            else if (type == ItemType.ShipModSettings)
+            {
+                var data = _serializer.FromJson<ShipModSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (ShipModSettings != null)
+                    throw new DatabaseException("Duplicate ShipModSettings file found - " + name);
+                ShipModSettings = data;
+            }
             else if (type == ItemType.ShipSettings)
             {
                 var data = _serializer.FromJson<ShipSettingsSerializable>(content);
@@ -306,6 +317,7 @@ namespace EditorDatabase.Storage
 		public ExplorationSettingsSerializable ExplorationSettings { get; private set; }
 		public FrontierSettingsSerializable FrontierSettings { get; private set; }
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
+		public ShipModSettingsSerializable ShipModSettings { get; private set; }
 		public ShipSettingsSerializable ShipSettings { get; private set; }
 
 		public IEnumerable<AmmunitionObsoleteSerializable> AmmunitionObsoleteList => _ammunitionObsoleteMap.Values;
