@@ -6,7 +6,7 @@
   "InitialPosition": {
     "x": 0.5
   },
-  "Damage": 4.0,
+  "Damage": 5.0,
   "Range": 18.0,
   "Velocity": 15.0,
   "LifeTime": 1.0,

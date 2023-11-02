@@ -7,11 +7,11 @@
   "InitialPosition": {
     "x": 0.5
   },
-  "Damage": 40.0,
+  "Damage": 75.0,
   "Range": 80.0,
   "Velocity": 30.0,
   "LifeTime": 0.8,
-  "EnergyCost": 50.0,
+  "EnergyCost": 30.0,
   "Color": "#A6CCFF",
   "FireSound": "explosion_03",
   "HitSound": "hit_02",

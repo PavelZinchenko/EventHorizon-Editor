@@ -35,7 +35,7 @@
     }
   ],
   "Features": {
-    "WeightBonus": -0.5,
+    "ShipWeightBonus": -0.5,
     "Regeneration": true,
     "BuiltinDevices": [
       18

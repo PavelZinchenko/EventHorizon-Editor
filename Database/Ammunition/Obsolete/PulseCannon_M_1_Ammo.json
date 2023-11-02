@@ -4,7 +4,7 @@
   "Impulse": 0.001,
   "Recoil": 0.001,
   "Size": 0.8,
-  "Damage": 2.0,
+  "Damage": 2.5,
   "Range": 20.0,
   "Velocity": 20.0,
   "LifeTime": 0.8,

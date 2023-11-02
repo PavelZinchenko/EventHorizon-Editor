@@ -28,7 +28,7 @@
   ],
   "Features": {
     "KineticResistance": 5.0,
-    "WeightBonus": -0.5,
+    "ShipWeightBonus": -0.5,
     "Regeneration": true,
     "BuiltinDevices": [
       18

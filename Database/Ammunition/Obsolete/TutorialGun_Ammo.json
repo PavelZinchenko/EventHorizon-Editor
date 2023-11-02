@@ -2,7 +2,7 @@
   "ItemType": 4,
   "Id": 84,
   "Size": 1.0,
-  "Damage": 2.0,
+  "Damage": 5.0,
   "Range": 15.0,
   "Velocity": 15.0,
   "LifeTime": 1.0,

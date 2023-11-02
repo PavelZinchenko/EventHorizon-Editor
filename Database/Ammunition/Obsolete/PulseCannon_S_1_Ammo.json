@@ -8,7 +8,7 @@
   "Range": 8.0,
   "Velocity": 20.0,
   "LifeTime": 0.3,
-  "EnergyCost": 1.0,
+  "EnergyCost": 0.5,
   "Color": "#B4FF9B80",
   "FireSound": "shot_03",
   "HitSound": "hit_01",

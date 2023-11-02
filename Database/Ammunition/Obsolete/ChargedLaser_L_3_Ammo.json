@@ -6,7 +6,7 @@
   "Size": 2.0,
   "Damage": 500.0,
   "Range": 80.0,
-  "LifeTime": 4.0,
+  "LifeTime": 2.0,
   "EnergyCost": 200.0,
   "Color": "#4A96FF",
   "FireSound": "launch_04",

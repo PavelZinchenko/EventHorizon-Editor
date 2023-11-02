@@ -4,7 +4,7 @@
   "AmmunitionClass": 18,
   "DamageType": 2,
   "Size": 0.75,
-  "Damage": 15.0,
+  "Damage": 20.0,
   "Range": 5.0,
   "LifeTime": 0.1,
   "EnergyCost": 2.0,

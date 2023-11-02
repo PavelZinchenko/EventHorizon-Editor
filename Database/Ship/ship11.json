@@ -27,6 +27,7 @@
     }
   ],
   "Features": {
-    "WeightBonus": -0.8
+    "ShipWeightBonus": -0.8,
+    "EquipmentWeightBonus": -0.8
   }
 }

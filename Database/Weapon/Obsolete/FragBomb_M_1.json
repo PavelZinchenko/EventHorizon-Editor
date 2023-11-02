@@ -2,7 +2,7 @@
   "ItemType": 3,
   "Id": 19,
   "WeaponClass": 1,
-  "FireRate": 5.0,
+  "FireRate": 0.3,
   "Spread": 2.0,
   "ActivationType": 1,
   "ShotEffectPrefab": "OrbAdditive",

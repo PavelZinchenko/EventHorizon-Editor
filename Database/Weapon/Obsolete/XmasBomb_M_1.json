@@ -1,7 +1,7 @@
 {
   "ItemType": 3,
   "Id": 91,
-  "FireRate": 0.2,
+  "FireRate": 0.5,
   "Spread": 2.0,
   "ActivationType": 1,
   "ShotEffectPrefab": "OrbAdditive",

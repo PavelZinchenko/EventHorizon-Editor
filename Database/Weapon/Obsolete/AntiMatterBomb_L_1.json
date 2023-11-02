@@ -5,6 +5,6 @@
   "FireRate": 0.4,
   "ActivationType": 1,
   "ChargeSound": "shot_06",
-  "ShotEffectPrefab": "Charge3",
+  "ShotEffectPrefab": "Charge1",
   "ControlButtonIcon": "controls_mine"
 }
