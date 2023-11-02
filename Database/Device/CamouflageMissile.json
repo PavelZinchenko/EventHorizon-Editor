@@ -3,5 +3,6 @@
   "Id": 28,
   "DeviceClass": 20,
   "PassiveEnergyConsumption": 20.0,
+  "Power": 0.9,
   "Color": "#40FFFFFF"
 }
