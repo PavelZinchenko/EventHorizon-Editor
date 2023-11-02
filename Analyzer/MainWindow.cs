@@ -1,5 +1,6 @@
 using EditorDatabase.Storage;
 using EditorDatabase;
+using EditorDatabase.DataModel;
 
 namespace Analyzer
 {
@@ -12,7 +13,7 @@ namespace Analyzer
 
         private void MainWindow_Load(object sender, EventArgs eventArgs)
         {
-            OpenDatabase(Directory.GetCurrentDirectory());
+            ReloadDatabase();
         }
 
         private void OpenDatabase(string path)
@@ -63,7 +64,16 @@ namespace Analyzer
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             console.Clear();
-            OpenDatabase(Directory.GetCurrentDirectory());
+            ReloadDatabase();
+        }
+
+        private void ReloadDatabase()
+        {
+            var args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+                OpenDatabase(args[1]);
+            else
+                OpenDatabase(Directory.GetCurrentDirectory());
         }
 
         private Analyzer.IntegrityChecker _integrityChecker;

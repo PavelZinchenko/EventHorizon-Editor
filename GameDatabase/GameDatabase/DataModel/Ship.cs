@@ -53,7 +53,7 @@ namespace EditorDatabase.DataModel
                     KineticResistance = serializable.KineticResistance,
                     Regeneration = serializable.Regeneration,
                     BuiltinDevices = serializable.BuiltinDevices,
-                    WeightBonus = serializable.BaseWeightModifier,
+                    ShipWeightBonus = serializable.BaseWeightModifier,
                 };
 
                 Features = new ShipFeatures(data, database);
