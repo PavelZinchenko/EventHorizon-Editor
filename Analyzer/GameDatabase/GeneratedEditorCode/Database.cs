@@ -54,6 +54,7 @@ namespace EditorDatabase
 			_galaxySettings?.Save(_content.GalaxySettings);
 			_shipModSettings?.Save(_content.ShipModSettings);
 			_shipSettings?.Save(_content.ShipSettings);
+			_specialEventSettings?.Save(_content.SpecialEventSettings);
 		
 			_content.Save(storage, _serializer);
 		}
@@ -143,6 +144,8 @@ namespace EditorDatabase
 				yield return ShipModSettings;
             if (_content.ShipSettings != null)
 				yield return ShipSettings;
+            if (_content.SpecialEventSettings != null)
+				yield return SpecialEventSettings;
         }
 
         public IItemId GetItemId(Type type, int id)
@@ -204,6 +207,7 @@ namespace EditorDatabase
 				case ItemType.GalaxySettings: return GalaxySettings;
 				case ItemType.ShipModSettings: return ShipModSettings;
 				case ItemType.ShipSettings: return ShipSettings;
+				case ItemType.SpecialEventSettings: return SpecialEventSettings;
                 default: return null;
             }
         }
@@ -215,6 +219,7 @@ namespace EditorDatabase
 		public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = new GalaxySettings(_content.GalaxySettings, this));
 		public ShipModSettings ShipModSettings => _shipModSettings ?? (_shipModSettings = new ShipModSettings(_content.ShipModSettings, this));
 		public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = new ShipSettings(_content.ShipSettings, this));
+		public SpecialEventSettings SpecialEventSettings => _specialEventSettings ?? (_specialEventSettings = new SpecialEventSettings(_content.SpecialEventSettings, this));
 
 		public ItemId<AmmunitionObsolete> GetAmmunitionObsoleteId(int id) { return new ItemId<AmmunitionObsolete>(_content.GetAmmunitionObsolete(id)); }
         public AmmunitionObsolete GetAmmunitionObsolete(int id)
@@ -514,6 +519,7 @@ namespace EditorDatabase
 			_galaxySettings = null;
 			_shipModSettings = null;
 			_shipSettings = null;
+			_specialEventSettings = null;
         }
 
 		private readonly Dictionary<int, AmmunitionObsolete> _ammunitionObsoleteMap = new Dictionary<int, AmmunitionObsolete>();
@@ -545,6 +551,7 @@ namespace EditorDatabase
 		private GalaxySettings _galaxySettings;
 		private ShipModSettings _shipModSettings;
 		private ShipSettings _shipSettings;
+		private SpecialEventSettings _specialEventSettings;
 	
         private readonly IJsonSerializer _serializer;
 		private readonly DatabaseContent _content;

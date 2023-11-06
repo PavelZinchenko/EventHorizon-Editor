@@ -39,5 +39,6 @@ namespace EditorDatabase.Enums
 		ExplorationSettings = 103,
 		FrontierSettings = 104,
 		ShipModSettings = 105,
+		SpecialEventSettings = 106,
 	}
 }
