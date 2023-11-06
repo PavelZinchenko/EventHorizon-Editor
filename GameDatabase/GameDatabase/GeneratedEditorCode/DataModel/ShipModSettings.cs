@@ -28,6 +28,7 @@ namespace EditorDatabase.DataModel
 			RegenerationValue = new NumericValue<float>(serializable.RegenerationValue, 0f, 1f);
 			RegenerationArmor = new NumericValue<float>(serializable.RegenerationArmor, 0f, 1f);
 			WeightReduction = new NumericValue<float>(serializable.WeightReduction, 0f, 1f);
+			AttackReduction = new NumericValue<float>(serializable.AttackReduction, 0f, 1f);
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -40,6 +41,7 @@ namespace EditorDatabase.DataModel
 			serializable.RegenerationValue = RegenerationValue.Value;
 			serializable.RegenerationArmor = RegenerationArmor.Value;
 			serializable.WeightReduction = WeightReduction.Value;
+			serializable.AttackReduction = AttackReduction.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -50,6 +52,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> RegenerationValue = new NumericValue<float>(0, 0f, 1f);
 		public NumericValue<float> RegenerationArmor = new NumericValue<float>(0, 0f, 1f);
 		public NumericValue<float> WeightReduction = new NumericValue<float>(0, 0f, 1f);
+		public NumericValue<float> AttackReduction = new NumericValue<float>(0, 0f, 1f);
 
 		public static ShipModSettings DefaultValue { get; private set; }
 	}

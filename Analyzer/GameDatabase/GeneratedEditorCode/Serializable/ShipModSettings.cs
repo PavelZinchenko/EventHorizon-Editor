@@ -23,5 +23,6 @@ namespace EditorDatabase.Serializable
 		public float RegenerationValue;
 		public float RegenerationArmor;
 		public float WeightReduction;
+		public float AttackReduction;
 	}
 }
