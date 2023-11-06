@@ -2,34 +2,31 @@
   "ItemType": 8,
   "Id": 232,
   "ShipId": 97,
+  "BuildFaction": -1,
   "Components": [
     {
       "ComponentId": 61,
       "Locked": true,
       "X": 9,
-      "Y": 23,
-      "BarrelId": -1
+      "Y": 23
     },
     {
       "ComponentId": 61,
       "Locked": true,
       "X": 18,
-      "Y": 23,
-      "BarrelId": -1
+      "Y": 23
     },
     {
       "ComponentId": 61,
       "Locked": true,
       "X": 12,
-      "Y": 21,
-      "BarrelId": -1
+      "Y": 21
     },
     {
       "ComponentId": 61,
       "Locked": true,
       "X": 15,
-      "Y": 21,
-      "BarrelId": -1
+      "Y": 21
     },
     {
       "ComponentId": 213,
@@ -86,7 +83,6 @@
       "Locked": true,
       "X": 8,
       "Y": 20,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -94,7 +90,6 @@
       "Locked": true,
       "X": 8,
       "Y": 17,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -102,7 +97,6 @@
       "Locked": true,
       "X": 8,
       "Y": 14,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -110,7 +104,6 @@
       "Locked": true,
       "X": 8,
       "Y": 11,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -118,7 +111,6 @@
       "Locked": true,
       "X": 19,
       "Y": 20,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -126,7 +118,6 @@
       "Locked": true,
       "X": 19,
       "Y": 17,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -134,7 +125,6 @@
       "Locked": true,
       "X": 19,
       "Y": 14,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -142,7 +132,6 @@
       "Locked": true,
       "X": 19,
       "Y": 11,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -150,7 +139,6 @@
       "Locked": true,
       "X": 5,
       "Y": 21,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -158,7 +146,6 @@
       "Locked": true,
       "X": 22,
       "Y": 21,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -166,7 +153,6 @@
       "Locked": true,
       "X": 22,
       "Y": 12,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -174,7 +160,6 @@
       "Locked": true,
       "X": 5,
       "Y": 12,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -182,7 +167,6 @@
       "Locked": true,
       "X": 11,
       "Y": 18,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -190,7 +174,6 @@
       "Locked": true,
       "X": 16,
       "Y": 18,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -198,7 +181,6 @@
       "Locked": true,
       "X": 11,
       "Y": 15,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -206,7 +188,6 @@
       "Locked": true,
       "X": 16,
       "Y": 15,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -214,7 +195,6 @@
       "Locked": true,
       "X": 9,
       "Y": 8,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -222,7 +202,6 @@
       "Locked": true,
       "X": 18,
       "Y": 8,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -230,7 +209,6 @@
       "Locked": true,
       "X": 6,
       "Y": 9,
-      "BarrelId": -1,
       "KeyBinding": -1
     },
     {
@@ -238,7 +216,6 @@
       "Locked": true,
       "X": 22,
       "Y": 9,
-      "BarrelId": -1,
       "KeyBinding": -1
     },
     {
@@ -246,7 +223,6 @@
       "Locked": true,
       "X": 20,
       "Y": 5,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -254,7 +230,6 @@
       "Locked": true,
       "X": 8,
       "Y": 5,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -262,7 +237,6 @@
       "Locked": true,
       "X": 3,
       "Y": 5,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -270,7 +244,6 @@
       "Locked": true,
       "X": 3,
       "Y": 3,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -278,7 +251,6 @@
       "Locked": true,
       "X": 1,
       "Y": 19,
-      "BarrelId": -1,
       "KeyBinding": -1
     },
     {
@@ -286,7 +258,6 @@
       "Locked": true,
       "X": 27,
       "Y": 19,
-      "BarrelId": -1,
       "KeyBinding": -1
     },
     {
@@ -294,7 +265,6 @@
       "Locked": true,
       "X": 25,
       "Y": 5,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -302,7 +272,6 @@
       "Locked": true,
       "X": 25,
       "Y": 3,
-      "BarrelId": -1,
       "KeyBinding": -1
     },
     {
@@ -310,7 +279,6 @@
       "Locked": true,
       "X": 22,
       "Y": 3,
-      "BarrelId": -1,
       "KeyBinding": -1
     },
     {
@@ -318,7 +286,6 @@
       "Locked": true,
       "X": 6,
       "Y": 3,
-      "BarrelId": -1,
       "KeyBinding": -1
     },
     {
@@ -326,7 +293,6 @@
       "Locked": true,
       "X": 14,
       "Y": 19,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -334,7 +300,6 @@
       "Locked": true,
       "X": 14,
       "Y": 17,
-      "BarrelId": -1,
       "KeyBinding": 2
     },
     {
@@ -342,7 +307,6 @@
       "Locked": true,
       "X": 14,
       "Y": 15,
-      "BarrelId": -1,
       "KeyBinding": 2
     }
   ]

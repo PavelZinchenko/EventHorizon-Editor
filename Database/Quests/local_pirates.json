@@ -41,7 +41,7 @@
       "Message": "$PIRATES_Passive",
       "Actions": [
         {
-          "TargetNode": 2,
+          "TargetNode": 7,
           "ButtonText": "$PIRATES_ACTION_Attack"
         },
         {
@@ -55,6 +55,12 @@
       "Type": 21,
       "DefaultTransition": 6,
       "FailureTransition": 3
+    },
+    {
+      "Id": 7,
+      "Type": 21,
+      "DefaultTransition": 6,
+      "FailureTransition": 5
     },
     {
       "Id": 3,

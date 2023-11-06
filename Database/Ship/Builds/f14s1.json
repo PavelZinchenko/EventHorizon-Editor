@@ -8,36 +8,31 @@
       "ComponentId": 61,
       "Locked": true,
       "X": 12,
-      "Y": 16,
-      "BarrelId": -1
+      "Y": 16
     },
     {
       "ComponentId": 61,
       "Locked": true,
       "X": 8,
-      "Y": 16,
-      "BarrelId": -1
+      "Y": 16
     },
     {
       "ComponentId": 62,
       "Locked": true,
       "X": 5,
-      "Y": 15,
-      "BarrelId": -1
+      "Y": 15
     },
     {
       "ComponentId": 62,
       "Locked": true,
       "X": 15,
-      "Y": 15,
-      "BarrelId": -1
+      "Y": 15
     },
     {
       "ComponentId": 75,
       "Locked": true,
       "X": 9,
-      "Y": 10,
-      "BarrelId": -1
+      "Y": 10
     },
     {
       "ComponentId": 82,
