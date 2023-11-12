@@ -1,6 +1,7 @@
 {
   "ItemType": 6,
   "Id": 140,
+  "ShipType": 4,
   "SizeClass": 4,
   "Name": "$ship_12",
   "Faction": 17,

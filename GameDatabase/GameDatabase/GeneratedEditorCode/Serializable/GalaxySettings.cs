@@ -18,5 +18,6 @@ namespace EditorDatabase.Serializable
 	{
 		public int AbandonedStarbaseFaction;
 		public int[] StartingShipBuilds;
+		public int DefaultStarbaseBuild;
 	}
 }

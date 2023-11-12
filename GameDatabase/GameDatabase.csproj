@@ -116,6 +116,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GameDatabase\DataModel\ComponentStats.cs" />
+    <Compile Include="GameDatabase\DataModel\Faction.cs" />
     <Compile Include="GameDatabase\DataModel\Ship.cs" />
     <Compile Include="GameDatabase\GeneratedEditorCode\**" />
     <Compile Include="GameDatabase\DataModel\Barrel.cs" />

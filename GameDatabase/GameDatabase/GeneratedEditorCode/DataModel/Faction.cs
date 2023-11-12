@@ -26,10 +26,13 @@ namespace EditorDatabase.DataModel
 				Id = new ItemId<Faction>(serializable.Id, serializable.FileName);
 				Name = serializable.Name;
 				Color = Helpers.ColorFromString(serializable.Color);
+				NoTerritories = serializable.NoTerritories;
 				HomeStarDistance = new NumericValue<int>(serializable.HomeStarDistance, 0, 1000);
+				NoWanderingShips = serializable.NoWanderingShips;
 				WanderingShipsDistance = new NumericValue<int>(serializable.WanderingShipsDistance, 0, 1000);
-				Hidden = serializable.Hidden;
-				Hostile = serializable.Hostile;
+				HideFromMerchants = serializable.HideFromMerchants;
+				HideResearchTree = serializable.HideResearchTree;
+				NoMissions = serializable.NoMissions;
 			}
 			catch (DatabaseException e)
 			{
@@ -42,10 +45,13 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.Name = Name;
 			serializable.Color = Helpers.ColorToString(Color);
+			serializable.NoTerritories = NoTerritories;
 			serializable.HomeStarDistance = HomeStarDistance.Value;
+			serializable.NoWanderingShips = NoWanderingShips;
 			serializable.WanderingShipsDistance = WanderingShipsDistance.Value;
-			serializable.Hidden = Hidden;
-			serializable.Hostile = Hostile;
+			serializable.HideFromMerchants = HideFromMerchants;
+			serializable.HideResearchTree = HideResearchTree;
+			serializable.NoMissions = NoMissions;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -53,10 +59,13 @@ namespace EditorDatabase.DataModel
 
 		public string Name;
 		public System.Drawing.Color Color;
+		public bool NoTerritories;
 		public NumericValue<int> HomeStarDistance = new NumericValue<int>(0, 0, 1000);
+		public bool NoWanderingShips;
 		public NumericValue<int> WanderingShipsDistance = new NumericValue<int>(0, 0, 1000);
-		public bool Hidden;
-		public bool Hostile;
+		public bool HideFromMerchants;
+		public bool HideResearchTree;
+		public bool NoMissions;
 
 		public static Faction DefaultValue { get; private set; }
 	}

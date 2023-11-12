@@ -1,6 +1,7 @@
 {
   "ItemType": 6,
   "Id": 109,
+  "ShipType": 4,
   "SizeClass": 4,
   "Name": "$f13_Flagship",
   "Faction": 13,

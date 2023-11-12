@@ -1,6 +1,7 @@
 {
   "ItemType": 6,
   "Id": 97,
+  "ShipType": 4,
   "ShipRarity": 2,
   "SizeClass": 4,
   "Name": "$fn_Flagship2",

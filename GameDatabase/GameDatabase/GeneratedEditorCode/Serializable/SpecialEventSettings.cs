@@ -16,9 +16,9 @@ namespace EditorDatabase.Serializable
 	[Serializable]
 	public class SpecialEventSettingsSerializable : SerializableItem
 	{
-		public bool EnableXmasEvent;
-		public int XmasDaysBefore;
-		public int XmasDaysAfter;
+		public bool EnableXmasEvent = true;
+		public int XmasDaysBefore = 24;
+		public int XmasDaysAfter = 15;
 		public int XmasQuest;
 		public bool EnableEasterEvent;
 		public int EasterDaysBefore;

@@ -10,9 +10,10 @@ namespace EditorDatabase.Enums
 {
 	public enum ShipType
 	{
-		Common,
-		Drone,
-		Station,
-		Special,
+		Common = 0,
+		Drone = 1,
+		Starbase = 2,
+		Special = 3,
+		Flagship = 4,
 	}
 }

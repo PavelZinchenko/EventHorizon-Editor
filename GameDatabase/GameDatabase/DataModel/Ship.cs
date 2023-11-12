@@ -22,19 +22,19 @@ namespace EditorDatabase.DataModel
                     ShipRarity = Enums.ShipRarity.Rare;
                     break;
                 case 2: // Flagship
+                    ShipType = Enums.ShipType.Flagship;
                     break;
                 case 3: // Special
                     ShipType = Enums.ShipType.Special;
                     break;
                 case 4: // Starbase
                     SizeClass = Enums.SizeClass.Starbase;
-                    ShipType = Enums.ShipType.Station;
+                    ShipType = Enums.ShipType.Starbase;
                     break;
                 case 5: // Hidden
                     ShipRarity = Enums.ShipRarity.Hidden;
                     break;
                 case 6: // Drone
-                    SizeClass = Enums.SizeClass.Drone;
                     ShipType = Enums.ShipType.Drone;
                     break;
             }
@@ -70,6 +70,7 @@ namespace EditorDatabase.DataModel
             serializable.HeatResistance = 0;
             serializable.Regeneration = false;
             serializable.BuiltinDevices = null;
+            serializable.ShipCategory = 0;
             serializable.BaseWeightModifier = 0;
         }
     }

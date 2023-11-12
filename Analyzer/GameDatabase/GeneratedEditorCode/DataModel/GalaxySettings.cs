@@ -23,6 +23,7 @@ namespace EditorDatabase.DataModel
 		{
 			AbandonedStarbaseFaction = database.GetFactionId(serializable.AbandonedStarbaseFaction);
 			StartingShipBuilds = serializable.StartingShipBuilds?.Select(id => new Wrapper<ShipBuild> { Item = database.GetShipBuildId(id) }).ToArray();
+			DefaultStarbaseBuild = database.GetShipBuildId(serializable.DefaultStarbaseBuild);
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -33,11 +34,13 @@ namespace EditorDatabase.DataModel
 			    serializable.StartingShipBuilds = null;
 			else
 			    serializable.StartingShipBuilds = StartingShipBuilds.Select(wrapper => wrapper.Item.Value).ToArray();
+			serializable.DefaultStarbaseBuild = DefaultStarbaseBuild.Value;
 			OnDataSerialized(ref serializable);
 		}
 
 		public ItemId<Faction> AbandonedStarbaseFaction = ItemId<Faction>.Empty;
 		public Wrapper<ShipBuild>[] StartingShipBuilds;
+		public ItemId<ShipBuild> DefaultStarbaseBuild = ItemId<ShipBuild>.Empty;
 
 		public static GalaxySettings DefaultValue { get; private set; }
 	}
