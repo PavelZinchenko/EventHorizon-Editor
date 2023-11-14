@@ -54,6 +54,7 @@ namespace EditorDatabase
 			_galaxySettings?.Save(_content.GalaxySettings);
 			_shipModSettings?.Save(_content.ShipModSettings);
 			_shipSettings?.Save(_content.ShipSettings);
+			_skillSettings?.Save(_content.SkillSettings);
 			_specialEventSettings?.Save(_content.SpecialEventSettings);
 		
 			_content.Save(storage, _serializer);
@@ -144,6 +145,8 @@ namespace EditorDatabase
 				yield return ShipModSettings;
             if (_content.ShipSettings != null)
 				yield return ShipSettings;
+            if (_content.SkillSettings != null)
+				yield return SkillSettings;
             if (_content.SpecialEventSettings != null)
 				yield return SpecialEventSettings;
         }
@@ -207,6 +210,7 @@ namespace EditorDatabase
 				case ItemType.GalaxySettings: return GalaxySettings;
 				case ItemType.ShipModSettings: return ShipModSettings;
 				case ItemType.ShipSettings: return ShipSettings;
+				case ItemType.SkillSettings: return SkillSettings;
 				case ItemType.SpecialEventSettings: return SpecialEventSettings;
                 default: return null;
             }
@@ -219,6 +223,7 @@ namespace EditorDatabase
 		public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = new GalaxySettings(_content.GalaxySettings, this));
 		public ShipModSettings ShipModSettings => _shipModSettings ?? (_shipModSettings = new ShipModSettings(_content.ShipModSettings, this));
 		public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = new ShipSettings(_content.ShipSettings, this));
+		public SkillSettings SkillSettings => _skillSettings ?? (_skillSettings = new SkillSettings(_content.SkillSettings, this));
 		public SpecialEventSettings SpecialEventSettings => _specialEventSettings ?? (_specialEventSettings = new SpecialEventSettings(_content.SpecialEventSettings, this));
 
 		public ItemId<AmmunitionObsolete> GetAmmunitionObsoleteId(int id) { return new ItemId<AmmunitionObsolete>(_content.GetAmmunitionObsolete(id)); }
@@ -519,6 +524,7 @@ namespace EditorDatabase
 			_galaxySettings = null;
 			_shipModSettings = null;
 			_shipSettings = null;
+			_skillSettings = null;
 			_specialEventSettings = null;
         }
 
@@ -551,6 +557,7 @@ namespace EditorDatabase
 		private GalaxySettings _galaxySettings;
 		private ShipModSettings _shipModSettings;
 		private ShipSettings _shipSettings;
+		private SkillSettings _skillSettings;
 		private SpecialEventSettings _specialEventSettings;
 	
         private readonly IJsonSerializer _serializer;

@@ -27,9 +27,9 @@ namespace EditorDatabase.DataModel
 				Name = serializable.Name;
 				Color = Helpers.ColorFromString(serializable.Color);
 				NoTerritories = serializable.NoTerritories;
-				HomeStarDistance = new NumericValue<int>(serializable.HomeStarDistance, 0, 1000);
+				HomeStarDistance = new NumericValue<int>(serializable.HomeStarDistance, 0, 5000);
 				NoWanderingShips = serializable.NoWanderingShips;
-				WanderingShipsDistance = new NumericValue<int>(serializable.WanderingShipsDistance, 0, 1000);
+				WanderingShipsDistance = new NumericValue<int>(serializable.WanderingShipsDistance, 0, 5000);
 				HideFromMerchants = serializable.HideFromMerchants;
 				HideResearchTree = serializable.HideResearchTree;
 				NoMissions = serializable.NoMissions;
@@ -60,9 +60,9 @@ namespace EditorDatabase.DataModel
 		public string Name;
 		public System.Drawing.Color Color;
 		public bool NoTerritories;
-		public NumericValue<int> HomeStarDistance = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<int> HomeStarDistance = new NumericValue<int>(0, 0, 5000);
 		public bool NoWanderingShips;
-		public NumericValue<int> WanderingShipsDistance = new NumericValue<int>(0, 0, 1000);
+		public NumericValue<int> WanderingShipsDistance = new NumericValue<int>(0, 0, 5000);
 		public bool HideFromMerchants;
 		public bool HideResearchTree;
 		public bool NoMissions;

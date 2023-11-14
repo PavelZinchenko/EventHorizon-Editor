@@ -80,6 +80,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(ShipModSettings.FileName, jsonSerializer.ToJson(ShipModSettings));            
             if (ShipSettings != null)
                 storage.SaveJson(ShipSettings.FileName, jsonSerializer.ToJson(ShipSettings));            
+            if (SkillSettings != null)
+                storage.SaveJson(SkillSettings.FileName, jsonSerializer.ToJson(SkillSettings));            
             if (SpecialEventSettings != null)
                 storage.SaveJson(SpecialEventSettings.FileName, jsonSerializer.ToJson(SpecialEventSettings));            
         }
@@ -299,6 +301,15 @@ namespace EditorDatabase.Storage
                     throw new DatabaseException("Duplicate ShipSettings file found - " + name);
                 ShipSettings = data;
             }
+            else if (type == ItemType.SkillSettings)
+            {
+                var data = _serializer.FromJson<SkillSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (SkillSettings != null)
+                    throw new DatabaseException("Duplicate SkillSettings file found - " + name);
+                SkillSettings = data;
+            }
             else if (type == ItemType.SpecialEventSettings)
             {
                 var data = _serializer.FromJson<SpecialEventSettingsSerializable>(content);
@@ -330,6 +341,7 @@ namespace EditorDatabase.Storage
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
 		public ShipModSettingsSerializable ShipModSettings { get; private set; }
 		public ShipSettingsSerializable ShipSettings { get; private set; }
+		public SkillSettingsSerializable SkillSettings { get; private set; }
 		public SpecialEventSettingsSerializable SpecialEventSettings { get; private set; }
 
 		public IEnumerable<AmmunitionObsoleteSerializable> AmmunitionObsoleteList => _ammunitionObsoleteMap.Values;
