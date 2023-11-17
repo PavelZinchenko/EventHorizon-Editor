@@ -24,6 +24,7 @@ namespace EditorDatabase.DataModel
 			AbandonedStarbaseFaction = database.GetFactionId(serializable.AbandonedStarbaseFaction);
 			StartingShipBuilds = serializable.StartingShipBuilds?.Select(id => new Wrapper<ShipBuild> { Item = database.GetShipBuildId(id) }).ToArray();
 			DefaultStarbaseBuild = database.GetShipBuildId(serializable.DefaultStarbaseBuild);
+			MaxEnemyShipsLevel = new NumericValue<int>(serializable.MaxEnemyShipsLevel, 100, 500);
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -35,12 +36,14 @@ namespace EditorDatabase.DataModel
 			else
 			    serializable.StartingShipBuilds = StartingShipBuilds.Select(wrapper => wrapper.Item.Value).ToArray();
 			serializable.DefaultStarbaseBuild = DefaultStarbaseBuild.Value;
+			serializable.MaxEnemyShipsLevel = MaxEnemyShipsLevel.Value;
 			OnDataSerialized(ref serializable);
 		}
 
 		public ItemId<Faction> AbandonedStarbaseFaction = ItemId<Faction>.Empty;
 		public Wrapper<ShipBuild>[] StartingShipBuilds;
 		public ItemId<ShipBuild> DefaultStarbaseBuild = ItemId<ShipBuild>.Empty;
+		public NumericValue<int> MaxEnemyShipsLevel = new NumericValue<int>(0, 100, 500);
 
 		public static GalaxySettings DefaultValue { get; private set; }
 	}

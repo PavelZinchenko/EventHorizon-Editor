@@ -38,6 +38,8 @@ namespace EditorDatabase.DataModel
 					return new Node_ShowDialog();
 				case NodeType.OpenShipyard:
 					return new Node_OpenShipyard();
+				case NodeType.OpenWorkshop:
+					return new Node_OpenWorkshop();
 				case NodeType.Switch:
 					return new Node_Switch();
 				case NodeType.Random:
@@ -204,6 +206,33 @@ namespace EditorDatabase.DataModel
 	}
 
 	public partial class Node_OpenShipyard : INodeContent
+	{
+		partial void OnDataDeserialized(NodeSerializable serializable, Database database);
+		partial void OnDataSerialized(ref NodeSerializable serializable);
+
+		public void Load(NodeSerializable serializable, Database database)
+		{
+			Transition = new NumericValue<int>(serializable.DefaultTransition, 1, 1000);
+			Faction = database.GetFactionId(serializable.Faction);
+			Level = new NumericValue<int>(serializable.Value, 0, 10000);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref NodeSerializable serializable)
+		{
+			serializable.DefaultTransition = Transition.Value;
+			serializable.Faction = Faction.Value;
+			serializable.Value = Level.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public NumericValue<int> Transition = new NumericValue<int>(0, 1, 1000);
+		public ItemId<Faction> Faction = ItemId<Faction>.Empty;
+		public NumericValue<int> Level = new NumericValue<int>(0, 0, 10000);
+	}
+
+	public partial class Node_OpenWorkshop : INodeContent
 	{
 		partial void OnDataDeserialized(NodeSerializable serializable, Database database);
 		partial void OnDataSerialized(ref NodeSerializable serializable);
