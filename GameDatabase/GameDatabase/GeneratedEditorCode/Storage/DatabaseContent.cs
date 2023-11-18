@@ -70,6 +70,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             if (DatabaseSettings != null)
                 storage.SaveJson(DatabaseSettings.FileName, jsonSerializer.ToJson(DatabaseSettings));            
+            if (DebugSettings != null)
+                storage.SaveJson(DebugSettings.FileName, jsonSerializer.ToJson(DebugSettings));            
             if (ExplorationSettings != null)
                 storage.SaveJson(ExplorationSettings.FileName, jsonSerializer.ToJson(ExplorationSettings));            
             if (FrontierSettings != null)
@@ -256,6 +258,15 @@ namespace EditorDatabase.Storage
                     throw new DatabaseException("Duplicate DatabaseSettings file found - " + name);
                 DatabaseSettings = data;
             }
+            else if (type == ItemType.DebugSettings)
+            {
+                var data = _serializer.FromJson<DebugSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (DebugSettings != null)
+                    throw new DatabaseException("Duplicate DebugSettings file found - " + name);
+                DebugSettings = data;
+            }
             else if (type == ItemType.ExplorationSettings)
             {
                 var data = _serializer.FromJson<ExplorationSettingsSerializable>(content);
@@ -336,6 +347,7 @@ namespace EditorDatabase.Storage
         }
         
 		public DatabaseSettingsSerializable DatabaseSettings { get; private set; }
+		public DebugSettingsSerializable DebugSettings { get; private set; }
 		public ExplorationSettingsSerializable ExplorationSettings { get; private set; }
 		public FrontierSettingsSerializable FrontierSettings { get; private set; }
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }

@@ -49,6 +49,7 @@ namespace EditorDatabase
             foreach (var item in _visualEffectMap) item.Value.Save(_content.GetVisualEffect(item.Key));
             foreach (var item in _weaponMap) item.Value.Save(_content.GetWeapon(item.Key));
 			_databaseSettings?.Save(_content.DatabaseSettings);
+			_debugSettings?.Save(_content.DebugSettings);
 			_explorationSettings?.Save(_content.ExplorationSettings);
 			_frontierSettings?.Save(_content.FrontierSettings);
 			_galaxySettings?.Save(_content.GalaxySettings);
@@ -135,6 +136,8 @@ namespace EditorDatabase
                 yield return GetWeapon(item.Id);
             if (_content.DatabaseSettings != null)
 				yield return DatabaseSettings;
+            if (_content.DebugSettings != null)
+				yield return DebugSettings;
             if (_content.ExplorationSettings != null)
 				yield return ExplorationSettings;
             if (_content.FrontierSettings != null)
@@ -205,6 +208,7 @@ namespace EditorDatabase
 				case ItemType.VisualEffect: return GetVisualEffect(id);
 				case ItemType.Weapon: return GetWeapon(id);
 				case ItemType.DatabaseSettings: return DatabaseSettings;
+				case ItemType.DebugSettings: return DebugSettings;
 				case ItemType.ExplorationSettings: return ExplorationSettings;
 				case ItemType.FrontierSettings: return FrontierSettings;
 				case ItemType.GalaxySettings: return GalaxySettings;
@@ -218,6 +222,7 @@ namespace EditorDatabase
 
 
 		public DatabaseSettings DatabaseSettings => _databaseSettings ?? (_databaseSettings = new DatabaseSettings(_content.DatabaseSettings, this));
+		public DebugSettings DebugSettings => _debugSettings ?? (_debugSettings = new DebugSettings(_content.DebugSettings, this));
 		public ExplorationSettings ExplorationSettings => _explorationSettings ?? (_explorationSettings = new ExplorationSettings(_content.ExplorationSettings, this));
 		public FrontierSettings FrontierSettings => _frontierSettings ?? (_frontierSettings = new FrontierSettings(_content.FrontierSettings, this));
 		public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = new GalaxySettings(_content.GalaxySettings, this));
@@ -519,6 +524,7 @@ namespace EditorDatabase
 			_weaponMap.Clear();
 
 			_databaseSettings = null;
+			_debugSettings = null;
 			_explorationSettings = null;
 			_frontierSettings = null;
 			_galaxySettings = null;
@@ -552,6 +558,7 @@ namespace EditorDatabase
 		private readonly Dictionary<int, Weapon> _weaponMap = new Dictionary<int, Weapon>();
 
 		private DatabaseSettings _databaseSettings;
+		private DebugSettings _debugSettings;
 		private ExplorationSettings _explorationSettings;
 		private FrontierSettings _frontierSettings;
 		private GalaxySettings _galaxySettings;
