@@ -22,6 +22,7 @@ namespace EditorDatabase.DataModel
 		public DatabaseSettings(DatabaseSettingsSerializable serializable, Database database)
 		{
 			DatabaseVersion = new NumericValue<int>(serializable.DatabaseVersion, 1, 2147483647);
+			DatabaseVersionMinor = new NumericValue<int>(serializable.DatabaseVersionMinor, 0, 2147483647);
 			ModName = serializable.ModName;
 			ModId = serializable.ModId;
 			ModVersion = new NumericValue<int>(serializable.ModVersion, -2147483648, 2147483647);
@@ -32,6 +33,7 @@ namespace EditorDatabase.DataModel
 		public void Save(DatabaseSettingsSerializable serializable)
 		{
 			serializable.DatabaseVersion = DatabaseVersion.Value;
+			serializable.DatabaseVersionMinor = DatabaseVersionMinor.Value;
 			serializable.ModName = ModName;
 			serializable.ModId = ModId;
 			serializable.ModVersion = ModVersion.Value;
@@ -40,6 +42,7 @@ namespace EditorDatabase.DataModel
 		}
 
 		public NumericValue<int> DatabaseVersion = new NumericValue<int>(0, 1, 2147483647);
+		public NumericValue<int> DatabaseVersionMinor = new NumericValue<int>(0, 0, 2147483647);
 		public string ModName;
 		public string ModId;
 		public NumericValue<int> ModVersion = new NumericValue<int>(0, -2147483648, 2147483647);

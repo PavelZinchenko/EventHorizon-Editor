@@ -18,6 +18,9 @@ namespace EditorDatabase
 {
     public partial class Database
     {
+		public const int VersionMajor = 1;
+		public const int VersionMinor = 1;
+
 		public Database(IDataStorage storage)
 		{
             _serializer = new JsonSerializer();

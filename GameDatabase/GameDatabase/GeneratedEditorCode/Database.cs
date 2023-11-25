@@ -18,10 +18,13 @@ namespace EditorDatabase
 {
     public partial class Database
     {
+		public const int VersionMajor = 1;
+		public const int VersionMinor = 1;
+
 		public Database(IDataStorage storage)
 		{
             _serializer = new JsonSerializer();
-            _content = new DatabaseContent(storage, _serializer);
+            _content = new DatabaseContent(_serializer, storage);
 		}
 
 		public void Save(IDataStorage storage)
@@ -496,7 +499,7 @@ namespace EditorDatabase
         }
 
 
-        public ImageData GetImage(string name) { return _content.GetImage(name); }
+        public IImageData GetImage(string name) { return _content.GetImage(name); }
 
         private void Clear()
         {

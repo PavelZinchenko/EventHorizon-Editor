@@ -17,6 +17,7 @@ namespace EditorDatabase.Serializable
 	public class DatabaseSettingsSerializable : SerializableItem
 	{
 		public int DatabaseVersion;
+		public int DatabaseVersionMinor;
 		[DefaultValue("")]
 		public string ModName;
 		[DefaultValue("")]

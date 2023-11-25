@@ -1,31 +1,37 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using EditorDatabase.Model;
 
 namespace EditorDatabase.Storage
 {
+    public partial interface IDataStorage 
+    {
+        Version Version { get; }
+    }
+
     public class DatabaseStorage : IDataStorage
     {
         public DatabaseStorage(string path)
         {
-            var info = new DirectoryInfo(path);
-            Name = info.Name;
-            Id = info.Name;
-
-            var modInfo = info.GetFiles("mod", SearchOption.AllDirectories).FirstOrDefault();
-            if (modInfo != null)
-            {
-                var data = File.ReadAllText(modInfo.FullName).Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-                if (data.Length == 2 && data[1].IndexOfAny(Path.GetInvalidFileNameChars()) == -1)
-                {
-                    Name = data[0];
-                    Id = data[1];
-                }
-            }
-
             _path = path;
         }
+
+        public Version LoadDatabaseVersion()
+        {
+            var serializer = new JsonSerializer();
+            var info = new DirectoryInfo(_path);
+            foreach (var fileInfo in info.GetFiles("*.json", SearchOption.AllDirectories))
+            {
+                var data = File.ReadAllText(fileInfo.FullName);
+                var settings = serializer.FromJson<Serializable.DatabaseSettingsSerializable>(data);
+                if (settings.ItemType != Enums.ItemType.DatabaseSettings) continue;
+                return Version = new Version(settings.DatabaseVersion, settings.DatabaseVersionMinor);
+            }
+
+            return Version = new Version(1,0);
+        }
+
+        public Version Version { get; private set; }
 
         public void LoadContent(IContentLoader loader)
         {
@@ -40,7 +46,7 @@ namespace EditorDatabase.Storage
                     fileInfo.Extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) ||
                     fileInfo.Extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase))
                 {
-                    loader.LoadImage(new ImageData(file));
+                    loader.LoadImage(file, new ImageData(file));
                 }
                 else if (fileInfo.Extension.Equals(".wav", StringComparison.OrdinalIgnoreCase))
                 {
@@ -81,5 +87,28 @@ namespace EditorDatabase.Storage
         }
 
         private readonly string _path;
+    }
+
+    public readonly struct Version
+    {
+        public Version(int major, int minor)
+        {
+            Major = major;
+            Minor = minor;
+        }
+
+        public int Compare(int major, int minor)
+        {
+            if (Major == major) return Minor - minor;
+            return Major - major;
+        }
+
+        public override string ToString()
+        {
+            return $"{Major}.{Minor}";
+        }
+
+        public readonly int Major;
+        public readonly int Minor;
     }
 }

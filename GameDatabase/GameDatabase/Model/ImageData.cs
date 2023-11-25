@@ -4,7 +4,12 @@ using System.IO;
 
 namespace EditorDatabase.Model
 {
-    public class ImageData
+    public interface IImageData 
+    {
+        Image Image { get; }
+    }
+
+    public class ImageData : IImageData
     {
         public ImageData(string fileName)
         {

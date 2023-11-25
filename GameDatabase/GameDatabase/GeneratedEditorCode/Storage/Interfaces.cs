@@ -26,6 +26,7 @@ namespace EditorDatabase.Storage
     {
         void LoadJson(string name, string data);
         void LoadLocalization(string name, string data);
-        void LoadImage(ImageData data);
+        void LoadImage(string name, IImageData image);
+        void LoadAudioClip(string name, IAudioClipData audioClip);
     }
 }

@@ -88,8 +88,6 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(SpecialEventSettings.FileName, jsonSerializer.ToJson(SpecialEventSettings));            
         }
 
-        public const int SchemaVersion = 1;
-
         public void LoadJson(string name, string content)
         {
             var item = _serializer.FromJson<SerializableItem>(content);
