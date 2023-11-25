@@ -18,7 +18,7 @@ namespace DatabaseMigration.v1.Serializable
 		public FleetSerializable()
 		{
 			ItemType = ItemType.Fleet;
-			FileName = $"{ItemType}.json";
+			FileName = "Fleet.json";
 		}
 
 		public FactionFilterSerializable Factions;
@@ -29,5 +29,6 @@ namespace DatabaseMigration.v1.Serializable
 		public RewardCondition ExpCondition;
 		public int[] SpecificShips;
 		public bool NoShipChanging;
+		public bool PlayerHasOneShip;
 	}
 }

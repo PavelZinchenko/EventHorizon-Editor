@@ -24,5 +24,6 @@ namespace EditorDatabase.Serializable
 		public RewardCondition ExpCondition;
 		public int[] SpecificShips;
 		public bool NoShipChanging;
+		public bool PlayerHasOneShip;
 	}
 }
