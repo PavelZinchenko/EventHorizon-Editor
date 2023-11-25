@@ -27,7 +27,6 @@ namespace EditorDatabase.DataModel
 			    throw new DatabaseException(this.GetType().Name + ": Component cannot be null");
 			Modification = serializable.Modification;
 			Quality = serializable.Quality;
-			Locked = serializable.Locked;
 			X = new NumericValue<int>(serializable.X, -32768, 32767);
 			Y = new NumericValue<int>(serializable.Y, -32768, 32767);
 			BarrelId = new NumericValue<int>(serializable.BarrelId, 0, 255);
@@ -42,7 +41,6 @@ namespace EditorDatabase.DataModel
 			serializable.ComponentId = Component.Value;
 			serializable.Modification = Modification;
 			serializable.Quality = Quality;
-			serializable.Locked = Locked;
 			serializable.X = X.Value;
 			serializable.Y = Y.Value;
 			serializable.BarrelId = BarrelId.Value;
@@ -55,7 +53,6 @@ namespace EditorDatabase.DataModel
 		public ItemId<Component> Component = ItemId<Component>.Empty;
 		public ComponentModType Modification;
 		public ModificationQuality Quality;
-		public bool Locked;
 		public NumericValue<int> X = new NumericValue<int>(0, -32768, 32767);
 		public NumericValue<int> Y = new NumericValue<int>(0, -32768, 32767);
 		public NumericValue<int> BarrelId = new NumericValue<int>(0, 0, 255);

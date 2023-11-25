@@ -40,7 +40,7 @@ namespace EditorDatabase.Storage
                     fileInfo.Extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) ||
                     fileInfo.Extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase))
                 {
-                    loader.LoadImage(new ImageData(file));
+                    loader.LoadImage(file, new ImageData(file));
                 }
                 else if (fileInfo.Extension.Equals(".wav", StringComparison.OrdinalIgnoreCase))
                 {

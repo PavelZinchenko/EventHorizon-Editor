@@ -16,10 +16,10 @@ namespace EditorDatabase.Storage
 {
     public class DatabaseContent : IContentLoader
     {
-        public DatabaseContent(IDataStorage storage, IJsonSerializer jsonSerializer)
+        public DatabaseContent(IJsonSerializer jsonSerializer, IDataStorage storage)
         {
             _serializer = jsonSerializer;
-            storage.LoadContent(this);
+            storage?.LoadContent(this);
         }
   
         public void Save(IDataStorage storage, IJsonSerializer jsonSerializer)
@@ -339,11 +339,15 @@ namespace EditorDatabase.Storage
             _localizations.Add(name, data);
         }
 
-        public void LoadImage(ImageData data)
+        public void LoadImage(string name, IImageData image)
         {
-            _images.Add(data.Name, data);
+            _images.Add(name, image);
         }
         
+        public void LoadAudioClip(string name, IAudioClipData audioClip)
+        {
+            _audioClips.Add(name, audioClip);
+        }
 		public DatabaseSettingsSerializable DatabaseSettings { get; private set; }
 		public DebugSettingsSerializable DebugSettings { get; private set; }
 		public ExplorationSettingsSerializable ExplorationSettings { get; private set; }
@@ -400,12 +404,17 @@ namespace EditorDatabase.Storage
 		public VisualEffectSerializable GetVisualEffect(int id) { return _visualEffectMap.TryGetValue(id, out var item) ? item : null; }
 		public WeaponSerializable GetWeapon(int id) { return _weaponMap.TryGetValue(id, out var item) ? item : null; }
 
-        public ImageData GetImage(string name)
+        public IImageData GetImage(string name)
         {
             return _images.TryGetValue(name, out var image) ? image : ImageData.Empty;
         }
 
-        private IEnumerable<KeyValuePair<string, ImageData>> Images => _images;
+        public IAudioClipData GetAudioClip(string name)
+        {
+            return _audioClips.TryGetValue(name, out var audioClip) ? audioClip : AudioClipData.Empty;
+        }
+
+        private IEnumerable<KeyValuePair<string, IImageData>> Images => _images;
         private IEnumerable<KeyValuePair<string, string>> Localizations => _localizations;
 
         private readonly IJsonSerializer _serializer;
@@ -433,7 +442,8 @@ namespace EditorDatabase.Storage
 		private readonly Dictionary<int, VisualEffectSerializable> _visualEffectMap = new Dictionary<int, VisualEffectSerializable>();
 		private readonly Dictionary<int, WeaponSerializable> _weaponMap = new Dictionary<int, WeaponSerializable>();
 
-        private readonly Dictionary<string, ImageData> _images = new Dictionary<string, ImageData>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, IImageData> _images = new Dictionary<string, IImageData>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, IAudioClipData> _audioClips = new Dictionary<string, IAudioClipData>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<string, string> _localizations = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 	}
 }

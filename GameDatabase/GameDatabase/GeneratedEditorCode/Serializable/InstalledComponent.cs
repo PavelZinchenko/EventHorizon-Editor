@@ -19,7 +19,6 @@ namespace EditorDatabase.Serializable
 		public int ComponentId;
 		public ComponentModType Modification;
 		public ModificationQuality Quality;
-		public bool Locked;
 		public int X;
 		public int Y;
 		public int BarrelId;
