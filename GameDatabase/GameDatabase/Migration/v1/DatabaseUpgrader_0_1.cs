@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.Serialization;
 using DatabaseMigration.v1.Serializable;
 using EditorDatabase.Model;
 

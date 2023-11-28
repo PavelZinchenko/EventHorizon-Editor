@@ -209,6 +209,7 @@
     <Compile Include="GameDatabase\GeneratedMigrationCode\v1\Serializable\VisualEffectElement.cs" />
     <Compile Include="GameDatabase\GeneratedMigrationCode\v1\Serializable\Weapon.cs" />
     <Compile Include="GameDatabase\GeneratedMigrationCode\v1\Storage\DatabaseContent.cs" />
+    <Compile Include="GameDatabase\Migration\v1\DatabaseUpgrader_1_2.cs" />
     <Compile Include="GameDatabase\Migration\v1\DatabaseUpgrader_0_1.cs" />
     <Compile Include="GameDatabase\Model\AudioClipData.cs" />
     <Compile Include="GameDatabase\Model\ImageData.cs" />

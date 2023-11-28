@@ -23,7 +23,10 @@ namespace DatabaseMigration.v1.Serializable
 
 		public int AbandonedStarbaseFaction;
 		public int[] StartingShipBuilds;
+		public int StartingInvenory;
+		public int SupporterPackShip;
 		public int DefaultStarbaseBuild;
 		public int MaxEnemyShipsLevel = 300;
+		public string EnemyLevel;
 	}
 }

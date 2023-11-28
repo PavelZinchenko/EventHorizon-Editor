@@ -62,6 +62,8 @@ namespace EditorDatabase.DataModel
 					return new LootContent_Blueprint();
 				case LootItemType.ResearchPoints:
 					return new LootContent_ResearchPoints();
+				case LootItemType.Satellite:
+					return new LootContent_Satellite();
 				default:
 					throw new DatabaseException("LootContent: Invalid content type - " + type);
 			}
@@ -84,6 +86,7 @@ namespace EditorDatabase.DataModel
 		public LootContentSerializable Serialize()
 		{
 			var serializable = new LootContentSerializable();
+			serializable.ItemId = 0;
 			serializable.ItemId = 0;
 			serializable.ItemId = 0;
 			serializable.ItemId = 0;
@@ -488,6 +491,35 @@ namespace EditorDatabase.DataModel
 		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
 		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
 		public RequiredFactions Factions = new RequiredFactions();
+	}
+
+	public partial class LootContent_Satellite : ILootContentContent
+	{
+		partial void OnDataDeserialized(LootContentSerializable serializable, Database database);
+		partial void OnDataSerialized(ref LootContentSerializable serializable);
+
+		public void Load(LootContentSerializable serializable, Database database)
+		{
+			Satellite = database.GetSatelliteId(serializable.ItemId);
+			if (Satellite.IsNull)
+			    throw new DatabaseException(this.GetType().Name + ": Satellite cannot be null");
+			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
+			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref LootContentSerializable serializable)
+		{
+			serializable.ItemId = Satellite.Value;
+			serializable.MinAmount = MinAmount.Value;
+			serializable.MaxAmount = MaxAmount.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public ItemId<Satellite> Satellite = ItemId<Satellite>.Empty;
+		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
+		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
 	}
 
 }
