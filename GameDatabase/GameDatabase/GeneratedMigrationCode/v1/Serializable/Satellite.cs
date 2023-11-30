@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -21,10 +22,13 @@ namespace DatabaseMigration.v1.Serializable
 			FileName = "Satellite.json";
 		}
 
+		[DefaultValue("")]
 		public string Name;
+		[DefaultValue("")]
 		public string ModelImage;
 		public float ModelScale;
 		public SizeClass SizeClass;
+		[DefaultValue("")]
 		public string Layout;
 		public BarrelSerializable[] Barrels;
 	}

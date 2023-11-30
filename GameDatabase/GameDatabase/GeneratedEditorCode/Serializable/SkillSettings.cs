@@ -48,9 +48,13 @@ namespace EditorDatabase.Serializable
 		public string CraftingPriceFactor;
 		[DefaultValue("")]
 		public string CraftingLevelReduction;
+		[DefaultValue(200)]
 		public int IncreasedLevelLimit = 200;
+		[DefaultValue(100)]
 		public int BaseFuelCapacity = 100;
+		[DefaultValue(1.5f)]
 		public float BaseFlightRange = 1.5f;
+		[DefaultValue(1f)]
 		public float BaseFlightSpeed = 1f;
 	}
 }

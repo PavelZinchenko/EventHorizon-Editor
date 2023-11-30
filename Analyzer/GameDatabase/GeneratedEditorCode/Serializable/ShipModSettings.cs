@@ -17,12 +17,19 @@ namespace EditorDatabase.Serializable
 	public class ShipModSettingsSerializable : SerializableItem
 	{
 		public bool RemoveWeaponSlotMod;
+		[DefaultValue(0.5f)]
 		public float HeatDefenseValue = 0.5f;
+		[DefaultValue(0.5f)]
 		public float KineticDefenseValue = 0.5f;
+		[DefaultValue(0.5f)]
 		public float EnergyDefenseValue = 0.5f;
+		[DefaultValue(0.01f)]
 		public float RegenerationValue = 0.01f;
+		[DefaultValue(0.85f)]
 		public float RegenerationArmor = 0.85f;
+		[DefaultValue(0.8f)]
 		public float WeightReduction = 0.8f;
+		[DefaultValue(0.2f)]
 		public float AttackReduction = 0.2f;
 	}
 }

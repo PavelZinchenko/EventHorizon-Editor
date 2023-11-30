@@ -38,6 +38,7 @@ namespace EditorDatabase.DataModel
 				Layout = new Layout(serializable.Layout);
 				Barrels = serializable.Barrels?.Select(item => new Barrel(item, database)).ToArray();
 				Features = new ShipFeatures(serializable.Features, database);
+				ColliderTolerance = new NumericValue<float>(serializable.ColliderTolerance, 0f, 1f);
 			}
 			catch (DatabaseException e)
 			{
@@ -68,6 +69,7 @@ namespace EditorDatabase.DataModel
 			else
 			    serializable.Barrels = Barrels.Select(item => item.Serialize()).ToArray();
 			serializable.Features = Features.Serialize();
+			serializable.ColliderTolerance = ColliderTolerance.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -87,6 +89,7 @@ namespace EditorDatabase.DataModel
 		public Layout Layout;
 		public Barrel[] Barrels;
 		public ShipFeatures Features = new ShipFeatures();
+		public NumericValue<float> ColliderTolerance = new NumericValue<float>(0, 0f, 1f);
 
 		public static Ship DefaultValue { get; private set; }
 	}

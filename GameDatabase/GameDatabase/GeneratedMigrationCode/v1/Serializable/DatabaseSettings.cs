@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -23,7 +24,9 @@ namespace DatabaseMigration.v1.Serializable
 
 		public int DatabaseVersion;
 		public int DatabaseVersionMinor;
+		[DefaultValue("")]
 		public string ModName;
+		[DefaultValue("")]
 		public string ModId;
 		public int ModVersion;
 		public bool UnloadOriginalDatabase;

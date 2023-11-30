@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -17,6 +18,7 @@ namespace DatabaseMigration.v1.Serializable
 	{
 		public int TargetNode;
 		public RequirementSerializable Requirement;
+		[DefaultValue("")]
 		public string ButtonText;
 	}
 }

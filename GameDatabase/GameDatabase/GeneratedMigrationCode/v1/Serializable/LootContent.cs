@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 

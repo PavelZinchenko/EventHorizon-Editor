@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -21,7 +22,9 @@ namespace DatabaseMigration.v1.Serializable
 		public int PlatformType;
 		public float AutoAimingArc;
 		public float RotationSpeed;
+		[DefaultValue("")]
 		public string WeaponClass;
+		[DefaultValue("")]
 		public string Image;
 		public float Size;
 	}

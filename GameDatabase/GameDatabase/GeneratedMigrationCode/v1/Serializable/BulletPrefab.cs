@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -22,12 +23,15 @@ namespace DatabaseMigration.v1.Serializable
 		}
 
 		public BulletShape Shape;
+		[DefaultValue("")]
 		public string Image;
 		public float Size;
 		public float Margins;
 		public float Deformation;
+		[DefaultValue("")]
 		public string MainColor;
 		public ColorMode MainColorMode;
+		[DefaultValue("")]
 		public string SecondColor;
 		public ColorMode SecondColorMode;
 	}

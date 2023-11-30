@@ -21,6 +21,7 @@ namespace EditorDatabase.Serializable
 		public int StartingInvenory;
 		public int SupporterPackShip;
 		public int DefaultStarbaseBuild;
+		[DefaultValue(300)]
 		public int MaxEnemyShipsLevel = 300;
 		[DefaultValue("")]
 		public string EnemyLevel;

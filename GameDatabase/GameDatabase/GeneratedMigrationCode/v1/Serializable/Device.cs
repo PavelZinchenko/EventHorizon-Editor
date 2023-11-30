@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -31,10 +32,15 @@ namespace DatabaseMigration.v1.Serializable
 		public float Lifetime;
 		public Vector2 Offset;
 		public ActivationType ActivationType;
+		[DefaultValue("")]
 		public string Color;
+		[DefaultValue("")]
 		public string Sound;
+		[DefaultValue("")]
 		public string EffectPrefab;
+		[DefaultValue("")]
 		public string ObjectPrefab;
+		[DefaultValue("")]
 		public string ControlButtonIcon;
 	}
 }

@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -21,7 +22,9 @@ namespace DatabaseMigration.v1.Serializable
 			FileName = "Faction.json";
 		}
 
+		[DefaultValue("")]
 		public string Name;
+		[DefaultValue("")]
 		public string Color;
 		public bool NoTerritories;
 		public int HomeStarDistance;

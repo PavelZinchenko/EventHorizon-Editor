@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -18,8 +19,10 @@ namespace DatabaseMigration.v1.Serializable
 		public BulletTriggerCondition Condition;
 		public BulletEffectType EffectType;
 		public int VisualEffect;
+		[DefaultValue("")]
 		public string AudioClip;
 		public int Ammunition;
+		[DefaultValue("")]
 		public string Color;
 		public ColorMode ColorMode;
 		public int Quantity;

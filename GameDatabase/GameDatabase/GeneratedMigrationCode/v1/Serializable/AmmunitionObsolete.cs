@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -36,10 +37,15 @@ namespace DatabaseMigration.v1.Serializable
 		public bool IgnoresShipVelocity;
 		public float EnergyCost;
 		public int CoupledAmmunitionId;
+		[DefaultValue("")]
 		public string Color;
+		[DefaultValue("")]
 		public string FireSound;
+		[DefaultValue("")]
 		public string HitSound;
+		[DefaultValue("")]
 		public string HitEffectPrefab;
+		[DefaultValue("")]
 		public string BulletPrefab;
 	}
 }

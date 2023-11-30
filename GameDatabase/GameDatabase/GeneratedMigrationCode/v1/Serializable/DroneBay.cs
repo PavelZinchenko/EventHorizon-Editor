@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -31,8 +32,11 @@ namespace DatabaseMigration.v1.Serializable
 		public bool ImprovedAi;
 		public int Capacity;
 		public ActivationType ActivationType;
+		[DefaultValue("")]
 		public string LaunchSound;
+		[DefaultValue("")]
 		public string LaunchEffectPrefab;
+		[DefaultValue("")]
 		public string ControlButtonIcon;
 	}
 }

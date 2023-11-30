@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -18,6 +19,7 @@ namespace DatabaseMigration.v1.Serializable
 		public SizeClass[] ShipSizes;
 		public bool NotForOrganicShips;
 		public bool NotForMechanicShips;
+		[DefaultValue("")]
 		public string UniqueComponentTag;
 	}
 }

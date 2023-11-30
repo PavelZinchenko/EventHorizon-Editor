@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -26,11 +27,15 @@ namespace DatabaseMigration.v1.Serializable
 		public float Spread;
 		public int Magazine;
 		public ActivationType ActivationType;
+		[DefaultValue("")]
 		public string ShotSound;
+		[DefaultValue("")]
 		public string ChargeSound;
+		[DefaultValue("")]
 		public string ShotEffectPrefab;
 		public int VisualEffect;
 		public float EffectSize;
+		[DefaultValue("")]
 		public string ControlButtonIcon;
 	}
 }

@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -21,8 +22,11 @@ namespace DatabaseMigration.v1.Serializable
 			FileName = "SpecialEventSettings.json";
 		}
 
+		[DefaultValue(true)]
 		public bool EnableXmasEvent = true;
+		[DefaultValue(24)]
 		public int XmasDaysBefore = 24;
+		[DefaultValue(15)]
 		public int XmasDaysAfter = 15;
 		public int XmasQuest;
 		public bool EnableEasterEvent;

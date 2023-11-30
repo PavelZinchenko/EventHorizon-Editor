@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -26,7 +27,9 @@ namespace DatabaseMigration.v1.Serializable
 		public int StartingInvenory;
 		public int SupporterPackShip;
 		public int DefaultStarbaseBuild;
+		[DefaultValue(300)]
 		public int MaxEnemyShipsLevel = 300;
+		[DefaultValue("")]
 		public string EnemyLevel;
 	}
 }

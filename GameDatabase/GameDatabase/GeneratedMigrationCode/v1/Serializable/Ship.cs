@@ -7,6 +7,7 @@
 //-------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using EditorDatabase.Model;
 using DatabaseMigration.v1.Enums;
 
@@ -24,17 +25,24 @@ namespace DatabaseMigration.v1.Serializable
 		public ShipType ShipType;
 		public ShipRarity ShipRarity;
 		public SizeClass SizeClass;
+		[DefaultValue("")]
 		public string Name;
 		public int Faction;
+		[DefaultValue("")]
 		public string IconImage;
 		public float IconScale;
+		[DefaultValue("")]
 		public string ModelImage;
 		public float ModelScale;
+		[DefaultValue("")]
 		public string EngineColor;
 		public EngineSerializable[] Engines;
+		[DefaultValue("")]
 		public string Layout;
 		public BarrelSerializable[] Barrels;
 		public ShipFeaturesSerializable Features;
+		[DefaultValue(0.02f)]
+		public float ColliderTolerance = 0.02f;
 		public Vector2 EnginePosition;
 		public float EngineSize;
 		public int ShipCategory;
