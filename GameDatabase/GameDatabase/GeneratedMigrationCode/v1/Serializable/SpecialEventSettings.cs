@@ -29,6 +29,8 @@ namespace DatabaseMigration.v1.Serializable
 		[DefaultValue(15)]
 		public int XmasDaysAfter = 15;
 		public int XmasQuest;
+		[DefaultValue("1 + credits/500")]
+		public string ConvertCreditsToSnowflakes = "1 + credits/500";
 		public bool EnableEasterEvent;
 		public int EasterDaysBefore;
 		public int EasterDaysAfter;

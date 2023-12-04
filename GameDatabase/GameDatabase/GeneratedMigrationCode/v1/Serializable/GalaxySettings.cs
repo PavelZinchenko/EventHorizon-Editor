@@ -29,7 +29,7 @@ namespace DatabaseMigration.v1.Serializable
 		public int DefaultStarbaseBuild;
 		[DefaultValue(300)]
 		public int MaxEnemyShipsLevel = 300;
-		[DefaultValue("")]
-		public string EnemyLevel;
+		[DefaultValue("MIN(3*distance/5 - 5, MaxEnemyShipsLevel)")]
+		public string EnemyLevel = "MIN(3*distance/5 - 5, MaxEnemyShipsLevel)";
 	}
 }

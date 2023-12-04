@@ -18,36 +18,36 @@ namespace EditorDatabase.Serializable
 	{
 		public int[] BeatAllEnemiesFactionList;
 		public bool DisableExceedTheLimits;
-		[DefaultValue("")]
-		public string FuelTankCapacity;
-		[DefaultValue("")]
-		public string AttackBonus;
-		[DefaultValue("")]
-		public string DefenseBonus;
-		[DefaultValue("")]
-		public string ShieldStrengthBonus;
-		[DefaultValue("")]
-		public string ShieldRechargeBonus;
-		[DefaultValue("")]
-		public string ExperienceBonus;
-		[DefaultValue("")]
-		public string FlightSpeed;
-		[DefaultValue("")]
-		public string FlightRange;
-		[DefaultValue("")]
-		public string ExplorationLootBonus;
-		[DefaultValue("")]
-		public string HeatResistance;
-		[DefaultValue("")]
-		public string KineticResistance;
-		[DefaultValue("")]
-		public string EnergyResistance;
-		[DefaultValue("")]
-		public string MerchantPriceFactor;
-		[DefaultValue("")]
-		public string CraftingPriceFactor;
-		[DefaultValue("")]
-		public string CraftingLevelReduction;
+		[DefaultValue("BaseFuelCapacity + 50*level")]
+		public string FuelTankCapacity = "BaseFuelCapacity + 50*level";
+		[DefaultValue("0.1*level")]
+		public string AttackBonus = "0.1*level";
+		[DefaultValue("0.1*level")]
+		public string DefenseBonus = "0.1*level";
+		[DefaultValue("0.1*level")]
+		public string ShieldStrengthBonus = "0.1*level";
+		[DefaultValue("0.1*level")]
+		public string ShieldRechargeBonus = "0.1*level";
+		[DefaultValue("0.1*level")]
+		public string ExperienceBonus = "0.1*level";
+		[DefaultValue("BaseFlightSpeed + 0.4*level")]
+		public string FlightSpeed = "BaseFlightSpeed + 0.4*level";
+		[DefaultValue("BaseFlightRange + 0.09*level")]
+		public string FlightRange = "BaseFlightRange + 0.09*level";
+		[DefaultValue("0.1*level")]
+		public string ExplorationLootBonus = "0.1*level";
+		[DefaultValue("0.1*level")]
+		public string HeatResistance = "0.1*level";
+		[DefaultValue("0.1*level")]
+		public string KineticResistance = "0.1*level";
+		[DefaultValue("0.1*level")]
+		public string EnergyResistance = "0.1*level";
+		[DefaultValue("1 - 0.05*level")]
+		public string MerchantPriceFactor = "1 - 0.05*level";
+		[DefaultValue("1 - 0.05*level")]
+		public string CraftingPriceFactor = "1 - 0.05*level";
+		[DefaultValue("5*level")]
+		public string CraftingLevelReduction = "5*level";
 		[DefaultValue(200)]
 		public int IncreasedLevelLimit = 200;
 		[DefaultValue(100)]
