@@ -16,6 +16,5 @@ namespace EditorDatabase.Enums
 		Inner = '2',
 		InnerOuter = '3',
 		Engine = '5',
-		Custom = '*',
 	}
 }

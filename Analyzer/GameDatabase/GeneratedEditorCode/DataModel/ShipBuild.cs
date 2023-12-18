@@ -27,7 +27,8 @@ namespace EditorDatabase.DataModel
 				Ship = database.GetShipId(serializable.ShipId);
 				if (Ship.IsNull)
 				    throw new DatabaseException(this.GetType().Name + " (" + serializable.Id + "): Ship cannot be null");
-				NotAvailableInGame = serializable.NotAvailableInGame;
+				AvailableForPlayer = serializable.AvailableForPlayer;
+				AvailableForEnemy = serializable.AvailableForEnemy;
 				DifficultyClass = serializable.DifficultyClass;
 				BuildFaction = database.GetFactionId(serializable.BuildFaction);
 				Components = serializable.Components?.Select(item => new InstalledComponent(item, database)).ToArray();
@@ -42,7 +43,8 @@ namespace EditorDatabase.DataModel
 		public void Save(ShipBuildSerializable serializable)
 		{
 			serializable.ShipId = Ship.Value;
-			serializable.NotAvailableInGame = NotAvailableInGame;
+			serializable.AvailableForPlayer = AvailableForPlayer;
+			serializable.AvailableForEnemy = AvailableForEnemy;
 			serializable.DifficultyClass = DifficultyClass;
 			serializable.BuildFaction = BuildFaction.Value;
 			if (Components == null || Components.Length == 0)
@@ -55,7 +57,8 @@ namespace EditorDatabase.DataModel
 		public readonly ItemId<ShipBuild> Id;
 
 		public ItemId<Ship> Ship = ItemId<Ship>.Empty;
-		public bool NotAvailableInGame;
+		public bool AvailableForPlayer;
+		public bool AvailableForEnemy;
 		public DifficultyClass DifficultyClass;
 		public ItemId<Faction> BuildFaction = ItemId<Faction>.Empty;
 		public InstalledComponent[] Components;

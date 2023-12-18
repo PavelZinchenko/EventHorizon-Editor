@@ -18,12 +18,15 @@ namespace EditorDatabase.Serializable
 	{
 		public int AbandonedStarbaseFaction;
 		public int[] StartingShipBuilds;
-		public int StartingInvenory;
+		public int StartingInventory;
 		public int SupporterPackShip;
 		public int DefaultStarbaseBuild;
 		[DefaultValue(300)]
 		public int MaxEnemyShipsLevel = 300;
 		[DefaultValue("MIN(3*distance/5 - 5, MaxEnemyShipsLevel)")]
 		public string EnemyLevel = "MIN(3*distance/5 - 5, MaxEnemyShipsLevel)";
+		[DefaultValue("IF(size == Destroyer, 5, size == Cruiser, 15, size == Battleship, 50, 0)")]
+		public string ShipMinSpawnDistance = "IF(size == Destroyer, 5, size == Cruiser, 15, size == Battleship, 50, 0)";
+		public int StartingInvenory;
 	}
 }
