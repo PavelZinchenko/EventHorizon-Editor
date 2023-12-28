@@ -20,6 +20,7 @@ namespace EditorDatabase.Enums
 		Condition = 17,
 		AttackFleet = 20,
 		AttackOccupants = 21,
+		AttackStarbase = 22,
 		DestroyOccupants = 25,
 		SuppressOccupants = 26,
 		Retreat = 30,

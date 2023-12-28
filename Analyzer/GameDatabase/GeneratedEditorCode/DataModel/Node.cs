@@ -50,6 +50,8 @@ namespace EditorDatabase.DataModel
 					return new Node_AttackFleet();
 				case NodeType.AttackOccupants:
 					return new Node_AttackOccupants();
+				case NodeType.AttackStarbase:
+					return new Node_AttackStarbase();
 				case NodeType.DestroyOccupants:
 					return new Node_DestroyOccupants();
 				case NodeType.SuppressOccupants:
@@ -377,6 +379,30 @@ namespace EditorDatabase.DataModel
 	}
 
 	public partial class Node_AttackOccupants : INodeContent
+	{
+		partial void OnDataDeserialized(NodeSerializable serializable, Database database);
+		partial void OnDataSerialized(ref NodeSerializable serializable);
+
+		public void Load(NodeSerializable serializable, Database database)
+		{
+			VictoryTransition = new NumericValue<int>(serializable.DefaultTransition, 1, 999999);
+			FailureTransition = new NumericValue<int>(serializable.FailureTransition, 1, 999999);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref NodeSerializable serializable)
+		{
+			serializable.DefaultTransition = VictoryTransition.Value;
+			serializable.FailureTransition = FailureTransition.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public NumericValue<int> VictoryTransition = new NumericValue<int>(0, 1, 999999);
+		public NumericValue<int> FailureTransition = new NumericValue<int>(0, 1, 999999);
+	}
+
+	public partial class Node_AttackStarbase : INodeContent
 	{
 		partial void OnDataDeserialized(NodeSerializable serializable, Database database);
 		partial void OnDataSerialized(ref NodeSerializable serializable);

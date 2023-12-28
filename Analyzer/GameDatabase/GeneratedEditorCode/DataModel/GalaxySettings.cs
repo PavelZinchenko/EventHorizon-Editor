@@ -29,6 +29,7 @@ namespace EditorDatabase.DataModel
 			MaxEnemyShipsLevel = new NumericValue<int>(serializable.MaxEnemyShipsLevel, 100, 500);
 			EnemyLevel = serializable.EnemyLevel;
 			ShipMinSpawnDistance = serializable.ShipMinSpawnDistance;
+			CaptureStarbaseQuest = database.GetQuestId(serializable.CaptureStarbaseQuest);
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -45,6 +46,7 @@ namespace EditorDatabase.DataModel
 			serializable.MaxEnemyShipsLevel = MaxEnemyShipsLevel.Value;
 			serializable.EnemyLevel = EnemyLevel;
 			serializable.ShipMinSpawnDistance = ShipMinSpawnDistance;
+			serializable.CaptureStarbaseQuest = CaptureStarbaseQuest.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -56,6 +58,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<int> MaxEnemyShipsLevel = new NumericValue<int>(0, 100, 500);
 		public string EnemyLevel;
 		public string ShipMinSpawnDistance;
+		public ItemId<QuestModel> CaptureStarbaseQuest = ItemId<QuestModel>.Empty;
 
 		public static GalaxySettings DefaultValue { get; private set; }
 	}
