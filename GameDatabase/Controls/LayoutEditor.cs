@@ -164,12 +164,18 @@ namespace GameDatabase
         private void DrawBarrels(PaintData data)
         {
             if (!showBarrelsToolStripMenuItem.Checked || _barrels == null) return;
-            
-            var pen = new Pen(Color.Black, 2);
-            var widePen = new Pen(Color.Black, 3);
 
-            foreach (var barrel in _barrels)
+			var defaultColor = Color.Black;
+			var selectedColor = Color.Purple;
+            var pen = new Pen(defaultColor, 2);
+            var widePen = new Pen(defaultColor, 3);
+
+			for (var i = 0; i < _barrels.Count; ++i)
             {
+				pen.Color = i == _selectedBarredId ? selectedColor : defaultColor;
+				widePen.Color = i == _selectedBarredId ? selectedColor : defaultColor;
+
+				var barrel = _barrels[i];
                 var x = BorderSize + (1 - barrel.X) * data.CanvasSize / 2;
                 var y = BorderSize + (1 - barrel.Y) * data.CanvasSize / 2;
 
