@@ -222,5 +222,10 @@ namespace GameDatabase
                 Rotation = item.Rotation.Value,
             }).ToArray();
         }
-    }
+
+		private void barrelCollection_SelectionChanged(object sender, EventArgs e)
+		{
+			layoutEditor1.HighlightBarrel(barrelCollection.SelectedItemId);
+		}
+	}
 }

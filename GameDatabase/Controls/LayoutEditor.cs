@@ -16,7 +16,7 @@ namespace GameDatabase
         {
             InitializeComponent();
 
-            _layout = new LayoutModel();
+			_layout = new LayoutModel();
             _layout.DataChangedEvent += OnLayoutChanged;
 
             _categories = new Dictionary<char, Color> { { '0', Color.LightGray }, { '1', Color.Blue } };
@@ -35,7 +35,11 @@ namespace GameDatabase
         public new string Layout
         {
             get { return _layout.Data; }
-            set { _layout.Data = value; }
+            set 
+			{
+				_barrelMapOutdated = true;
+				_layout.Data = value; 
+			}
         }
 
         [Serializable]
@@ -75,8 +79,43 @@ namespace GameDatabase
             ValueChanged?.Invoke(this, e);
         }
 
-        private void DrawLayout(PaintData data)
+		public void HighlightBarrel(int barredId)
+		{
+			_selectedBarredId = barredId;
+			Invalidate();
+		}
+
+		private void UpdateBarrelMap()
+		{
+			if (_selectedBarredId >= 0 && _barrelMapOutdated)
+			{
+				_barrelMapOutdated = false;
+				_barrelMapBuilder.Build(_layout);
+			}
+		}
+
+		private bool TryGetCellColor(int x, int y, out Color color)
+		{
+			color = Color.Black;
+			var cell = _layout[x, y];
+
+			if (cell == (char)CellType.Empty)
+				return false;
+
+			if (!_categories.TryGetValue(cell, out color))
+				return false;
+
+			if (cell == (char)CellType.Weapon)
+				if (_selectedBarredId >= 0 && _barrelMapBuilder[x, y] == _selectedBarredId)
+					color = Color.FromArgb(255, color.R/4 + 192, color.G/4 + 192, color.B/4 + 192);
+
+			return true;
+		}
+
+		private void DrawLayout(PaintData data)
         {
+			UpdateBarrelMap();
+
             data.Graphics.FillRectangle(GetBrush(_categories[(char)CellType.Empty]), new Rectangle(BorderSize, BorderSize, data.CanvasSize, data.CanvasSize));
 
             if (Image != null)
@@ -91,16 +130,8 @@ namespace GameDatabase
                     var x = BorderSize + j * data.CanvasSize / data.LayoutSize;
                     var y = BorderSize + i * data.CanvasSize / data.LayoutSize;
 
-                    var cell = _layout[j, i];
-
-                    if (cell == (char)CellType.Empty)
-                        continue;
-
-                    Color color;
-                    if (!_categories.TryGetValue(cell, out color))
-                        color = Color.Black;
-
-                    data.Graphics.FillRectangle(GetBrush(color), x, y, data.CellSize, data.CellSize);
+					if (TryGetCellColor(j, i, out var color))
+						data.Graphics.FillRectangle(GetBrush(color), x, y, data.CellSize, data.CellSize);
                 }
             }
         }
@@ -285,6 +316,7 @@ namespace GameDatabase
 
         private void OnLayoutChanged()
         {
+			_barrelMapOutdated = true;
             Invalidate();
             OnValueChanged(this, EventArgs.Empty);
         }
@@ -320,6 +352,10 @@ namespace GameDatabase
 
         private MouseButtons _mouseButton;
 
+		private bool _barrelMapOutdated = true;
+		private int _selectedBarredId = -1;
+		private BarrelMapBuilder _barrelMapBuilder = new BarrelMapBuilder();
+
         private ILayoutBrush _selectedBrush;
         private IList<BarrelData> _barrels;
 
@@ -340,4 +376,73 @@ namespace GameDatabase
             public Color Color { get; set; }
         }
     }
+
+	public class BarrelMapBuilder
+	{
+		private string _layout;
+		private int[] _map;
+		private readonly Queue<int> _mapCells = new Queue<int>();
+
+		public int Size { get; private set; }
+		public int BarrelCount { get; private set; }
+		public int this[int x, int y]
+		{
+			get
+			{
+				if (x < 0 || x >= Size) return -1;
+				if (y < 0 || y >= Size) return -1;
+				return _map[x + y * Size] - 1;
+			}
+		}
+
+		public void Build(LayoutModel layout)
+		{
+			BarrelCount = 0;
+			Size = layout.Size;
+			_layout = layout.Data;
+			_map = new int[Size * Size];
+
+			for (int i = 0; i < Size; ++i)
+			{
+				for (int j = 0; j < Size; ++j)
+				{
+					if (TryAssignBarrel(j, i, BarrelCount + 1))
+					{
+						BarrelCount++;
+						ProcessCells();
+					}
+				}
+			}
+		}
+
+		private void ProcessCells()
+		{
+			while (_mapCells.Count > 0)
+			{
+				var index = _mapCells.Dequeue();
+				var y = index / Size;
+				var x = index % Size;
+				var barrel = _map[index];
+
+				TryAssignBarrel(x - 1, y, barrel);
+				TryAssignBarrel(x + 1, y, barrel);
+				TryAssignBarrel(x, y + 1, barrel);
+				TryAssignBarrel(x, y - 1, barrel);
+			}
+		}
+
+		private bool TryAssignBarrel(int x, int y, int barrelId)
+		{
+			if (x < 0 || x >= Size) return false;
+			if (y < 0 || y >= Size) return false;
+
+			int index = x + y * Size;
+			if (_map[index] > 0) return false;
+			if (_layout[index] != (char)CellType.Weapon) return false;
+
+			_map[index] = barrelId;
+			_mapCells.Enqueue(index);
+			return true;
+		}
+	}
 }

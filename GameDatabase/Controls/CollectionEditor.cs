@@ -35,11 +35,13 @@ namespace GameDatabase.Controls
             }
         }
 
-        public event EventHandler CollectionChanged;
-
+		public event EventHandler SelectionChanged;
+		public event EventHandler CollectionChanged;
         public event EventHandler DataChanged;
 
-        public CollectionEditor()
+		public int SelectedItemId => _selectedItemId;
+
+		public CollectionEditor()
         {
             InitializeComponent();
         }
@@ -110,6 +112,7 @@ namespace GameDatabase.Controls
         private void OnRadioButtonSelected(object sender, EventArgs args)
         {
             _selectedItemId = _radioButtons.IndexOf((Control)sender);
+			SelectionChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void moveUpButton_Click(object sender, EventArgs e)
