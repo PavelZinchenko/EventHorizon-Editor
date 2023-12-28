@@ -1,12 +1,15 @@
 using EditorDatabase.Storage;
 using EditorDatabase;
-using EditorDatabase.DataModel;
+using Analyzer.Analyzer;
 
 namespace Analyzer
 {
     public partial class MainWindow : Form
     {
-        public MainWindow()
+		private Database _database;
+		private Analyzer.Statistics _statistics;
+
+		public MainWindow()
         {
             InitializeComponent();
         }
@@ -20,12 +23,8 @@ namespace Analyzer
         {
             try
             {
-                var database = new Database(new DatabaseStorage(path));
-                _statistics = new Analyzer.Statistics(database);
-                _integrityChecker = new Analyzer.IntegrityChecker(database);
-            
+                _database = new Database(new DatabaseStorage(path));            
                 console.AppendText("Database loaded\n");
-                console.AppendText("Total weapons - " + _statistics.WeaponCount + "\n\n");
             }
             catch (Exception e)
             {
@@ -76,16 +75,25 @@ namespace Analyzer
                 OpenDatabase(Directory.GetCurrentDirectory());
         }
 
-        private Analyzer.IntegrityChecker _integrityChecker;
-        private Analyzer.Statistics _statistics;
-
         private void deadLinksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             console.Clear();
             console.AppendText("Dead links:\n");
 
-            foreach (var item in _integrityChecker.LookForDeadLinks())
+			var integrityChecker = new Analyzer.IntegrityChecker(_database);
+
+            foreach (var item in integrityChecker.LookForDeadLinks())
                 console.AppendText(item + "\n");
         }
-    }
+
+        private void shipsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			console.Clear();
+
+			var barrelAnalyzer = new ShipBarrelAnalyzer(_database);
+
+			foreach (var item in barrelAnalyzer.AnalyzeShips())
+				console.AppendText(item + "\n");
+		}
+	}
 }
