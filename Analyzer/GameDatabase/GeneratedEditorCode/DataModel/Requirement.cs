@@ -63,7 +63,7 @@ namespace EditorDatabase.DataModel
 				case RequirementType.HaveItemById:
 					return new Requirement_HaveItemById();
 				case RequirementType.ComeToOrigin:
-					return new RequirementEmptyContent();
+					return new Requirement_ComeToOrigin();
 				case RequirementType.TimeSinceQuestStart:
 					return new Requirement_TimeSinceQuestStart();
 				case RequirementType.TimeSinceLastCompletion:
@@ -100,6 +100,7 @@ namespace EditorDatabase.DataModel
 			serializable.MinValue = 0;
 			serializable.MinValue = 0;
 			serializable.MaxValue = 0;
+			serializable.BoolValue = false;
 			serializable.Character = 0;
 			serializable.Faction = 0;
 			serializable.Loot = new LootContentSerializable();
@@ -226,6 +227,7 @@ namespace EditorDatabase.DataModel
 		{
 			MinValue = new NumericValue<int>(serializable.MinValue, 0, 10000);
 			MaxValue = new NumericValue<int>(serializable.MaxValue, 0, 10000);
+			AllowUnsafeStars = serializable.BoolValue;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -234,11 +236,13 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.MinValue = MinValue.Value;
 			serializable.MaxValue = MaxValue.Value;
+			serializable.BoolValue = AllowUnsafeStars;
 			OnDataSerialized(ref serializable);
 		}
 
 		public NumericValue<int> MinValue = new NumericValue<int>(0, 0, 10000);
 		public NumericValue<int> MaxValue = new NumericValue<int>(0, 0, 10000);
+		public bool AllowUnsafeStars;
 	}
 
 	public partial class Requirement_RandomStarSystem : IRequirementContent
@@ -250,6 +254,7 @@ namespace EditorDatabase.DataModel
 		{
 			MinValue = new NumericValue<int>(serializable.MinValue, 0, 10000);
 			MaxValue = new NumericValue<int>(serializable.MaxValue, 0, 10000);
+			AllowUnsafeStars = serializable.BoolValue;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -258,11 +263,13 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.MinValue = MinValue.Value;
 			serializable.MaxValue = MaxValue.Value;
+			serializable.BoolValue = AllowUnsafeStars;
 			OnDataSerialized(ref serializable);
 		}
 
 		public NumericValue<int> MinValue = new NumericValue<int>(0, 0, 10000);
 		public NumericValue<int> MaxValue = new NumericValue<int>(0, 0, 10000);
+		public bool AllowUnsafeStars;
 	}
 
 	public partial class Requirement_QuestCompleted : IRequirementContent
@@ -443,6 +450,27 @@ namespace EditorDatabase.DataModel
 		}
 
 		public ItemId<LootModel> Loot = ItemId<LootModel>.Empty;
+	}
+
+	public partial class Requirement_ComeToOrigin : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+		partial void OnDataSerialized(ref RequirementSerializable serializable);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			AllowUnsafeStars = serializable.BoolValue;
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref RequirementSerializable serializable)
+		{
+			serializable.BoolValue = AllowUnsafeStars;
+			OnDataSerialized(ref serializable);
+		}
+
+		public bool AllowUnsafeStars;
 	}
 
 	public partial class Requirement_TimeSinceQuestStart : IRequirementContent

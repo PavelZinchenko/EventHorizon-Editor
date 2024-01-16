@@ -25,6 +25,7 @@ namespace EditorDatabase.DataModel
 			TurretShip = database.GetShipId(serializable.TurretShip);
 			InfectedPlanetFaction = database.GetFactionId(serializable.InfectedPlanetFaction);
 			HiveShipBuild = database.GetShipBuildId(serializable.HiveShipBuild);
+			GasCloudDPS = serializable.GasCloudDPS;
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -34,6 +35,7 @@ namespace EditorDatabase.DataModel
 			serializable.TurretShip = TurretShip.Value;
 			serializable.InfectedPlanetFaction = InfectedPlanetFaction.Value;
 			serializable.HiveShipBuild = HiveShipBuild.Value;
+			serializable.GasCloudDPS = GasCloudDPS;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -41,6 +43,7 @@ namespace EditorDatabase.DataModel
 		public ItemId<Ship> TurretShip = ItemId<Ship>.Empty;
 		public ItemId<Faction> InfectedPlanetFaction = ItemId<Faction>.Empty;
 		public ItemId<ShipBuild> HiveShipBuild = ItemId<ShipBuild>.Empty;
+		public string GasCloudDPS;
 
 		public static ExplorationSettings DefaultValue { get; private set; }
 	}

@@ -20,5 +20,7 @@ namespace EditorDatabase.Serializable
 		public int TurretShip;
 		public int InfectedPlanetFaction;
 		public int HiveShipBuild;
+		[DefaultValue("level*2")]
+		public string GasCloudDPS = "level*2";
 	}
 }

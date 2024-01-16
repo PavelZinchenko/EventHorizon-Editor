@@ -20,6 +20,7 @@ namespace DatabaseMigration.v1.Serializable
 		public int ItemId;
 		public int MinValue;
 		public int MaxValue;
+		public bool BoolValue;
 		public int Character;
 		public int Faction;
 		public LootContentSerializable Loot;
