@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace EditorDatabase
 {
     public interface IProperty
     {
         string Name { get; }
+		string Tooltip { get; }
         Type Type { get; }
         bool IsReadOnly { get; }
         object Value { get; set; }
@@ -52,9 +50,11 @@ namespace EditorDatabase
             _data = data;
             _fieldInfo = fieldInfo;
             _dataChangedAction = dataChangedAction;
+			_tooltip = _fieldInfo.GetCustomAttribute<TooltipText>();
         }
 
         public string Name => _fieldInfo.Name;
+		public string Tooltip => _tooltip?.Text;
         public Type Type => _fieldInfo.FieldType;
         public bool IsReadOnly => _fieldInfo.IsInitOnly;
 
@@ -68,8 +68,20 @@ namespace EditorDatabase
             }
         }
 
+		private readonly TooltipText _tooltip;
         private readonly object _data;
         private readonly FieldInfo _fieldInfo;
         private readonly Action _dataChangedAction;
     }
+
+	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+	public class TooltipText : Attribute
+	{
+		public string Text { get; private set; }
+
+		public TooltipText(string text)
+		{
+			Text = text;
+		}
+	}
 }

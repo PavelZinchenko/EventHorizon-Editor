@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using Cyotek.Windows.Forms;
@@ -75,7 +76,8 @@ namespace GameDatabase
             tableLayoutPanel.RowStyles.Clear();
             _layouts.Clear();
             _binding.Clear();
-        }
+			toolTip.RemoveAll();
+		}
 
         private void BuildLayout()
         {
@@ -111,7 +113,10 @@ namespace GameDatabase
                 if (control != null)
                     _binding.Add(control, item);
                 else
-                    CreateLabel(value?.ToString() ?? "[empty]", 1, rowId);
+                    control = CreateLabel(value?.ToString() ?? "[empty]", 1, rowId);
+
+				if (!string.IsNullOrEmpty(item.Tooltip))
+					toolTip.SetToolTip(control, item.Tooltip);
 
                 rowId++;
             }
@@ -235,7 +240,15 @@ namespace GameDatabase
             comboBox.SelectedValueChanged += OnComboBoxValueChanged;
             comboBox.MouseWheel += DisableMouseWheel;
 
-            tableLayoutPanel.Controls.Add(comboBox, column, row);
+			var memberInfo = value.GetType().GetMember(value.ToString()).FirstOrDefault();
+			if (memberInfo != null)
+			{
+				var attribute = memberInfo.GetCustomAttribute<TooltipText>();
+				if (attribute != null)
+					toolTip.SetToolTip(comboBox, attribute.Text);
+			}
+
+			tableLayoutPanel.Controls.Add(comboBox, column, row);
             return comboBox;
         }
 
@@ -444,10 +457,10 @@ namespace GameDatabase
 
         private void OnComboBoxValueChanged(object sender, EventArgs args)
         {
-            if (_ignoreEvents) return;
+			if (_ignoreEvents) return;
 
-            _binding[sender].Value = ((ComboBox)sender).SelectedItem;
-        }
+			_binding[sender].Value = ((ComboBox)sender).SelectedItem;
+		}
 
         private void OnTextBoxValueChanged(object sender, EventArgs args)
         {

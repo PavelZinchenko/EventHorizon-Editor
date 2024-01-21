@@ -44,11 +44,15 @@ namespace EditorDatabase.DataModel
 					return new BehaviorTreeNode_RandomSelector();
 				case BehaviorNodeType.Invertor:
 					return new BehaviorTreeNode_Invertor();
+				case BehaviorNodeType.ConstantResult:
+					return new BehaviorTreeNode_ConstantResult();
+				case BehaviorNodeType.CompleteOnce:
+					return new BehaviorTreeNode_CompleteOnce();
 				case BehaviorNodeType.HaveEnoughEnergy:
 					return new BehaviorTreeNode_HaveEnoughEnergy();
-				case BehaviorNodeType.HaveEnoughHp:
-					return new BehaviorTreeNode_HaveEnoughHp();
-				case BehaviorNodeType.IsPlayerControled:
+				case BehaviorNodeType.IsLowOnHp:
+					return new BehaviorTreeNode_IsLowOnHp();
+				case BehaviorNodeType.IsControledByPlayer:
 					return new BehaviorTreeNodeEmptyContent();
 				case BehaviorNodeType.FindEnemy:
 					return new BehaviorTreeNode_FindEnemy();
@@ -86,6 +90,8 @@ namespace EditorDatabase.DataModel
 					return new BehaviorTreeNodeEmptyContent();
 				case BehaviorNodeType.ChargeWeapons:
 					return new BehaviorTreeNodeEmptyContent();
+				case BehaviorNodeType.Chase:
+					return new BehaviorTreeNodeEmptyContent();
 				case BehaviorNodeType.IsWithinAttackRange:
 					return new BehaviorTreeNode_IsWithinAttackRange();
 				case BehaviorNodeType.MotherShipRetreated:
@@ -98,10 +104,12 @@ namespace EditorDatabase.DataModel
 					return new BehaviorTreeNodeEmptyContent();
 				case BehaviorNodeType.TargetMothership:
 					return new BehaviorTreeNodeEmptyContent();
-				case BehaviorNodeType.MothershipHp:
-					return new BehaviorTreeNode_MothershipHp();
+				case BehaviorNodeType.MothershipLowHp:
+					return new BehaviorTreeNode_MothershipLowHp();
 				case BehaviorNodeType.ShowMessage:
 					return new BehaviorTreeNode_ShowMessage();
+				case BehaviorNodeType.DebugLog:
+					return new BehaviorTreeNode_DebugLog();
 				default:
 					throw new DatabaseException("BehaviorTreeNode: Invalid content type - " + type);
 			}
@@ -122,7 +130,6 @@ namespace EditorDatabase.DataModel
 		{
 			Type = serializable.Type;
 			Requirement.Value = DataModel.BehaviorNodeRequirement.Create(serializable.Requirement, database);
-			InverseResult = serializable.InverseResult;
 			_content = CreateContent(serializable.Type);
 			_content.Load(serializable, database);
 
@@ -136,8 +143,10 @@ namespace EditorDatabase.DataModel
 			serializable.Node = null;
 			serializable.ItemId = 0;
 			serializable.WeaponType = 0;
+			serializable.IsTrue = false;
 			serializable.MinValue = 0f;
 			serializable.MaxValue = 0f;
+			serializable.MinValue = 0f;
 			serializable.Cooldown = 0f;
 			serializable.Cooldown = 0f;
 			serializable.MinValue = 0f;
@@ -154,10 +163,10 @@ namespace EditorDatabase.DataModel
 			serializable.DeviceClass = 0;
 			serializable.Text = string.Empty;
 			serializable.Cooldown = 0f;
+			serializable.Color = string.Empty;
 			_content.Save(ref serializable);
 			serializable.Type = Type;
 			serializable.Requirement = Requirement.Value?.Serialize();
-			serializable.InverseResult = InverseResult;
 			OnDataSerialized(ref serializable);
 			return serializable;
 		}
@@ -173,7 +182,6 @@ namespace EditorDatabase.DataModel
 
 				yield return new Property(this, type.GetField("Type"), OnTypeChanged);
 				yield return new Property(this, type.GetField("Requirement"), DataChangedEvent);
-				yield return new Property(this, type.GetField("InverseResult"), DataChangedEvent);
 
 				foreach (var item in _content.GetType().GetFields().Where(f => f.IsPublic && !f.IsStatic))
 					yield return new Property(_content, item, DataChangedEvent);
@@ -190,7 +198,6 @@ namespace EditorDatabase.DataModel
 		private IBehaviorTreeNodeContent _content;
 		public BehaviorNodeType Type;
 		public ObjectWrapper<BehaviorNodeRequirement> Requirement = new(DataModel.BehaviorNodeRequirement.DefaultValue);
-		public bool InverseResult;
 
 		public static BehaviorTreeNode DefaultValue { get; private set; }
 	}
@@ -342,6 +349,51 @@ namespace EditorDatabase.DataModel
 		public ObjectWrapper<BehaviorTreeNode> Node = new(DataModel.BehaviorTreeNode.DefaultValue);
 	}
 
+	public partial class BehaviorTreeNode_ConstantResult : IBehaviorTreeNodeContent
+	{
+		partial void OnDataDeserialized(BehaviorTreeNodeSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BehaviorTreeNodeSerializable serializable);
+
+		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
+		{
+			Node.Value = DataModel.BehaviorTreeNode.Create(serializable.Node, database);
+			IsTrue = serializable.IsTrue;
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BehaviorTreeNodeSerializable serializable)
+		{
+			serializable.Node = Node.Value?.Serialize();
+			serializable.IsTrue = IsTrue;
+			OnDataSerialized(ref serializable);
+		}
+
+		public ObjectWrapper<BehaviorTreeNode> Node = new(DataModel.BehaviorTreeNode.DefaultValue);
+		public bool IsTrue;
+	}
+
+	public partial class BehaviorTreeNode_CompleteOnce : IBehaviorTreeNodeContent
+	{
+		partial void OnDataDeserialized(BehaviorTreeNodeSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BehaviorTreeNodeSerializable serializable);
+
+		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
+		{
+			Node.Value = DataModel.BehaviorTreeNode.Create(serializable.Node, database);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BehaviorTreeNodeSerializable serializable)
+		{
+			serializable.Node = Node.Value?.Serialize();
+			OnDataSerialized(ref serializable);
+		}
+
+		public ObjectWrapper<BehaviorTreeNode> Node = new(DataModel.BehaviorTreeNode.DefaultValue);
+	}
+
 	public partial class BehaviorTreeNode_HaveEnoughEnergy : IBehaviorTreeNodeContent
 	{
 		partial void OnDataDeserialized(BehaviorTreeNodeSerializable serializable, Database database);
@@ -363,25 +415,25 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> FailIfLess = new NumericValue<float>(0, 0f, 1f);
 	}
 
-	public partial class BehaviorTreeNode_HaveEnoughHp : IBehaviorTreeNodeContent
+	public partial class BehaviorTreeNode_IsLowOnHp : IBehaviorTreeNodeContent
 	{
 		partial void OnDataDeserialized(BehaviorTreeNodeSerializable serializable, Database database);
 		partial void OnDataSerialized(ref BehaviorTreeNodeSerializable serializable);
 
 		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
 		{
-			FailIfLess = new NumericValue<float>(serializable.MinValue, 0f, 1f);
+			MinValue = new NumericValue<float>(serializable.MinValue, 0f, 1f);
 
 			OnDataDeserialized(serializable, database);
 		}
 
 		public void Save(ref BehaviorTreeNodeSerializable serializable)
 		{
-			serializable.MinValue = FailIfLess.Value;
+			serializable.MinValue = MinValue.Value;
 			OnDataSerialized(ref serializable);
 		}
 
-		public NumericValue<float> FailIfLess = new NumericValue<float>(0, 0f, 1f);
+		public NumericValue<float> MinValue = new NumericValue<float>(0, 0f, 1f);
 	}
 
 	public partial class BehaviorTreeNode_FindEnemy : IBehaviorTreeNodeContent
@@ -681,28 +733,55 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> MaxDistance = new NumericValue<float>(0, 0f, 10f);
 	}
 
-	public partial class BehaviorTreeNode_MothershipHp : IBehaviorTreeNodeContent
+	public partial class BehaviorTreeNode_MothershipLowHp : IBehaviorTreeNodeContent
 	{
 		partial void OnDataDeserialized(BehaviorTreeNodeSerializable serializable, Database database);
 		partial void OnDataSerialized(ref BehaviorTreeNodeSerializable serializable);
 
 		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
 		{
-			FailIfLess = new NumericValue<float>(serializable.MinValue, 0f, 1f);
+			MinValue = new NumericValue<float>(serializable.MinValue, 0f, 1f);
 
 			OnDataDeserialized(serializable, database);
 		}
 
 		public void Save(ref BehaviorTreeNodeSerializable serializable)
 		{
-			serializable.MinValue = FailIfLess.Value;
+			serializable.MinValue = MinValue.Value;
 			OnDataSerialized(ref serializable);
 		}
 
-		public NumericValue<float> FailIfLess = new NumericValue<float>(0, 0f, 1f);
+		public NumericValue<float> MinValue = new NumericValue<float>(0, 0f, 1f);
 	}
 
 	public partial class BehaviorTreeNode_ShowMessage : IBehaviorTreeNodeContent
+	{
+		partial void OnDataDeserialized(BehaviorTreeNodeSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BehaviorTreeNodeSerializable serializable);
+
+		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
+		{
+			Text = serializable.Text;
+			Cooldown = new NumericValue<float>(serializable.Cooldown, 0.2f, 3.402823E+38f);
+			Color = Helpers.ColorFromString(serializable.Color);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BehaviorTreeNodeSerializable serializable)
+		{
+			serializable.Text = Text;
+			serializable.Cooldown = Cooldown.Value;
+			serializable.Color = Helpers.ColorToString(Color);
+			OnDataSerialized(ref serializable);
+		}
+
+		public string Text;
+		public NumericValue<float> Cooldown = new NumericValue<float>(0, 0.2f, 3.402823E+38f);
+		public System.Drawing.Color Color;
+	}
+
+	public partial class BehaviorTreeNode_DebugLog : IBehaviorTreeNodeContent
 	{
 		partial void OnDataDeserialized(BehaviorTreeNodeSerializable serializable, Database database);
 		partial void OnDataSerialized(ref BehaviorTreeNodeSerializable serializable);

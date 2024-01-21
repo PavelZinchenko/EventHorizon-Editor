@@ -18,13 +18,15 @@ namespace DatabaseMigration.v1.Serializable
 	{
 		public BehaviorNodeType Type;
 		public BehaviorNodeRequirementSerializable Requirement;
-		public bool InverseResult;
 		public BehaviorTreeNodeSerializable[] Nodes;
 		public BehaviorTreeNodeSerializable Node;
 		public int ItemId;
 		public AiWeaponCategory WeaponType;
-		public float MinValue;
-		public float MaxValue;
+		public bool IsTrue;
+		[DefaultValue(0.1f)]
+		public float MinValue = 0.1f;
+		[DefaultValue(0.9f)]
+		public float MaxValue = 0.9f;
 		public float Cooldown;
 		public bool InRange;
 		public bool NoDrones;
@@ -32,5 +34,7 @@ namespace DatabaseMigration.v1.Serializable
 		public DeviceClass DeviceClass;
 		[DefaultValue("")]
 		public string Text;
+		[DefaultValue("")]
+		public string Color;
 	}
 }

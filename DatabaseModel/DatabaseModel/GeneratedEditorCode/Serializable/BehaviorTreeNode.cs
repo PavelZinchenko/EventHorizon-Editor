@@ -18,12 +18,14 @@ namespace EditorDatabase.Serializable
 	{
 		public BehaviorNodeType Type;
 		public BehaviorNodeRequirementSerializable Requirement;
-		public bool InverseResult;
 		public BehaviorTreeNodeSerializable[] Nodes;
 		public BehaviorTreeNodeSerializable Node;
 		public int ItemId;
 		public AiWeaponCategory WeaponType;
+		public bool IsTrue;
+		[DefaultValue(0.1f)]
 		public float MinValue;
+		[DefaultValue(0.9f)]
 		public float MaxValue;
 		public float Cooldown;
 		public bool InRange;
@@ -32,5 +34,7 @@ namespace EditorDatabase.Serializable
 		public DeviceClass DeviceClass;
 		[DefaultValue("")]
 		public string Text;
+		[DefaultValue("")]
+		public string Color;
 	}
 }
