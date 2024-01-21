@@ -38,10 +38,10 @@
 		public void CreateNew() => Value = new();
 		public void Clear() => Value = _defaultValue;
 
-		public ObjectWrapper(T value, T defaultValue)
+		public ObjectWrapper(T defaultValue)
 		{
 			_defaultValue = defaultValue;
-			Value = value ?? defaultValue;
+			Value = defaultValue;
 		}
 
 		public override string ToString()

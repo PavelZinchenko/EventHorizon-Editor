@@ -14,7 +14,7 @@ using DatabaseMigration.v1.Enums;
 namespace DatabaseMigration.v1.Serializable
 {
 	[Serializable]
-	public struct ComponentRestrictionsSerializable
+	public class ComponentRestrictionsSerializable
 	{
 		public SizeClass[] ShipSizes;
 		public bool NotForOrganicShips;

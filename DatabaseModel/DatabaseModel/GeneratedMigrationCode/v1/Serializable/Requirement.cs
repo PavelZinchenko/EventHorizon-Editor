@@ -14,7 +14,7 @@ using DatabaseMigration.v1.Enums;
 namespace DatabaseMigration.v1.Serializable
 {
 	[Serializable]
-	public struct RequirementSerializable
+	public class RequirementSerializable
 	{
 		public RequirementType Type;
 		public int ItemId;

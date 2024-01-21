@@ -29,7 +29,7 @@ namespace EditorDatabase.DataModel
 			try
 			{
 				Id = new ItemId<BehaviorTreeModel>(serializable.Id, serializable.FileName);
-				RootNode = new ObjectWrapper<BehaviorTreeNode>(DataModel.BehaviorTreeNode.Create(serializable.RootNode, database), DataModel.BehaviorTreeNode.DefaultValue);
+				RootNode.Value = DataModel.BehaviorTreeNode.Create(serializable.RootNode, database);
 			}
 			catch (DatabaseException e)
 			{
@@ -46,7 +46,7 @@ namespace EditorDatabase.DataModel
 
 		public readonly ItemId<BehaviorTreeModel> Id;
 
-		public ObjectWrapper<BehaviorTreeNode> RootNode;
+		public ObjectWrapper<BehaviorTreeNode> RootNode = new(DataModel.BehaviorTreeNode.DefaultValue);
 
 		public static BehaviorTreeModel DefaultValue { get; private set; }
 	}

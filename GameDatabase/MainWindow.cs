@@ -126,7 +126,7 @@ namespace GameDatabase
 
                 EditButton.Enabled = true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //MessageBox.Show(e.Message);
             }
@@ -175,7 +175,7 @@ namespace GameDatabase
                 var index = ids.IndexOf(false);
                 data.FirstUnusedId.Value = index > 0 ? index : ids.Count;
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
 

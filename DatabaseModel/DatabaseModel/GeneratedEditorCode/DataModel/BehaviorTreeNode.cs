@@ -42,6 +42,8 @@ namespace EditorDatabase.DataModel
 					return new BehaviorTreeNode_Parallel();
 				case BehaviorNodeType.RandomSelector:
 					return new BehaviorTreeNode_RandomSelector();
+				case BehaviorNodeType.Invertor:
+					return new BehaviorTreeNode_Invertor();
 				case BehaviorNodeType.HaveEnoughEnergy:
 					return new BehaviorTreeNode_HaveEnoughEnergy();
 				case BehaviorNodeType.HaveEnoughHp:
@@ -119,7 +121,7 @@ namespace EditorDatabase.DataModel
 		private BehaviorTreeNode(BehaviorTreeNodeSerializable serializable, Database database)
 		{
 			Type = serializable.Type;
-			Requirement = new ObjectWrapper<BehaviorNodeRequirement>(DataModel.BehaviorNodeRequirement.Create(serializable.Requirement, database), DataModel.BehaviorNodeRequirement.DefaultValue);
+			Requirement.Value = DataModel.BehaviorNodeRequirement.Create(serializable.Requirement, database);
 			InverseResult = serializable.InverseResult;
 			_content = CreateContent(serializable.Type);
 			_content.Load(serializable, database);
@@ -131,6 +133,7 @@ namespace EditorDatabase.DataModel
 		{
 			var serializable = new BehaviorTreeNodeSerializable();
 			serializable.Nodes = null;
+			serializable.Node = null;
 			serializable.ItemId = 0;
 			serializable.WeaponType = 0;
 			serializable.MinValue = 0f;
@@ -186,7 +189,7 @@ namespace EditorDatabase.DataModel
 
 		private IBehaviorTreeNodeContent _content;
 		public BehaviorNodeType Type;
-		public ObjectWrapper<BehaviorNodeRequirement> Requirement;
+		public ObjectWrapper<BehaviorNodeRequirement> Requirement = new(DataModel.BehaviorNodeRequirement.DefaultValue);
 		public bool InverseResult;
 
 		public static BehaviorTreeNode DefaultValue { get; private set; }
@@ -316,6 +319,27 @@ namespace EditorDatabase.DataModel
 
 		public BehaviorTreeNode[] Nodes;
 		public NumericValue<float> Cooldown = new NumericValue<float>(0, 0f, 3.402823E+38f);
+	}
+
+	public partial class BehaviorTreeNode_Invertor : IBehaviorTreeNodeContent
+	{
+		partial void OnDataDeserialized(BehaviorTreeNodeSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BehaviorTreeNodeSerializable serializable);
+
+		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
+		{
+			Node.Value = DataModel.BehaviorTreeNode.Create(serializable.Node, database);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BehaviorTreeNodeSerializable serializable)
+		{
+			serializable.Node = Node.Value?.Serialize();
+			OnDataSerialized(ref serializable);
+		}
+
+		public ObjectWrapper<BehaviorTreeNode> Node = new(DataModel.BehaviorTreeNode.DefaultValue);
 	}
 
 	public partial class BehaviorTreeNode_HaveEnoughEnergy : IBehaviorTreeNodeContent

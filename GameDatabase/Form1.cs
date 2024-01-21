@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace GameDatabase
+﻿namespace GameDatabase
 {
     public partial class NameForm : Form
     {
@@ -11,7 +8,7 @@ namespace GameDatabase
             Name = string.Empty;
         }
 
-        public string Name { get; set; }
+        public new string Name { get; set; }
 
         private void confirmButton_Click(object sender, EventArgs e)
         {

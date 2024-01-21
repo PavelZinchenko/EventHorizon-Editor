@@ -7,7 +7,6 @@ namespace Analyzer
     public partial class MainWindow : Form
     {
 		private Database _database;
-		private Analyzer.Statistics _statistics;
 
 		public MainWindow()
         {
@@ -37,7 +36,9 @@ namespace Analyzer
             console.Clear();
             console.AppendText("Total score:\n");
 
-            foreach (var item in _statistics.GetCannonStats().ToArray().OrderBy(item => item.name))
+			var statistics = new Analyzer.Statistics(_database);
+
+			foreach (var item in statistics.GetCannonStats().ToArray().OrderBy(item => item.name))
             {
                 console.AppendText(ExpandString(item.name, 24));
                 console.AppendText(" id:" + item.id + "\t");

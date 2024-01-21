@@ -423,7 +423,7 @@ namespace EditorDatabase.DataModel
 
 		public void Load(RequirementSerializable serializable, Database database)
 		{
-			Loot = new ObjectWrapper<LootContent>(DataModel.LootContent.Create(serializable.Loot, database), DataModel.LootContent.DefaultValue);
+			Loot.Value = DataModel.LootContent.Create(serializable.Loot, database);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -434,7 +434,7 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
-		public ObjectWrapper<LootContent> Loot;
+		public ObjectWrapper<LootContent> Loot = new(DataModel.LootContent.DefaultValue);
 	}
 
 	public partial class Requirement_HaveItemById : IRequirementContent

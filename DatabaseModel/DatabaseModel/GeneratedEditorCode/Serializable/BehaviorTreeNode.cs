@@ -20,6 +20,7 @@ namespace EditorDatabase.Serializable
 		public BehaviorNodeRequirementSerializable Requirement;
 		public bool InverseResult;
 		public BehaviorTreeNodeSerializable[] Nodes;
+		public BehaviorTreeNodeSerializable Node;
 		public int ItemId;
 		public AiWeaponCategory WeaponType;
 		public float MinValue;

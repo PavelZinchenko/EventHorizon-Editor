@@ -39,7 +39,7 @@ namespace EditorDatabase
                 var value = Convert.ToUInt32(color.Substring(index), 16);
                 return "#" + (value > 0xffffff ? value.ToString("X8") : value.ToString("X6"));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return _colorWhite;
             }

@@ -14,12 +14,13 @@ using DatabaseMigration.v1.Enums;
 namespace DatabaseMigration.v1.Serializable
 {
 	[Serializable]
-	public struct BehaviorTreeNodeSerializable
+	public class BehaviorTreeNodeSerializable
 	{
 		public BehaviorNodeType Type;
 		public BehaviorNodeRequirementSerializable Requirement;
 		public bool InverseResult;
 		public BehaviorTreeNodeSerializable[] Nodes;
+		public BehaviorTreeNodeSerializable Node;
 		public int ItemId;
 		public AiWeaponCategory WeaponType;
 		public float MinValue;

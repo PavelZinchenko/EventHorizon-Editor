@@ -14,7 +14,7 @@ using DatabaseMigration.v1.Enums;
 namespace DatabaseMigration.v1.Serializable
 {
 	[Serializable]
-	public struct ImpactEffectSerializable
+	public class ImpactEffectSerializable
 	{
 		public ImpactEffectType Type;
 		public DamageType DamageType;

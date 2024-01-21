@@ -42,7 +42,7 @@ namespace EditorDatabase.DataModel
 				Engines = serializable.Engines?.Select(item => Engine.Create(item, database)).ToArray();
 				Layout = new Layout(serializable.Layout);
 				Barrels = serializable.Barrels?.Select(item => Barrel.Create(item, database)).ToArray();
-				Features = new ObjectWrapper<ShipFeatures>(DataModel.ShipFeatures.Create(serializable.Features, database), DataModel.ShipFeatures.DefaultValue);
+				Features.Value = DataModel.ShipFeatures.Create(serializable.Features, database);
 				ColliderTolerance = new NumericValue<float>(serializable.ColliderTolerance, 0f, 1f);
 			}
 			catch (DatabaseException e)
@@ -93,7 +93,7 @@ namespace EditorDatabase.DataModel
 		public Engine[] Engines;
 		public Layout Layout;
 		public Barrel[] Barrels;
-		public ObjectWrapper<ShipFeatures> Features;
+		public ObjectWrapper<ShipFeatures> Features = new(DataModel.ShipFeatures.DefaultValue);
 		public NumericValue<float> ColliderTolerance = new NumericValue<float>(0, 0f, 1f);
 
 		public static Ship DefaultValue { get; private set; }

@@ -29,7 +29,7 @@ namespace EditorDatabase.DataModel
 		private DebugCode(DebugCodeSerializable serializable, Database database)
 		{
 			Code = new NumericValue<int>(serializable.Code, 0, 999999);
-			Loot = new ObjectWrapper<LootContent>(DataModel.LootContent.Create(serializable.Loot, database), DataModel.LootContent.DefaultValue);
+			Loot.Value = DataModel.LootContent.Create(serializable.Loot, database);
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -43,7 +43,7 @@ namespace EditorDatabase.DataModel
 		}
 
 		public NumericValue<int> Code = new NumericValue<int>(0, 0, 999999);
-		public ObjectWrapper<LootContent> Loot;
+		public ObjectWrapper<LootContent> Loot = new(DataModel.LootContent.DefaultValue);
 
 		public static DebugCode DefaultValue { get; private set; }
 	}

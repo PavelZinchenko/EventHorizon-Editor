@@ -14,7 +14,7 @@ using DatabaseMigration.v1.Enums;
 namespace DatabaseMigration.v1.Serializable
 {
 	[Serializable]
-	public struct BehaviorNodeRequirementSerializable
+	public class BehaviorNodeRequirementSerializable
 	{
 		public BehaviorRequirementType Type;
 		public DeviceClass DeviceClass;

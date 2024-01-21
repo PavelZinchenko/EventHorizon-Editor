@@ -14,7 +14,7 @@ using DatabaseMigration.v1.Enums;
 namespace DatabaseMigration.v1.Serializable
 {
 	[Serializable]
-	public struct BarrelSerializable
+	public class BarrelSerializable
 	{
 		public Vector2 Position;
 		public float Rotation;

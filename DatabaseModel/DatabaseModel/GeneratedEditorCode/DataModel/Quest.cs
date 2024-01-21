@@ -33,8 +33,8 @@ namespace EditorDatabase.DataModel
 				QuestType = serializable.QuestType;
 				StartCondition = serializable.StartCondition;
 				Weight = new NumericValue<float>(serializable.Weight, 0f, 1000f);
-				Origin = new ObjectWrapper<QuestOrigin>(DataModel.QuestOrigin.Create(serializable.Origin, database), DataModel.QuestOrigin.DefaultValue);
-				Requirement = new ObjectWrapper<Requirement>(DataModel.Requirement.Create(serializable.Requirement, database), DataModel.Requirement.DefaultValue);
+				Origin.Value = DataModel.QuestOrigin.Create(serializable.Origin, database);
+				Requirement.Value = DataModel.Requirement.Create(serializable.Requirement, database);
 				Level = new NumericValue<int>(serializable.Level, 0, 1000);
 				Nodes = serializable.Nodes?.Select(item => Node.Create(item, database)).ToArray();
 			}
@@ -67,8 +67,8 @@ namespace EditorDatabase.DataModel
 		public QuestType QuestType;
 		public StartCondition StartCondition;
 		public NumericValue<float> Weight = new NumericValue<float>(0, 0f, 1000f);
-		public ObjectWrapper<QuestOrigin> Origin;
-		public ObjectWrapper<Requirement> Requirement;
+		public ObjectWrapper<QuestOrigin> Origin = new(DataModel.QuestOrigin.DefaultValue);
+		public ObjectWrapper<Requirement> Requirement = new(DataModel.Requirement.DefaultValue);
 		public NumericValue<int> Level = new NumericValue<int>(0, 0, 1000);
 		public Node[] Nodes;
 

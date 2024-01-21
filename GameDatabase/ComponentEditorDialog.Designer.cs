@@ -61,12 +61,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = global::GameDatabase.Properties.Settings.Default.EditorSize;
+            this.ClientSize = global::DatabaseEditor.Properties.Settings.Default.EditorSize;
             this.Controls.Add(this.structDataEditor1);
             this.Controls.Add(this.statusStrip1);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::GameDatabase.Properties.Settings.Default, "EditorPosition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::GameDatabase.Properties.Settings.Default, "EditorSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.Location = global::GameDatabase.Properties.Settings.Default.EditorPosition;
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::DatabaseEditor.Properties.Settings.Default, "EditorPosition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::DatabaseEditor.Properties.Settings.Default, "EditorSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Location = global::DatabaseEditor.Properties.Settings.Default.EditorPosition;
             this.Name = "ComponentEditorDialog";
             this.Text = "ComponentEditorDialog";
             this.ResumeLayout(false);

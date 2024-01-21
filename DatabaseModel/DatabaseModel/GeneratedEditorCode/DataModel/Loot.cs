@@ -29,7 +29,7 @@ namespace EditorDatabase.DataModel
 			try
 			{
 				Id = new ItemId<LootModel>(serializable.Id, serializable.FileName);
-				Loot = new ObjectWrapper<LootContent>(DataModel.LootContent.Create(serializable.Loot, database), DataModel.LootContent.DefaultValue);
+				Loot.Value = DataModel.LootContent.Create(serializable.Loot, database);
 			}
 			catch (DatabaseException e)
 			{
@@ -46,7 +46,7 @@ namespace EditorDatabase.DataModel
 
 		public readonly ItemId<LootModel> Id;
 
-		public ObjectWrapper<LootContent> Loot;
+		public ObjectWrapper<LootContent> Loot = new(DataModel.LootContent.DefaultValue);
 
 		public static LootModel DefaultValue { get; private set; }
 	}

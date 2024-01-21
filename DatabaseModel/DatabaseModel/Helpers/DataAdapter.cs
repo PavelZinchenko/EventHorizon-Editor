@@ -15,8 +15,8 @@ namespace EditorDatabase
 
     public interface IDataAdapter
     {
-        event Action LayoutChangedEvent;
-        event Action DataChangedEvent;
+		event Action LayoutChangedEvent;
+		event Action DataChangedEvent;
         IEnumerable<IProperty> Properties { get; }
     }
 
@@ -27,10 +27,10 @@ namespace EditorDatabase
             _data = data;
         }
 
-        public event Action LayoutChangedEvent;
-        public event Action DataChangedEvent;
+		public event Action DataChangedEvent;
+		event Action IDataAdapter.LayoutChangedEvent { add { } remove { } }
 
-        public IEnumerable<IProperty> Properties
+		public IEnumerable<IProperty> Properties
         {
             get
             {

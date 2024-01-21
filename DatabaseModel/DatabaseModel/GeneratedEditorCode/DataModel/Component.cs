@@ -47,7 +47,7 @@ namespace EditorDatabase.DataModel
 				AmmunitionObsolete = database.GetAmmunitionObsoleteId(serializable.AmmunitionId);
 				DroneBay = database.GetDroneBayId(serializable.DroneBayId);
 				Drone = database.GetShipBuildId(serializable.DroneId);
-				Restrictions = new ObjectWrapper<ComponentRestrictions>(DataModel.ComponentRestrictions.Create(serializable.Restrictions, database), DataModel.ComponentRestrictions.DefaultValue);
+				Restrictions.Value = DataModel.ComponentRestrictions.Create(serializable.Restrictions, database);
 				PossibleModifications = serializable.PossibleModifications?.Select(id => new Wrapper<ComponentMod> { Item = database.GetComponentModId(id) }).ToArray();
 			}
 			catch (DatabaseException e)
@@ -101,7 +101,7 @@ namespace EditorDatabase.DataModel
 		public ItemId<AmmunitionObsolete> AmmunitionObsolete = ItemId<AmmunitionObsolete>.Empty;
 		public ItemId<DroneBay> DroneBay = ItemId<DroneBay>.Empty;
 		public ItemId<ShipBuild> Drone = ItemId<ShipBuild>.Empty;
-		public ObjectWrapper<ComponentRestrictions> Restrictions;
+		public ObjectWrapper<ComponentRestrictions> Restrictions = new(DataModel.ComponentRestrictions.DefaultValue);
 		public Wrapper<ComponentMod>[] PossibleModifications;
 
 		public static Component DefaultValue { get; private set; }

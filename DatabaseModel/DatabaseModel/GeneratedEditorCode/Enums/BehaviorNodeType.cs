@@ -16,6 +16,7 @@ namespace EditorDatabase.Enums
 		Sequence = 3,
 		Parallel = 4,
 		RandomSelector = 5,
+		Invertor = 6,
 		HaveEnoughEnergy = 50,
 		HaveEnoughHp = 51,
 		IsPlayerControled = 52,

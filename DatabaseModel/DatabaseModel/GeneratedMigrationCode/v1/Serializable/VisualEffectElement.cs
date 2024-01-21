@@ -14,7 +14,7 @@ using DatabaseMigration.v1.Enums;
 namespace DatabaseMigration.v1.Serializable
 {
 	[Serializable]
-	public struct VisualEffectElementSerializable
+	public class VisualEffectElementSerializable
 	{
 		public VisualEffectType Type;
 		[DefaultValue("")]

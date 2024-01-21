@@ -29,7 +29,7 @@ namespace EditorDatabase.DataModel
 			try
 			{
 				Id = new ItemId<Ammunition>(serializable.Id, serializable.FileName);
-				Body = new ObjectWrapper<BulletBody>(DataModel.BulletBody.Create(serializable.Body, database), DataModel.BulletBody.DefaultValue);
+				Body.Value = DataModel.BulletBody.Create(serializable.Body, database);
 				Triggers = serializable.Triggers?.Select(item => BulletTrigger.Create(item, database)).ToArray();
 				ImpactType = serializable.ImpactType;
 				Effects = serializable.Effects?.Select(item => ImpactEffect.Create(item, database)).ToArray();
@@ -58,7 +58,7 @@ namespace EditorDatabase.DataModel
 
 		public readonly ItemId<Ammunition> Id;
 
-		public ObjectWrapper<BulletBody> Body;
+		public ObjectWrapper<BulletBody> Body = new(DataModel.BulletBody.DefaultValue);
 		public BulletTrigger[] Triggers;
 		public BulletImpactType ImpactType;
 		public ImpactEffect[] Effects;

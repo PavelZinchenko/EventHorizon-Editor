@@ -352,12 +352,12 @@ namespace GameDatabase
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Window;
-			this.ClientSize = global::GameDatabase.Properties.Settings.Default.ShipEditorSize;
+			this.ClientSize = global::DatabaseEditor.Properties.Settings.Default.ShipEditorSize;
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.statusStrip1);
-			this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::GameDatabase.Properties.Settings.Default, "ShipEditorPosition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::GameDatabase.Properties.Settings.Default, "ShipEditorSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.Location = global::GameDatabase.Properties.Settings.Default.ShipEditorPosition;
+			this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::DatabaseEditor.Properties.Settings.Default, "ShipEditorPosition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::DatabaseEditor.Properties.Settings.Default, "ShipEditorSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.Location = global::DatabaseEditor.Properties.Settings.Default.ShipEditorPosition;
 			this.Name = "ShipEditorDialog";
 			this.Text = "ShipEditorDialog";
 			this.Load += new System.EventHandler(this.ShipEditorDialog_Load);

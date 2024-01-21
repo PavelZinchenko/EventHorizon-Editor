@@ -198,13 +198,13 @@ namespace GameDatabase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = global::GameDatabase.Properties.Settings.Default.MainSize;
+            this.ClientSize = global::DatabaseEditor.Properties.Settings.Default.MainSize;
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.menuStrip1);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::GameDatabase.Properties.Settings.Default, "MainPosition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::GameDatabase.Properties.Settings.Default, "MainSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::DatabaseEditor.Properties.Settings.Default, "MainPosition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("ClientSize", global::DatabaseEditor.Properties.Settings.Default, "MainSize", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Location = global::GameDatabase.Properties.Settings.Default.MainPosition;
+            this.Location = global::DatabaseEditor.Properties.Settings.Default.MainPosition;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainWindow";
             this.Text = "Game database";

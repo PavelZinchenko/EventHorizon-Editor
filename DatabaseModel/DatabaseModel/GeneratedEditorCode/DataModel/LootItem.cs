@@ -29,7 +29,7 @@ namespace EditorDatabase.DataModel
 		private LootItem(LootItemSerializable serializable, Database database)
 		{
 			Weight = new NumericValue<float>(serializable.Weight, -3.402823E+38f, 3.402823E+38f);
-			Loot = new ObjectWrapper<LootContent>(DataModel.LootContent.Create(serializable.Loot, database), DataModel.LootContent.DefaultValue);
+			Loot.Value = DataModel.LootContent.Create(serializable.Loot, database);
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -43,7 +43,7 @@ namespace EditorDatabase.DataModel
 		}
 
 		public NumericValue<float> Weight = new NumericValue<float>(0, -3.402823E+38f, 3.402823E+38f);
-		public ObjectWrapper<LootContent> Loot;
+		public ObjectWrapper<LootContent> Loot = new(DataModel.LootContent.DefaultValue);
 
 		public static LootItem DefaultValue { get; private set; }
 	}

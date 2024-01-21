@@ -29,7 +29,7 @@ namespace EditorDatabase.DataModel
 			try
 			{
 				Id = new ItemId<Fleet>(serializable.Id, serializable.FileName);
-				Factions = new ObjectWrapper<RequiredFactions>(DataModel.RequiredFactions.Create(serializable.Factions, database), DataModel.RequiredFactions.DefaultValue);
+				Factions.Value = DataModel.RequiredFactions.Create(serializable.Factions, database);
 				LevelBonus = new NumericValue<int>(serializable.LevelBonus, -10000, 10000);
 				NoRandomShips = serializable.NoRandomShips;
 				CombatTimeLimit = new NumericValue<int>(serializable.CombatTimeLimit, 0, 999);
@@ -65,7 +65,7 @@ namespace EditorDatabase.DataModel
 
 		public readonly ItemId<Fleet> Id;
 
-		public ObjectWrapper<RequiredFactions> Factions;
+		public ObjectWrapper<RequiredFactions> Factions = new(DataModel.RequiredFactions.DefaultValue);
 		public NumericValue<int> LevelBonus = new NumericValue<int>(0, -10000, 10000);
 		public bool NoRandomShips;
 		public NumericValue<int> CombatTimeLimit = new NumericValue<int>(0, 0, 999);

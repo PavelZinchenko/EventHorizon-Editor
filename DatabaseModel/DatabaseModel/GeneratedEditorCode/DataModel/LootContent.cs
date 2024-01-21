@@ -247,7 +247,7 @@ namespace EditorDatabase.DataModel
 			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
 			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
 			ValueRatio = new NumericValue<float>(serializable.ValueRatio, 0.001f, 1000f);
-			Factions = new ObjectWrapper<RequiredFactions>(DataModel.RequiredFactions.Create(serializable.Factions, database), DataModel.RequiredFactions.DefaultValue);
+			Factions.Value = DataModel.RequiredFactions.Create(serializable.Factions, database);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -264,7 +264,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
 		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
 		public NumericValue<float> ValueRatio = new NumericValue<float>(0, 0.001f, 1000f);
-		public ObjectWrapper<RequiredFactions> Factions;
+		public ObjectWrapper<RequiredFactions> Factions = new(DataModel.RequiredFactions.DefaultValue);
 	}
 
 	public partial class LootContent_RandomItems : ILootContentContent
@@ -481,7 +481,7 @@ namespace EditorDatabase.DataModel
 		{
 			MinAmount = new NumericValue<int>(serializable.MinAmount, 0, 999999999);
 			MaxAmount = new NumericValue<int>(serializable.MaxAmount, 0, 999999999);
-			Factions = new ObjectWrapper<RequiredFactions>(DataModel.RequiredFactions.Create(serializable.Factions, database), DataModel.RequiredFactions.DefaultValue);
+			Factions.Value = DataModel.RequiredFactions.Create(serializable.Factions, database);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -496,7 +496,7 @@ namespace EditorDatabase.DataModel
 
 		public NumericValue<int> MinAmount = new NumericValue<int>(0, 0, 999999999);
 		public NumericValue<int> MaxAmount = new NumericValue<int>(0, 0, 999999999);
-		public ObjectWrapper<RequiredFactions> Factions;
+		public ObjectWrapper<RequiredFactions> Factions = new(DataModel.RequiredFactions.DefaultValue);
 	}
 
 	public partial class LootContent_Satellite : ILootContentContent
