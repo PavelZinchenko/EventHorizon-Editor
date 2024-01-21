@@ -64,9 +64,9 @@ namespace Analyzer.Analyzer
                 if (ammunition != null)
                 {
                     stats.dps = continuous ? GetContinuousDPS(ammunition) : GetDPS(ammunition, fireRate);
-                    stats.eps = continuous ? ammunition.Body.EnergyCost.Value : ammunition.Body.EnergyCost.Value * energyRate;
-                    stats.range = ammunition.Body.Range.Value;
-                    stats.homing = ammunition.Body.Type == BulletType.Homing || ammunition.Body.Type == BulletType.Magnetic;
+                    stats.eps = continuous ? ammunition.Body.Value.EnergyCost.Value : ammunition.Body.Value.EnergyCost.Value * energyRate;
+                    stats.range = ammunition.Body.Value.Range.Value;
+                    stats.homing = ammunition.Body.Value.Type == BulletType.Homing || ammunition.Body.Value.Type == BulletType.Magnetic;
                 }
                 else if (ammunitionOld != null)
                 {
@@ -205,7 +205,7 @@ namespace Analyzer.Analyzer
 
         private float GetContinuousDPS(Ammunition ammunition, float powerMultiplier = 1.0f, int nestingLevel = 0)
         {
-            if (ammunition.Body.Type != BulletType.Continuous) return 0f;
+            if (ammunition.Body.Value.Type != BulletType.Continuous) return 0f;
 
             float damage = GetSpawnDPS(ammunition, 0.0f, powerMultiplier, nestingLevel);
 
@@ -272,7 +272,7 @@ namespace Analyzer.Analyzer
                     damage += impactDamage * fireRate;
                     break;
                 case BulletImpactType.DamageOverTime:
-                    damage += impactDamage * fireRate * ammunition.Body.Lifetime.Value;
+                    damage += impactDamage * fireRate * ammunition.Body.Value.Lifetime.Value;
                     break;
             }
 

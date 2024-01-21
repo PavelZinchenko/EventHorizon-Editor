@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using Cyotek.Windows.Forms;
 using EditorDatabase;
 using EditorDatabase.Model;
 using GameDatabase.Controls;
+using Newtonsoft.Json.Linq;
 
 namespace GameDatabase
 {
@@ -139,6 +141,9 @@ namespace GameDatabase
                 return CreateNumericContol((decimal)numeric.Value, FloatToDecimal(numeric.Min), FloatToDecimal(numeric.Max), (decimal)0.1f, 5, 1, rowId);
             }
 
+			if (typeof(IObjectWrapper).IsAssignableFrom(type))
+				return CreateContainerControl((IObjectWrapper)value, 1, rowId);
+
             if (type == typeof(string))
                 return CreateTextBox((string)value, 1, rowId);
 
@@ -157,7 +162,6 @@ namespace GameDatabase
             if (type == typeof(Vector2))
                 return CreateVectorEditor((Vector2)value, 1, rowId);
 
-            Control result;
             if (typeof(IItemId).IsAssignableFrom(type))
                 return CreateObjectList(value, 1, rowId);
 
@@ -306,7 +310,22 @@ namespace GameDatabase
             return layoutEditor;
         }
 
-        private Control CreateCollection(Array value, int column, int row)
+		private Control CreateContainerControl(IObjectWrapper wrapper, int column, int row)
+		{
+			var container = new ContainerEditor()
+			{
+				Dock = DockStyle.Fill,
+				AutoSize = true,
+				Database = _database,
+				ContentAutoScroll = false,
+			};
+
+			container.Data = wrapper;
+			tableLayoutPanel.Controls.Add(container, column, row);
+			return container;
+		}
+
+		private Control CreateCollection(Array value, int column, int row)
         {
             if (value.Length > 15)
             {
@@ -362,7 +381,7 @@ namespace GameDatabase
             return vector;
         }
 
-        private NumericUpDown CreateNumericContol(decimal value, decimal min, decimal max, decimal increment, int decimalPlaces, int column, int row)
+		private NumericUpDown CreateNumericContol(decimal value, decimal min, decimal max, decimal increment, int decimalPlaces, int column, int row)
         {
             var numeric = new NumericUpDown()
             {
@@ -470,7 +489,7 @@ namespace GameDatabase
             _binding[sender].Value = ((CheckBox)sender).Checked;
         }
 
-        private void OnCollectionChanged(object sender, EventArgs args)
+		private void OnCollectionChanged(object sender, EventArgs args)
         {
             if (_ignoreEvents) return;
 

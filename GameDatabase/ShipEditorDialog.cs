@@ -46,14 +46,16 @@ namespace GameDatabase
                 var ship = (Ship)_item;
                 layout = ship.Layout;
                 barrelCollection.Data = ship.Barrels;
-                layoutEditor1.Image = _database.GetImage(ship.ModelImage).Image;
+				var image = _database.GetImage(System.IO.Path.GetFileNameWithoutExtension(ship.ModelImage)).Image;
+				layoutEditor1.Image = image;
             }
             else if (_item is Satellite)
             {
                 var satellite = (Satellite)_item;
                 layout = satellite.Layout;
                 barrelCollection.Data = satellite.Barrels;
-                layoutEditor1.Image = _database.GetImage(satellite.ModelImage).Image;
+				var image = _database.GetImage(System.IO.Path.GetFileNameWithoutExtension(satellite.ModelImage)).Image;
+				layoutEditor1.Image = image;
             }
             else
                 throw new ArgumentException();
