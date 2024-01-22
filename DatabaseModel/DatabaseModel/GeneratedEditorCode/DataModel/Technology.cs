@@ -70,8 +70,6 @@ namespace EditorDatabase.DataModel
 		public void Save(TechnologySerializable serializable)
 		{
 			serializable.ItemId = 0;
-			serializable.ItemId = 0;
-			serializable.ItemId = 0;
 			serializable.Faction = 0;
 			_content.Save(ref serializable);
 			serializable.Type = Type;

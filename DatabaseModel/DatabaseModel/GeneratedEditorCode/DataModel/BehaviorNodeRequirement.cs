@@ -38,8 +38,10 @@ namespace EditorDatabase.DataModel
 					return new BehaviorNodeRequirement_All();
 				case BehaviorRequirementType.None:
 					return new BehaviorNodeRequirement_None();
-				case BehaviorRequirementType.DifficultyLevel:
-					return new BehaviorNodeRequirement_DifficultyLevel();
+				case BehaviorRequirementType.AiLevel:
+					return new BehaviorNodeRequirement_AiLevel();
+				case BehaviorRequirementType.MinAiLevel:
+					return new BehaviorNodeRequirement_MinAiLevel();
 				case BehaviorRequirementType.HasDevice:
 					return new BehaviorNodeRequirement_HasDevice();
 				case BehaviorRequirementType.HasAnyWeapon:
@@ -200,7 +202,28 @@ namespace EditorDatabase.DataModel
 		public BehaviorNodeRequirement[] Requirements;
 	}
 
-	public partial class BehaviorNodeRequirement_DifficultyLevel : IBehaviorNodeRequirementContent
+	public partial class BehaviorNodeRequirement_AiLevel : IBehaviorNodeRequirementContent
+	{
+		partial void OnDataDeserialized(BehaviorNodeRequirementSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BehaviorNodeRequirementSerializable serializable);
+
+		public void Load(BehaviorNodeRequirementSerializable serializable, Database database)
+		{
+			DifficultyLevel = serializable.DifficultyLevel;
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BehaviorNodeRequirementSerializable serializable)
+		{
+			serializable.DifficultyLevel = DifficultyLevel;
+			OnDataSerialized(ref serializable);
+		}
+
+		public AiDifficultyLevel DifficultyLevel;
+	}
+
+	public partial class BehaviorNodeRequirement_MinAiLevel : IBehaviorNodeRequirementContent
 	{
 		partial void OnDataDeserialized(BehaviorNodeRequirementSerializable serializable, Database database);
 		partial void OnDataSerialized(ref BehaviorNodeRequirementSerializable serializable);

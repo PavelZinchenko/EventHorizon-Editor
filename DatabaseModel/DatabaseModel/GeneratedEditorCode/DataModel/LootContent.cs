@@ -93,11 +93,6 @@ namespace EditorDatabase.DataModel
 		{
 			var serializable = new LootContentSerializable();
 			serializable.ItemId = 0;
-			serializable.ItemId = 0;
-			serializable.ItemId = 0;
-			serializable.ItemId = 0;
-			serializable.ItemId = 0;
-			serializable.ItemId = 0;
 			serializable.MinAmount = 0;
 			serializable.MaxAmount = 0;
 			serializable.ValueRatio = 0f;

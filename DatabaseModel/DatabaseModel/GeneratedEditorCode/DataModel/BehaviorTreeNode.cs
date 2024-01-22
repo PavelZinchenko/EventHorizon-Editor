@@ -48,12 +48,16 @@ namespace EditorDatabase.DataModel
 					return new BehaviorTreeNode_ConstantResult();
 				case BehaviorNodeType.CompleteOnce:
 					return new BehaviorTreeNode_CompleteOnce();
+				case BehaviorNodeType.RandomExecutor:
+					return new BehaviorTreeNode_RandomExecutor();
 				case BehaviorNodeType.HaveEnoughEnergy:
 					return new BehaviorTreeNode_HaveEnoughEnergy();
 				case BehaviorNodeType.IsLowOnHp:
 					return new BehaviorTreeNode_IsLowOnHp();
 				case BehaviorNodeType.IsControledByPlayer:
 					return new BehaviorTreeNodeEmptyContent();
+				case BehaviorNodeType.HaveIncomingThreat:
+					return new BehaviorTreeNode_HaveIncomingThreat();
 				case BehaviorNodeType.FindEnemy:
 					return new BehaviorTreeNode_FindEnemy();
 				case BehaviorNodeType.MoveToAttackRange:
@@ -91,6 +95,14 @@ namespace EditorDatabase.DataModel
 				case BehaviorNodeType.ChargeWeapons:
 					return new BehaviorTreeNodeEmptyContent();
 				case BehaviorNodeType.Chase:
+					return new BehaviorTreeNodeEmptyContent();
+				case BehaviorNodeType.AvoidThreats:
+					return new BehaviorTreeNodeEmptyContent();
+				case BehaviorNodeType.Stop:
+					return new BehaviorTreeNodeEmptyContent();
+				case BehaviorNodeType.UseRecoil:
+					return new BehaviorTreeNodeEmptyContent();
+				case BehaviorNodeType.DefendWithFronalShield:
 					return new BehaviorTreeNodeEmptyContent();
 				case BehaviorNodeType.IsWithinAttackRange:
 					return new BehaviorTreeNode_IsWithinAttackRange();
@@ -143,26 +155,15 @@ namespace EditorDatabase.DataModel
 			serializable.Node = null;
 			serializable.ItemId = 0;
 			serializable.WeaponType = 0;
-			serializable.IsTrue = false;
-			serializable.MinValue = 0f;
-			serializable.MaxValue = 0f;
-			serializable.MinValue = 0f;
+			serializable.Result = false;
+			serializable.MinValue = 0.1f;
+			serializable.MaxValue = 0.9f;
 			serializable.Cooldown = 0f;
-			serializable.Cooldown = 0f;
-			serializable.MinValue = 0f;
-			serializable.MaxValue = 0f;
-			serializable.InRange = false;
 			serializable.InRange = false;
 			serializable.NoDrones = false;
 			serializable.UseSystems = false;
-			serializable.MinValue = 0f;
-			serializable.MaxValue = 0f;
-			serializable.MaxValue = 0f;
-			serializable.MinValue = 0f;
-			serializable.MaxValue = 0f;
 			serializable.DeviceClass = 0;
 			serializable.Text = string.Empty;
-			serializable.Cooldown = 0f;
 			serializable.Color = string.Empty;
 			_content.Save(ref serializable);
 			serializable.Type = Type;
@@ -357,7 +358,7 @@ namespace EditorDatabase.DataModel
 		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
 		{
 			Node.Value = DataModel.BehaviorTreeNode.Create(serializable.Node, database);
-			IsTrue = serializable.IsTrue;
+			Result = serializable.Result;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -365,12 +366,12 @@ namespace EditorDatabase.DataModel
 		public void Save(ref BehaviorTreeNodeSerializable serializable)
 		{
 			serializable.Node = Node.Value?.Serialize();
-			serializable.IsTrue = IsTrue;
+			serializable.Result = Result;
 			OnDataSerialized(ref serializable);
 		}
 
 		public ObjectWrapper<BehaviorTreeNode> Node = new(DataModel.BehaviorTreeNode.DefaultValue);
-		public bool IsTrue;
+		public bool Result;
 	}
 
 	public partial class BehaviorTreeNode_CompleteOnce : IBehaviorTreeNodeContent
@@ -381,6 +382,7 @@ namespace EditorDatabase.DataModel
 		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
 		{
 			Node.Value = DataModel.BehaviorTreeNode.Create(serializable.Node, database);
+			Result = serializable.Result;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -388,10 +390,39 @@ namespace EditorDatabase.DataModel
 		public void Save(ref BehaviorTreeNodeSerializable serializable)
 		{
 			serializable.Node = Node.Value?.Serialize();
+			serializable.Result = Result;
 			OnDataSerialized(ref serializable);
 		}
 
 		public ObjectWrapper<BehaviorTreeNode> Node = new(DataModel.BehaviorTreeNode.DefaultValue);
+		public bool Result;
+	}
+
+	public partial class BehaviorTreeNode_RandomExecutor : IBehaviorTreeNodeContent
+	{
+		partial void OnDataDeserialized(BehaviorTreeNodeSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BehaviorTreeNodeSerializable serializable);
+
+		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
+		{
+			Nodes = serializable.Nodes?.Select(item => BehaviorTreeNode.Create(item, database)).ToArray();
+			Cooldown = new NumericValue<float>(serializable.Cooldown, 0f, 3.402823E+38f);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BehaviorTreeNodeSerializable serializable)
+		{
+			if (Nodes == null || Nodes.Length == 0)
+			    serializable.Nodes = null;
+			else
+			    serializable.Nodes = Nodes.Select(item => item.Serialize()).ToArray();
+			serializable.Cooldown = Cooldown.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public BehaviorTreeNode[] Nodes;
+		public NumericValue<float> Cooldown = new NumericValue<float>(0, 0f, 3.402823E+38f);
 	}
 
 	public partial class BehaviorTreeNode_HaveEnoughEnergy : IBehaviorTreeNodeContent
@@ -434,6 +465,27 @@ namespace EditorDatabase.DataModel
 		}
 
 		public NumericValue<float> MinValue = new NumericValue<float>(0, 0f, 1f);
+	}
+
+	public partial class BehaviorTreeNode_HaveIncomingThreat : IBehaviorTreeNodeContent
+	{
+		partial void OnDataDeserialized(BehaviorTreeNodeSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BehaviorTreeNodeSerializable serializable);
+
+		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
+		{
+			TimeToCollision = new NumericValue<float>(serializable.Cooldown, 0f, 3.402823E+38f);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BehaviorTreeNodeSerializable serializable)
+		{
+			serializable.Cooldown = TimeToCollision.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public NumericValue<float> TimeToCollision = new NumericValue<float>(0, 0f, 3.402823E+38f);
 	}
 
 	public partial class BehaviorTreeNode_FindEnemy : IBehaviorTreeNodeContent
@@ -486,6 +538,7 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
+		[TooltipText("Linear interpolation between shortest and longest weapon ranges")]
 		public NumericValue<float> MinMaxLerp = new NumericValue<float>(0, 0f, 1f);
 		public NumericValue<float> Multiplier = new NumericValue<float>(0, 0f, 1f);
 	}
@@ -573,7 +626,9 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
+		[TooltipText("Linear interpolation between shortest and longest weapon ranges")]
 		public NumericValue<float> MinMaxLerp = new NumericValue<float>(0, 0f, 1f);
+		[TooltipText("A valid distance between ships will be [range*(1-tolerance) .. range]")]
 		public NumericValue<float> Tolerance = new NumericValue<float>(0, 0f, 1f);
 	}
 
@@ -706,6 +761,7 @@ namespace EditorDatabase.DataModel
 			OnDataSerialized(ref serializable);
 		}
 
+		[TooltipText("Linear interpolation between shortest and longest weapon ranges")]
 		public NumericValue<float> MinMaxLerp = new NumericValue<float>(0, 0f, 1f);
 	}
 
@@ -762,7 +818,6 @@ namespace EditorDatabase.DataModel
 		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
 		{
 			Text = serializable.Text;
-			Cooldown = new NumericValue<float>(serializable.Cooldown, 0.2f, 3.402823E+38f);
 			Color = Helpers.ColorFromString(serializable.Color);
 
 			OnDataDeserialized(serializable, database);
@@ -771,13 +826,11 @@ namespace EditorDatabase.DataModel
 		public void Save(ref BehaviorTreeNodeSerializable serializable)
 		{
 			serializable.Text = Text;
-			serializable.Cooldown = Cooldown.Value;
 			serializable.Color = Helpers.ColorToString(Color);
 			OnDataSerialized(ref serializable);
 		}
 
 		public string Text;
-		public NumericValue<float> Cooldown = new NumericValue<float>(0, 0.2f, 3.402823E+38f);
 		public System.Drawing.Color Color;
 	}
 
@@ -789,7 +842,6 @@ namespace EditorDatabase.DataModel
 		public void Load(BehaviorTreeNodeSerializable serializable, Database database)
 		{
 			Text = serializable.Text;
-			Cooldown = new NumericValue<float>(serializable.Cooldown, 0.2f, 3.402823E+38f);
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -797,12 +849,10 @@ namespace EditorDatabase.DataModel
 		public void Save(ref BehaviorTreeNodeSerializable serializable)
 		{
 			serializable.Text = Text;
-			serializable.Cooldown = Cooldown.Value;
 			OnDataSerialized(ref serializable);
 		}
 
 		public string Text;
-		public NumericValue<float> Cooldown = new NumericValue<float>(0, 0.2f, 3.402823E+38f);
 	}
 
 }

@@ -97,13 +97,6 @@ namespace EditorDatabase.DataModel
 		{
 			var serializable = new RequirementSerializable();
 			serializable.ItemId = 0;
-			serializable.ItemId = 0;
-			serializable.ItemId = 0;
-			serializable.MinValue = 0;
-			serializable.MaxValue = 0;
-			serializable.MinValue = 0;
-			serializable.MaxValue = 0;
-			serializable.MinValue = 0;
 			serializable.MinValue = 0;
 			serializable.MaxValue = 0;
 			serializable.BoolValue = false;

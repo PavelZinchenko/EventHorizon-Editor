@@ -118,15 +118,12 @@ namespace EditorDatabase.DataModel
 			serializable.RequiredView = 0;
 			serializable.Message = string.Empty;
 			serializable.DefaultTransition = 0;
-			serializable.DefaultTransition = 0;
-			serializable.DefaultTransition = 0;
 			serializable.FailureTransition = 0;
 			serializable.Enemy = 0;
 			serializable.Loot = 0;
 			serializable.Quest = 0;
 			serializable.Character = 0;
 			serializable.Faction = 0;
-			serializable.Value = 0;
 			serializable.Value = 0;
 			serializable.Actions = null;
 			serializable.Transitions = null;

@@ -14,7 +14,10 @@ namespace EditorDatabase.Enums
 		Any = 1,
 		All = 2,
 		None = 3,
-		DifficultyLevel = 5,
+		[TooltipText("Satisfied if enemy AI level equals to this value")]
+		AiLevel = 5,
+		[TooltipText("Satisfied if enemy AI level is equals or higher than this value")]
+		MinAiLevel = 6,
 		HasDevice = 10,
 		HasAnyWeapon = 11,
 		HasDrones = 12,
