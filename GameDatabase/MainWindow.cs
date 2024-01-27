@@ -136,7 +136,8 @@ namespace GameDatabase
         {
             public NumericValue<int> FilesCount;
             public ItemType ItemTypes;
-            public NumericValue<int> LastItemId;
+			public NumericValue<int> FirstItemId;
+			public NumericValue<int> LastItemId;
             public NumericValue<int> FirstUnusedId;
         }
 
@@ -146,13 +147,14 @@ namespace GameDatabase
             {
                 FilesCount = new NumericValue<int>(0, 0, int.MaxValue),
                 ItemTypes = ItemType.Undefined,
-                LastItemId = new NumericValue<int>(0, 0, int.MaxValue),
+				FirstItemId = new NumericValue<int>(0, 0, int.MaxValue),
+				LastItemId = new NumericValue<int>(0, 0, int.MaxValue),
                 FirstUnusedId = new NumericValue<int>(0, 0, int.MaxValue),
             };
 
             try
             {
-                var ids = new List<bool> { true };
+                var ids = new SortedSet<int>();
                 foreach (var file in Directory.EnumerateFiles(path, "*.json", SearchOption.TopDirectoryOnly))
                 {
                     var text = File.ReadAllText(file);
@@ -163,19 +165,39 @@ namespace GameDatabase
                     if (item.ItemType == ItemType.Undefined)
                         continue;
 
-                    if (ids.Count <= item.Id)
-                        ids.AddRange(Enumerable.Repeat(false, item.Id - ids.Count + 1));
-                    ids[item.Id] = true;
+                    ids.Add(item.Id);
 
                     if (data.ItemTypes == ItemType.Undefined)
                         data.ItemTypes = item.ItemType;
                 }
 
-                data.LastItemId.Value = ids.Count - 1;
-                var index = ids.IndexOf(false);
-                data.FirstUnusedId.Value = index > 0 ? index : ids.Count;
-            }
-            catch (Exception)
+				if (ids.Count == 0)
+				{
+					data.FilesCount.Value = 0;
+					data.FirstItemId.Value = 0;
+					data.LastItemId.Value = 0;
+					data.FirstUnusedId.Value = 1;
+				}
+				else
+				{
+					var lastId = ids.First();
+					data.FirstItemId.Value = lastId;
+					data.LastItemId.Value = ids.Last();
+					data.FirstUnusedId.Value = data.LastItemId.Value + 1;
+					data.FilesCount.Value = ids.Count;
+
+					foreach (var id in ids.Skip(1))
+					{
+						if (id - lastId > 1)
+						{
+							data.FirstUnusedId.Value = lastId + 1;
+							break;
+						}
+						lastId = id;
+					}
+				}
+			}
+			catch (Exception)
             {
             }
 

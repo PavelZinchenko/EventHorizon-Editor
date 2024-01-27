@@ -6,25 +6,14 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-using System;
-using System.ComponentModel;
-using EditorDatabase.Enums;
-using EditorDatabase.Model;
-
-namespace EditorDatabase.Serializable
+namespace DatabaseMigration.v1.Enums
 {
-	[Serializable]
-	public class ShipBuildSerializable : SerializableItem
+	public enum NodeExecutionMode
 	{
-		public int ShipId;
-		[DefaultValue(true)]
-		public bool AvailableForPlayer = true;
-		[DefaultValue(true)]
-		public bool AvailableForEnemy = true;
-		public DifficultyClass DifficultyClass;
-		public int BuildFaction;
-		public int CustomAI;
-		public InstalledComponentSerializable[] Components;
-		public bool NotAvailableInGame;
+		UntilSucceeds = 0,
+		UntilFails = 1,
+		UntilFinishes = 2,
+		Infinitely = 3,
+		OneTime = 4,
 	}
 }

@@ -36,6 +36,7 @@ namespace EditorDatabase.DataModel
 				AvailableForEnemy = serializable.AvailableForEnemy;
 				DifficultyClass = serializable.DifficultyClass;
 				BuildFaction = database.GetFactionId(serializable.BuildFaction);
+				CustomAI = database.GetBehaviorTreeId(serializable.CustomAI);
 				Components = serializable.Components?.Select(item => InstalledComponent.Create(item, database)).ToArray();
 			}
 			catch (DatabaseException e)
@@ -52,6 +53,7 @@ namespace EditorDatabase.DataModel
 			serializable.AvailableForEnemy = AvailableForEnemy;
 			serializable.DifficultyClass = DifficultyClass;
 			serializable.BuildFaction = BuildFaction.Value;
+			serializable.CustomAI = CustomAI.Value;
 			if (Components == null || Components.Length == 0)
 			    serializable.Components = null;
 			else
@@ -66,6 +68,7 @@ namespace EditorDatabase.DataModel
 		public bool AvailableForEnemy;
 		public DifficultyClass DifficultyClass;
 		public ItemId<Faction> BuildFaction = ItemId<Faction>.Empty;
+		public ItemId<BehaviorTreeModel> CustomAI = ItemId<BehaviorTreeModel>.Empty;
 		public InstalledComponent[] Components;
 
 		public static ShipBuild DefaultValue { get; private set; }

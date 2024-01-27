@@ -20,8 +20,7 @@ namespace EditorDatabase.Serializable
 		public int AutopilotAI;
 		public int CloneAI;
 		public int DefensiveDroneAI;
-		public int ImprovedDefensiveDroneAI;
 		public int OffensiveDroneAI;
-		public int ImprovedOffensiveDroneAI;
+		public int StarbaseAI;
 	}
 }

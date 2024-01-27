@@ -22,6 +22,7 @@ namespace EditorDatabase.Serializable
 		public BehaviorTreeNodeSerializable Node;
 		public int ItemId;
 		public AiWeaponCategory WeaponType;
+		public NodeExecutionMode ExecutionMode;
 		public bool Result;
 		[DefaultValue(0.1f)]
 		public float MinValue = 0.1f;

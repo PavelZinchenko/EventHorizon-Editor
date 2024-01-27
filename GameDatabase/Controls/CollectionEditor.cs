@@ -124,9 +124,10 @@ namespace GameDatabase.Controls
                 return;
 
             SwapControls(_selectedItemId, _selectedItemId - 1);
-        }
+			_radioButtons[_selectedItemId - 1].Select();
+		}
 
-        private void moveDownButton_Click(object sender, EventArgs e)
+		private void moveDownButton_Click(object sender, EventArgs e)
         {
             if (_collection == null || _collection.Length < 2)
                 return;
@@ -135,9 +136,10 @@ namespace GameDatabase.Controls
                 return;
 
             SwapControls(_selectedItemId, _selectedItemId + 1);
-        }
+			_radioButtons[_selectedItemId + 1].Select();
+		}
 
-        private void addButton_Click(object sender, EventArgs args)
+		private void addButton_Click(object sender, EventArgs args)
         {
             if (_collection == null)
                 return;

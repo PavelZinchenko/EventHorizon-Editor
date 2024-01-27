@@ -25,8 +25,8 @@ namespace EditorDatabase.Serializable
 		public int MaxEnemyShipsLevel = 300;
 		[DefaultValue("MIN(3*distance/5 - 5, MaxEnemyShipsLevel)")]
 		public string EnemyLevel = "MIN(3*distance/5 - 5, MaxEnemyShipsLevel)";
-		[DefaultValue("IF(size == Destroyer, 5, size == Cruiser, 15, size == Battleship, 50, 0)")]
-		public string ShipMinSpawnDistance = "IF(size == Destroyer, 5, size == Cruiser, 15, size == Battleship, 50, 0)";
+		[DefaultValue("IF(size == Destroyer, 5, size == Cruiser, 15, size == Battleship, 50, size == Titan, 100, 0)")]
+		public string ShipMinSpawnDistance = "IF(size == Destroyer, 5, size == Cruiser, 15, size == Battleship, 50, size == Titan, 100, 0)";
 		public int CaptureStarbaseQuest;
 		public int StartingInvenory;
 	}
