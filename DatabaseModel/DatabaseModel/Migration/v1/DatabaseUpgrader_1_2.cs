@@ -53,7 +53,7 @@ namespace DatabaseMigration.v1
 		{
 			return new LootItemSerializable
 			{
-				Loot =
+				Loot = new()
 				{
 					Type = type,
 					ItemId = id,
