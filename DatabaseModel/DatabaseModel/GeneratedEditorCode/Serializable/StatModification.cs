@@ -8,21 +8,20 @@
 
 using System;
 using System.ComponentModel;
+using EditorDatabase.Enums;
 using EditorDatabase.Model;
-using DatabaseMigration.v1.Enums;
 
-namespace DatabaseMigration.v1.Serializable
+namespace EditorDatabase.Serializable
 {
 	[Serializable]
-	public class InstalledComponentSerializable
+	public class StatModificationSerializable
 	{
-		public int ComponentId;
-		public int Modification;
-		public ModificationQuality Quality;
-		public int X;
-		public int Y;
-		public int BarrelId;
-		public int Behaviour;
-		public int KeyBinding;
+		public StatModificationType Type;
+		public float Gray3;
+		public float Gray2;
+		public float Gray1;
+		public float Green;
+		public float Purple;
+		public float Gold;
 	}
 }

@@ -6,31 +6,22 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace DatabaseMigration.v1.Enums
+using System;
+using System.ComponentModel;
+using EditorDatabase.Model;
+using DatabaseMigration.v1.Enums;
+
+namespace DatabaseMigration.v1.Serializable
 {
-	public enum ComponentModType
+	[Serializable]
+	public class StatModificationSerializable
 	{
-		Empty,
-		Lightweight,
-		LowEnergyCost,
-		Fortified,
-		ExtraHitPoints,
-		Damage,
-		Cooldown,
-		Range,
-		BulletVelocity,
-		EnergyCapacity,
-		RepairRate,
-		EnginePower,
-		RechargeRate,
-		BulletVelocity2,
-		AreaOfEffect,
-		ShieldPower,
-		Damage2,
-		DroneDamage,
-		DroneDefense,
-		DroneSpeed,
-		DroneRange,
-		Recoil,
+		public StatModificationType Type;
+		public float Gray3;
+		public float Gray2;
+		public float Gray1;
+		public float Green;
+		public float Purple;
+		public float Gold;
 	}
 }

@@ -29,7 +29,8 @@ namespace EditorDatabase.DataModel
 			try
 			{
 				Id = new ItemId<ComponentMod>(serializable.Id, serializable.FileName);
-				Type = serializable.Type;
+				Description = serializable.Description;
+				Modifications = serializable.Modifications?.Select(item => StatModification.Create(item, database)).ToArray();
 			}
 			catch (DatabaseException e)
 			{
@@ -40,13 +41,18 @@ namespace EditorDatabase.DataModel
 
 		public void Save(ComponentModSerializable serializable)
 		{
-			serializable.Type = Type;
+			serializable.Description = Description;
+			if (Modifications == null || Modifications.Length == 0)
+			    serializable.Modifications = null;
+			else
+			    serializable.Modifications = Modifications.Select(item => item.Serialize()).ToArray();
 			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<ComponentMod> Id;
 
-		public ComponentModType Type;
+		public string Description;
+		public StatModification[] Modifications;
 
 		public static ComponentMod DefaultValue { get; private set; }
 	}

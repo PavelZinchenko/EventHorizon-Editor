@@ -31,7 +31,7 @@ namespace EditorDatabase.DataModel
 			Component = database.GetComponentId(serializable.ComponentId);
 			if (Component.IsNull)
 			    throw new DatabaseException(this.GetType().Name + ": Component cannot be null");
-			Modification = serializable.Modification;
+			Modification = database.GetComponentModId(serializable.Modification);
 			Quality = serializable.Quality;
 			X = new NumericValue<int>(serializable.X, -32768, 32767);
 			Y = new NumericValue<int>(serializable.Y, -32768, 32767);
@@ -45,7 +45,7 @@ namespace EditorDatabase.DataModel
 		{
 			var serializable = new InstalledComponentSerializable();
 			serializable.ComponentId = Component.Value;
-			serializable.Modification = Modification;
+			serializable.Modification = Modification.Value;
 			serializable.Quality = Quality;
 			serializable.X = X.Value;
 			serializable.Y = Y.Value;
@@ -57,7 +57,7 @@ namespace EditorDatabase.DataModel
 		}
 
 		public ItemId<Component> Component = ItemId<Component>.Empty;
-		public ComponentModType Modification;
+		public ItemId<ComponentMod> Modification = ItemId<ComponentMod>.Empty;
 		public ModificationQuality Quality;
 		public NumericValue<int> X = new NumericValue<int>(0, -32768, 32767);
 		public NumericValue<int> Y = new NumericValue<int>(0, -32768, 32767);

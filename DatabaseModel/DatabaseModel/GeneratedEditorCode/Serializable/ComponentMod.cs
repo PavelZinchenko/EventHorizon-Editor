@@ -16,6 +16,8 @@ namespace EditorDatabase.Serializable
 	[Serializable]
 	public class ComponentModSerializable : SerializableItem
 	{
-		public ComponentModType Type;
+		[DefaultValue("")]
+		public string Description;
+		public StatModificationSerializable[] Modifications;
 	}
 }

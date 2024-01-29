@@ -17,7 +17,7 @@ namespace EditorDatabase.Serializable
 	public class InstalledComponentSerializable
 	{
 		public int ComponentId;
-		public ComponentModType Modification;
+		public int Modification;
 		public ModificationQuality Quality;
 		public int X;
 		public int Y;
