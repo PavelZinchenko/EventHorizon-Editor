@@ -18,5 +18,6 @@ namespace DatabaseMigration.v1.Enums
 		Expired,
 		Detonated,
 		OutOfAmmo,
+		Cooldown,
 	}
 }

@@ -38,6 +38,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _factionMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
+            foreach (var item in _gameObjectPrefabMap.Values)
+                storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _satelliteMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _satelliteBuildMap.Values)
@@ -53,6 +55,8 @@ namespace EditorDatabase.Storage
             foreach (var item in _behaviorTreeMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _characterMap.Values)
+                storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
+            foreach (var item in _combatRulesMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _fleetMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
@@ -90,6 +94,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(SkillSettings.FileName, jsonSerializer.ToJson(SkillSettings));            
             if (SpecialEventSettings != null)
                 storage.SaveJson(SpecialEventSettings.FileName, jsonSerializer.ToJson(SpecialEventSettings));            
+            if (UiSettings != null)
+                storage.SaveJson(UiSettings.FileName, jsonSerializer.ToJson(UiSettings));            
         }
 
         public void LoadJson(string name, string content)
@@ -146,6 +152,13 @@ namespace EditorDatabase.Storage
                 data.FileName = name;
                 _factionMap.Add(data.Id, data);
             }
+            else if (type == ItemType.GameObjectPrefab)
+            {
+			    if (_gameObjectPrefabMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate GameObjectPrefab ID - " + item.Id + " (" + name + ")");
+                var data = _serializer.FromJson<GameObjectPrefabSerializable>(content);
+                data.FileName = name;
+                _gameObjectPrefabMap.Add(data.Id, data);
+            }
             else if (type == ItemType.Satellite)
             {
 			    if (_satelliteMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Satellite ID - " + item.Id + " (" + name + ")");
@@ -201,6 +214,13 @@ namespace EditorDatabase.Storage
                 var data = _serializer.FromJson<CharacterSerializable>(content);
                 data.FileName = name;
                 _characterMap.Add(data.Id, data);
+            }
+            else if (type == ItemType.CombatRules)
+            {
+			    if (_combatRulesMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate CombatRules ID - " + item.Id + " (" + name + ")");
+                var data = _serializer.FromJson<CombatRulesSerializable>(content);
+                data.FileName = name;
+                _combatRulesMap.Add(data.Id, data);
             }
             else if (type == ItemType.Fleet)
             {
@@ -348,6 +368,15 @@ namespace EditorDatabase.Storage
                     throw new DatabaseException("Duplicate SpecialEventSettings file found - " + name);
                 SpecialEventSettings = data;
             }
+            else if (type == ItemType.UiSettings)
+            {
+                var data = _serializer.FromJson<UiSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (UiSettings != null)
+                    throw new DatabaseException("Duplicate UiSettings file found - " + name);
+                UiSettings = data;
+            }
             else
             {
                 throw new DatabaseException("Unknown file type - " + type + "(" + name + ")");
@@ -378,6 +407,7 @@ namespace EditorDatabase.Storage
 		public ShipSettingsSerializable ShipSettings { get; private set; }
 		public SkillSettingsSerializable SkillSettings { get; private set; }
 		public SpecialEventSettingsSerializable SpecialEventSettings { get; private set; }
+		public UiSettingsSerializable UiSettings { get; private set; }
 
 		public IEnumerable<AmmunitionObsoleteSerializable> AmmunitionObsoleteList => _ammunitionObsoleteMap.Values;
 		public IEnumerable<ComponentSerializable> ComponentList => _componentMap.Values;
@@ -386,6 +416,7 @@ namespace EditorDatabase.Storage
 		public IEnumerable<DeviceSerializable> DeviceList => _deviceMap.Values;
 		public IEnumerable<DroneBaySerializable> DroneBayList => _droneBayMap.Values;
 		public IEnumerable<FactionSerializable> FactionList => _factionMap.Values;
+		public IEnumerable<GameObjectPrefabSerializable> GameObjectPrefabList => _gameObjectPrefabMap.Values;
 		public IEnumerable<SatelliteSerializable> SatelliteList => _satelliteMap.Values;
 		public IEnumerable<SatelliteBuildSerializable> SatelliteBuildList => _satelliteBuildMap.Values;
 		public IEnumerable<ShipSerializable> ShipList => _shipMap.Values;
@@ -394,6 +425,7 @@ namespace EditorDatabase.Storage
 		public IEnumerable<TechnologySerializable> TechnologyList => _technologyMap.Values;
 		public IEnumerable<BehaviorTreeSerializable> BehaviorTreeList => _behaviorTreeMap.Values;
 		public IEnumerable<CharacterSerializable> CharacterList => _characterMap.Values;
+		public IEnumerable<CombatRulesSerializable> CombatRulesList => _combatRulesMap.Values;
 		public IEnumerable<FleetSerializable> FleetList => _fleetMap.Values;
 		public IEnumerable<LootSerializable> LootList => _lootMap.Values;
 		public IEnumerable<QuestSerializable> QuestList => _questMap.Values;
@@ -410,6 +442,7 @@ namespace EditorDatabase.Storage
 		public DeviceSerializable GetDevice(int id) { return _deviceMap.TryGetValue(id, out var item) ? item : null; }
 		public DroneBaySerializable GetDroneBay(int id) { return _droneBayMap.TryGetValue(id, out var item) ? item : null; }
 		public FactionSerializable GetFaction(int id) { return _factionMap.TryGetValue(id, out var item) ? item : null; }
+		public GameObjectPrefabSerializable GetGameObjectPrefab(int id) { return _gameObjectPrefabMap.TryGetValue(id, out var item) ? item : null; }
 		public SatelliteSerializable GetSatellite(int id) { return _satelliteMap.TryGetValue(id, out var item) ? item : null; }
 		public SatelliteBuildSerializable GetSatelliteBuild(int id) { return _satelliteBuildMap.TryGetValue(id, out var item) ? item : null; }
 		public ShipSerializable GetShip(int id) { return _shipMap.TryGetValue(id, out var item) ? item : null; }
@@ -418,6 +451,7 @@ namespace EditorDatabase.Storage
 		public TechnologySerializable GetTechnology(int id) { return _technologyMap.TryGetValue(id, out var item) ? item : null; }
 		public BehaviorTreeSerializable GetBehaviorTree(int id) { return _behaviorTreeMap.TryGetValue(id, out var item) ? item : null; }
 		public CharacterSerializable GetCharacter(int id) { return _characterMap.TryGetValue(id, out var item) ? item : null; }
+		public CombatRulesSerializable GetCombatRules(int id) { return _combatRulesMap.TryGetValue(id, out var item) ? item : null; }
 		public FleetSerializable GetFleet(int id) { return _fleetMap.TryGetValue(id, out var item) ? item : null; }
 		public LootSerializable GetLoot(int id) { return _lootMap.TryGetValue(id, out var item) ? item : null; }
 		public QuestSerializable GetQuest(int id) { return _questMap.TryGetValue(id, out var item) ? item : null; }
@@ -449,6 +483,7 @@ namespace EditorDatabase.Storage
 		private readonly Dictionary<int, DeviceSerializable> _deviceMap = new Dictionary<int, DeviceSerializable>();
 		private readonly Dictionary<int, DroneBaySerializable> _droneBayMap = new Dictionary<int, DroneBaySerializable>();
 		private readonly Dictionary<int, FactionSerializable> _factionMap = new Dictionary<int, FactionSerializable>();
+		private readonly Dictionary<int, GameObjectPrefabSerializable> _gameObjectPrefabMap = new Dictionary<int, GameObjectPrefabSerializable>();
 		private readonly Dictionary<int, SatelliteSerializable> _satelliteMap = new Dictionary<int, SatelliteSerializable>();
 		private readonly Dictionary<int, SatelliteBuildSerializable> _satelliteBuildMap = new Dictionary<int, SatelliteBuildSerializable>();
 		private readonly Dictionary<int, ShipSerializable> _shipMap = new Dictionary<int, ShipSerializable>();
@@ -457,6 +492,7 @@ namespace EditorDatabase.Storage
 		private readonly Dictionary<int, TechnologySerializable> _technologyMap = new Dictionary<int, TechnologySerializable>();
 		private readonly Dictionary<int, BehaviorTreeSerializable> _behaviorTreeMap = new Dictionary<int, BehaviorTreeSerializable>();
 		private readonly Dictionary<int, CharacterSerializable> _characterMap = new Dictionary<int, CharacterSerializable>();
+		private readonly Dictionary<int, CombatRulesSerializable> _combatRulesMap = new Dictionary<int, CombatRulesSerializable>();
 		private readonly Dictionary<int, FleetSerializable> _fleetMap = new Dictionary<int, FleetSerializable>();
 		private readonly Dictionary<int, LootSerializable> _lootMap = new Dictionary<int, LootSerializable>();
 		private readonly Dictionary<int, QuestSerializable> _questMap = new Dictionary<int, QuestSerializable>();

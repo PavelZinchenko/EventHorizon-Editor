@@ -14,28 +14,24 @@ using EditorDatabase.Model;
 namespace EditorDatabase.Serializable
 {
 	[Serializable]
-	public class DeviceSerializable : SerializableItem
+	public class CombatRulesSerializable : SerializableItem
 	{
-		public DeviceClass DeviceClass;
-		public float EnergyConsumption;
-		public float PassiveEnergyConsumption;
-		public float Power;
-		public float Range;
-		public float Size;
-		public float Cooldown;
-		public float Lifetime;
-		public Vector2 Offset;
-		public ActivationType ActivationType;
-		[DefaultValue("")]
-		public string Color;
-		[DefaultValue("")]
-		public string Sound;
-		[DefaultValue("")]
-		public string EffectPrefab;
-		[DefaultValue("")]
-		public string ObjectPrefab;
-		public int Prefab;
-		[DefaultValue("")]
-		public string ControlButtonIcon;
+		[DefaultValue("1")]
+		public string InitialEnemyShips = "1";
+		[DefaultValue("12")]
+		public string MaxEnemyShips = "12";
+		[DefaultValue("MAX(40, 100 - level)")]
+		public string TimeLimit = "MAX(40, 100 - level)";
+		public TimeOutMode TimeOutMode;
+		public RewardCondition LootCondition;
+		public RewardCondition ExpCondition;
+		public PlayerShipSelectionMode ShipSelection;
+		public bool DisableSkillBonuses;
+		public bool DisableRandomLoot;
+		public bool DisableAsteroids;
+		public bool DisablePlanet;
+		[DefaultValue(true)]
+		public bool NextEnemyButton = true;
+		public bool KillThemAllButton;
 	}
 }

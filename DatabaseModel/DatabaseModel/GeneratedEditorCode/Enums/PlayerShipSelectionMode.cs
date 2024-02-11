@@ -8,20 +8,14 @@
 
 namespace EditorDatabase.Enums
 {
-	public enum ImpactEffectType
+	public enum PlayerShipSelectionMode
 	{
-		Damage,
-		Push,
-		Pull,
-		DrainEnergy,
-		SiphonHitPoints,
-		SlowDown,
-		CaptureDrones,
-		Repair,
-		RestoreLifetime,
-		Devour,
-		Teleport,
-		DrainShield,
-		DriveDronesCrazy,
+		Default = 0,
+		[TooltipText("Player can select only one ship. When it dies, battle ends")]
+		OnlyOneShip = 1,
+		[TooltipText("Ships enters battlefield by order. Selection is not allowed")]
+		ByOrder = 2,
+		[TooltipText("Player can select ship but can't change it until it dies")]
+		NoRetreats = 3,
 	}
 }

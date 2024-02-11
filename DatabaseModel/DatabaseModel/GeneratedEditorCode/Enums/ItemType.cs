@@ -34,6 +34,8 @@ namespace EditorDatabase.Enums
 		VisualEffect = 26,
 		BulletPrefab = 27,
 		BehaviorTree = 28,
+		GameObjectPrefab = 29,
+		CombatRules = 30,
 		ShipSettings = 100,
 		GalaxySettings = 101,
 		DatabaseSettings = 102,
@@ -44,5 +46,6 @@ namespace EditorDatabase.Enums
 		SkillSettings = 107,
 		DebugSettings = 108,
 		CombatSettings = 109,
+		UiSettings = 110,
 	}
 }

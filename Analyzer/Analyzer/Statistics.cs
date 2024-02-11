@@ -186,17 +186,16 @@ namespace Analyzer.Analyzer
             if (nestingLevel >= 100) return damage;
 
             if (ammunition.Triggers != null)
-                foreach (var trigger in ammunition.Triggers.
-                    Where(item => item.EffectType == BulletEffectType.SpawnBullet).
-                    Select(item => item.Content as BulletTrigger_SpawnBullet))
+                foreach (var trigger in ammunition.Triggers.Where(item => item.EffectType == BulletEffectType.SpawnBullet))
                 {
-                    if (trigger.MaxNestingLevel.Value > 0 && nestingLevel > trigger.MaxNestingLevel.Value) continue;
+					var spawnBullet = trigger.Content as BulletTrigger_SpawnBullet;
+                    if (spawnBullet.MaxNestingLevel.Value > 0 && nestingLevel > spawnBullet.MaxNestingLevel.Value) continue;
 
-                    var bulletPower = trigger.PowerMultiplier.Value > 0 ? trigger.PowerMultiplier.Value : 1.0f;
-                    var quantity = trigger.Quantity.Value > 0 ? trigger.Quantity.Value : 1;
+                    var bulletPower = spawnBullet.PowerMultiplier.Value > 0 ? spawnBullet.PowerMultiplier.Value : 1.0f;
+                    var quantity = spawnBullet.Quantity.Value > 0 ? spawnBullet.Quantity.Value : 1;
                     var spawnRate = trigger.Cooldown.Value > 0 ? 1.0f / trigger.Cooldown.Value : fireRate;
 
-                    var bullet = _database.GetAmmunition(trigger.Ammunition.Value);
+                    var bullet = _database.GetAmmunition(spawnBullet.Ammunition.Value);
                     damage += GetDPS(bullet, bulletPower * quantity, spawnRate, nestingLevel + 1) * powerMultiplier;
                 }
 

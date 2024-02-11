@@ -29,5 +29,11 @@ namespace EditorDatabase.Serializable
 		public string ShipMinSpawnDistance = "IF(size == Destroyer, 5, size == Cruiser, 15, size == Battleship, 50, size == Titan, 100, 0)";
 		public int CaptureStarbaseQuest;
 		public int StartingInvenory;
+		public int SurvivalCombatRules;
+		public int StarbaseCombatRules;
+		public int FlagshipCombatRules;
+		public int ArenaCombatRules;
+		public int ChallengeCombatRules;
+		public int QuickCombatRules;
 	}
 }

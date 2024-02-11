@@ -35,6 +35,12 @@ namespace EditorDatabase.DataModel
 			EnemyLevel = serializable.EnemyLevel;
 			ShipMinSpawnDistance = serializable.ShipMinSpawnDistance;
 			CaptureStarbaseQuest = database.GetQuestId(serializable.CaptureStarbaseQuest);
+			SurvivalCombatRules = database.GetCombatRulesId(serializable.SurvivalCombatRules);
+			StarbaseCombatRules = database.GetCombatRulesId(serializable.StarbaseCombatRules);
+			FlagshipCombatRules = database.GetCombatRulesId(serializable.FlagshipCombatRules);
+			ArenaCombatRules = database.GetCombatRulesId(serializable.ArenaCombatRules);
+			ChallengeCombatRules = database.GetCombatRulesId(serializable.ChallengeCombatRules);
+			QuickCombatRules = database.GetCombatRulesId(serializable.QuickCombatRules);
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -52,6 +58,12 @@ namespace EditorDatabase.DataModel
 			serializable.EnemyLevel = EnemyLevel;
 			serializable.ShipMinSpawnDistance = ShipMinSpawnDistance;
 			serializable.CaptureStarbaseQuest = CaptureStarbaseQuest.Value;
+			serializable.SurvivalCombatRules = SurvivalCombatRules.Value;
+			serializable.StarbaseCombatRules = StarbaseCombatRules.Value;
+			serializable.FlagshipCombatRules = FlagshipCombatRules.Value;
+			serializable.ArenaCombatRules = ArenaCombatRules.Value;
+			serializable.ChallengeCombatRules = ChallengeCombatRules.Value;
+			serializable.QuickCombatRules = QuickCombatRules.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -64,6 +76,12 @@ namespace EditorDatabase.DataModel
 		public string EnemyLevel;
 		public string ShipMinSpawnDistance;
 		public ItemId<QuestModel> CaptureStarbaseQuest = ItemId<QuestModel>.Empty;
+		public ItemId<CombatRules> SurvivalCombatRules = ItemId<CombatRules>.Empty;
+		public ItemId<CombatRules> StarbaseCombatRules = ItemId<CombatRules>.Empty;
+		public ItemId<CombatRules> FlagshipCombatRules = ItemId<CombatRules>.Empty;
+		public ItemId<CombatRules> ArenaCombatRules = ItemId<CombatRules>.Empty;
+		public ItemId<CombatRules> ChallengeCombatRules = ItemId<CombatRules>.Empty;
+		public ItemId<CombatRules> QuickCombatRules = ItemId<CombatRules>.Empty;
 
 		public static GalaxySettings DefaultValue { get; private set; }
 	}

@@ -18,5 +18,6 @@ namespace EditorDatabase.Enums
 		Expired,
 		Detonated,
 		OutOfAmmo,
+		Cooldown,
 	}
 }

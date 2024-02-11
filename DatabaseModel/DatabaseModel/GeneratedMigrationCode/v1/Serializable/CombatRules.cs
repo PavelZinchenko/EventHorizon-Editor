@@ -14,31 +14,30 @@ using DatabaseMigration.v1.Enums;
 namespace DatabaseMigration.v1.Serializable
 {
 	[Serializable]
-	public class SpecialEventSettingsSerializable : SerializableItem
+	public class CombatRulesSerializable : SerializableItem
 	{
-		public SpecialEventSettingsSerializable()
+		public CombatRulesSerializable()
 		{
-			ItemType = ItemType.SpecialEventSettings;
-			FileName = "SpecialEventSettings.json";
+			ItemType = ItemType.CombatRules;
+			FileName = "CombatRules.json";
 		}
 
+		[DefaultValue("1")]
+		public string InitialEnemyShips = "1";
+		[DefaultValue("12")]
+		public string MaxEnemyShips = "12";
+		[DefaultValue("MAX(40, 100 - level)")]
+		public string TimeLimit = "MAX(40, 100 - level)";
+		public TimeOutMode TimeOutMode;
+		public RewardCondition LootCondition;
+		public RewardCondition ExpCondition;
+		public PlayerShipSelectionMode ShipSelection;
+		public bool DisableSkillBonuses;
+		public bool DisableRandomLoot;
+		public bool DisableAsteroids;
+		public bool DisablePlanet;
 		[DefaultValue(true)]
-		public bool EnableXmasEvent = true;
-		[DefaultValue(24)]
-		public int XmasDaysBefore = 24;
-		[DefaultValue(15)]
-		public int XmasDaysAfter = 15;
-		public int XmasQuest;
-		public int XmasCombatRules;
-		[DefaultValue("1 + credits/500")]
-		public string ConvertCreditsToSnowflakes = "1 + credits/500";
-		public bool EnableEasterEvent;
-		public int EasterDaysBefore;
-		public int EasterDaysAfter;
-		public int EasterQuest;
-		public bool EnableHalloweenEvent;
-		public int HalloweenDaysBefore;
-		public int HalloweenDaysAfter;
-		public int HalloweenQuest;
+		public bool NextEnemyButton = true;
+		public bool KillThemAllButton;
 	}
 }

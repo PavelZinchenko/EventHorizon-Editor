@@ -6,22 +6,12 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace EditorDatabase.Enums
+namespace DatabaseMigration.v1.Enums
 {
-	public enum ImpactEffectType
+	public enum TimeOutMode
 	{
-		Damage,
-		Push,
-		Pull,
-		DrainEnergy,
-		SiphonHitPoints,
-		SlowDown,
-		CaptureDrones,
-		Repair,
-		RestoreLifetime,
-		Devour,
-		Teleport,
-		DrainShield,
-		DriveDronesCrazy,
+		CallNextEnemy = 0,
+		DrainPlayerHp = 1,
+		CallNextEnemyOrDraw = 2,
 	}
 }

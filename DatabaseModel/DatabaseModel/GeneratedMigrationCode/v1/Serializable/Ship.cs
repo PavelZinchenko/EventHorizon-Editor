@@ -27,6 +27,8 @@ namespace DatabaseMigration.v1.Serializable
 		public SizeClass SizeClass;
 		[DefaultValue("")]
 		public string Name;
+		[DefaultValue("")]
+		public string Description;
 		public int Faction;
 		[DefaultValue("")]
 		public string IconImage;

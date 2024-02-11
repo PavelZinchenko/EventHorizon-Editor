@@ -19,7 +19,7 @@ namespace EditorDatabase
     public partial class Database
     {
 		public const int VersionMajor = 1;
-		public const int VersionMinor = 3;
+		public const int VersionMinor = 5;
 
 		public Database(IDataStorage storage)
 		{
@@ -36,6 +36,7 @@ namespace EditorDatabase
             foreach (var item in _deviceMap) item.Value.Save(_content.GetDevice(item.Key));
             foreach (var item in _droneBayMap) item.Value.Save(_content.GetDroneBay(item.Key));
             foreach (var item in _factionMap) item.Value.Save(_content.GetFaction(item.Key));
+            foreach (var item in _gameObjectPrefabMap) item.Value.Save(_content.GetGameObjectPrefab(item.Key));
             foreach (var item in _satelliteMap) item.Value.Save(_content.GetSatellite(item.Key));
             foreach (var item in _satelliteBuildMap) item.Value.Save(_content.GetSatelliteBuild(item.Key));
             foreach (var item in _shipMap) item.Value.Save(_content.GetShip(item.Key));
@@ -44,6 +45,7 @@ namespace EditorDatabase
             foreach (var item in _technologyMap) item.Value.Save(_content.GetTechnology(item.Key));
             foreach (var item in _behaviorTreeMap) item.Value.Save(_content.GetBehaviorTree(item.Key));
             foreach (var item in _characterMap) item.Value.Save(_content.GetCharacter(item.Key));
+            foreach (var item in _combatRulesMap) item.Value.Save(_content.GetCombatRules(item.Key));
             foreach (var item in _fleetMap) item.Value.Save(_content.GetFleet(item.Key));
             foreach (var item in _lootMap) item.Value.Save(_content.GetLoot(item.Key));
             foreach (var item in _questMap) item.Value.Save(_content.GetQuest(item.Key));
@@ -62,6 +64,7 @@ namespace EditorDatabase
 			_shipSettings?.Save(_content.ShipSettings);
 			_skillSettings?.Save(_content.SkillSettings);
 			_specialEventSettings?.Save(_content.SpecialEventSettings);
+			_uiSettings?.Save(_content.UiSettings);
 		
 			_content.Save(storage, _serializer);
 		}
@@ -75,6 +78,7 @@ namespace EditorDatabase
             if (type == typeof(Device)) return _content.DeviceList.Select(item => new ItemId<Device>(item));
             if (type == typeof(DroneBay)) return _content.DroneBayList.Select(item => new ItemId<DroneBay>(item));
             if (type == typeof(Faction)) return _content.FactionList.Select(item => new ItemId<Faction>(item));
+            if (type == typeof(GameObjectPrefab)) return _content.GameObjectPrefabList.Select(item => new ItemId<GameObjectPrefab>(item));
             if (type == typeof(Satellite)) return _content.SatelliteList.Select(item => new ItemId<Satellite>(item));
             if (type == typeof(SatelliteBuild)) return _content.SatelliteBuildList.Select(item => new ItemId<SatelliteBuild>(item));
             if (type == typeof(Ship)) return _content.ShipList.Select(item => new ItemId<Ship>(item));
@@ -83,6 +87,7 @@ namespace EditorDatabase
             if (type == typeof(Technology)) return _content.TechnologyList.Select(item => new ItemId<Technology>(item));
             if (type == typeof(BehaviorTreeModel)) return _content.BehaviorTreeList.Select(item => new ItemId<BehaviorTreeModel>(item));
             if (type == typeof(Character)) return _content.CharacterList.Select(item => new ItemId<Character>(item));
+            if (type == typeof(CombatRules)) return _content.CombatRulesList.Select(item => new ItemId<CombatRules>(item));
             if (type == typeof(Fleet)) return _content.FleetList.Select(item => new ItemId<Fleet>(item));
             if (type == typeof(LootModel)) return _content.LootList.Select(item => new ItemId<LootModel>(item));
             if (type == typeof(QuestModel)) return _content.QuestList.Select(item => new ItemId<QuestModel>(item));
@@ -110,6 +115,8 @@ namespace EditorDatabase
                 yield return GetDroneBay(item.Id);
             foreach (var item in _content.FactionList)
                 yield return GetFaction(item.Id);
+            foreach (var item in _content.GameObjectPrefabList)
+                yield return GetGameObjectPrefab(item.Id);
             foreach (var item in _content.SatelliteList)
                 yield return GetSatellite(item.Id);
             foreach (var item in _content.SatelliteBuildList)
@@ -126,6 +133,8 @@ namespace EditorDatabase
                 yield return GetBehaviorTree(item.Id);
             foreach (var item in _content.CharacterList)
                 yield return GetCharacter(item.Id);
+            foreach (var item in _content.CombatRulesList)
+                yield return GetCombatRules(item.Id);
             foreach (var item in _content.FleetList)
                 yield return GetFleet(item.Id);
             foreach (var item in _content.LootList)
@@ -162,6 +171,8 @@ namespace EditorDatabase
 				yield return SkillSettings;
             if (_content.SpecialEventSettings != null)
 				yield return SpecialEventSettings;
+            if (_content.UiSettings != null)
+				yield return UiSettings;
         }
 
         public IItemId GetItemId(Type type, int id)
@@ -173,6 +184,7 @@ namespace EditorDatabase
             if (type == typeof(Device)) return GetDeviceId(id);
             if (type == typeof(DroneBay)) return GetDroneBayId(id);
             if (type == typeof(Faction)) return GetFactionId(id);
+            if (type == typeof(GameObjectPrefab)) return GetGameObjectPrefabId(id);
             if (type == typeof(Satellite)) return GetSatelliteId(id);
             if (type == typeof(SatelliteBuild)) return GetSatelliteBuildId(id);
             if (type == typeof(Ship)) return GetShipId(id);
@@ -181,6 +193,7 @@ namespace EditorDatabase
             if (type == typeof(Technology)) return GetTechnologyId(id);
             if (type == typeof(BehaviorTreeModel)) return GetBehaviorTreeId(id);
             if (type == typeof(Character)) return GetCharacterId(id);
+            if (type == typeof(CombatRules)) return GetCombatRulesId(id);
             if (type == typeof(Fleet)) return GetFleetId(id);
             if (type == typeof(LootModel)) return GetLootId(id);
             if (type == typeof(QuestModel)) return GetQuestId(id);
@@ -203,6 +216,7 @@ namespace EditorDatabase
 				case ItemType.Device: return GetDevice(id);
 				case ItemType.DroneBay: return GetDroneBay(id);
 				case ItemType.Faction: return GetFaction(id);
+				case ItemType.GameObjectPrefab: return GetGameObjectPrefab(id);
 				case ItemType.Satellite: return GetSatellite(id);
 				case ItemType.SatelliteBuild: return GetSatelliteBuild(id);
 				case ItemType.Ship: return GetShip(id);
@@ -211,6 +225,7 @@ namespace EditorDatabase
 				case ItemType.Technology: return GetTechnology(id);
 				case ItemType.BehaviorTree: return GetBehaviorTree(id);
 				case ItemType.Character: return GetCharacter(id);
+				case ItemType.CombatRules: return GetCombatRules(id);
 				case ItemType.Fleet: return GetFleet(id);
 				case ItemType.Loot: return GetLoot(id);
 				case ItemType.Quest: return GetQuest(id);
@@ -229,6 +244,7 @@ namespace EditorDatabase
 				case ItemType.ShipSettings: return ShipSettings;
 				case ItemType.SkillSettings: return SkillSettings;
 				case ItemType.SpecialEventSettings: return SpecialEventSettings;
+				case ItemType.UiSettings: return UiSettings;
                 default: return null;
             }
         }
@@ -244,6 +260,7 @@ namespace EditorDatabase
 		public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = ShipSettings.Create(_content.ShipSettings, this));
 		public SkillSettings SkillSettings => _skillSettings ?? (_skillSettings = SkillSettings.Create(_content.SkillSettings, this));
 		public SpecialEventSettings SpecialEventSettings => _specialEventSettings ?? (_specialEventSettings = SpecialEventSettings.Create(_content.SpecialEventSettings, this));
+		public UiSettings UiSettings => _uiSettings ?? (_uiSettings = UiSettings.Create(_content.UiSettings, this));
 
 		public ItemId<AmmunitionObsolete> GetAmmunitionObsoleteId(int id) { return new ItemId<AmmunitionObsolete>(_content.GetAmmunitionObsolete(id)); }
         public AmmunitionObsolete GetAmmunitionObsolete(int id)
@@ -325,6 +342,18 @@ namespace EditorDatabase
                 var serializable = _content.GetFaction(id);
                 item = Faction.Create(serializable, this);
                 _factionMap.Add(id, item);
+            }
+            return item;
+        }
+
+		public ItemId<GameObjectPrefab> GetGameObjectPrefabId(int id) { return new ItemId<GameObjectPrefab>(_content.GetGameObjectPrefab(id)); }
+        public GameObjectPrefab GetGameObjectPrefab(int id)
+        {
+            if (!_gameObjectPrefabMap.TryGetValue(id, out var item))
+            {
+                var serializable = _content.GetGameObjectPrefab(id);
+                item = GameObjectPrefab.Create(serializable, this);
+                _gameObjectPrefabMap.Add(id, item);
             }
             return item;
         }
@@ -421,6 +450,18 @@ namespace EditorDatabase
                 var serializable = _content.GetCharacter(id);
                 item = Character.Create(serializable, this);
                 _characterMap.Add(id, item);
+            }
+            return item;
+        }
+
+		public ItemId<CombatRules> GetCombatRulesId(int id) { return new ItemId<CombatRules>(_content.GetCombatRules(id)); }
+        public CombatRules GetCombatRules(int id)
+        {
+            if (!_combatRulesMap.TryGetValue(id, out var item))
+            {
+                var serializable = _content.GetCombatRules(id);
+                item = CombatRules.Create(serializable, this);
+                _combatRulesMap.Add(id, item);
             }
             return item;
         }
@@ -533,6 +574,7 @@ namespace EditorDatabase
 			_deviceMap.Clear();
 			_droneBayMap.Clear();
 			_factionMap.Clear();
+			_gameObjectPrefabMap.Clear();
 			_satelliteMap.Clear();
 			_satelliteBuildMap.Clear();
 			_shipMap.Clear();
@@ -541,6 +583,7 @@ namespace EditorDatabase
 			_technologyMap.Clear();
 			_behaviorTreeMap.Clear();
 			_characterMap.Clear();
+			_combatRulesMap.Clear();
 			_fleetMap.Clear();
 			_lootMap.Clear();
 			_questMap.Clear();
@@ -560,6 +603,7 @@ namespace EditorDatabase
 			_shipSettings = null;
 			_skillSettings = null;
 			_specialEventSettings = null;
+			_uiSettings = null;
         }
 
 		private readonly Dictionary<int, AmmunitionObsolete> _ammunitionObsoleteMap = new Dictionary<int, AmmunitionObsolete>();
@@ -569,6 +613,7 @@ namespace EditorDatabase
 		private readonly Dictionary<int, Device> _deviceMap = new Dictionary<int, Device>();
 		private readonly Dictionary<int, DroneBay> _droneBayMap = new Dictionary<int, DroneBay>();
 		private readonly Dictionary<int, Faction> _factionMap = new Dictionary<int, Faction>();
+		private readonly Dictionary<int, GameObjectPrefab> _gameObjectPrefabMap = new Dictionary<int, GameObjectPrefab>();
 		private readonly Dictionary<int, Satellite> _satelliteMap = new Dictionary<int, Satellite>();
 		private readonly Dictionary<int, SatelliteBuild> _satelliteBuildMap = new Dictionary<int, SatelliteBuild>();
 		private readonly Dictionary<int, Ship> _shipMap = new Dictionary<int, Ship>();
@@ -577,6 +622,7 @@ namespace EditorDatabase
 		private readonly Dictionary<int, Technology> _technologyMap = new Dictionary<int, Technology>();
 		private readonly Dictionary<int, BehaviorTreeModel> _behaviorTreeMap = new Dictionary<int, BehaviorTreeModel>();
 		private readonly Dictionary<int, Character> _characterMap = new Dictionary<int, Character>();
+		private readonly Dictionary<int, CombatRules> _combatRulesMap = new Dictionary<int, CombatRules>();
 		private readonly Dictionary<int, Fleet> _fleetMap = new Dictionary<int, Fleet>();
 		private readonly Dictionary<int, LootModel> _lootMap = new Dictionary<int, LootModel>();
 		private readonly Dictionary<int, QuestModel> _questMap = new Dictionary<int, QuestModel>();
@@ -596,6 +642,7 @@ namespace EditorDatabase
 		private ShipSettings _shipSettings;
 		private SkillSettings _skillSettings;
 		private SpecialEventSettings _specialEventSettings;
+		private UiSettings _uiSettings;
 	
         private readonly IJsonSerializer _serializer;
 		private readonly DatabaseContent _content;

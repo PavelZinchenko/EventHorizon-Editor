@@ -6,22 +6,11 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace EditorDatabase.Enums
+namespace DatabaseMigration.v1.Enums
 {
-	public enum ImpactEffectType
+	public enum ObjectPrefabType
 	{
-		Damage,
-		Push,
-		Pull,
-		DrainEnergy,
-		SiphonHitPoints,
-		SlowDown,
-		CaptureDrones,
-		Repair,
-		RestoreLifetime,
-		Devour,
-		Teleport,
-		DrainShield,
-		DriveDronesCrazy,
+		Undefined = 0,
+		WormTailSegment = 1,
 	}
 }

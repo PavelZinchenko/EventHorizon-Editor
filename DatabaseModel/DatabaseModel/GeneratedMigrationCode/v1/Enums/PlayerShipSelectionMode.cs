@@ -6,22 +6,13 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace EditorDatabase.Enums
+namespace DatabaseMigration.v1.Enums
 {
-	public enum ImpactEffectType
+	public enum PlayerShipSelectionMode
 	{
-		Damage,
-		Push,
-		Pull,
-		DrainEnergy,
-		SiphonHitPoints,
-		SlowDown,
-		CaptureDrones,
-		Repair,
-		RestoreLifetime,
-		Devour,
-		Teleport,
-		DrainShield,
-		DriveDronesCrazy,
+		Default = 0,
+		OnlyOneShip = 1,
+		ByOrder = 2,
+		NoRetreats = 3,
 	}
 }

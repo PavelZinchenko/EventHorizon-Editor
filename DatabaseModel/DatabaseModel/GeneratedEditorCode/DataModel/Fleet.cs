@@ -32,12 +32,8 @@ namespace EditorDatabase.DataModel
 				Factions.Value = DataModel.RequiredFactions.Create(serializable.Factions, database);
 				LevelBonus = new NumericValue<int>(serializable.LevelBonus, -10000, 10000);
 				NoRandomShips = serializable.NoRandomShips;
-				CombatTimeLimit = new NumericValue<int>(serializable.CombatTimeLimit, 0, 999);
-				LootCondition = serializable.LootCondition;
-				ExpCondition = serializable.ExpCondition;
 				SpecificShips = serializable.SpecificShips?.Select(id => new Wrapper<ShipBuild> { Item = database.GetShipBuildId(id) }).ToArray();
-				NoShipChanging = serializable.NoShipChanging;
-				PlayerHasOneShip = serializable.PlayerHasOneShip;
+				CombatRules = database.GetCombatRulesId(serializable.CombatRules);
 			}
 			catch (DatabaseException e)
 			{
@@ -51,15 +47,11 @@ namespace EditorDatabase.DataModel
 			serializable.Factions = Factions.Value?.Serialize();
 			serializable.LevelBonus = LevelBonus.Value;
 			serializable.NoRandomShips = NoRandomShips;
-			serializable.CombatTimeLimit = CombatTimeLimit.Value;
-			serializable.LootCondition = LootCondition;
-			serializable.ExpCondition = ExpCondition;
 			if (SpecificShips == null || SpecificShips.Length == 0)
 			    serializable.SpecificShips = null;
 			else
 			    serializable.SpecificShips = SpecificShips.Select(wrapper => wrapper.Item.Value).ToArray();
-			serializable.NoShipChanging = NoShipChanging;
-			serializable.PlayerHasOneShip = PlayerHasOneShip;
+			serializable.CombatRules = CombatRules.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -68,12 +60,8 @@ namespace EditorDatabase.DataModel
 		public ObjectWrapper<RequiredFactions> Factions = new(DataModel.RequiredFactions.DefaultValue);
 		public NumericValue<int> LevelBonus = new NumericValue<int>(0, -10000, 10000);
 		public bool NoRandomShips;
-		public NumericValue<int> CombatTimeLimit = new NumericValue<int>(0, 0, 999);
-		public RewardCondition LootCondition;
-		public RewardCondition ExpCondition;
 		public Wrapper<ShipBuild>[] SpecificShips;
-		public bool NoShipChanging;
-		public bool PlayerHasOneShip;
+		public ItemId<CombatRules> CombatRules = ItemId<CombatRules>.Empty;
 
 		public static Fleet DefaultValue { get; private set; }
 	}

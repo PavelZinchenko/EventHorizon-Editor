@@ -43,6 +43,7 @@ namespace EditorDatabase.DataModel
 				Sound = serializable.Sound;
 				EffectPrefab = serializable.EffectPrefab;
 				ObjectPrefab = serializable.ObjectPrefab;
+				Prefab = database.GetGameObjectPrefabId(serializable.Prefab);
 				ControlButtonIcon = serializable.ControlButtonIcon;
 			}
 			catch (DatabaseException e)
@@ -68,6 +69,7 @@ namespace EditorDatabase.DataModel
 			serializable.Sound = Sound;
 			serializable.EffectPrefab = EffectPrefab;
 			serializable.ObjectPrefab = ObjectPrefab;
+			serializable.Prefab = Prefab.Value;
 			serializable.ControlButtonIcon = ControlButtonIcon;
 			OnDataSerialized(ref serializable);
 		}
@@ -88,6 +90,7 @@ namespace EditorDatabase.DataModel
 		public string Sound;
 		public string EffectPrefab;
 		public string ObjectPrefab;
+		public ItemId<GameObjectPrefab> Prefab = ItemId<GameObjectPrefab>.Empty;
 		public string ControlButtonIcon;
 
 		public static Device DefaultValue { get; private set; }

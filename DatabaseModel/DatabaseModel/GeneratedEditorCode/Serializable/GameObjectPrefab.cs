@@ -14,28 +14,12 @@ using EditorDatabase.Model;
 namespace EditorDatabase.Serializable
 {
 	[Serializable]
-	public class DeviceSerializable : SerializableItem
+	public class GameObjectPrefabSerializable : SerializableItem
 	{
-		public DeviceClass DeviceClass;
-		public float EnergyConsumption;
-		public float PassiveEnergyConsumption;
-		public float Power;
-		public float Range;
-		public float Size;
-		public float Cooldown;
-		public float Lifetime;
-		public Vector2 Offset;
-		public ActivationType ActivationType;
+		public ObjectPrefabType Type;
 		[DefaultValue("")]
-		public string Color;
+		public string Image1;
 		[DefaultValue("")]
-		public string Sound;
-		[DefaultValue("")]
-		public string EffectPrefab;
-		[DefaultValue("")]
-		public string ObjectPrefab;
-		public int Prefab;
-		[DefaultValue("")]
-		public string ControlButtonIcon;
+		public string Image2;
 	}
 }

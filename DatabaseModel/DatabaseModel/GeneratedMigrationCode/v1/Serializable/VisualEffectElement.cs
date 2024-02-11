@@ -22,10 +22,17 @@ namespace DatabaseMigration.v1.Serializable
 		public ColorMode ColorMode;
 		[DefaultValue("")]
 		public string Color;
-		public float Size;
+		[DefaultValue(1)]
+		public int Quantity = 1;
+		[DefaultValue(1f)]
+		public float Size = 1f;
 		public float GrowthRate;
 		public float TurnRate;
 		public float StartTime;
-		public float Lifetime;
+		[DefaultValue(1f)]
+		public float Lifetime = 1f;
+		[DefaultValue(1f)]
+		public float ParticleSize = 1f;
+		public bool Loop;
 	}
 }

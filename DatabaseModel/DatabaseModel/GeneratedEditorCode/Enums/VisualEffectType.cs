@@ -16,5 +16,8 @@ namespace EditorDatabase.Enums
 		Smoke,
 		SmokeAdditive,
 		Shake,
+		Spark,
+		Lightning,
+		LightningStrike,
 	}
 }

@@ -40,6 +40,7 @@ namespace DatabaseMigration.v1.Serializable
 		public string EffectPrefab;
 		[DefaultValue("")]
 		public string ObjectPrefab;
+		public int Prefab;
 		[DefaultValue("")]
 		public string ControlButtonIcon;
 	}

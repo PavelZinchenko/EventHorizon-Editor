@@ -8,20 +8,11 @@
 
 namespace EditorDatabase.Enums
 {
-	public enum ImpactEffectType
+	public enum TimeOutMode
 	{
-		Damage,
-		Push,
-		Pull,
-		DrainEnergy,
-		SiphonHitPoints,
-		SlowDown,
-		CaptureDrones,
-		Repair,
-		RestoreLifetime,
-		Devour,
-		Teleport,
-		DrainShield,
-		DriveDronesCrazy,
+		CallNextEnemy = 0,
+		DrainPlayerHp = 1,
+		[TooltipText("Calls next enemy if any and resets the timer, draws the battle otherwise")]
+		CallNextEnemyOrDraw = 2,
 	}
 }

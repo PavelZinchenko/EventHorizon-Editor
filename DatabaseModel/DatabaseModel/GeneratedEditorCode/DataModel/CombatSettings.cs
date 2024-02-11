@@ -32,6 +32,7 @@ namespace EditorDatabase.DataModel
 			DefensiveDroneAI = database.GetBehaviorTreeId(serializable.DefensiveDroneAI);
 			OffensiveDroneAI = database.GetBehaviorTreeId(serializable.OffensiveDroneAI);
 			StarbaseAI = database.GetBehaviorTreeId(serializable.StarbaseAI);
+			DefaultCombatRules = database.GetCombatRulesId(serializable.DefaultCombatRules);
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -43,6 +44,7 @@ namespace EditorDatabase.DataModel
 			serializable.DefensiveDroneAI = DefensiveDroneAI.Value;
 			serializable.OffensiveDroneAI = OffensiveDroneAI.Value;
 			serializable.StarbaseAI = StarbaseAI.Value;
+			serializable.DefaultCombatRules = DefaultCombatRules.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -52,6 +54,7 @@ namespace EditorDatabase.DataModel
 		public ItemId<BehaviorTreeModel> DefensiveDroneAI = ItemId<BehaviorTreeModel>.Empty;
 		public ItemId<BehaviorTreeModel> OffensiveDroneAI = ItemId<BehaviorTreeModel>.Empty;
 		public ItemId<BehaviorTreeModel> StarbaseAI = ItemId<BehaviorTreeModel>.Empty;
+		public ItemId<CombatRules> DefaultCombatRules = ItemId<CombatRules>.Empty;
 
 		public static CombatSettings DefaultValue { get; private set; }
 	}

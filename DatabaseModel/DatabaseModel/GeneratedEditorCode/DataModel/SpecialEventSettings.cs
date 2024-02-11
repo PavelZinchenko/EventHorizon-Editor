@@ -30,6 +30,7 @@ namespace EditorDatabase.DataModel
 			XmasDaysBefore = new NumericValue<int>(serializable.XmasDaysBefore, 0, 30);
 			XmasDaysAfter = new NumericValue<int>(serializable.XmasDaysAfter, 0, 30);
 			XmasQuest = database.GetQuestId(serializable.XmasQuest);
+			XmasCombatRules = database.GetCombatRulesId(serializable.XmasCombatRules);
 			ConvertCreditsToSnowflakes = serializable.ConvertCreditsToSnowflakes;
 			EnableEasterEvent = serializable.EnableEasterEvent;
 			EasterDaysBefore = new NumericValue<int>(serializable.EasterDaysBefore, 0, 30);
@@ -48,6 +49,7 @@ namespace EditorDatabase.DataModel
 			serializable.XmasDaysBefore = XmasDaysBefore.Value;
 			serializable.XmasDaysAfter = XmasDaysAfter.Value;
 			serializable.XmasQuest = XmasQuest.Value;
+			serializable.XmasCombatRules = XmasCombatRules.Value;
 			serializable.ConvertCreditsToSnowflakes = ConvertCreditsToSnowflakes;
 			serializable.EnableEasterEvent = EnableEasterEvent;
 			serializable.EasterDaysBefore = EasterDaysBefore.Value;
@@ -64,6 +66,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<int> XmasDaysBefore = new NumericValue<int>(0, 0, 30);
 		public NumericValue<int> XmasDaysAfter = new NumericValue<int>(0, 0, 30);
 		public ItemId<QuestModel> XmasQuest = ItemId<QuestModel>.Empty;
+		public ItemId<CombatRules> XmasCombatRules = ItemId<CombatRules>.Empty;
 		public string ConvertCreditsToSnowflakes;
 		public bool EnableEasterEvent;
 		public NumericValue<int> EasterDaysBefore = new NumericValue<int>(0, 0, 30);

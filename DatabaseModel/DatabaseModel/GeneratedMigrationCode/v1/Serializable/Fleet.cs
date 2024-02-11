@@ -31,5 +31,6 @@ namespace DatabaseMigration.v1.Serializable
 		public int[] SpecificShips;
 		public bool NoShipChanging;
 		public bool PlayerHasOneShip;
+		public int CombatRules;
 	}
 }

@@ -33,6 +33,7 @@ namespace EditorDatabase.DataModel
 				ShipRarity = serializable.ShipRarity;
 				SizeClass = serializable.SizeClass;
 				Name = serializable.Name;
+				Description = serializable.Description;
 				Faction = database.GetFactionId(serializable.Faction);
 				IconImage = serializable.IconImage;
 				IconScale = new NumericValue<float>(serializable.IconScale, 0.1f, 100f);
@@ -58,6 +59,7 @@ namespace EditorDatabase.DataModel
 			serializable.ShipRarity = ShipRarity;
 			serializable.SizeClass = SizeClass;
 			serializable.Name = Name;
+			serializable.Description = Description;
 			serializable.Faction = Faction.Value;
 			serializable.IconImage = IconImage;
 			serializable.IconScale = IconScale.Value;
@@ -84,6 +86,7 @@ namespace EditorDatabase.DataModel
 		public ShipRarity ShipRarity;
 		public SizeClass SizeClass;
 		public string Name;
+		public string Description;
 		public ItemId<Faction> Faction = ItemId<Faction>.Empty;
 		public string IconImage;
 		public NumericValue<float> IconScale = new NumericValue<float>(0, 0.1f, 100f);
