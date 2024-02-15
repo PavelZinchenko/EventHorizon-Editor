@@ -58,6 +58,7 @@ namespace EditorDatabase
 			_databaseSettings?.Save(_content.DatabaseSettings);
 			_debugSettings?.Save(_content.DebugSettings);
 			_explorationSettings?.Save(_content.ExplorationSettings);
+			_factionsSettings?.Save(_content.FactionsSettings);
 			_frontierSettings?.Save(_content.FrontierSettings);
 			_galaxySettings?.Save(_content.GalaxySettings);
 			_shipModSettings?.Save(_content.ShipModSettings);
@@ -159,6 +160,8 @@ namespace EditorDatabase
 				yield return DebugSettings;
             if (_content.ExplorationSettings != null)
 				yield return ExplorationSettings;
+            if (_content.FactionsSettings != null)
+				yield return FactionsSettings;
             if (_content.FrontierSettings != null)
 				yield return FrontierSettings;
             if (_content.GalaxySettings != null)
@@ -238,6 +241,7 @@ namespace EditorDatabase
 				case ItemType.DatabaseSettings: return DatabaseSettings;
 				case ItemType.DebugSettings: return DebugSettings;
 				case ItemType.ExplorationSettings: return ExplorationSettings;
+				case ItemType.FactionsSettings: return FactionsSettings;
 				case ItemType.FrontierSettings: return FrontierSettings;
 				case ItemType.GalaxySettings: return GalaxySettings;
 				case ItemType.ShipModSettings: return ShipModSettings;
@@ -254,6 +258,7 @@ namespace EditorDatabase
 		public DatabaseSettings DatabaseSettings => _databaseSettings ?? (_databaseSettings = DatabaseSettings.Create(_content.DatabaseSettings, this));
 		public DebugSettings DebugSettings => _debugSettings ?? (_debugSettings = DebugSettings.Create(_content.DebugSettings, this));
 		public ExplorationSettings ExplorationSettings => _explorationSettings ?? (_explorationSettings = ExplorationSettings.Create(_content.ExplorationSettings, this));
+		public FactionsSettings FactionsSettings => _factionsSettings ?? (_factionsSettings = FactionsSettings.Create(_content.FactionsSettings, this));
 		public FrontierSettings FrontierSettings => _frontierSettings ?? (_frontierSettings = FrontierSettings.Create(_content.FrontierSettings, this));
 		public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = GalaxySettings.Create(_content.GalaxySettings, this));
 		public ShipModSettings ShipModSettings => _shipModSettings ?? (_shipModSettings = ShipModSettings.Create(_content.ShipModSettings, this));
@@ -597,6 +602,7 @@ namespace EditorDatabase
 			_databaseSettings = null;
 			_debugSettings = null;
 			_explorationSettings = null;
+			_factionsSettings = null;
 			_frontierSettings = null;
 			_galaxySettings = null;
 			_shipModSettings = null;
@@ -636,6 +642,7 @@ namespace EditorDatabase
 		private DatabaseSettings _databaseSettings;
 		private DebugSettings _debugSettings;
 		private ExplorationSettings _explorationSettings;
+		private FactionsSettings _factionsSettings;
 		private FrontierSettings _frontierSettings;
 		private GalaxySettings _galaxySettings;
 		private ShipModSettings _shipModSettings;

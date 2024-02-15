@@ -31,6 +31,7 @@ namespace EditorDatabase.DataModel
 				Id = new ItemId<CombatRules>(serializable.Id, serializable.FileName);
 				InitialEnemyShips = serializable.InitialEnemyShips;
 				MaxEnemyShips = serializable.MaxEnemyShips;
+				BattleMapSize = new NumericValue<int>(serializable.BattleMapSize, 50, 2147483647);
 				TimeLimit = serializable.TimeLimit;
 				TimeOutMode = serializable.TimeOutMode;
 				LootCondition = serializable.LootCondition;
@@ -54,6 +55,7 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.InitialEnemyShips = InitialEnemyShips;
 			serializable.MaxEnemyShips = MaxEnemyShips;
+			serializable.BattleMapSize = BattleMapSize.Value;
 			serializable.TimeLimit = TimeLimit;
 			serializable.TimeOutMode = TimeOutMode;
 			serializable.LootCondition = LootCondition;
@@ -72,6 +74,7 @@ namespace EditorDatabase.DataModel
 
 		public string InitialEnemyShips;
 		public string MaxEnemyShips;
+		public NumericValue<int> BattleMapSize = new NumericValue<int>(0, 50, 2147483647);
 		public string TimeLimit;
 		public TimeOutMode TimeOutMode;
 		public RewardCondition LootCondition;

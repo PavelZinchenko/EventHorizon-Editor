@@ -20,6 +20,8 @@ namespace EditorDatabase.Serializable
 		public string InitialEnemyShips = "1";
 		[DefaultValue("12")]
 		public string MaxEnemyShips = "12";
+		[DefaultValue(200)]
+		public int BattleMapSize = 200;
 		[DefaultValue("MAX(40, 100 - level)")]
 		public string TimeLimit = "MAX(40, 100 - level)";
 		public TimeOutMode TimeOutMode;

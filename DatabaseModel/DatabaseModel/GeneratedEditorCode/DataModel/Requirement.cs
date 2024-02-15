@@ -54,6 +54,8 @@ namespace EditorDatabase.DataModel
 					return new Requirement_FactionRelations();
 				case RequirementType.StarbaseCaptured:
 					return new RequirementEmptyContent();
+				case RequirementType.FactionStarbasePower:
+					return new Requirement_FactionStarbasePower();
 				case RequirementType.Faction:
 					return new Requirement_Faction();
 				case RequirementType.HaveQuestItem:
@@ -362,6 +364,32 @@ namespace EditorDatabase.DataModel
 
 		public NumericValue<int> MinValue = new NumericValue<int>(0, -100, 100);
 		public NumericValue<int> MaxValue = new NumericValue<int>(0, -100, 100);
+	}
+
+	public partial class Requirement_FactionStarbasePower : IRequirementContent
+	{
+		partial void OnDataDeserialized(RequirementSerializable serializable, Database database);
+		partial void OnDataSerialized(ref RequirementSerializable serializable);
+
+		public void Load(RequirementSerializable serializable, Database database)
+		{
+			MinValue = new NumericValue<int>(serializable.MinValue, 0, 100000);
+			MaxValue = new NumericValue<int>(serializable.MaxValue, 0, 100000);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref RequirementSerializable serializable)
+		{
+			serializable.MinValue = MinValue.Value;
+			serializable.MaxValue = MaxValue.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		[TooltipText("Percentage value")]
+		public NumericValue<int> MinValue = new NumericValue<int>(0, 0, 100000);
+		[TooltipText("Percentage value")]
+		public NumericValue<int> MaxValue = new NumericValue<int>(0, 0, 100000);
 	}
 
 	public partial class Requirement_Faction : IRequirementContent

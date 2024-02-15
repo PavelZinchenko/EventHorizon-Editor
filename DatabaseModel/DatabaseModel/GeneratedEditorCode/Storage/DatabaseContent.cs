@@ -82,6 +82,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(DebugSettings.FileName, jsonSerializer.ToJson(DebugSettings));            
             if (ExplorationSettings != null)
                 storage.SaveJson(ExplorationSettings.FileName, jsonSerializer.ToJson(ExplorationSettings));            
+            if (FactionsSettings != null)
+                storage.SaveJson(FactionsSettings.FileName, jsonSerializer.ToJson(FactionsSettings));            
             if (FrontierSettings != null)
                 storage.SaveJson(FrontierSettings.FileName, jsonSerializer.ToJson(FrontierSettings));            
             if (GalaxySettings != null)
@@ -314,6 +316,15 @@ namespace EditorDatabase.Storage
                     throw new DatabaseException("Duplicate ExplorationSettings file found - " + name);
                 ExplorationSettings = data;
             }
+            else if (type == ItemType.FactionsSettings)
+            {
+                var data = _serializer.FromJson<FactionsSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (FactionsSettings != null)
+                    throw new DatabaseException("Duplicate FactionsSettings file found - " + name);
+                FactionsSettings = data;
+            }
             else if (type == ItemType.FrontierSettings)
             {
                 var data = _serializer.FromJson<FrontierSettingsSerializable>(content);
@@ -401,6 +412,7 @@ namespace EditorDatabase.Storage
 		public DatabaseSettingsSerializable DatabaseSettings { get; private set; }
 		public DebugSettingsSerializable DebugSettings { get; private set; }
 		public ExplorationSettingsSerializable ExplorationSettings { get; private set; }
+		public FactionsSettingsSerializable FactionsSettings { get; private set; }
 		public FrontierSettingsSerializable FrontierSettings { get; private set; }
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
 		public ShipModSettingsSerializable ShipModSettings { get; private set; }

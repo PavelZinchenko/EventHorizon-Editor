@@ -36,6 +36,7 @@ namespace EditorDatabase.DataModel
 				Origin.Value = DataModel.QuestOrigin.Create(serializable.Origin, database);
 				Requirement.Value = DataModel.Requirement.Create(serializable.Requirement, database);
 				Level = new NumericValue<int>(serializable.Level, 0, 1000);
+				UseRandomSeed = serializable.UseRandomSeed;
 				Nodes = serializable.Nodes?.Select(item => Node.Create(item, database)).ToArray();
 			}
 			catch (DatabaseException e)
@@ -54,6 +55,7 @@ namespace EditorDatabase.DataModel
 			serializable.Origin = Origin.Value?.Serialize();
 			serializable.Requirement = Requirement.Value?.Serialize();
 			serializable.Level = Level.Value;
+			serializable.UseRandomSeed = UseRandomSeed;
 			if (Nodes == null || Nodes.Length == 0)
 			    serializable.Nodes = null;
 			else
@@ -70,6 +72,7 @@ namespace EditorDatabase.DataModel
 		public ObjectWrapper<QuestOrigin> Origin = new(DataModel.QuestOrigin.DefaultValue);
 		public ObjectWrapper<Requirement> Requirement = new(DataModel.Requirement.DefaultValue);
 		public NumericValue<int> Level = new NumericValue<int>(0, 0, 1000);
+		public bool UseRandomSeed;
 		public Node[] Nodes;
 
 		public static QuestModel DefaultValue { get; private set; }

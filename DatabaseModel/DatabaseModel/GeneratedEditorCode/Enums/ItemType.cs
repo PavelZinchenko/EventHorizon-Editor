@@ -47,5 +47,6 @@ namespace EditorDatabase.Enums
 		DebugSettings = 108,
 		CombatSettings = 109,
 		UiSettings = 110,
+		FactionsSettings = 111,
 	}
 }
