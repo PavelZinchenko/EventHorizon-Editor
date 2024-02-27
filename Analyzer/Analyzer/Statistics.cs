@@ -66,7 +66,7 @@ namespace Analyzer.Analyzer
                     stats.dps = continuous ? GetContinuousDPS(ammunition) : GetDPS(ammunition, fireRate);
                     stats.eps = continuous ? ammunition.Body.Value.EnergyCost.Value : ammunition.Body.Value.EnergyCost.Value * energyRate;
                     stats.range = ammunition.Body.Value.Range.Value;
-                    stats.homing = ammunition.Body.Value.Type == BulletType.Homing || ammunition.Body.Value.Type == BulletType.Magnetic;
+                    stats.homing = ammunition.Controller.Value.Type == BulletControllerType.Homing;
                 }
                 else if (ammunitionOld != null)
                 {
@@ -204,7 +204,7 @@ namespace Analyzer.Analyzer
 
         private float GetContinuousDPS(Ammunition ammunition, float powerMultiplier = 1.0f, int nestingLevel = 0)
         {
-            if (ammunition.Body.Value.Type != BulletType.Continuous) return 0f;
+            if (ammunition.Controller.Value.Type != BulletControllerType.Beam) return 0f;
 
             float damage = GetSpawnDPS(ammunition, 0.0f, powerMultiplier, nestingLevel);
 
