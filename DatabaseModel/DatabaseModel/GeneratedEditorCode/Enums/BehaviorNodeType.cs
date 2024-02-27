@@ -29,6 +29,8 @@ namespace EditorDatabase.Enums
 		Execute = 8,
 		[TooltipText("Executes nodes sequentially, stops when the first node returns FAILURE")]
 		ParallelSequence = 10,
+		[TooltipText("Memorizes the primary target, runs the child node, then restores the original target. Returns the result of the node's execution")]
+		PreserveTarget = 11,
 		HasEnoughEnergy = 50,
 		IsLowOnHp = 51,
 		[TooltipText("SUCCESS if player did any action this frame")]
@@ -37,6 +39,7 @@ namespace EditorDatabase.Enums
 		HasIncomingThreat = 53,
 		[TooltipText("Returns SUCCESS if has any targets found by LookForAdditionalTargets node")]
 		HasAdditionalTargets = 54,
+		[TooltipText("Returns SUCCESS if [engine power] > Multiplier * [target engine power]")]
 		IsFasterThanTarget = 55,
 		[TooltipText("Returns SUCCESS if the main is selected and alive")]
 		HasMainTarget = 56,
@@ -44,6 +47,12 @@ namespace EditorDatabase.Enums
 		MainTargetIsEnemy = 58,
 		MainTargetLowHp = 59,
 		MainTargetWithinAttackRange = 60,
+		[TooltipText("Returns SUCCESS if mothership exists and is alive")]
+		HasMothership = 61,
+		[TooltipText("Returns SUCCESS if the distance to the target does not exceed the MaxDistance")]
+		TargetDistance = 62,
+		[TooltipText("Returns SUCCESS if the attack range of any weapon surpasses [enemy attack range] * Multiplier")]
+		HasLongerAttackRange = 63,
 		[TooltipText("Looks for nearest enemy. Changes target every MaxCooldown sec if it's defined. SUCCESS if found, FAILURE otherwise")]
 		FindEnemy = 100,
 		[TooltipText("Moves towards target until inside attack radius. Requires main target. Uses attack range of selected weapons. SUCCESS if inside attack range, FAILURE if any error, RUNNING otherwise")]
@@ -97,18 +106,26 @@ namespace EditorDatabase.Enums
 		EscapeTargetAttackRadius = 126,
 		[TooltipText("Attacks additional targets with selected weapons, returning SUCCESS upon firing, RUNNING while aiming, and FAILURE for any inability to initiate the attack")]
 		AttackAdditionalTargets = 127,
+		[TooltipText("Targets an ally starbase. Returns SUCCESS if it exists and alive, otherwise FAILURE")]
+		TargetAllyStarbase = 128,
+		[TooltipText("Targets an enemy starbase. Returns SUCCESS if it exists and alive, otherwise FAILURE")]
+		TargetEnemyStarbase = 129,
+		[TooltipText("Tries to bypass obstacle if any. Returns FAILURE if there are no obstacles, RUNNING otherwise")]
+		BypassObstacles = 130,
 		[TooltipText("Returns SUCCESS when [forward acceleration]/[max acceleration] > MinValue")]
 		EnginePropulsionForce = 150,
 		MotherShipRetreated = 200,
 		MotherShipDestroyed = 201,
 		FlyAroundMothership = 202,
-		[TooltipText("Detaches from the mothership. Starts treating all ships as enemies. Returns SUCCESS once activated, FAILURE after that")]
+		[TooltipText("Detaches drone from the mothership. Starts treating all ships as enemies. Returns SUCCESS once activated, FAILURE after that")]
 		GoBerserk = 203,
 		[TooltipText("Sets the mothership as a main target. Returns FAILURE if it's absent, otherwise SUCCESS")]
 		TargetMothership = 204,
 		MothershipLowHp = 205,
-		[TooltipText("Returns SUCCESS if drone is too far from the mothership")]
-		DroneBayRangeExceeded = 206,
+		[TooltipText("Returns SUCCESS if ship is too far from the mothership")]
+		MothershipDistanceExceeded = 206,
+		[TooltipText("Makes primary target a new mothership. Returns FAILURE if target is absent or already a mothership, otherwise SUCCESS")]
+		MakeTargetMothership = 207,
 		[TooltipText("Spawns text over the ship sprite that disappears shortly. Retruns SUCCESS if spawned, RUNNING if on cooldown")]
 		ShowMessage = 300,
 		[TooltipText("Writes message to the log file (https://docs.unity3d.com/Manual/LogFiles.html). Retruns SUCCESS")]

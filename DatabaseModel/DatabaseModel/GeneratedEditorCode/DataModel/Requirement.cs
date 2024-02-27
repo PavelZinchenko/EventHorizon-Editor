@@ -56,6 +56,8 @@ namespace EditorDatabase.DataModel
 					return new RequirementEmptyContent();
 				case RequirementType.FactionStarbasePower:
 					return new Requirement_FactionStarbasePower();
+				case RequirementType.IsHostileFaction:
+					return new RequirementEmptyContent();
 				case RequirementType.Faction:
 					return new Requirement_Faction();
 				case RequirementType.HaveQuestItem:

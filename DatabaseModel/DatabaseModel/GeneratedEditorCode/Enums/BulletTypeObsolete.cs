@@ -6,9 +6,9 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace DatabaseMigration.v1.Enums
+namespace EditorDatabase.Enums
 {
-	public enum BulletType
+	public enum BulletTypeObsolete
 	{
 		Projectile,
 		Homing,

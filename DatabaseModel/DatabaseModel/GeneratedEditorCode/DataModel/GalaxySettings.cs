@@ -31,7 +31,7 @@ namespace EditorDatabase.DataModel
 			StartingInventory = database.GetLootId(serializable.StartingInventory);
 			SupporterPackShip = database.GetShipBuildId(serializable.SupporterPackShip);
 			DefaultStarbaseBuild = database.GetShipBuildId(serializable.DefaultStarbaseBuild);
-			MaxEnemyShipsLevel = new NumericValue<int>(serializable.MaxEnemyShipsLevel, 100, 500);
+			MaxEnemyShipsLevel = new NumericValue<int>(serializable.MaxEnemyShipsLevel, 0, 500);
 			EnemyLevel = serializable.EnemyLevel;
 			ShipMinSpawnDistance = serializable.ShipMinSpawnDistance;
 			CaptureStarbaseQuest = database.GetQuestId(serializable.CaptureStarbaseQuest);
@@ -72,7 +72,7 @@ namespace EditorDatabase.DataModel
 		public ItemId<LootModel> StartingInventory = ItemId<LootModel>.Empty;
 		public ItemId<ShipBuild> SupporterPackShip = ItemId<ShipBuild>.Empty;
 		public ItemId<ShipBuild> DefaultStarbaseBuild = ItemId<ShipBuild>.Empty;
-		public NumericValue<int> MaxEnemyShipsLevel = new NumericValue<int>(0, 100, 500);
+		public NumericValue<int> MaxEnemyShipsLevel = new NumericValue<int>(0, 0, 500);
 		public string EnemyLevel;
 		public string ShipMinSpawnDistance;
 		public ItemId<QuestModel> CaptureStarbaseQuest = ItemId<QuestModel>.Empty;

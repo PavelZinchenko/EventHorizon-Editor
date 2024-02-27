@@ -43,7 +43,8 @@ namespace EditorDatabase.DataModel
 			MerchantPriceFactor = serializable.MerchantPriceFactor;
 			CraftingPriceFactor = serializable.CraftingPriceFactor;
 			CraftingLevelReduction = serializable.CraftingLevelReduction;
-			IncreasedLevelLimit = new NumericValue<int>(serializable.IncreasedLevelLimit, 100, 1000);
+			MaxPlayerShipsLevel = new NumericValue<int>(serializable.MaxPlayerShipsLevel, 0, 500);
+			IncreasedLevelLimit = new NumericValue<int>(serializable.IncreasedLevelLimit, 0, 1000);
 			BaseFuelCapacity = new NumericValue<int>(serializable.BaseFuelCapacity, 10, 2147483647);
 			BaseFlightRange = new NumericValue<float>(serializable.BaseFlightRange, 1.5f, 3.402823E+38f);
 			BaseFlightSpeed = new NumericValue<float>(serializable.BaseFlightSpeed, 1f, 3.402823E+38f);
@@ -72,6 +73,7 @@ namespace EditorDatabase.DataModel
 			serializable.MerchantPriceFactor = MerchantPriceFactor;
 			serializable.CraftingPriceFactor = CraftingPriceFactor;
 			serializable.CraftingLevelReduction = CraftingLevelReduction;
+			serializable.MaxPlayerShipsLevel = MaxPlayerShipsLevel.Value;
 			serializable.IncreasedLevelLimit = IncreasedLevelLimit.Value;
 			serializable.BaseFuelCapacity = BaseFuelCapacity.Value;
 			serializable.BaseFlightRange = BaseFlightRange.Value;
@@ -96,7 +98,8 @@ namespace EditorDatabase.DataModel
 		public string MerchantPriceFactor;
 		public string CraftingPriceFactor;
 		public string CraftingLevelReduction;
-		public NumericValue<int> IncreasedLevelLimit = new NumericValue<int>(0, 100, 1000);
+		public NumericValue<int> MaxPlayerShipsLevel = new NumericValue<int>(0, 0, 500);
+		public NumericValue<int> IncreasedLevelLimit = new NumericValue<int>(0, 0, 1000);
 		public NumericValue<int> BaseFuelCapacity = new NumericValue<int>(0, 10, 2147483647);
 		public NumericValue<float> BaseFlightRange = new NumericValue<float>(0, 1.5f, 3.402823E+38f);
 		public NumericValue<float> BaseFlightSpeed = new NumericValue<float>(0, 1f, 3.402823E+38f);

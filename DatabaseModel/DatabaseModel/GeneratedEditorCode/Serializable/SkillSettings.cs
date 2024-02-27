@@ -48,6 +48,8 @@ namespace EditorDatabase.Serializable
 		public string CraftingPriceFactor = "1 - 0.05*level";
 		[DefaultValue("5*level")]
 		public string CraftingLevelReduction = "5*level";
+		[DefaultValue(100)]
+		public int MaxPlayerShipsLevel = 100;
 		[DefaultValue(200)]
 		public int IncreasedLevelLimit = 200;
 		[DefaultValue(100)]

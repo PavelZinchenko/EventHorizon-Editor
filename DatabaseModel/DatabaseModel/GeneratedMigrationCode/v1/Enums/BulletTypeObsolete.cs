@@ -6,13 +6,14 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace EditorDatabase.Enums
+namespace DatabaseMigration.v1.Enums
 {
-	public enum ObjectPrefabType
+	public enum BulletTypeObsolete
 	{
-		Undefined = 0,
-		WormTailSegment = 1,
-		CircularSpriteObject = 2,
-		CircularOutlineObject = 3,
+		Projectile,
+		Homing,
+		Static,
+		Continuous,
+		Magnetic,
 	}
 }

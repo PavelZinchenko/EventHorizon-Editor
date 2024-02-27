@@ -8,11 +8,10 @@
 
 namespace EditorDatabase.Enums
 {
-	public enum ObjectPrefabType
+	public enum BulletControllerType
 	{
-		Undefined = 0,
-		WormTailSegment = 1,
-		CircularSpriteObject = 2,
-		CircularOutlineObject = 3,
+		Projectile,
+		Homing,
+		Beam,
 	}
 }
