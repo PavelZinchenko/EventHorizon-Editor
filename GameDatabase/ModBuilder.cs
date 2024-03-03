@@ -15,6 +15,7 @@ namespace GameDatabase
             Image = 2,
             Localization = 3,
             WaveAudio = 4,
+            OggAudio = 5,
         }
 
         public static ModBuilder Create(string path, int versionMajor, int versionMinor)
@@ -121,6 +122,14 @@ namespace GameDatabase
                 else if (ext == ".wav")
                 {
                     yield return (byte)FileType.WaveAudio;
+                    foreach (var value in Serialize(Path.GetFileNameWithoutExtension(file.Name)))
+                        yield return value;
+                    foreach (var value in SerializeBinaryFile(file.FullName))
+                        yield return value;
+                }
+                else if (ext == ".ogg")
+                {
+                    yield return (byte)FileType.OggAudio;
                     foreach (var value in Serialize(Path.GetFileNameWithoutExtension(file.Name)))
                         yield return value;
                     foreach (var value in SerializeBinaryFile(file.FullName))
