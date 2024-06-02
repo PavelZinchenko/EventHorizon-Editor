@@ -25,6 +25,8 @@ namespace DatabaseMigration.v1.Serializable
 		public DeviceClass DeviceClass;
 		public float EnergyConsumption;
 		public float PassiveEnergyConsumption;
+		[DefaultValue(true)]
+		public bool ScaleEnergyWithShipSize = true;
 		public float Power;
 		public float Range;
 		public float Size;
@@ -38,6 +40,7 @@ namespace DatabaseMigration.v1.Serializable
 		public string Sound;
 		[DefaultValue("")]
 		public string EffectPrefab;
+		public int VisualEffect;
 		[DefaultValue("")]
 		public string ObjectPrefab;
 		public int Prefab;

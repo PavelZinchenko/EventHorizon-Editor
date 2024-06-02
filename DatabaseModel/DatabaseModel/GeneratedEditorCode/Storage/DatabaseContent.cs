@@ -32,6 +32,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _componentStatsMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
+            foreach (var item in _componentStatUpgradeMap.Values)
+                storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _deviceMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _droneBayMap.Values)
@@ -48,7 +50,7 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _shipBuildMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
-            foreach (var item in _skillMap.Values)
+            foreach (var item in _statUpgradeTemplateMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _technologyMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
@@ -84,10 +86,12 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(ExplorationSettings.FileName, jsonSerializer.ToJson(ExplorationSettings));            
             if (FactionsSettings != null)
                 storage.SaveJson(FactionsSettings.FileName, jsonSerializer.ToJson(FactionsSettings));            
-            if (FrontierSettings != null)
-                storage.SaveJson(FrontierSettings.FileName, jsonSerializer.ToJson(FrontierSettings));            
             if (GalaxySettings != null)
                 storage.SaveJson(GalaxySettings.FileName, jsonSerializer.ToJson(GalaxySettings));            
+            if (LocalizationSettings != null)
+                storage.SaveJson(LocalizationSettings.FileName, jsonSerializer.ToJson(LocalizationSettings));            
+            if (MusicPlaylist != null)
+                storage.SaveJson(MusicPlaylist.FileName, jsonSerializer.ToJson(MusicPlaylist));            
             if (ShipModSettings != null)
                 storage.SaveJson(ShipModSettings.FileName, jsonSerializer.ToJson(ShipModSettings));            
             if (ShipSettings != null)
@@ -132,6 +136,13 @@ namespace EditorDatabase.Storage
                 var data = _serializer.FromJson<ComponentStatsSerializable>(content);
                 data.FileName = name;
                 _componentStatsMap.Add(data.Id, data);
+            }
+            else if (type == ItemType.ComponentStatUpgrade)
+            {
+			    if (_componentStatUpgradeMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate ComponentStatUpgrade ID - " + item.Id + " (" + name + ")");
+                var data = _serializer.FromJson<ComponentStatUpgradeSerializable>(content);
+                data.FileName = name;
+                _componentStatUpgradeMap.Add(data.Id, data);
             }
             else if (type == ItemType.Device)
             {
@@ -189,12 +200,12 @@ namespace EditorDatabase.Storage
                 data.FileName = name;
                 _shipBuildMap.Add(data.Id, data);
             }
-            else if (type == ItemType.Skill)
+            else if (type == ItemType.StatUpgradeTemplate)
             {
-			    if (_skillMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate Skill ID - " + item.Id + " (" + name + ")");
-                var data = _serializer.FromJson<SkillSerializable>(content);
+			    if (_statUpgradeTemplateMap.ContainsKey(item.Id)) throw new DatabaseException("Duplicate StatUpgradeTemplate ID - " + item.Id + " (" + name + ")");
+                var data = _serializer.FromJson<StatUpgradeTemplateSerializable>(content);
                 data.FileName = name;
-                _skillMap.Add(data.Id, data);
+                _statUpgradeTemplateMap.Add(data.Id, data);
             }
             else if (type == ItemType.Technology)
             {
@@ -325,15 +336,6 @@ namespace EditorDatabase.Storage
                     throw new DatabaseException("Duplicate FactionsSettings file found - " + name);
                 FactionsSettings = data;
             }
-            else if (type == ItemType.FrontierSettings)
-            {
-                var data = _serializer.FromJson<FrontierSettingsSerializable>(content);
-                data.FileName = name;
-
-				if (FrontierSettings != null)
-                    throw new DatabaseException("Duplicate FrontierSettings file found - " + name);
-                FrontierSettings = data;
-            }
             else if (type == ItemType.GalaxySettings)
             {
                 var data = _serializer.FromJson<GalaxySettingsSerializable>(content);
@@ -342,6 +344,24 @@ namespace EditorDatabase.Storage
 				if (GalaxySettings != null)
                     throw new DatabaseException("Duplicate GalaxySettings file found - " + name);
                 GalaxySettings = data;
+            }
+            else if (type == ItemType.LocalizationSettings)
+            {
+                var data = _serializer.FromJson<LocalizationSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (LocalizationSettings != null)
+                    throw new DatabaseException("Duplicate LocalizationSettings file found - " + name);
+                LocalizationSettings = data;
+            }
+            else if (type == ItemType.MusicPlaylist)
+            {
+                var data = _serializer.FromJson<MusicPlaylistSerializable>(content);
+                data.FileName = name;
+
+				if (MusicPlaylist != null)
+                    throw new DatabaseException("Duplicate MusicPlaylist file found - " + name);
+                MusicPlaylist = data;
             }
             else if (type == ItemType.ShipModSettings)
             {
@@ -413,8 +433,9 @@ namespace EditorDatabase.Storage
 		public DebugSettingsSerializable DebugSettings { get; private set; }
 		public ExplorationSettingsSerializable ExplorationSettings { get; private set; }
 		public FactionsSettingsSerializable FactionsSettings { get; private set; }
-		public FrontierSettingsSerializable FrontierSettings { get; private set; }
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
+		public LocalizationSettingsSerializable LocalizationSettings { get; private set; }
+		public MusicPlaylistSerializable MusicPlaylist { get; private set; }
 		public ShipModSettingsSerializable ShipModSettings { get; private set; }
 		public ShipSettingsSerializable ShipSettings { get; private set; }
 		public SkillSettingsSerializable SkillSettings { get; private set; }
@@ -425,6 +446,7 @@ namespace EditorDatabase.Storage
 		public IEnumerable<ComponentSerializable> ComponentList => _componentMap.Values;
 		public IEnumerable<ComponentModSerializable> ComponentModList => _componentModMap.Values;
 		public IEnumerable<ComponentStatsSerializable> ComponentStatsList => _componentStatsMap.Values;
+		public IEnumerable<ComponentStatUpgradeSerializable> ComponentStatUpgradeList => _componentStatUpgradeMap.Values;
 		public IEnumerable<DeviceSerializable> DeviceList => _deviceMap.Values;
 		public IEnumerable<DroneBaySerializable> DroneBayList => _droneBayMap.Values;
 		public IEnumerable<FactionSerializable> FactionList => _factionMap.Values;
@@ -433,7 +455,7 @@ namespace EditorDatabase.Storage
 		public IEnumerable<SatelliteBuildSerializable> SatelliteBuildList => _satelliteBuildMap.Values;
 		public IEnumerable<ShipSerializable> ShipList => _shipMap.Values;
 		public IEnumerable<ShipBuildSerializable> ShipBuildList => _shipBuildMap.Values;
-		public IEnumerable<SkillSerializable> SkillList => _skillMap.Values;
+		public IEnumerable<StatUpgradeTemplateSerializable> StatUpgradeTemplateList => _statUpgradeTemplateMap.Values;
 		public IEnumerable<TechnologySerializable> TechnologyList => _technologyMap.Values;
 		public IEnumerable<BehaviorTreeSerializable> BehaviorTreeList => _behaviorTreeMap.Values;
 		public IEnumerable<CharacterSerializable> CharacterList => _characterMap.Values;
@@ -451,6 +473,7 @@ namespace EditorDatabase.Storage
 		public ComponentSerializable GetComponent(int id) { return _componentMap.TryGetValue(id, out var item) ? item : null; }
 		public ComponentModSerializable GetComponentMod(int id) { return _componentModMap.TryGetValue(id, out var item) ? item : null; }
 		public ComponentStatsSerializable GetComponentStats(int id) { return _componentStatsMap.TryGetValue(id, out var item) ? item : null; }
+		public ComponentStatUpgradeSerializable GetComponentStatUpgrade(int id) { return _componentStatUpgradeMap.TryGetValue(id, out var item) ? item : null; }
 		public DeviceSerializable GetDevice(int id) { return _deviceMap.TryGetValue(id, out var item) ? item : null; }
 		public DroneBaySerializable GetDroneBay(int id) { return _droneBayMap.TryGetValue(id, out var item) ? item : null; }
 		public FactionSerializable GetFaction(int id) { return _factionMap.TryGetValue(id, out var item) ? item : null; }
@@ -459,7 +482,7 @@ namespace EditorDatabase.Storage
 		public SatelliteBuildSerializable GetSatelliteBuild(int id) { return _satelliteBuildMap.TryGetValue(id, out var item) ? item : null; }
 		public ShipSerializable GetShip(int id) { return _shipMap.TryGetValue(id, out var item) ? item : null; }
 		public ShipBuildSerializable GetShipBuild(int id) { return _shipBuildMap.TryGetValue(id, out var item) ? item : null; }
-		public SkillSerializable GetSkill(int id) { return _skillMap.TryGetValue(id, out var item) ? item : null; }
+		public StatUpgradeTemplateSerializable GetStatUpgradeTemplate(int id) { return _statUpgradeTemplateMap.TryGetValue(id, out var item) ? item : null; }
 		public TechnologySerializable GetTechnology(int id) { return _technologyMap.TryGetValue(id, out var item) ? item : null; }
 		public BehaviorTreeSerializable GetBehaviorTree(int id) { return _behaviorTreeMap.TryGetValue(id, out var item) ? item : null; }
 		public CharacterSerializable GetCharacter(int id) { return _characterMap.TryGetValue(id, out var item) ? item : null; }
@@ -492,6 +515,7 @@ namespace EditorDatabase.Storage
 		private readonly Dictionary<int, ComponentSerializable> _componentMap = new Dictionary<int, ComponentSerializable>();
 		private readonly Dictionary<int, ComponentModSerializable> _componentModMap = new Dictionary<int, ComponentModSerializable>();
 		private readonly Dictionary<int, ComponentStatsSerializable> _componentStatsMap = new Dictionary<int, ComponentStatsSerializable>();
+		private readonly Dictionary<int, ComponentStatUpgradeSerializable> _componentStatUpgradeMap = new Dictionary<int, ComponentStatUpgradeSerializable>();
 		private readonly Dictionary<int, DeviceSerializable> _deviceMap = new Dictionary<int, DeviceSerializable>();
 		private readonly Dictionary<int, DroneBaySerializable> _droneBayMap = new Dictionary<int, DroneBaySerializable>();
 		private readonly Dictionary<int, FactionSerializable> _factionMap = new Dictionary<int, FactionSerializable>();
@@ -500,7 +524,7 @@ namespace EditorDatabase.Storage
 		private readonly Dictionary<int, SatelliteBuildSerializable> _satelliteBuildMap = new Dictionary<int, SatelliteBuildSerializable>();
 		private readonly Dictionary<int, ShipSerializable> _shipMap = new Dictionary<int, ShipSerializable>();
 		private readonly Dictionary<int, ShipBuildSerializable> _shipBuildMap = new Dictionary<int, ShipBuildSerializable>();
-		private readonly Dictionary<int, SkillSerializable> _skillMap = new Dictionary<int, SkillSerializable>();
+		private readonly Dictionary<int, StatUpgradeTemplateSerializable> _statUpgradeTemplateMap = new Dictionary<int, StatUpgradeTemplateSerializable>();
 		private readonly Dictionary<int, TechnologySerializable> _technologyMap = new Dictionary<int, TechnologySerializable>();
 		private readonly Dictionary<int, BehaviorTreeSerializable> _behaviorTreeMap = new Dictionary<int, BehaviorTreeSerializable>();
 		private readonly Dictionary<int, CharacterSerializable> _characterMap = new Dictionary<int, CharacterSerializable>();

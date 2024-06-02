@@ -32,6 +32,7 @@ namespace EditorDatabase.DataModel
 				DeviceClass = serializable.DeviceClass;
 				EnergyConsumption = new NumericValue<float>(serializable.EnergyConsumption, 0f, 1E+09f);
 				PassiveEnergyConsumption = new NumericValue<float>(serializable.PassiveEnergyConsumption, 0f, 1E+09f);
+				ScaleEnergyWithShipSize = serializable.ScaleEnergyWithShipSize;
 				Power = new NumericValue<float>(serializable.Power, 0f, 1000f);
 				Range = new NumericValue<float>(serializable.Range, 0f, 1000f);
 				Size = new NumericValue<float>(serializable.Size, 0f, 1000f);
@@ -42,6 +43,7 @@ namespace EditorDatabase.DataModel
 				Color = Helpers.ColorFromString(serializable.Color);
 				Sound = serializable.Sound;
 				EffectPrefab = serializable.EffectPrefab;
+				VisualEffect = database.GetVisualEffectId(serializable.VisualEffect);
 				ObjectPrefab = serializable.ObjectPrefab;
 				Prefab = database.GetGameObjectPrefabId(serializable.Prefab);
 				ControlButtonIcon = serializable.ControlButtonIcon;
@@ -58,6 +60,7 @@ namespace EditorDatabase.DataModel
 			serializable.DeviceClass = DeviceClass;
 			serializable.EnergyConsumption = EnergyConsumption.Value;
 			serializable.PassiveEnergyConsumption = PassiveEnergyConsumption.Value;
+			serializable.ScaleEnergyWithShipSize = ScaleEnergyWithShipSize;
 			serializable.Power = Power.Value;
 			serializable.Range = Range.Value;
 			serializable.Size = Size.Value;
@@ -68,6 +71,7 @@ namespace EditorDatabase.DataModel
 			serializable.Color = Helpers.ColorToString(Color);
 			serializable.Sound = Sound;
 			serializable.EffectPrefab = EffectPrefab;
+			serializable.VisualEffect = VisualEffect.Value;
 			serializable.ObjectPrefab = ObjectPrefab;
 			serializable.Prefab = Prefab.Value;
 			serializable.ControlButtonIcon = ControlButtonIcon;
@@ -79,6 +83,7 @@ namespace EditorDatabase.DataModel
 		public DeviceClass DeviceClass;
 		public NumericValue<float> EnergyConsumption = new NumericValue<float>(0, 0f, 1E+09f);
 		public NumericValue<float> PassiveEnergyConsumption = new NumericValue<float>(0, 0f, 1E+09f);
+		public bool ScaleEnergyWithShipSize;
 		public NumericValue<float> Power = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> Range = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 1000f);
@@ -89,6 +94,7 @@ namespace EditorDatabase.DataModel
 		public System.Drawing.Color Color;
 		public string Sound;
 		public string EffectPrefab;
+		public ItemId<VisualEffect> VisualEffect = ItemId<VisualEffect>.Empty;
 		public string ObjectPrefab;
 		public ItemId<GameObjectPrefab> Prefab = ItemId<GameObjectPrefab>.Empty;
 		public string ControlButtonIcon;

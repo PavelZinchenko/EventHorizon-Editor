@@ -8,24 +8,27 @@
 
 using System;
 using System.ComponentModel;
-using EditorDatabase.Enums;
 using EditorDatabase.Model;
+using DatabaseMigration.v1.Enums;
 
-namespace EditorDatabase.Serializable
+namespace DatabaseMigration.v1.Serializable
 {
 	[Serializable]
-	public class SkillSerializable : SerializableItem
+	public class StatUpgradeTemplateSerializable : SerializableItem
 	{
+		public StatUpgradeTemplateSerializable()
+		{
+			ItemType = ItemType.StatUpgradeTemplate;
+			FileName = "StatUpgradeTemplate.json";
+		}
+
+		[DefaultValue(20)]
+		public int MaxLevel = 20;
 		[DefaultValue("")]
-		public string Name;
+		public string Stars;
 		[DefaultValue("")]
-		public string Icon;
+		public string Credits;
 		[DefaultValue("")]
-		public string Description;
-		public float BaseRequirement;
-		public float RequirementPerLevel;
-		public float BasePrice;
-		public float PricePerLevel;
-		public int MaxLevel;
+		public string Resources;
 	}
 }

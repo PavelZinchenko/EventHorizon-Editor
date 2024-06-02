@@ -13,5 +13,8 @@ namespace EditorDatabase.Enums
 		Projectile,
 		Homing,
 		Beam,
+		Parametric,
+		Harpoon,
+		AuraEmitter,
 	}
 }

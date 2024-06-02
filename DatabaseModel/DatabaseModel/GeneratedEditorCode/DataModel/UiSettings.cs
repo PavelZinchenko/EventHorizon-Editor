@@ -62,6 +62,8 @@ namespace EditorDatabase.DataModel
 			MoneyColor = Helpers.ColorFromString(serializable.MoneyColor);
 			FuelColor = Helpers.ColorFromString(serializable.FuelColor);
 			TokensColor = Helpers.ColorFromString(serializable.TokensColor);
+			MainMenuBackgroundImage = serializable.MainMenuBackgroundImage;
+			NoCreditsText = serializable.NoCreditsText;
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -103,6 +105,8 @@ namespace EditorDatabase.DataModel
 			serializable.MoneyColor = Helpers.ColorToString(MoneyColor);
 			serializable.FuelColor = Helpers.ColorToString(FuelColor);
 			serializable.TokensColor = Helpers.ColorToString(TokensColor);
+			serializable.MainMenuBackgroundImage = MainMenuBackgroundImage;
+			serializable.NoCreditsText = NoCreditsText;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -142,6 +146,8 @@ namespace EditorDatabase.DataModel
 		public System.Drawing.Color MoneyColor;
 		public System.Drawing.Color FuelColor;
 		public System.Drawing.Color TokensColor;
+		public string MainMenuBackgroundImage;
+		public bool NoCreditsText;
 
 		public static UiSettings DefaultValue { get; private set; }
 	}

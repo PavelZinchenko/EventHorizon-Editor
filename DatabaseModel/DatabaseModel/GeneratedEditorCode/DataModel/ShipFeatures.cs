@@ -38,6 +38,9 @@ namespace EditorDatabase.DataModel
 			ArmorBonus = new NumericValue<float>(serializable.ArmorBonus, -1f, 10f);
 			ShieldBonus = new NumericValue<float>(serializable.ShieldBonus, -1f, 10f);
 			EnergyBonus = new NumericValue<float>(serializable.EnergyBonus, -1f, 10f);
+			DroneBuildSpeedBonus = new NumericValue<float>(serializable.DroneBuildSpeedBonus, -1f, 10f);
+			DroneAttackBonus = new NumericValue<float>(serializable.DroneAttackBonus, -1f, 10f);
+			DroneDefenseBonus = new NumericValue<float>(serializable.DroneDefenseBonus, -1f, 10f);
 			Regeneration = serializable.Regeneration;
 			BuiltinDevices = serializable.BuiltinDevices?.Select(id => new Wrapper<Device> { Item = database.GetDeviceId(id) }).ToArray();
 			OnDataDeserialized(serializable, database);
@@ -56,6 +59,9 @@ namespace EditorDatabase.DataModel
 			serializable.ArmorBonus = ArmorBonus.Value;
 			serializable.ShieldBonus = ShieldBonus.Value;
 			serializable.EnergyBonus = EnergyBonus.Value;
+			serializable.DroneBuildSpeedBonus = DroneBuildSpeedBonus.Value;
+			serializable.DroneAttackBonus = DroneAttackBonus.Value;
+			serializable.DroneDefenseBonus = DroneDefenseBonus.Value;
 			serializable.Regeneration = Regeneration;
 			if (BuiltinDevices == null || BuiltinDevices.Length == 0)
 			    serializable.BuiltinDevices = null;
@@ -75,6 +81,9 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> ArmorBonus = new NumericValue<float>(0, -1f, 10f);
 		public NumericValue<float> ShieldBonus = new NumericValue<float>(0, -1f, 10f);
 		public NumericValue<float> EnergyBonus = new NumericValue<float>(0, -1f, 10f);
+		public NumericValue<float> DroneBuildSpeedBonus = new NumericValue<float>(0, -1f, 10f);
+		public NumericValue<float> DroneAttackBonus = new NumericValue<float>(0, -1f, 10f);
+		public NumericValue<float> DroneDefenseBonus = new NumericValue<float>(0, -1f, 10f);
 		public bool Regeneration;
 		public Wrapper<Device>[] BuiltinDevices;
 

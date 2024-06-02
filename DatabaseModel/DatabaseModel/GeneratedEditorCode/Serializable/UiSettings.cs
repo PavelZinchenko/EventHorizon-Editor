@@ -50,8 +50,8 @@ namespace EditorDatabase.Serializable
 		public string PremiumButtonIconColor = "#FFFFC0";
 		[DefaultValue("#80FFFF")]
 		public string TextColor = "#80FFFF";
-		[DefaultValue("#FFC000")]
-		public string ErrorTextColor = "#FFC000";
+		[DefaultValue("#FF4040")]
+		public string ErrorTextColor = "#FF4040";
 		[DefaultValue("#FFFFC0")]
 		public string HeaderTextColor = "#FFFFC0";
 		[DefaultValue("#A0FFFFFF")]
@@ -88,5 +88,8 @@ namespace EditorDatabase.Serializable
 		public string FuelColor = "#00FFFF";
 		[DefaultValue("#8080FF")]
 		public string TokensColor = "#8080FF";
+		[DefaultValue("")]
+		public string MainMenuBackgroundImage;
+		public bool NoCreditsText;
 	}
 }

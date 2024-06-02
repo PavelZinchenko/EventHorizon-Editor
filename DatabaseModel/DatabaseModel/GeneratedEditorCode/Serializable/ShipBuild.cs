@@ -26,5 +26,10 @@ namespace EditorDatabase.Serializable
 		public int CustomAI;
 		public InstalledComponentSerializable[] Components;
 		public bool NotAvailableInGame;
+		public ShipBuildPerksSerializable Perks;
+		public bool ExtendedLayout;
+		public bool RandomColor;
+		public int LeftSatelliteBuild;
+		public int RightSatelliteBuild;
 	}
 }

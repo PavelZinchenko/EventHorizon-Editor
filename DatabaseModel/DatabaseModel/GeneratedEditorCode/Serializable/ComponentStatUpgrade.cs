@@ -8,30 +8,13 @@
 
 using System;
 using System.ComponentModel;
+using EditorDatabase.Enums;
 using EditorDatabase.Model;
-using DatabaseMigration.v1.Enums;
 
-namespace DatabaseMigration.v1.Serializable
+namespace EditorDatabase.Serializable
 {
 	[Serializable]
-	public class SkillSerializable : SerializableItem
+	public class ComponentStatUpgradeSerializable : SerializableItem
 	{
-		public SkillSerializable()
-		{
-			ItemType = ItemType.Skill;
-			FileName = "Skill.json";
-		}
-
-		[DefaultValue("")]
-		public string Name;
-		[DefaultValue("")]
-		public string Icon;
-		[DefaultValue("")]
-		public string Description;
-		public float BaseRequirement;
-		public float RequirementPerLevel;
-		public float BasePrice;
-		public float PricePerLevel;
-		public int MaxLevel;
 	}
 }

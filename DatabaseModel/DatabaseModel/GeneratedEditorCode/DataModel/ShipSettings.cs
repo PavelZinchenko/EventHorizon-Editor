@@ -37,8 +37,11 @@ namespace EditorDatabase.DataModel
 			BaseShieldRechargeRate = new NumericValue<float>(serializable.BaseShieldRechargeRate, 0f, 1000000f);
 			ShieldRechargeCooldown = new NumericValue<float>(serializable.ShieldRechargeCooldown, 0f, 60f);
 			BaseDroneReconstructionSpeed = new NumericValue<float>(serializable.BaseDroneReconstructionSpeed, 0f, 100f);
-			MaxVelocity = new NumericValue<float>(serializable.MaxVelocity, 5f, 30f);
-			MaxTurnRate = new NumericValue<float>(serializable.MaxTurnRate, 5f, 30f);
+			ShieldCorrosiveResistance = new NumericValue<float>(serializable.ShieldCorrosiveResistance, 0f, 1f);
+			MaxVelocity = new NumericValue<float>(serializable.MaxVelocity, 5f, 100f);
+			MaxAngularVelocity = new NumericValue<float>(serializable.MaxAngularVelocity, 5f, 100f);
+			MaxAcceleration = new NumericValue<float>(serializable.MaxAcceleration, 5f, 1000f);
+			MaxAngularAcceleration = new NumericValue<float>(serializable.MaxAngularAcceleration, 5f, 1000f);
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -55,8 +58,11 @@ namespace EditorDatabase.DataModel
 			serializable.BaseShieldRechargeRate = BaseShieldRechargeRate.Value;
 			serializable.ShieldRechargeCooldown = ShieldRechargeCooldown.Value;
 			serializable.BaseDroneReconstructionSpeed = BaseDroneReconstructionSpeed.Value;
+			serializable.ShieldCorrosiveResistance = ShieldCorrosiveResistance.Value;
 			serializable.MaxVelocity = MaxVelocity.Value;
-			serializable.MaxTurnRate = MaxTurnRate.Value;
+			serializable.MaxAngularVelocity = MaxAngularVelocity.Value;
+			serializable.MaxAcceleration = MaxAcceleration.Value;
+			serializable.MaxAngularAcceleration = MaxAngularAcceleration.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -71,8 +77,11 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> BaseShieldRechargeRate = new NumericValue<float>(0, 0f, 1000000f);
 		public NumericValue<float> ShieldRechargeCooldown = new NumericValue<float>(0, 0f, 60f);
 		public NumericValue<float> BaseDroneReconstructionSpeed = new NumericValue<float>(0, 0f, 100f);
-		public NumericValue<float> MaxVelocity = new NumericValue<float>(0, 5f, 30f);
-		public NumericValue<float> MaxTurnRate = new NumericValue<float>(0, 5f, 30f);
+		public NumericValue<float> ShieldCorrosiveResistance = new NumericValue<float>(0, 0f, 1f);
+		public NumericValue<float> MaxVelocity = new NumericValue<float>(0, 5f, 100f);
+		public NumericValue<float> MaxAngularVelocity = new NumericValue<float>(0, 5f, 100f);
+		public NumericValue<float> MaxAcceleration = new NumericValue<float>(0, 5f, 1000f);
+		public NumericValue<float> MaxAngularAcceleration = new NumericValue<float>(0, 5f, 1000f);
 
 		public static ShipSettings DefaultValue { get; private set; }
 	}

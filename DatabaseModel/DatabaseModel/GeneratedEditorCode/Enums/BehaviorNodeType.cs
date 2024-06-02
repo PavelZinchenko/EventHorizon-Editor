@@ -11,7 +11,9 @@ namespace EditorDatabase.Enums
 	public enum BehaviorNodeType
 	{
 		[TooltipText("Always returs SUCCESS")]
-		Undefined = 0,
+		Success = 0,
+		[TooltipText("Always returs FAILURE")]
+		Failure = 9,
 		SubTree = 1,
 		[TooltipText("Executes nodes sequentially, stops when the first node returns SUCCESS or RUNNING")]
 		Selector = 2,
@@ -31,10 +33,12 @@ namespace EditorDatabase.Enums
 		ParallelSequence = 10,
 		[TooltipText("Memorizes the primary target, runs the child node, then restores the original target. Returns the result of the node's execution")]
 		PreserveTarget = 11,
+		[TooltipText("If the first node returns SUCCESS, executes the second node, executes the thirid node otherwise")]
+		IfThenElse = 12,
 		HasEnoughEnergy = 50,
 		IsLowOnHp = 51,
-		[TooltipText("SUCCESS if player did any action this frame")]
-		IsControledByPlayer = 52,
+		[TooltipText("Returns FAILURE if the time since the last player action is under the Cooldown, SUCCESS otherwise")]
+		IsNotControledByPlayer = 52,
 		[TooltipText("Requires threat list. Returns SUCCESS if time to collision less than value")]
 		HasIncomingThreat = 53,
 		[TooltipText("Returns SUCCESS if has any targets found by LookForAdditionalTargets node")]
@@ -82,7 +86,7 @@ namespace EditorDatabase.Enums
 		ActivateDevice = 114,
 		[TooltipText("If energy level drops below FailIfLess, enters recharging state and returns FAILURE until energy level reaches RestoreUntil, otherwise returns SUCCESS")]
 		RechargeEnergy = 115,
-		[TooltipText("If any directional weapon active, maintain focus on target and returns RUNNING. Returns SUCCESS otherwise")]
+		[TooltipText("If any directional weapon active, maintain focus on target and returns RUNNING. Returns FAILURE otherwise")]
 		SustainAim = 116,
 		[TooltipText("Charges all weapons that require charging, reserves energy needed to fully charge. Returns FAILURE if not possible, SUCCESS if fully charged, RUNNING otherwise")]
 		ChargeWeapons = 117,
@@ -112,6 +116,12 @@ namespace EditorDatabase.Enums
 		TargetEnemyStarbase = 129,
 		[TooltipText("Tries to bypass obstacle if any. Returns FAILURE if there are no obstacles, RUNNING otherwise")]
 		BypassObstacles = 130,
+		[TooltipText("Attacks targets that tracked by auto-aiming turrets, returning SUCCESS upon firing, FAILURE otherwise")]
+		AttackTurretTargets = 131,
+		[TooltipText("Keeps harpoon active upon hitting the enemy. Returns SUCCESS if it remains attached to the enemy, returns FAILURE otherwise")]
+		HoldHarpoon = 132,
+		[TooltipText("Looks for nearest damaged ally. Changes target every MaxCooldown sec if it's defined. SUCCESS if found, FAILURE otherwise")]
+		FindDamagedAlly = 133,
 		[TooltipText("Returns SUCCESS when [forward acceleration]/[max acceleration] > MinValue")]
 		EnginePropulsionForce = 150,
 		MotherShipRetreated = 200,
@@ -126,6 +136,8 @@ namespace EditorDatabase.Enums
 		MothershipDistanceExceeded = 206,
 		[TooltipText("Makes primary target a new mothership. Returns FAILURE if target is absent or already a mothership, otherwise SUCCESS")]
 		MakeTargetMothership = 207,
+		MothershipLowEnergy = 208,
+		MothershipLowShield = 209,
 		[TooltipText("Spawns text over the ship sprite that disappears shortly. Retruns SUCCESS if spawned, RUNNING if on cooldown")]
 		ShowMessage = 300,
 		[TooltipText("Writes message to the log file (https://docs.unity3d.com/Manual/LogFiles.html). Retruns SUCCESS")]

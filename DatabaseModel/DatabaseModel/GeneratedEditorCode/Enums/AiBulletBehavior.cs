@@ -14,5 +14,7 @@ namespace EditorDatabase.Enums
 		Homing,
 		Beam,
 		AreaOfEffect,
+		Trap,
+		Harpoon,
 	}
 }

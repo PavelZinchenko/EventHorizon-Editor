@@ -40,6 +40,8 @@ namespace EditorDatabase.DataModel
 			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
 			ParticleSize = new NumericValue<float>(serializable.ParticleSize, 0.001f, 100f);
 			Loop = serializable.Loop;
+			Inverse = serializable.Inverse;
+			UseRealTime = serializable.UseRealTime;
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -58,6 +60,8 @@ namespace EditorDatabase.DataModel
 			serializable.Lifetime = Lifetime.Value;
 			serializable.ParticleSize = ParticleSize.Value;
 			serializable.Loop = Loop;
+			serializable.Inverse = Inverse;
+			serializable.UseRealTime = UseRealTime;
 			OnDataSerialized(ref serializable);
 			return serializable;
 		}
@@ -74,6 +78,8 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> ParticleSize = new NumericValue<float>(0, 0.001f, 100f);
 		public bool Loop;
+		public bool Inverse;
+		public bool UseRealTime;
 
 		public static VisualEffectElement DefaultValue { get; private set; }
 	}

@@ -83,8 +83,10 @@ namespace EditorDatabase.DataModel
 			serializable.RandomFactor = 0f;
 			serializable.PowerMultiplier = 0f;
 			serializable.MaxNestingLevel = 0;
-			serializable.Rotation = "IF(Quantity == 1, 0, RANDOM(0, 360))";
-			serializable.OffsetX = "IF(Quantity == 1, 0, Size / 2)";
+			serializable.OncePerCollision = false;
+			serializable.UseBulletPosition = false;
+			serializable.Rotation = "IF(Quantity <= 1, 0, RANDOM(0, 360))";
+			serializable.OffsetX = "IF(Quantity <= 1, 0, Size / 2)";
 			serializable.OffsetY = "0";
 			_content.Save(ref serializable);
 			serializable.Condition = Condition;
@@ -146,6 +148,8 @@ namespace EditorDatabase.DataModel
 			ColorMode = serializable.ColorMode;
 			Size = new NumericValue<float>(serializable.Size, 0f, 100f);
 			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
+			OncePerCollision = serializable.OncePerCollision;
+			UseBulletPosition = serializable.UseBulletPosition;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -158,6 +162,8 @@ namespace EditorDatabase.DataModel
 			serializable.ColorMode = ColorMode;
 			serializable.Size = Size.Value;
 			serializable.Lifetime = Lifetime.Value;
+			serializable.OncePerCollision = OncePerCollision;
+			serializable.UseBulletPosition = UseBulletPosition;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -167,6 +173,8 @@ namespace EditorDatabase.DataModel
 		public ColorMode ColorMode;
 		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 100f);
 		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1000f);
+		public bool OncePerCollision;
+		public bool UseBulletPosition;
 	}
 
 	public partial class BulletTrigger_SpawnBullet : IBulletTriggerContent
@@ -236,6 +244,7 @@ namespace EditorDatabase.DataModel
 			ColorMode = serializable.ColorMode;
 			Size = new NumericValue<float>(serializable.Size, 0f, 100f);
 			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
+			OncePerCollision = serializable.OncePerCollision;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -248,6 +257,7 @@ namespace EditorDatabase.DataModel
 			serializable.ColorMode = ColorMode;
 			serializable.Size = Size.Value;
 			serializable.Lifetime = Lifetime.Value;
+			serializable.OncePerCollision = OncePerCollision;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -257,6 +267,7 @@ namespace EditorDatabase.DataModel
 		public ColorMode ColorMode;
 		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 100f);
 		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1000f);
+		public bool OncePerCollision;
 	}
 
 	public partial class BulletTrigger_GravityField : IBulletTriggerContent

@@ -33,6 +33,7 @@ namespace EditorDatabase
             foreach (var item in _componentMap) item.Value.Save(_content.GetComponent(item.Key));
             foreach (var item in _componentModMap) item.Value.Save(_content.GetComponentMod(item.Key));
             foreach (var item in _componentStatsMap) item.Value.Save(_content.GetComponentStats(item.Key));
+            foreach (var item in _componentStatUpgradeMap) item.Value.Save(_content.GetComponentStatUpgrade(item.Key));
             foreach (var item in _deviceMap) item.Value.Save(_content.GetDevice(item.Key));
             foreach (var item in _droneBayMap) item.Value.Save(_content.GetDroneBay(item.Key));
             foreach (var item in _factionMap) item.Value.Save(_content.GetFaction(item.Key));
@@ -41,7 +42,7 @@ namespace EditorDatabase
             foreach (var item in _satelliteBuildMap) item.Value.Save(_content.GetSatelliteBuild(item.Key));
             foreach (var item in _shipMap) item.Value.Save(_content.GetShip(item.Key));
             foreach (var item in _shipBuildMap) item.Value.Save(_content.GetShipBuild(item.Key));
-            foreach (var item in _skillMap) item.Value.Save(_content.GetSkill(item.Key));
+            foreach (var item in _statUpgradeTemplateMap) item.Value.Save(_content.GetStatUpgradeTemplate(item.Key));
             foreach (var item in _technologyMap) item.Value.Save(_content.GetTechnology(item.Key));
             foreach (var item in _behaviorTreeMap) item.Value.Save(_content.GetBehaviorTree(item.Key));
             foreach (var item in _characterMap) item.Value.Save(_content.GetCharacter(item.Key));
@@ -59,8 +60,9 @@ namespace EditorDatabase
 			_debugSettings?.Save(_content.DebugSettings);
 			_explorationSettings?.Save(_content.ExplorationSettings);
 			_factionsSettings?.Save(_content.FactionsSettings);
-			_frontierSettings?.Save(_content.FrontierSettings);
 			_galaxySettings?.Save(_content.GalaxySettings);
+			_localizationSettings?.Save(_content.LocalizationSettings);
+			_musicPlaylist?.Save(_content.MusicPlaylist);
 			_shipModSettings?.Save(_content.ShipModSettings);
 			_shipSettings?.Save(_content.ShipSettings);
 			_skillSettings?.Save(_content.SkillSettings);
@@ -76,6 +78,7 @@ namespace EditorDatabase
             if (type == typeof(Component)) return _content.ComponentList.Select(item => new ItemId<Component>(item));
             if (type == typeof(ComponentMod)) return _content.ComponentModList.Select(item => new ItemId<ComponentMod>(item));
             if (type == typeof(ComponentStats)) return _content.ComponentStatsList.Select(item => new ItemId<ComponentStats>(item));
+            if (type == typeof(ComponentStatUpgrade)) return _content.ComponentStatUpgradeList.Select(item => new ItemId<ComponentStatUpgrade>(item));
             if (type == typeof(Device)) return _content.DeviceList.Select(item => new ItemId<Device>(item));
             if (type == typeof(DroneBay)) return _content.DroneBayList.Select(item => new ItemId<DroneBay>(item));
             if (type == typeof(Faction)) return _content.FactionList.Select(item => new ItemId<Faction>(item));
@@ -84,7 +87,7 @@ namespace EditorDatabase
             if (type == typeof(SatelliteBuild)) return _content.SatelliteBuildList.Select(item => new ItemId<SatelliteBuild>(item));
             if (type == typeof(Ship)) return _content.ShipList.Select(item => new ItemId<Ship>(item));
             if (type == typeof(ShipBuild)) return _content.ShipBuildList.Select(item => new ItemId<ShipBuild>(item));
-            if (type == typeof(Skill)) return _content.SkillList.Select(item => new ItemId<Skill>(item));
+            if (type == typeof(StatUpgradeTemplate)) return _content.StatUpgradeTemplateList.Select(item => new ItemId<StatUpgradeTemplate>(item));
             if (type == typeof(Technology)) return _content.TechnologyList.Select(item => new ItemId<Technology>(item));
             if (type == typeof(BehaviorTreeModel)) return _content.BehaviorTreeList.Select(item => new ItemId<BehaviorTreeModel>(item));
             if (type == typeof(Character)) return _content.CharacterList.Select(item => new ItemId<Character>(item));
@@ -110,6 +113,8 @@ namespace EditorDatabase
                 yield return GetComponentMod(item.Id);
             foreach (var item in _content.ComponentStatsList)
                 yield return GetComponentStats(item.Id);
+            foreach (var item in _content.ComponentStatUpgradeList)
+                yield return GetComponentStatUpgrade(item.Id);
             foreach (var item in _content.DeviceList)
                 yield return GetDevice(item.Id);
             foreach (var item in _content.DroneBayList)
@@ -126,8 +131,8 @@ namespace EditorDatabase
                 yield return GetShip(item.Id);
             foreach (var item in _content.ShipBuildList)
                 yield return GetShipBuild(item.Id);
-            foreach (var item in _content.SkillList)
-                yield return GetSkill(item.Id);
+            foreach (var item in _content.StatUpgradeTemplateList)
+                yield return GetStatUpgradeTemplate(item.Id);
             foreach (var item in _content.TechnologyList)
                 yield return GetTechnology(item.Id);
             foreach (var item in _content.BehaviorTreeList)
@@ -162,10 +167,12 @@ namespace EditorDatabase
 				yield return ExplorationSettings;
             if (_content.FactionsSettings != null)
 				yield return FactionsSettings;
-            if (_content.FrontierSettings != null)
-				yield return FrontierSettings;
             if (_content.GalaxySettings != null)
 				yield return GalaxySettings;
+            if (_content.LocalizationSettings != null)
+				yield return LocalizationSettings;
+            if (_content.MusicPlaylist != null)
+				yield return MusicPlaylist;
             if (_content.ShipModSettings != null)
 				yield return ShipModSettings;
             if (_content.ShipSettings != null)
@@ -184,6 +191,7 @@ namespace EditorDatabase
             if (type == typeof(Component)) return GetComponentId(id);
             if (type == typeof(ComponentMod)) return GetComponentModId(id);
             if (type == typeof(ComponentStats)) return GetComponentStatsId(id);
+            if (type == typeof(ComponentStatUpgrade)) return GetComponentStatUpgradeId(id);
             if (type == typeof(Device)) return GetDeviceId(id);
             if (type == typeof(DroneBay)) return GetDroneBayId(id);
             if (type == typeof(Faction)) return GetFactionId(id);
@@ -192,7 +200,7 @@ namespace EditorDatabase
             if (type == typeof(SatelliteBuild)) return GetSatelliteBuildId(id);
             if (type == typeof(Ship)) return GetShipId(id);
             if (type == typeof(ShipBuild)) return GetShipBuildId(id);
-            if (type == typeof(Skill)) return GetSkillId(id);
+            if (type == typeof(StatUpgradeTemplate)) return GetStatUpgradeTemplateId(id);
             if (type == typeof(Technology)) return GetTechnologyId(id);
             if (type == typeof(BehaviorTreeModel)) return GetBehaviorTreeId(id);
             if (type == typeof(Character)) return GetCharacterId(id);
@@ -216,6 +224,7 @@ namespace EditorDatabase
 				case ItemType.Component: return GetComponent(id);
 				case ItemType.ComponentMod: return GetComponentMod(id);
 				case ItemType.ComponentStats: return GetComponentStats(id);
+				case ItemType.ComponentStatUpgrade: return GetComponentStatUpgrade(id);
 				case ItemType.Device: return GetDevice(id);
 				case ItemType.DroneBay: return GetDroneBay(id);
 				case ItemType.Faction: return GetFaction(id);
@@ -224,7 +233,7 @@ namespace EditorDatabase
 				case ItemType.SatelliteBuild: return GetSatelliteBuild(id);
 				case ItemType.Ship: return GetShip(id);
 				case ItemType.ShipBuild: return GetShipBuild(id);
-				case ItemType.Skill: return GetSkill(id);
+				case ItemType.StatUpgradeTemplate: return GetStatUpgradeTemplate(id);
 				case ItemType.Technology: return GetTechnology(id);
 				case ItemType.BehaviorTree: return GetBehaviorTree(id);
 				case ItemType.Character: return GetCharacter(id);
@@ -242,8 +251,9 @@ namespace EditorDatabase
 				case ItemType.DebugSettings: return DebugSettings;
 				case ItemType.ExplorationSettings: return ExplorationSettings;
 				case ItemType.FactionsSettings: return FactionsSettings;
-				case ItemType.FrontierSettings: return FrontierSettings;
 				case ItemType.GalaxySettings: return GalaxySettings;
+				case ItemType.LocalizationSettings: return LocalizationSettings;
+				case ItemType.MusicPlaylist: return MusicPlaylist;
 				case ItemType.ShipModSettings: return ShipModSettings;
 				case ItemType.ShipSettings: return ShipSettings;
 				case ItemType.SkillSettings: return SkillSettings;
@@ -259,8 +269,9 @@ namespace EditorDatabase
 		public DebugSettings DebugSettings => _debugSettings ?? (_debugSettings = DebugSettings.Create(_content.DebugSettings, this));
 		public ExplorationSettings ExplorationSettings => _explorationSettings ?? (_explorationSettings = ExplorationSettings.Create(_content.ExplorationSettings, this));
 		public FactionsSettings FactionsSettings => _factionsSettings ?? (_factionsSettings = FactionsSettings.Create(_content.FactionsSettings, this));
-		public FrontierSettings FrontierSettings => _frontierSettings ?? (_frontierSettings = FrontierSettings.Create(_content.FrontierSettings, this));
 		public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = GalaxySettings.Create(_content.GalaxySettings, this));
+		public LocalizationSettings LocalizationSettings => _localizationSettings ?? (_localizationSettings = LocalizationSettings.Create(_content.LocalizationSettings, this));
+		public MusicPlaylist MusicPlaylist => _musicPlaylist ?? (_musicPlaylist = MusicPlaylist.Create(_content.MusicPlaylist, this));
 		public ShipModSettings ShipModSettings => _shipModSettings ?? (_shipModSettings = ShipModSettings.Create(_content.ShipModSettings, this));
 		public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = ShipSettings.Create(_content.ShipSettings, this));
 		public SkillSettings SkillSettings => _skillSettings ?? (_skillSettings = SkillSettings.Create(_content.SkillSettings, this));
@@ -311,6 +322,18 @@ namespace EditorDatabase
                 var serializable = _content.GetComponentStats(id);
                 item = ComponentStats.Create(serializable, this);
                 _componentStatsMap.Add(id, item);
+            }
+            return item;
+        }
+
+		public ItemId<ComponentStatUpgrade> GetComponentStatUpgradeId(int id) { return new ItemId<ComponentStatUpgrade>(_content.GetComponentStatUpgrade(id)); }
+        public ComponentStatUpgrade GetComponentStatUpgrade(int id)
+        {
+            if (!_componentStatUpgradeMap.TryGetValue(id, out var item))
+            {
+                var serializable = _content.GetComponentStatUpgrade(id);
+                item = ComponentStatUpgrade.Create(serializable, this);
+                _componentStatUpgradeMap.Add(id, item);
             }
             return item;
         }
@@ -411,14 +434,14 @@ namespace EditorDatabase
             return item;
         }
 
-		public ItemId<Skill> GetSkillId(int id) { return new ItemId<Skill>(_content.GetSkill(id)); }
-        public Skill GetSkill(int id)
+		public ItemId<StatUpgradeTemplate> GetStatUpgradeTemplateId(int id) { return new ItemId<StatUpgradeTemplate>(_content.GetStatUpgradeTemplate(id)); }
+        public StatUpgradeTemplate GetStatUpgradeTemplate(int id)
         {
-            if (!_skillMap.TryGetValue(id, out var item))
+            if (!_statUpgradeTemplateMap.TryGetValue(id, out var item))
             {
-                var serializable = _content.GetSkill(id);
-                item = Skill.Create(serializable, this);
-                _skillMap.Add(id, item);
+                var serializable = _content.GetStatUpgradeTemplate(id);
+                item = StatUpgradeTemplate.Create(serializable, this);
+                _statUpgradeTemplateMap.Add(id, item);
             }
             return item;
         }
@@ -576,6 +599,7 @@ namespace EditorDatabase
 			_componentMap.Clear();
 			_componentModMap.Clear();
 			_componentStatsMap.Clear();
+			_componentStatUpgradeMap.Clear();
 			_deviceMap.Clear();
 			_droneBayMap.Clear();
 			_factionMap.Clear();
@@ -584,7 +608,7 @@ namespace EditorDatabase
 			_satelliteBuildMap.Clear();
 			_shipMap.Clear();
 			_shipBuildMap.Clear();
-			_skillMap.Clear();
+			_statUpgradeTemplateMap.Clear();
 			_technologyMap.Clear();
 			_behaviorTreeMap.Clear();
 			_characterMap.Clear();
@@ -603,8 +627,9 @@ namespace EditorDatabase
 			_debugSettings = null;
 			_explorationSettings = null;
 			_factionsSettings = null;
-			_frontierSettings = null;
 			_galaxySettings = null;
+			_localizationSettings = null;
+			_musicPlaylist = null;
 			_shipModSettings = null;
 			_shipSettings = null;
 			_skillSettings = null;
@@ -616,6 +641,7 @@ namespace EditorDatabase
 		private readonly Dictionary<int, Component> _componentMap = new Dictionary<int, Component>();
 		private readonly Dictionary<int, ComponentMod> _componentModMap = new Dictionary<int, ComponentMod>();
 		private readonly Dictionary<int, ComponentStats> _componentStatsMap = new Dictionary<int, ComponentStats>();
+		private readonly Dictionary<int, ComponentStatUpgrade> _componentStatUpgradeMap = new Dictionary<int, ComponentStatUpgrade>();
 		private readonly Dictionary<int, Device> _deviceMap = new Dictionary<int, Device>();
 		private readonly Dictionary<int, DroneBay> _droneBayMap = new Dictionary<int, DroneBay>();
 		private readonly Dictionary<int, Faction> _factionMap = new Dictionary<int, Faction>();
@@ -624,7 +650,7 @@ namespace EditorDatabase
 		private readonly Dictionary<int, SatelliteBuild> _satelliteBuildMap = new Dictionary<int, SatelliteBuild>();
 		private readonly Dictionary<int, Ship> _shipMap = new Dictionary<int, Ship>();
 		private readonly Dictionary<int, ShipBuild> _shipBuildMap = new Dictionary<int, ShipBuild>();
-		private readonly Dictionary<int, Skill> _skillMap = new Dictionary<int, Skill>();
+		private readonly Dictionary<int, StatUpgradeTemplate> _statUpgradeTemplateMap = new Dictionary<int, StatUpgradeTemplate>();
 		private readonly Dictionary<int, Technology> _technologyMap = new Dictionary<int, Technology>();
 		private readonly Dictionary<int, BehaviorTreeModel> _behaviorTreeMap = new Dictionary<int, BehaviorTreeModel>();
 		private readonly Dictionary<int, Character> _characterMap = new Dictionary<int, Character>();
@@ -643,8 +669,9 @@ namespace EditorDatabase
 		private DebugSettings _debugSettings;
 		private ExplorationSettings _explorationSettings;
 		private FactionsSettings _factionsSettings;
-		private FrontierSettings _frontierSettings;
 		private GalaxySettings _galaxySettings;
+		private LocalizationSettings _localizationSettings;
+		private MusicPlaylist _musicPlaylist;
 		private ShipModSettings _shipModSettings;
 		private ShipSettings _shipSettings;
 		private SkillSettings _skillSettings;

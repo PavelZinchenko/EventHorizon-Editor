@@ -34,5 +34,7 @@ namespace EditorDatabase.Serializable
 		[DefaultValue(1f)]
 		public float ParticleSize = 1f;
 		public bool Loop;
+		public bool Inverse;
+		public bool UseRealTime;
 	}
 }

@@ -19,5 +19,8 @@ namespace EditorDatabase.Enums
 		Mine,
 		Wave,
 		BlackHole,
+		Harpoon,
+		CircularSaw,
+		PiercingLaser,
 	}
 }

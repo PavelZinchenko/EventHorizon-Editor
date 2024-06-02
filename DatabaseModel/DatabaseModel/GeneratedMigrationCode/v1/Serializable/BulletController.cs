@@ -17,9 +17,19 @@ namespace DatabaseMigration.v1.Serializable
 	public class BulletControllerSerializable
 	{
 		public BulletControllerType Type;
-		[DefaultValue(0.1f)]
-		public float StartingVelocityModifier = 0.1f;
+		[DefaultValue(1f)]
+		public float StartingVelocityModifier = 1f;
 		public bool IgnoreRotation;
 		public bool SmartAim;
+		[DefaultValue("0")]
+		public string X = "0";
+		[DefaultValue("0")]
+		public string Y = "0";
+		[DefaultValue("0")]
+		public string Rotation = "0";
+		[DefaultValue("1")]
+		public string Size = "1";
+		[DefaultValue("1")]
+		public string Length = "1";
 	}
 }

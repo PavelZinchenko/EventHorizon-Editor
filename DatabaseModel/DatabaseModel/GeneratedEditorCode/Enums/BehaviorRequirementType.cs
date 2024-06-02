@@ -26,9 +26,14 @@ namespace EditorDatabase.Enums
 		HasHighRecoilWeapon = 14,
 		HasChargeableWeapon = 15,
 		HasRemotelyControlledWeapon = 16,
+		HasLongRangeWeapon = 17,
+		HasEngine = 18,
+		HasHarpoon = 19,
+		CanRechargeAllies = 20,
 		IsDrone = 50,
 		HasKineticResistance = 100,
-		[TooltipText("Condition met when EnginePower/sqrt(Mass) > Value")]
+		[TooltipText("Condition met when forward acceleration > Value")]
 		HasHighManeuverability = 101,
+		HasHighRammingDamage = 102,
 	}
 }

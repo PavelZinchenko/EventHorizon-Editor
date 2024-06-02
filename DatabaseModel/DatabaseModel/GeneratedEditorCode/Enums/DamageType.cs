@@ -13,6 +13,6 @@ namespace EditorDatabase.Enums
 		Impact,
 		Energy,
 		Heat,
-		Direct,
+		Corrosive,
 	}
 }

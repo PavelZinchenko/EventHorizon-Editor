@@ -23,6 +23,10 @@ namespace DatabaseMigration.v1.Serializable
 		}
 
 		public bool RemoveWeaponSlotMod;
+		public bool RemoveUnlimitedRespawnMod;
+		public bool RemoveEnergyRechargeCdMod;
+		public bool RemoveShieldRechargeCdMod;
+		public bool RemoveBiggerSatellitesMod;
 		[DefaultValue(0.5f)]
 		public float HeatDefenseValue = 0.5f;
 		[DefaultValue(0.5f)]
@@ -37,5 +41,9 @@ namespace DatabaseMigration.v1.Serializable
 		public float WeightReduction = 0.8f;
 		[DefaultValue(0.2f)]
 		public float AttackReduction = 0.2f;
+		[DefaultValue(0.5f)]
+		public float EnergyReduction = 0.5f;
+		[DefaultValue(0.5f)]
+		public float ShieldReduction = 0.5f;
 	}
 }

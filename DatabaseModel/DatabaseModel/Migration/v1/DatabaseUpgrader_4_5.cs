@@ -11,7 +11,7 @@ namespace DatabaseMigration.v1
             var combatRules = new CombatRulesSerializable { Id = 1, FileName = "DefaultCombatRules.json" };
             Content.CombatRulesList.Add(combatRules);
 
-            Content.CombatSettings.DefaultCombatRules = 1;
+            Content.CreateCombatSettings().DefaultCombatRules = 1;
 		}
 	}
 }

@@ -31,5 +31,7 @@ namespace EditorDatabase.Enums
 		Jammer,
 		DroneCamouflage,
 		MissileCamouflage,
+		TeleporterV2,
+		WormTailV2,
 	}
 }

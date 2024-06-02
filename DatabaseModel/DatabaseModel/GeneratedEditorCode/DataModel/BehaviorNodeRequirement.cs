@@ -58,12 +58,22 @@ namespace EditorDatabase.DataModel
 					return new BehaviorNodeRequirementEmptyContent();
 				case BehaviorRequirementType.HasRemotelyControlledWeapon:
 					return new BehaviorNodeRequirementEmptyContent();
+				case BehaviorRequirementType.HasLongRangeWeapon:
+					return new BehaviorNodeRequirement_HasLongRangeWeapon();
+				case BehaviorRequirementType.HasEngine:
+					return new BehaviorNodeRequirementEmptyContent();
+				case BehaviorRequirementType.HasHarpoon:
+					return new BehaviorNodeRequirementEmptyContent();
+				case BehaviorRequirementType.CanRechargeAllies:
+					return new BehaviorNodeRequirementEmptyContent();
 				case BehaviorRequirementType.IsDrone:
 					return new BehaviorNodeRequirementEmptyContent();
 				case BehaviorRequirementType.HasKineticResistance:
 					return new BehaviorNodeRequirement_HasKineticResistance();
 				case BehaviorRequirementType.HasHighManeuverability:
 					return new BehaviorNodeRequirement_HasHighManeuverability();
+				case BehaviorRequirementType.HasHighRammingDamage:
+					return new BehaviorNodeRequirement_HasHighRammingDamage();
 				default:
 					throw new DatabaseException("BehaviorNodeRequirement: Invalid content type - " + type);
 			}
@@ -296,6 +306,27 @@ namespace EditorDatabase.DataModel
 		public DeviceClass DeviceClass;
 	}
 
+	public partial class BehaviorNodeRequirement_HasLongRangeWeapon : IBehaviorNodeRequirementContent
+	{
+		partial void OnDataDeserialized(BehaviorNodeRequirementSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BehaviorNodeRequirementSerializable serializable);
+
+		public void Load(BehaviorNodeRequirementSerializable serializable, Database database)
+		{
+			Range = new NumericValue<float>(serializable.Value, 0f, 3.402823E+38f);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BehaviorNodeRequirementSerializable serializable)
+		{
+			serializable.Value = Range.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public NumericValue<float> Range = new NumericValue<float>(0, 0f, 3.402823E+38f);
+	}
+
 	public partial class BehaviorNodeRequirement_HasKineticResistance : IBehaviorNodeRequirementContent
 	{
 		partial void OnDataDeserialized(BehaviorNodeRequirementSerializable serializable, Database database);
@@ -318,6 +349,27 @@ namespace EditorDatabase.DataModel
 	}
 
 	public partial class BehaviorNodeRequirement_HasHighManeuverability : IBehaviorNodeRequirementContent
+	{
+		partial void OnDataDeserialized(BehaviorNodeRequirementSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BehaviorNodeRequirementSerializable serializable);
+
+		public void Load(BehaviorNodeRequirementSerializable serializable, Database database)
+		{
+			Value = new NumericValue<float>(serializable.Value, 0f, 3.402823E+38f);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BehaviorNodeRequirementSerializable serializable)
+		{
+			serializable.Value = Value.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public NumericValue<float> Value = new NumericValue<float>(0, 0f, 3.402823E+38f);
+	}
+
+	public partial class BehaviorNodeRequirement_HasHighRammingDamage : IBehaviorNodeRequirementContent
 	{
 		partial void OnDataDeserialized(BehaviorNodeRequirementSerializable serializable, Database database);
 		partial void OnDataSerialized(ref BehaviorNodeRequirementSerializable serializable);
