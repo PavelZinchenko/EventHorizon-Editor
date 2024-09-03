@@ -19,8 +19,9 @@ namespace EditorDatabase.Serializable
 		public SizeClass[] ShipSizes;
 		public bool NotForOrganicShips;
 		public bool NotForMechanicShips;
+		public int MaxComponentAmount;
+		public int ComponentGroupTag;
 		[DefaultValue("")]
 		public string UniqueComponentTag;
-		public int MaxComponentAmount;
 	}
 }

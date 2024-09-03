@@ -37,5 +37,6 @@ namespace EditorDatabase.Serializable
 		public float MaxAcceleration = 300f;
 		[DefaultValue(300f)]
 		public float MaxAngularAcceleration = 300f;
+		public bool DisableCellsExpansions;
 	}
 }

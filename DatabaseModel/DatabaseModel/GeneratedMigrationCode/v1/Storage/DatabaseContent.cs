@@ -52,6 +52,12 @@ namespace DatabaseMigration.v1.Storage
                 data.FileName = name;
                 ComponentList.Add(data);
             }
+            else if (type == ItemType.ComponentGroupTag)
+            {
+                var data = _serializer.FromJson<ComponentGroupTagSerializable>(content);
+                data.FileName = name;
+                ComponentGroupTagList.Add(data);
+            }
             else if (type == ItemType.ComponentMod)
             {
                 var data = _serializer.FromJson<ComponentModSerializable>(content);
@@ -286,6 +292,8 @@ namespace DatabaseMigration.v1.Storage
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in ComponentList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in ComponentGroupTagList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in ComponentModList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in ComponentStatsList)
@@ -413,6 +421,7 @@ namespace DatabaseMigration.v1.Storage
 
 		public List<AmmunitionObsoleteSerializable> AmmunitionObsoleteList { get; } = new List<AmmunitionObsoleteSerializable>();
 		public List<ComponentSerializable> ComponentList { get; } = new List<ComponentSerializable>();
+		public List<ComponentGroupTagSerializable> ComponentGroupTagList { get; } = new List<ComponentGroupTagSerializable>();
 		public List<ComponentModSerializable> ComponentModList { get; } = new List<ComponentModSerializable>();
 		public List<ComponentStatsSerializable> ComponentStatsList { get; } = new List<ComponentStatsSerializable>();
 		public List<ComponentStatUpgradeSerializable> ComponentStatUpgradeList { get; } = new List<ComponentStatUpgradeSerializable>();

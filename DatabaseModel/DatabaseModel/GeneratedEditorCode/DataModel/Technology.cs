@@ -61,6 +61,7 @@ namespace EditorDatabase.DataModel
 			Hidden = serializable.Hidden;
 			Special = serializable.Special;
 			Dependencies = serializable.Dependencies?.Select(id => new Wrapper<Technology> { Item = database.GetTechnologyId(id) }).ToArray();
+			CustomCraftingLevel = new NumericValue<int>(serializable.CustomCraftingLevel, 0, 2147483647);
 			_content = CreateContent(serializable.Type);
 			_content.Load(serializable, database);
 
@@ -80,6 +81,7 @@ namespace EditorDatabase.DataModel
 			    serializable.Dependencies = null;
 			else
 			    serializable.Dependencies = Dependencies.Select(wrapper => wrapper.Item.Value).ToArray();
+			serializable.CustomCraftingLevel = CustomCraftingLevel.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -97,6 +99,7 @@ namespace EditorDatabase.DataModel
 				yield return new Property(this, type.GetField("Hidden"), DataChangedEvent);
 				yield return new Property(this, type.GetField("Special"), DataChangedEvent);
 				yield return new Property(this, type.GetField("Dependencies"), DataChangedEvent);
+				yield return new Property(this, type.GetField("CustomCraftingLevel"), DataChangedEvent);
 
 				foreach (var item in _content.GetType().GetFields().Where(f => f.IsPublic && !f.IsStatic))
 					yield return new Property(_content, item, DataChangedEvent);
@@ -118,6 +121,7 @@ namespace EditorDatabase.DataModel
 		public bool Hidden;
 		public bool Special;
 		public Wrapper<Technology>[] Dependencies;
+		public NumericValue<int> CustomCraftingLevel = new NumericValue<int>(0, 0, 2147483647);
 
 		public static Technology DefaultValue { get; private set; }
 	}

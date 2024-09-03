@@ -19,5 +19,6 @@ namespace EditorDatabase.Enums
 		Spark,
 		Lightning,
 		LightningStrike,
+		Sprite,
 	}
 }

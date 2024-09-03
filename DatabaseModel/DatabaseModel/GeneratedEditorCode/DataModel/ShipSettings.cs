@@ -42,6 +42,7 @@ namespace EditorDatabase.DataModel
 			MaxAngularVelocity = new NumericValue<float>(serializable.MaxAngularVelocity, 5f, 100f);
 			MaxAcceleration = new NumericValue<float>(serializable.MaxAcceleration, 5f, 1000f);
 			MaxAngularAcceleration = new NumericValue<float>(serializable.MaxAngularAcceleration, 5f, 1000f);
+			DisableCellsExpansions = serializable.DisableCellsExpansions;
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -63,6 +64,7 @@ namespace EditorDatabase.DataModel
 			serializable.MaxAngularVelocity = MaxAngularVelocity.Value;
 			serializable.MaxAcceleration = MaxAcceleration.Value;
 			serializable.MaxAngularAcceleration = MaxAngularAcceleration.Value;
+			serializable.DisableCellsExpansions = DisableCellsExpansions;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -82,6 +84,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> MaxAngularVelocity = new NumericValue<float>(0, 5f, 100f);
 		public NumericValue<float> MaxAcceleration = new NumericValue<float>(0, 5f, 1000f);
 		public NumericValue<float> MaxAngularAcceleration = new NumericValue<float>(0, 5f, 1000f);
+		public bool DisableCellsExpansions;
 
 		public static ShipSettings DefaultValue { get; private set; }
 	}

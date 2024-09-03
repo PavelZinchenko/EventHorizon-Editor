@@ -43,6 +43,7 @@ namespace DatabaseMigration.v1.Serializable
 		public string Layout;
 		public BarrelSerializable[] Barrels;
 		public ShipFeaturesSerializable Features;
+		public ToggleState CellsExpansions;
 		[DefaultValue(0.02f)]
 		public float ColliderTolerance = 0.02f;
 		public Vector2 EnginePosition;

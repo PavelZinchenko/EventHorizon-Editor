@@ -19,7 +19,7 @@ namespace EditorDatabase
     public partial class Database
     {
 		public const int VersionMajor = 1;
-		public const int VersionMinor = 6;
+		public const int VersionMinor = 7;
 
 		public Database(IDataStorage storage)
 		{
@@ -31,6 +31,7 @@ namespace EditorDatabase
 		{
             foreach (var item in _ammunitionObsoleteMap) item.Value.Save(_content.GetAmmunitionObsolete(item.Key));
             foreach (var item in _componentMap) item.Value.Save(_content.GetComponent(item.Key));
+            foreach (var item in _componentGroupTagMap) item.Value.Save(_content.GetComponentGroupTag(item.Key));
             foreach (var item in _componentModMap) item.Value.Save(_content.GetComponentMod(item.Key));
             foreach (var item in _componentStatsMap) item.Value.Save(_content.GetComponentStats(item.Key));
             foreach (var item in _componentStatUpgradeMap) item.Value.Save(_content.GetComponentStatUpgrade(item.Key));
@@ -76,6 +77,7 @@ namespace EditorDatabase
         {
             if (type == typeof(AmmunitionObsolete)) return _content.AmmunitionObsoleteList.Select(item => new ItemId<AmmunitionObsolete>(item));
             if (type == typeof(Component)) return _content.ComponentList.Select(item => new ItemId<Component>(item));
+            if (type == typeof(ComponentGroupTag)) return _content.ComponentGroupTagList.Select(item => new ItemId<ComponentGroupTag>(item));
             if (type == typeof(ComponentMod)) return _content.ComponentModList.Select(item => new ItemId<ComponentMod>(item));
             if (type == typeof(ComponentStats)) return _content.ComponentStatsList.Select(item => new ItemId<ComponentStats>(item));
             if (type == typeof(ComponentStatUpgrade)) return _content.ComponentStatUpgradeList.Select(item => new ItemId<ComponentStatUpgrade>(item));
@@ -109,6 +111,8 @@ namespace EditorDatabase
                 yield return GetAmmunitionObsolete(item.Id);
             foreach (var item in _content.ComponentList)
                 yield return GetComponent(item.Id);
+            foreach (var item in _content.ComponentGroupTagList)
+                yield return GetComponentGroupTag(item.Id);
             foreach (var item in _content.ComponentModList)
                 yield return GetComponentMod(item.Id);
             foreach (var item in _content.ComponentStatsList)
@@ -189,6 +193,7 @@ namespace EditorDatabase
         {
             if (type == typeof(AmmunitionObsolete)) return GetAmmunitionObsoleteId(id);
             if (type == typeof(Component)) return GetComponentId(id);
+            if (type == typeof(ComponentGroupTag)) return GetComponentGroupTagId(id);
             if (type == typeof(ComponentMod)) return GetComponentModId(id);
             if (type == typeof(ComponentStats)) return GetComponentStatsId(id);
             if (type == typeof(ComponentStatUpgrade)) return GetComponentStatUpgradeId(id);
@@ -222,6 +227,7 @@ namespace EditorDatabase
             {
 				case ItemType.AmmunitionObsolete: return GetAmmunitionObsolete(id);
 				case ItemType.Component: return GetComponent(id);
+				case ItemType.ComponentGroupTag: return GetComponentGroupTag(id);
 				case ItemType.ComponentMod: return GetComponentMod(id);
 				case ItemType.ComponentStats: return GetComponentStats(id);
 				case ItemType.ComponentStatUpgrade: return GetComponentStatUpgrade(id);
@@ -298,6 +304,18 @@ namespace EditorDatabase
                 var serializable = _content.GetComponent(id);
                 item = Component.Create(serializable, this);
                 _componentMap.Add(id, item);
+            }
+            return item;
+        }
+
+		public ItemId<ComponentGroupTag> GetComponentGroupTagId(int id) { return new ItemId<ComponentGroupTag>(_content.GetComponentGroupTag(id)); }
+        public ComponentGroupTag GetComponentGroupTag(int id)
+        {
+            if (!_componentGroupTagMap.TryGetValue(id, out var item))
+            {
+                var serializable = _content.GetComponentGroupTag(id);
+                item = ComponentGroupTag.Create(serializable, this);
+                _componentGroupTagMap.Add(id, item);
             }
             return item;
         }
@@ -597,6 +615,7 @@ namespace EditorDatabase
         {
 			_ammunitionObsoleteMap.Clear();
 			_componentMap.Clear();
+			_componentGroupTagMap.Clear();
 			_componentModMap.Clear();
 			_componentStatsMap.Clear();
 			_componentStatUpgradeMap.Clear();
@@ -639,6 +658,7 @@ namespace EditorDatabase
 
 		private readonly Dictionary<int, AmmunitionObsolete> _ammunitionObsoleteMap = new Dictionary<int, AmmunitionObsolete>();
 		private readonly Dictionary<int, Component> _componentMap = new Dictionary<int, Component>();
+		private readonly Dictionary<int, ComponentGroupTag> _componentGroupTagMap = new Dictionary<int, ComponentGroupTag>();
 		private readonly Dictionary<int, ComponentMod> _componentModMap = new Dictionary<int, ComponentMod>();
 		private readonly Dictionary<int, ComponentStats> _componentStatsMap = new Dictionary<int, ComponentStats>();
 		private readonly Dictionary<int, ComponentStatUpgrade> _componentStatUpgradeMap = new Dictionary<int, ComponentStatUpgrade>();

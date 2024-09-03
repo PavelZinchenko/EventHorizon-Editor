@@ -23,5 +23,6 @@ namespace EditorDatabase.Serializable
 		public bool Hidden;
 		public bool Special;
 		public int[] Dependencies;
+		public int CustomCraftingLevel;
 	}
 }

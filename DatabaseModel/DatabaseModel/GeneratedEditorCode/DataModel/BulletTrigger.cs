@@ -85,6 +85,7 @@ namespace EditorDatabase.DataModel
 			serializable.MaxNestingLevel = 0;
 			serializable.OncePerCollision = false;
 			serializable.UseBulletPosition = false;
+			serializable.SyncLifetimeWithBullet = false;
 			serializable.Rotation = "IF(Quantity <= 1, 0, RANDOM(0, 360))";
 			serializable.OffsetX = "IF(Quantity <= 1, 0, Size / 2)";
 			serializable.OffsetY = "0";
@@ -150,6 +151,7 @@ namespace EditorDatabase.DataModel
 			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
 			OncePerCollision = serializable.OncePerCollision;
 			UseBulletPosition = serializable.UseBulletPosition;
+			SyncLifetimeWithBullet = serializable.SyncLifetimeWithBullet;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -164,6 +166,7 @@ namespace EditorDatabase.DataModel
 			serializable.Lifetime = Lifetime.Value;
 			serializable.OncePerCollision = OncePerCollision;
 			serializable.UseBulletPosition = UseBulletPosition;
+			serializable.SyncLifetimeWithBullet = SyncLifetimeWithBullet;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -175,6 +178,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1000f);
 		public bool OncePerCollision;
 		public bool UseBulletPosition;
+		public bool SyncLifetimeWithBullet;
 	}
 
 	public partial class BulletTrigger_SpawnBullet : IBulletTriggerContent

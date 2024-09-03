@@ -6,28 +6,22 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace EditorDatabase.Enums
+using System;
+using System.ComponentModel;
+using EditorDatabase.Model;
+using DatabaseMigration.v1.Enums;
+
+namespace DatabaseMigration.v1.Serializable
 {
-	public enum ImpactEffectType
+	[Serializable]
+	public class ComponentGroupTagSerializable : SerializableItem
 	{
-		Damage,
-		Push,
-		Pull,
-		DrainEnergy,
-		SiphonHitPoints,
-		SlowDown,
-		CaptureDrones,
-		Repair,
-		RestoreLifetime,
-		Devour,
-		Teleport,
-		DrainShield,
-		DriveDronesCrazy,
-		IgnoreShield,
-		RechargeShield,
-		RechargeEnergy,
-		ProgressiveDamage,
-		PushFromCenter,
-		PullToCenter,
+		public ComponentGroupTagSerializable()
+		{
+			ItemType = ItemType.ComponentGroupTag;
+			FileName = "ComponentGroupTag.json";
+		}
+
+		public int MaxInstallableComponents;
 	}
 }

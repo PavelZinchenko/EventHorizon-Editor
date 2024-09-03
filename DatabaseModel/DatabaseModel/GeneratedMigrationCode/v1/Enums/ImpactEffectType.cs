@@ -27,5 +27,7 @@ namespace DatabaseMigration.v1.Enums
 		RechargeShield,
 		RechargeEnergy,
 		ProgressiveDamage,
+		PushFromCenter,
+		PullToCenter,
 	}
 }

@@ -34,6 +34,7 @@ namespace EditorDatabase.Serializable
 		public int MaxNestingLevel;
 		public bool OncePerCollision;
 		public bool UseBulletPosition;
+		public bool SyncLifetimeWithBullet;
 		[DefaultValue("IF(Quantity <= 1, 0, RANDOM(0, 360))")]
 		public string Rotation = "IF(Quantity <= 1, 0, RANDOM(0, 360))";
 		[DefaultValue("IF(Quantity <= 1, 0, Size / 2)")]

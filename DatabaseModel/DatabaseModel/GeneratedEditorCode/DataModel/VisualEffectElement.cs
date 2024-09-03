@@ -39,6 +39,8 @@ namespace EditorDatabase.DataModel
 			StartTime = new NumericValue<float>(serializable.StartTime, 0f, 1000f);
 			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1000f);
 			ParticleSize = new NumericValue<float>(serializable.ParticleSize, 0.001f, 100f);
+			Offset = serializable.Offset;
+			Rotation = new NumericValue<float>(serializable.Rotation, 0f, 360f);
 			Loop = serializable.Loop;
 			Inverse = serializable.Inverse;
 			UseRealTime = serializable.UseRealTime;
@@ -59,6 +61,8 @@ namespace EditorDatabase.DataModel
 			serializable.StartTime = StartTime.Value;
 			serializable.Lifetime = Lifetime.Value;
 			serializable.ParticleSize = ParticleSize.Value;
+			serializable.Offset = Offset;
+			serializable.Rotation = Rotation.Value;
 			serializable.Loop = Loop;
 			serializable.Inverse = Inverse;
 			serializable.UseRealTime = UseRealTime;
@@ -77,6 +81,8 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> StartTime = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> ParticleSize = new NumericValue<float>(0, 0.001f, 100f);
+		public Vector2 Offset;
+		public NumericValue<float> Rotation = new NumericValue<float>(0, 0f, 360f);
 		public bool Loop;
 		public bool Inverse;
 		public bool UseRealTime;

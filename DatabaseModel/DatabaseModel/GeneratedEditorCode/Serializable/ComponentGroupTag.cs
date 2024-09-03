@@ -6,28 +6,16 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace EditorDatabase.Enums
+using System;
+using System.ComponentModel;
+using EditorDatabase.Enums;
+using EditorDatabase.Model;
+
+namespace EditorDatabase.Serializable
 {
-	public enum ImpactEffectType
+	[Serializable]
+	public class ComponentGroupTagSerializable : SerializableItem
 	{
-		Damage,
-		Push,
-		Pull,
-		DrainEnergy,
-		SiphonHitPoints,
-		SlowDown,
-		CaptureDrones,
-		Repair,
-		RestoreLifetime,
-		Devour,
-		Teleport,
-		DrainShield,
-		DriveDronesCrazy,
-		IgnoreShield,
-		RechargeShield,
-		RechargeEnergy,
-		ProgressiveDamage,
-		PushFromCenter,
-		PullToCenter,
+		public int MaxInstallableComponents;
 	}
 }

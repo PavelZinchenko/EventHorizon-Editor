@@ -33,6 +33,8 @@ namespace EditorDatabase.Serializable
 		public float Lifetime = 1f;
 		[DefaultValue(1f)]
 		public float ParticleSize = 1f;
+		public Vector2 Offset;
+		public float Rotation;
 		public bool Loop;
 		public bool Inverse;
 		public bool UseRealTime;

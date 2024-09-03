@@ -6,28 +6,12 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace EditorDatabase.Enums
+namespace DatabaseMigration.v1.Enums
 {
-	public enum ImpactEffectType
+	public enum ToggleState
 	{
-		Damage,
-		Push,
-		Pull,
-		DrainEnergy,
-		SiphonHitPoints,
-		SlowDown,
-		CaptureDrones,
-		Repair,
-		RestoreLifetime,
-		Devour,
-		Teleport,
-		DrainShield,
-		DriveDronesCrazy,
-		IgnoreShield,
-		RechargeShield,
-		RechargeEnergy,
-		ProgressiveDamage,
-		PushFromCenter,
-		PullToCenter,
+		Default = 0,
+		Enabled = 1,
+		Disabled = 2,
 	}
 }
