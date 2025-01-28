@@ -44,6 +44,7 @@ namespace EditorDatabase.DataModel
 				Layout = new Layout(serializable.Layout);
 				Barrels = serializable.Barrels?.Select(item => Barrel.Create(item, database)).ToArray();
 				Features.Value = DataModel.ShipFeatures.Create(serializable.Features, database);
+				VisualEffects.Value = DataModel.ShipVisualEffects.Create(serializable.VisualEffects, database);
 				CellsExpansions = serializable.CellsExpansions;
 				ColliderTolerance = new NumericValue<float>(serializable.ColliderTolerance, 0f, 1f);
 			}
@@ -77,6 +78,7 @@ namespace EditorDatabase.DataModel
 			else
 			    serializable.Barrels = Barrels.Select(item => item.Serialize()).ToArray();
 			serializable.Features = Features.Value?.Serialize();
+			serializable.VisualEffects = VisualEffects.Value?.Serialize();
 			serializable.CellsExpansions = CellsExpansions;
 			serializable.ColliderTolerance = ColliderTolerance.Value;
 			OnDataSerialized(ref serializable);
@@ -99,6 +101,7 @@ namespace EditorDatabase.DataModel
 		public Layout Layout;
 		public Barrel[] Barrels;
 		public ObjectWrapper<ShipFeatures> Features = new(DataModel.ShipFeatures.DefaultValue);
+		public ObjectWrapper<ShipVisualEffects> VisualEffects = new(DataModel.ShipVisualEffects.DefaultValue);
 		public ToggleState CellsExpansions;
 		public NumericValue<float> ColliderTolerance = new NumericValue<float>(0, 0f, 1f);
 

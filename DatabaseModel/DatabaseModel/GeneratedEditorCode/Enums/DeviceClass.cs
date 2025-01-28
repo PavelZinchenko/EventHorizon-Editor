@@ -33,5 +33,6 @@ namespace EditorDatabase.Enums
 		MissileCamouflage,
 		TeleporterV2,
 		WormTailV2,
+		Retribution,
 	}
 }

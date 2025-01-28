@@ -44,6 +44,7 @@ namespace DatabaseMigration.v1.Serializable
 		[DefaultValue("")]
 		public string ObjectPrefab;
 		public int Prefab;
+		public int AmmunitionId;
 		[DefaultValue("")]
 		public string ControlButtonIcon;
 	}

@@ -37,6 +37,7 @@ namespace EditorDatabase.Serializable
 		public string Layout;
 		public BarrelSerializable[] Barrels;
 		public ShipFeaturesSerializable Features;
+		public ShipVisualEffectsSerializable VisualEffects;
 		public ToggleState CellsExpansions;
 		[DefaultValue(0.02f)]
 		public float ColliderTolerance = 0.02f;

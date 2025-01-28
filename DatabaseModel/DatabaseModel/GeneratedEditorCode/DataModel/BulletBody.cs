@@ -42,6 +42,7 @@ namespace EditorDatabase.DataModel
 			EnergyCost = new NumericValue<float>(serializable.EnergyCost, 0f, 1E+09f);
 			CanBeDisarmed = serializable.CanBeDisarmed;
 			FriendlyFire = serializable.FriendlyFire;
+			DetonateWhenDestroyed = serializable.DetonateWhenDestroyed;
 			AiBulletBehavior = serializable.AiBulletBehavior;
 			OnDataDeserialized(serializable, database);
 		}
@@ -63,6 +64,7 @@ namespace EditorDatabase.DataModel
 			serializable.EnergyCost = EnergyCost.Value;
 			serializable.CanBeDisarmed = CanBeDisarmed;
 			serializable.FriendlyFire = FriendlyFire;
+			serializable.DetonateWhenDestroyed = DetonateWhenDestroyed;
 			serializable.AiBulletBehavior = AiBulletBehavior;
 			OnDataSerialized(ref serializable);
 			return serializable;
@@ -84,6 +86,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> EnergyCost = new NumericValue<float>(0, 0f, 1E+09f);
 		public bool CanBeDisarmed;
 		public bool FriendlyFire;
+		public bool DetonateWhenDestroyed;
 		[TooltipText("Hints for AI and auto-aim0 on usage of this weapon")]
 		public AiBulletBehavior AiBulletBehavior;
 

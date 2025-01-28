@@ -152,6 +152,9 @@ namespace GameDatabase
             if (type == typeof(string))
                 return CreateTextBox((string)value, 1, rowId);
 
+            if (type == typeof(char))
+                return CreateTextBox((char)value, 1, rowId);
+
             if (type == typeof(bool))
                 return CreateCheckBox((bool)value, 1, rowId);
 
@@ -221,6 +224,23 @@ namespace GameDatabase
             };
 
             textbox.TextChanged += OnTextBoxValueChanged;
+
+            tableLayoutPanel.Controls.Add(textbox, column, row);
+            return textbox;
+        }
+
+        private TextBox CreateTextBox(char value, int column, int row)
+        {
+            var textbox = new TextBox()
+            {
+                Text = value.ToString(),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left,
+                BorderStyle = BorderStyle.FixedSingle,
+                Dock = DockStyle.Fill,
+                MaxLength = 1,
+            };
+
+            textbox.TextChanged += OnTextBoxCharValueChanged;
 
             tableLayoutPanel.Controls.Add(textbox, column, row);
             return textbox;
@@ -468,6 +488,14 @@ namespace GameDatabase
 
             var newValue = ((TextBox)sender).Text;
             _binding[sender].Value = string.IsNullOrWhiteSpace(newValue) ? null : newValue;
+        }
+
+        private void OnTextBoxCharValueChanged(object sender, EventArgs args)
+        {
+            if (_ignoreEvents) return;
+
+            var newValue = ((TextBox)sender).Text;
+            _binding[sender].Value = string.IsNullOrEmpty(newValue) ? default : newValue[0];
         }
 
         private void OnNumericValueChanged(object sender, EventArgs args)

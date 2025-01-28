@@ -38,6 +38,7 @@ namespace EditorDatabase.Serializable
 		[DefaultValue("")]
 		public string ObjectPrefab;
 		public int Prefab;
+		public int AmmunitionId;
 		[DefaultValue("")]
 		public string ControlButtonIcon;
 	}

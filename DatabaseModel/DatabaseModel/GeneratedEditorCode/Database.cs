@@ -69,6 +69,7 @@ namespace EditorDatabase
 			_skillSettings?.Save(_content.SkillSettings);
 			_specialEventSettings?.Save(_content.SpecialEventSettings);
 			_uiSettings?.Save(_content.UiSettings);
+			_weaponSlots?.Save(_content.WeaponSlots);
 		
 			_content.Save(storage, _serializer);
 		}
@@ -187,6 +188,8 @@ namespace EditorDatabase
 				yield return SpecialEventSettings;
             if (_content.UiSettings != null)
 				yield return UiSettings;
+            if (_content.WeaponSlots != null)
+				yield return WeaponSlots;
         }
 
         public IItemId GetItemId(Type type, int id)
@@ -265,6 +268,7 @@ namespace EditorDatabase
 				case ItemType.SkillSettings: return SkillSettings;
 				case ItemType.SpecialEventSettings: return SpecialEventSettings;
 				case ItemType.UiSettings: return UiSettings;
+				case ItemType.WeaponSlots: return WeaponSlots;
                 default: return null;
             }
         }
@@ -283,6 +287,7 @@ namespace EditorDatabase
 		public SkillSettings SkillSettings => _skillSettings ?? (_skillSettings = SkillSettings.Create(_content.SkillSettings, this));
 		public SpecialEventSettings SpecialEventSettings => _specialEventSettings ?? (_specialEventSettings = SpecialEventSettings.Create(_content.SpecialEventSettings, this));
 		public UiSettings UiSettings => _uiSettings ?? (_uiSettings = UiSettings.Create(_content.UiSettings, this));
+		public WeaponSlots WeaponSlots => _weaponSlots ?? (_weaponSlots = WeaponSlots.Create(_content.WeaponSlots, this));
 
 		public ItemId<AmmunitionObsolete> GetAmmunitionObsoleteId(int id) { return new ItemId<AmmunitionObsolete>(_content.GetAmmunitionObsolete(id)); }
         public AmmunitionObsolete GetAmmunitionObsolete(int id)
@@ -654,6 +659,7 @@ namespace EditorDatabase
 			_skillSettings = null;
 			_specialEventSettings = null;
 			_uiSettings = null;
+			_weaponSlots = null;
         }
 
 		private readonly Dictionary<int, AmmunitionObsolete> _ammunitionObsoleteMap = new Dictionary<int, AmmunitionObsolete>();
@@ -697,6 +703,7 @@ namespace EditorDatabase
 		private SkillSettings _skillSettings;
 		private SpecialEventSettings _specialEventSettings;
 		private UiSettings _uiSettings;
+		private WeaponSlots _weaponSlots;
 	
         private readonly IJsonSerializer _serializer;
 		private readonly DatabaseContent _content;

@@ -280,6 +280,12 @@ namespace DatabaseMigration.v1.Storage
                 data.FileName = name;
                 UiSettings = data;
             }
+            else if (type == ItemType.WeaponSlots)
+            {
+                var data = _serializer.FromJson<WeaponSlotsSerializable>(content);
+                data.FileName = name;
+                WeaponSlots = data;
+            }
             else
             {
                 throw new DatabaseException("Unknown file type - " + type + "(" + name + ")");
@@ -368,6 +374,8 @@ namespace DatabaseMigration.v1.Storage
                 contentLoader.LoadJson(SpecialEventSettings.FileName, _serializer.ToJson(SpecialEventSettings));
             if (UiSettings != null)
                 contentLoader.LoadJson(UiSettings.FileName, _serializer.ToJson(UiSettings));
+            if (WeaponSlots != null)
+                contentLoader.LoadJson(WeaponSlots.FileName, _serializer.ToJson(WeaponSlots));
             foreach (var item in _images)
                 contentLoader.LoadImage(item.Key, item.Value);
             foreach (var item in _audioClips)
@@ -404,6 +412,7 @@ namespace DatabaseMigration.v1.Storage
 		public SkillSettingsSerializable SkillSettings { get; private set; }
 		public SpecialEventSettingsSerializable SpecialEventSettings { get; private set; }
 		public UiSettingsSerializable UiSettings { get; private set; }
+		public WeaponSlotsSerializable WeaponSlots { get; private set; }
 
 		public CombatSettingsSerializable CreateCombatSettings() => CombatSettings ?? (CombatSettings = new CombatSettingsSerializable());
 		public DatabaseSettingsSerializable CreateDatabaseSettings() => DatabaseSettings ?? (DatabaseSettings = new DatabaseSettingsSerializable());
@@ -418,6 +427,7 @@ namespace DatabaseMigration.v1.Storage
 		public SkillSettingsSerializable CreateSkillSettings() => SkillSettings ?? (SkillSettings = new SkillSettingsSerializable());
 		public SpecialEventSettingsSerializable CreateSpecialEventSettings() => SpecialEventSettings ?? (SpecialEventSettings = new SpecialEventSettingsSerializable());
 		public UiSettingsSerializable CreateUiSettings() => UiSettings ?? (UiSettings = new UiSettingsSerializable());
+		public WeaponSlotsSerializable CreateWeaponSlots() => WeaponSlots ?? (WeaponSlots = new WeaponSlotsSerializable());
 
 		public List<AmmunitionObsoleteSerializable> AmmunitionObsoleteList { get; } = new List<AmmunitionObsoleteSerializable>();
 		public List<ComponentSerializable> ComponentList { get; } = new List<ComponentSerializable>();

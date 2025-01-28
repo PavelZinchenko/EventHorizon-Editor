@@ -42,7 +42,6 @@ namespace DatabaseMigration.v1.Serializable
 		public int DeviceId;
 		public int WeaponId;
 		public int AmmunitionId;
-		[DefaultValue("")]
 		public string WeaponSlotType;
 		public int DroneBayId;
 		public int DroneId;

@@ -43,6 +43,10 @@ namespace EditorDatabase.DataModel
 			MaxAcceleration = new NumericValue<float>(serializable.MaxAcceleration, 5f, 1000f);
 			MaxAngularAcceleration = new NumericValue<float>(serializable.MaxAngularAcceleration, 5f, 1000f);
 			DisableCellsExpansions = serializable.DisableCellsExpansions;
+			ShipExplosionEffect = database.GetVisualEffectId(serializable.ShipExplosionEffect);
+			ShipExplosionSound = serializable.ShipExplosionSound;
+			DroneExplosionEffect = database.GetVisualEffectId(serializable.DroneExplosionEffect);
+			DroneExplosionSound = serializable.DroneExplosionSound;
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -65,6 +69,10 @@ namespace EditorDatabase.DataModel
 			serializable.MaxAcceleration = MaxAcceleration.Value;
 			serializable.MaxAngularAcceleration = MaxAngularAcceleration.Value;
 			serializable.DisableCellsExpansions = DisableCellsExpansions;
+			serializable.ShipExplosionEffect = ShipExplosionEffect.Value;
+			serializable.ShipExplosionSound = ShipExplosionSound;
+			serializable.DroneExplosionEffect = DroneExplosionEffect.Value;
+			serializable.DroneExplosionSound = DroneExplosionSound;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -85,6 +93,10 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> MaxAcceleration = new NumericValue<float>(0, 5f, 1000f);
 		public NumericValue<float> MaxAngularAcceleration = new NumericValue<float>(0, 5f, 1000f);
 		public bool DisableCellsExpansions;
+		public ItemId<VisualEffect> ShipExplosionEffect = ItemId<VisualEffect>.Empty;
+		public string ShipExplosionSound;
+		public ItemId<VisualEffect> DroneExplosionEffect = ItemId<VisualEffect>.Empty;
+		public string DroneExplosionSound;
 
 		public static ShipSettings DefaultValue { get; private set; }
 	}

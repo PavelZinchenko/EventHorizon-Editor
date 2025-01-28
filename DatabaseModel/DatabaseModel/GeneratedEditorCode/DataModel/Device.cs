@@ -33,7 +33,7 @@ namespace EditorDatabase.DataModel
 				EnergyConsumption = new NumericValue<float>(serializable.EnergyConsumption, 0f, 1E+09f);
 				PassiveEnergyConsumption = new NumericValue<float>(serializable.PassiveEnergyConsumption, 0f, 1E+09f);
 				ScaleEnergyWithShipSize = serializable.ScaleEnergyWithShipSize;
-				Power = new NumericValue<float>(serializable.Power, 0f, 1000f);
+				Power = new NumericValue<float>(serializable.Power, -3.402823E+38f, 3.402823E+38f);
 				Range = new NumericValue<float>(serializable.Range, 0f, 1000f);
 				Size = new NumericValue<float>(serializable.Size, 0f, 1000f);
 				Cooldown = new NumericValue<float>(serializable.Cooldown, 0f, 1000f);
@@ -46,6 +46,7 @@ namespace EditorDatabase.DataModel
 				VisualEffect = database.GetVisualEffectId(serializable.VisualEffect);
 				ObjectPrefab = serializable.ObjectPrefab;
 				Prefab = database.GetGameObjectPrefabId(serializable.Prefab);
+				AmmunitionId = database.GetAmmunitionId(serializable.AmmunitionId);
 				ControlButtonIcon = serializable.ControlButtonIcon;
 			}
 			catch (DatabaseException e)
@@ -74,6 +75,7 @@ namespace EditorDatabase.DataModel
 			serializable.VisualEffect = VisualEffect.Value;
 			serializable.ObjectPrefab = ObjectPrefab;
 			serializable.Prefab = Prefab.Value;
+			serializable.AmmunitionId = AmmunitionId.Value;
 			serializable.ControlButtonIcon = ControlButtonIcon;
 			OnDataSerialized(ref serializable);
 		}
@@ -84,7 +86,7 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> EnergyConsumption = new NumericValue<float>(0, 0f, 1E+09f);
 		public NumericValue<float> PassiveEnergyConsumption = new NumericValue<float>(0, 0f, 1E+09f);
 		public bool ScaleEnergyWithShipSize;
-		public NumericValue<float> Power = new NumericValue<float>(0, 0f, 1000f);
+		public NumericValue<float> Power = new NumericValue<float>(0, -3.402823E+38f, 3.402823E+38f);
 		public NumericValue<float> Range = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> Size = new NumericValue<float>(0, 0f, 1000f);
 		public NumericValue<float> Cooldown = new NumericValue<float>(0, 0f, 1000f);
@@ -97,6 +99,7 @@ namespace EditorDatabase.DataModel
 		public ItemId<VisualEffect> VisualEffect = ItemId<VisualEffect>.Empty;
 		public string ObjectPrefab;
 		public ItemId<GameObjectPrefab> Prefab = ItemId<GameObjectPrefab>.Empty;
+		public ItemId<Ammunition> AmmunitionId = ItemId<Ammunition>.Empty;
 		public string ControlButtonIcon;
 
 		public static Device DefaultValue { get; private set; }

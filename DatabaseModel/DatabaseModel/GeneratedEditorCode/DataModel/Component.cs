@@ -45,6 +45,7 @@ namespace EditorDatabase.DataModel
 				Weapon = database.GetWeaponId(serializable.WeaponId);
 				Ammunition = database.GetAmmunitionId(serializable.AmmunitionId);
 				AmmunitionObsolete = database.GetAmmunitionObsoleteId(serializable.AmmunitionId);
+				WeaponSlotType = string.IsNullOrEmpty(serializable.WeaponSlotType) ? default : serializable.WeaponSlotType[0];
 				DroneBay = database.GetDroneBayId(serializable.DroneBayId);
 				Drone = database.GetShipBuildId(serializable.DroneId);
 				Restrictions.Value = DataModel.ComponentRestrictions.Create(serializable.Restrictions, database);
@@ -73,6 +74,7 @@ namespace EditorDatabase.DataModel
 			serializable.WeaponId = Weapon.Value;
 			serializable.AmmunitionId = Ammunition.Value;
 			serializable.AmmunitionId = AmmunitionObsolete.Value;
+			serializable.WeaponSlotType = WeaponSlotType == default ? string.Empty : WeaponSlotType.ToString();
 			serializable.DroneBayId = DroneBay.Value;
 			serializable.DroneId = Drone.Value;
 			serializable.Restrictions = Restrictions.Value?.Serialize();
@@ -99,6 +101,7 @@ namespace EditorDatabase.DataModel
 		public ItemId<Weapon> Weapon = ItemId<Weapon>.Empty;
 		public ItemId<Ammunition> Ammunition = ItemId<Ammunition>.Empty;
 		public ItemId<AmmunitionObsolete> AmmunitionObsolete = ItemId<AmmunitionObsolete>.Empty;
+		public char WeaponSlotType;
 		public ItemId<DroneBay> DroneBay = ItemId<DroneBay>.Empty;
 		public ItemId<ShipBuild> Drone = ItemId<ShipBuild>.Empty;
 		public ObjectWrapper<ComponentRestrictions> Restrictions = new(DataModel.ComponentRestrictions.DefaultValue);

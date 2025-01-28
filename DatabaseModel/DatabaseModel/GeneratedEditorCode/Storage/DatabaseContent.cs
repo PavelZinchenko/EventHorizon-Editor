@@ -104,6 +104,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(SpecialEventSettings.FileName, jsonSerializer.ToJson(SpecialEventSettings));            
             if (UiSettings != null)
                 storage.SaveJson(UiSettings.FileName, jsonSerializer.ToJson(UiSettings));            
+            if (WeaponSlots != null)
+                storage.SaveJson(WeaponSlots.FileName, jsonSerializer.ToJson(WeaponSlots));            
         }
 
         public void LoadJson(string name, string content)
@@ -417,6 +419,15 @@ namespace EditorDatabase.Storage
                     throw new DatabaseException("Duplicate UiSettings file found - " + name);
                 UiSettings = data;
             }
+            else if (type == ItemType.WeaponSlots)
+            {
+                var data = _serializer.FromJson<WeaponSlotsSerializable>(content);
+                data.FileName = name;
+
+				if (WeaponSlots != null)
+                    throw new DatabaseException("Duplicate WeaponSlots file found - " + name);
+                WeaponSlots = data;
+            }
             else
             {
                 throw new DatabaseException("Unknown file type - " + type + "(" + name + ")");
@@ -450,6 +461,7 @@ namespace EditorDatabase.Storage
 		public SkillSettingsSerializable SkillSettings { get; private set; }
 		public SpecialEventSettingsSerializable SpecialEventSettings { get; private set; }
 		public UiSettingsSerializable UiSettings { get; private set; }
+		public WeaponSlotsSerializable WeaponSlots { get; private set; }
 
 		public IEnumerable<AmmunitionObsoleteSerializable> AmmunitionObsoleteList => _ammunitionObsoleteMap.Values;
 		public IEnumerable<ComponentSerializable> ComponentList => _componentMap.Values;

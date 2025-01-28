@@ -72,6 +72,7 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.ItemId = 0;
 			serializable.Faction = 0;
+			serializable.DoesnPreventUnlocking = false;
 			_content.Save(ref serializable);
 			serializable.Type = Type;
 			serializable.Price = Price.Value;
@@ -143,6 +144,7 @@ namespace EditorDatabase.DataModel
 			if (Component.IsNull)
 			    throw new DatabaseException(this.GetType().Name + " (" + serializable.Id + "): Component cannot be null");
 			Faction = database.GetFactionId(serializable.Faction);
+			DoesnPreventUnlocking = serializable.DoesnPreventUnlocking;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -151,11 +153,14 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.ItemId = Component.Value;
 			serializable.Faction = Faction.Value;
+			serializable.DoesnPreventUnlocking = DoesnPreventUnlocking;
 			OnDataSerialized(ref serializable);
 		}
 
 		public ItemId<Component> Component = ItemId<Component>.Empty;
 		public ItemId<Faction> Faction = ItemId<Faction>.Empty;
+		[TooltipText("If this flag is set, locked components on ships can be unlocked even if the technology has not yet been researched.")]
+		public bool DoesnPreventUnlocking;
 	}
 
 	public partial class Technology_Ship : ITechnologyContent

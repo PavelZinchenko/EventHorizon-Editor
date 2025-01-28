@@ -42,6 +42,8 @@ namespace EditorDatabase.DataModel
 					return new BulletControllerEmptyContent();
 				case BulletControllerType.AuraEmitter:
 					return new BulletControllerEmptyContent();
+				case BulletControllerType.StickyMine:
+					return new BulletController_StickyMine();
 				default:
 					throw new DatabaseException("BulletController: Invalid content type - " + type);
 			}
@@ -73,6 +75,7 @@ namespace EditorDatabase.DataModel
 			serializable.StartingVelocityModifier = 1f;
 			serializable.IgnoreRotation = false;
 			serializable.SmartAim = false;
+			serializable.Lifetime = 0f;
 			serializable.X = "0";
 			serializable.Y = "0";
 			serializable.Rotation = "0";
@@ -177,6 +180,27 @@ namespace EditorDatabase.DataModel
 		public string Rotation;
 		public string Size;
 		public string Length;
+	}
+
+	public partial class BulletController_StickyMine : IBulletControllerContent
+	{
+		partial void OnDataDeserialized(BulletControllerSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BulletControllerSerializable serializable);
+
+		public void Load(BulletControllerSerializable serializable, Database database)
+		{
+			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 3.402823E+38f);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BulletControllerSerializable serializable)
+		{
+			serializable.Lifetime = Lifetime.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 3.402823E+38f);
 	}
 
 }

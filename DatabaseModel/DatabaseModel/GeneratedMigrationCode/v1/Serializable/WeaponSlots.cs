@@ -14,27 +14,18 @@ using DatabaseMigration.v1.Enums;
 namespace DatabaseMigration.v1.Serializable
 {
 	[Serializable]
-	public class BulletBodySerializable
+	public class WeaponSlotsSerializable : SerializableItem
 	{
-		public float Size;
-		public float Length;
-		public float Velocity;
-		[DefaultValue(1f)]
-		public float ParentVelocityEffect = 1f;
-		public bool AttachedToParent;
-		public float Range;
-		public float Lifetime;
-		public float Weight;
-		public int HitPoints;
-		[DefaultValue("")]
-		public string Color;
-		public int BulletPrefab;
-		public float EnergyCost;
-		public bool CanBeDisarmed;
-		public bool FriendlyFire;
-		[DefaultValue(true)]
-		public bool DetonateWhenDestroyed = true;
-		public AiBulletBehavior AiBulletBehavior;
-		public BulletTypeObsolete Type;
+		public WeaponSlotsSerializable()
+		{
+			ItemType = ItemType.WeaponSlots;
+			FileName = "WeaponSlots.json";
+		}
+
+		public WeaponSlotSerializable[] Slots;
+		[DefaultValue("$GroupWeaponAny")]
+		public string DefaultSlotName = "$GroupWeaponAny";
+		[DefaultValue("icon_weapon_x")]
+		public string DefaultSlotIcon = "icon_weapon_x";
 	}
 }

@@ -44,5 +44,11 @@ namespace DatabaseMigration.v1.Serializable
 		[DefaultValue(300f)]
 		public float MaxAngularAcceleration = 300f;
 		public bool DisableCellsExpansions;
+		public int ShipExplosionEffect;
+		[DefaultValue("")]
+		public string ShipExplosionSound;
+		public int DroneExplosionEffect;
+		[DefaultValue("")]
+		public string DroneExplosionSound;
 	}
 }

@@ -6,15 +6,20 @@
 //                                                                               
 //-------------------------------------------------------------------------------
 
-namespace EditorDatabase.Enums
+using System;
+using System.ComponentModel;
+using EditorDatabase.Enums;
+using EditorDatabase.Model;
+
+namespace EditorDatabase.Serializable
 {
-	public enum WeaponSlotType
+	[Serializable]
+	public class WeaponSlotsSerializable : SerializableItem
 	{
-		Default,
-		Cannon = 'C',
-		Torpedo = 'T',
-		Missile = 'M',
-		Laser = 'L',
-		Special = 'S',
+		public WeaponSlotSerializable[] Slots;
+		[DefaultValue("$GroupWeaponAny")]
+		public string DefaultSlotName = "$GroupWeaponAny";
+		[DefaultValue("icon_weapon_x")]
+		public string DefaultSlotIcon = "icon_weapon_x";
 	}
 }

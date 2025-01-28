@@ -32,6 +32,8 @@ namespace EditorDatabase.Serializable
 		public float EnergyCost;
 		public bool CanBeDisarmed;
 		public bool FriendlyFire;
+		[DefaultValue(true)]
+		public bool DetonateWhenDestroyed = true;
 		public AiBulletBehavior AiBulletBehavior;
 		public BulletTypeObsolete Type;
 	}

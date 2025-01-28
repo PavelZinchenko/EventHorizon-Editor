@@ -59,5 +59,6 @@ namespace DatabaseMigration.v1.Enums
 		FrontierNpcSettings = 115,
 		FrontierLevelSettings = 116,
 		LocalizationSettings = 117,
+		WeaponSlots = 118,
 	}
 }

@@ -28,7 +28,7 @@ namespace EditorDatabase.DataModel
 
 		private NodeTransition(NodeTransitionSerializable serializable, Database database)
 		{
-			TargetNode = new NumericValue<int>(serializable.TargetNode, 1, 1000);
+			TargetNode = new NumericValue<int>(serializable.TargetNode, 1, 999999);
 			Requirement.Value = DataModel.Requirement.Create(serializable.Requirement, database);
 			Weight = new NumericValue<float>(serializable.Weight, 0f, 1000f);
 			OnDataDeserialized(serializable, database);
@@ -44,7 +44,7 @@ namespace EditorDatabase.DataModel
 			return serializable;
 		}
 
-		public NumericValue<int> TargetNode = new NumericValue<int>(0, 1, 1000);
+		public NumericValue<int> TargetNode = new NumericValue<int>(0, 1, 999999);
 		public ObjectWrapper<Requirement> Requirement = new(DataModel.Requirement.DefaultValue);
 		public NumericValue<float> Weight = new NumericValue<float>(0, 0f, 1000f);
 
