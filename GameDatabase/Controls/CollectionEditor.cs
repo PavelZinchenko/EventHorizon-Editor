@@ -10,7 +10,8 @@ namespace GameDatabase.Controls
 {
     public partial class CollectionEditor : UserControl
     {
-        [Description("Database"), Category("Data")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Database Database
         {
             get { return _database; }
@@ -18,13 +19,15 @@ namespace GameDatabase.Controls
         }
 
         [Description("ContentAutoScroll"), Category("Layout")]
+        [DefaultValue(true)]
         public bool ContentAutoScroll
         {
             get { return tableLayoutPanel.AutoScroll; }
             set { tableLayoutPanel.AutoScroll = value; }
         }
 
-        [Description("Collection"), Category("Data")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Array Data
         {
             get { return _collection; }

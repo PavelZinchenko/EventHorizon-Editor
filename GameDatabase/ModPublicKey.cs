@@ -1,0 +1,8 @@
+namespace GameDatabase
+{
+    internal static class ModPublicKey
+    {
+        internal const string SubjectPublicKeyInfoBase64 = "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAqqG9VY7aw4vreTzhkAWRobd5rI5LvAy6FQywyRmDW0SCkzg2DrX44LPkbn9U8VsG+lJ5ev3RcquDoG25G2NrIMLn1glfy51TINDZpj6sJNDCSR1xsyZIgOiWMV5nMObI7UuhPJ5Ygzn0Kf3GgdSixc1Hpwu3lhIdlVJGtmLewd95XZjt+8EFP7eYbBrXrLtjctjTbfhqet6SsNO7F9s24m7TYReXbitI4lcb+K9FXpj9ohIP73Cp/MXgbUw/GzBHPNV2VTc6zm6n8u3k2u8NXBGawSgLlbfLiA+2AA7d6rSUOvq3FReZs8pdRWlr0H6gEt6bWJXgcAvlLR4YSdWNppAmDNA4tvVOcK7G0WSE0yNnbP0NF9hYirM7fjmdsXlBkk+Ex4O4xxkW//KX2AJLr+ZPhH2emNM4QTmpqL6qrzmg59TOXSQx6vLbEmOL1yjsF/C2cwO7ntyf+WqMEYcVEHqbZnbZuhzf6i/mlSvUt3QtIrf5IURbHgOzwFgoY22tAgMBAAE=";
+        internal const string Fingerprint = "c4599959f07fb6e3d5d6c981c715c8ba55212ff3bbf617bf5b2978864cda5220";
+    }
+}

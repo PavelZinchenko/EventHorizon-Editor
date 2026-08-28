@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -58,35 +58,24 @@ namespace GameDatabase
 
         public void Build(FileStream stream)
         {
+            byte[] rawData = null;
+            byte[] compressedData = null;
+            byte[] encryptedFile = null;
+
             try
             {
-                var header = SerializeHeader().ToArray();
-                var rawdata = SerializeData().ToArray();
-                var data = ZlibStream.CompressBuffer(rawdata.ToArray());
-
-                var size = (uint)data.Length;
-                byte checksumm = 0;
-                uint w = 0x12345678 ^ size;
-                uint z = 0x87654321 ^ size;
-                for (int i = 0; i < size; ++i)
-                {
-                    checksumm += data[i];
-                    data[i] = (byte)(data[i] ^ (byte)random(ref w, ref z));
-                }
-
-                stream.Write(header, 0, header.Length);
-                stream.Write(data, 0, data.Length);
-                stream.WriteByte((byte)(checksumm ^ (byte)random(ref w, ref z)));
+                rawData = SerializeData().ToArray();
+                compressedData = ZlibStream.CompressBuffer(rawData);
+                encryptedFile = ModEncryption.Encrypt(compressedData);
+                stream.Write(encryptedFile, 0, encryptedFile.Length);
             }
             finally
             {
+                Clear(rawData);
+                Clear(compressedData);
+                Clear(encryptedFile);
                 stream.Close();
             }
-        }
-
-        private IEnumerable<byte> SerializeHeader()
-        {
-            return Serialize(unchecked((int)_header));
         }
 
         private IEnumerable<byte> SerializeData()
@@ -192,11 +181,10 @@ namespace GameDatabase
                 yield return value;
         }
 
-        private static uint random(ref uint w, ref uint z)
+        private static void Clear(byte[] data)
         {
-            z = 36969 * (z & 65535) + (z >> 16);
-            w = 18000 * (w & 65535) + (w >> 16);
-            return (z << 16) + w;  /* 32-bit result */
+            if (data != null)
+                Array.Clear(data, 0, data.Length);
         }
 
         private ModBuilder(string datapath, string name, string id, int versionMajor, int versionMinor)
@@ -214,7 +202,6 @@ namespace GameDatabase
         private readonly string _name;
         private readonly string _id;
 
-        private const uint _header = 0xDA7ABA5E;
         private const int _version = 1;
         public const string SignatureFileName = "id";
     }

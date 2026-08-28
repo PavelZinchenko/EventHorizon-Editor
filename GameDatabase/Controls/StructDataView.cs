@@ -10,7 +10,8 @@ namespace GameDatabase.Controls
 {
     public partial class StructDataView : UserControl
     {
-        [Description("Data"), Category("Data")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object Data
         {
             get { return _data; }
@@ -21,7 +22,8 @@ namespace GameDatabase.Controls
             }
         }
 
-        [Description("Database"), Category("Data")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Database Database
         {
             get { return _database; }

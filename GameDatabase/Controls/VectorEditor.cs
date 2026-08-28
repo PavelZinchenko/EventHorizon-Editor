@@ -7,7 +7,8 @@ namespace GameDatabase.Controls
 {
     public partial class VectorEditor : UserControl
     {
-        [Description("Vector"), Category("Data")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Vector2 Value
         {
             get { return _vector; }

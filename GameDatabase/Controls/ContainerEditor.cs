@@ -6,7 +6,8 @@ namespace GameDatabase.Controls
 {
     public partial class ContainerEditor : UserControl
     {
-        [Description("Database"), Category("Data")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Database Database
         {
             get { return _database; }
@@ -14,13 +15,15 @@ namespace GameDatabase.Controls
         }
 
         [Description("ContentAutoScroll"), Category("Layout")]
+        [DefaultValue(true)]
         public bool ContentAutoScroll
         {
             get { return tableLayoutOuterPanel.AutoScroll; }
             set { tableLayoutOuterPanel.AutoScroll = value; }
         }
 
-        [Description("Container"), Category("Data")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IObjectWrapper Data
         {
             get { return _wrapper; }
