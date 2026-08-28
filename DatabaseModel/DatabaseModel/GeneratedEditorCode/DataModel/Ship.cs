@@ -38,7 +38,7 @@ namespace EditorDatabase.DataModel
 				IconImage = serializable.IconImage;
 				IconScale = new NumericValue<float>(serializable.IconScale, 0.1f, 100f);
 				ModelImage = serializable.ModelImage;
-				ModelScale = new NumericValue<float>(serializable.ModelScale, 0.1f, 100f);
+				ModelScale = new NumericValue<float>(serializable.ModelScale, 0.1f, 500f);
 				EngineColor = Helpers.ColorFromString(serializable.EngineColor);
 				Engines = serializable.Engines?.Select(item => Engine.Create(item, database)).ToArray();
 				Layout = new Layout(serializable.Layout);
@@ -95,7 +95,7 @@ namespace EditorDatabase.DataModel
 		public string IconImage;
 		public NumericValue<float> IconScale = new NumericValue<float>(0, 0.1f, 100f);
 		public string ModelImage;
-		public NumericValue<float> ModelScale = new NumericValue<float>(0, 0.1f, 100f);
+		public NumericValue<float> ModelScale = new NumericValue<float>(0, 0.1f, 500f);
 		public System.Drawing.Color EngineColor;
 		public Engine[] Engines;
 		public Layout Layout;
