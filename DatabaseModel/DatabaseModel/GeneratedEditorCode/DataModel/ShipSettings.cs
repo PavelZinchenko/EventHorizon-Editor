@@ -42,6 +42,8 @@ namespace EditorDatabase.DataModel
 			MaxAngularVelocity = new NumericValue<float>(serializable.MaxAngularVelocity, 5f, 100f);
 			MaxAcceleration = new NumericValue<float>(serializable.MaxAcceleration, 5f, 1000f);
 			MaxAngularAcceleration = new NumericValue<float>(serializable.MaxAngularAcceleration, 5f, 1000f);
+			SatelliteModelScaleMultiplier = new NumericValue<float>(serializable.SatelliteModelScaleMultiplier, 1f, 100f);
+			SatelliteRequireModelScaleWithSizeClass = serializable.SatelliteRequireModelScaleWithSizeClass;
 			DisableCellsExpansions = serializable.DisableCellsExpansions;
 			ShipExplosionEffect = database.GetVisualEffectId(serializable.ShipExplosionEffect);
 			ShipExplosionSound = serializable.ShipExplosionSound;
@@ -68,6 +70,8 @@ namespace EditorDatabase.DataModel
 			serializable.MaxAngularVelocity = MaxAngularVelocity.Value;
 			serializable.MaxAcceleration = MaxAcceleration.Value;
 			serializable.MaxAngularAcceleration = MaxAngularAcceleration.Value;
+			serializable.SatelliteModelScaleMultiplier = SatelliteModelScaleMultiplier.Value;
+			serializable.SatelliteRequireModelScaleWithSizeClass = SatelliteRequireModelScaleWithSizeClass;
 			serializable.DisableCellsExpansions = DisableCellsExpansions;
 			serializable.ShipExplosionEffect = ShipExplosionEffect.Value;
 			serializable.ShipExplosionSound = ShipExplosionSound;
@@ -92,6 +96,8 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> MaxAngularVelocity = new NumericValue<float>(0, 5f, 100f);
 		public NumericValue<float> MaxAcceleration = new NumericValue<float>(0, 5f, 1000f);
 		public NumericValue<float> MaxAngularAcceleration = new NumericValue<float>(0, 5f, 1000f);
+		public NumericValue<float> SatelliteModelScaleMultiplier = new NumericValue<float>(0, 1f, 100f);
+		public bool SatelliteRequireModelScaleWithSizeClass;
 		public bool DisableCellsExpansions;
 		public ItemId<VisualEffect> ShipExplosionEffect = ItemId<VisualEffect>.Empty;
 		public string ShipExplosionSound;
