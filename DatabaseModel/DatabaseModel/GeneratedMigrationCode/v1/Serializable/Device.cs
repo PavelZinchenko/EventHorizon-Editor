@@ -22,6 +22,8 @@ namespace DatabaseMigration.v1.Serializable
 			FileName = "Device.json";
 		}
 
+		[DefaultValue("$Device")]
+		public string Name = "$Device";
 		public DeviceClass DeviceClass;
 		public float EnergyConsumption;
 		public float PassiveEnergyConsumption;
