@@ -16,8 +16,8 @@ namespace EditorDatabase.Serializable
 	[Serializable]
 	public class DeviceSerializable : SerializableItem
 	{
-		[DefaultValue("$Device")]
-		public string Name = "$Device";
+		[DefaultValue("")]
+		public string Name;
 		public DeviceClass DeviceClass;
 		public float EnergyConsumption;
 		public float PassiveEnergyConsumption;
