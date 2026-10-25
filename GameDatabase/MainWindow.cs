@@ -35,6 +35,7 @@ namespace GameDatabase
         {
             try
             {
+                DatabaseMigration.MigrationResources.LocateBuiltinDatabase(path, AppDomain.CurrentDomain.BaseDirectory);
                 DatabaseTreeView.Nodes.Clear();
                 var storage = new DatabaseStorage(path);
                 storage.LoadDatabaseVersion();

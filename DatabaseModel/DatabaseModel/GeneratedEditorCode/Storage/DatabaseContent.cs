@@ -78,6 +78,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _weaponMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
+            if (BlackMarketSettings != null)
+                storage.SaveJson(BlackMarketSettings.FileName, jsonSerializer.ToJson(BlackMarketSettings));            
             if (CombatSettings != null)
                 storage.SaveJson(CombatSettings.FileName, jsonSerializer.ToJson(CombatSettings));            
             if (DatabaseSettings != null)
@@ -94,6 +96,8 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(LocalizationSettings.FileName, jsonSerializer.ToJson(LocalizationSettings));            
             if (MusicPlaylist != null)
                 storage.SaveJson(MusicPlaylist.FileName, jsonSerializer.ToJson(MusicPlaylist));            
+            if (RuinsSettings != null)
+                storage.SaveJson(RuinsSettings.FileName, jsonSerializer.ToJson(RuinsSettings));            
             if (ShipModSettings != null)
                 storage.SaveJson(ShipModSettings.FileName, jsonSerializer.ToJson(ShipModSettings));            
             if (ShipSettings != null)
@@ -302,6 +306,15 @@ namespace EditorDatabase.Storage
                 data.FileName = name;
                 _weaponMap.Add(data.Id, data);
             }
+            else if (type == ItemType.BlackMarketSettings)
+            {
+                var data = _serializer.FromJson<BlackMarketSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (BlackMarketSettings != null)
+                    throw new DatabaseException("Duplicate BlackMarketSettings file found - " + name);
+                BlackMarketSettings = data;
+            }
             else if (type == ItemType.CombatSettings)
             {
                 var data = _serializer.FromJson<CombatSettingsSerializable>(content);
@@ -373,6 +386,15 @@ namespace EditorDatabase.Storage
 				if (MusicPlaylist != null)
                     throw new DatabaseException("Duplicate MusicPlaylist file found - " + name);
                 MusicPlaylist = data;
+            }
+            else if (type == ItemType.RuinsSettings)
+            {
+                var data = _serializer.FromJson<RuinsSettingsSerializable>(content);
+                data.FileName = name;
+
+				if (RuinsSettings != null)
+                    throw new DatabaseException("Duplicate RuinsSettings file found - " + name);
+                RuinsSettings = data;
             }
             else if (type == ItemType.ShipModSettings)
             {
@@ -448,6 +470,7 @@ namespace EditorDatabase.Storage
         {
             _audioClips.Add(name, audioClip);
         }
+		public BlackMarketSettingsSerializable BlackMarketSettings { get; private set; }
 		public CombatSettingsSerializable CombatSettings { get; private set; }
 		public DatabaseSettingsSerializable DatabaseSettings { get; private set; }
 		public DebugSettingsSerializable DebugSettings { get; private set; }
@@ -456,6 +479,7 @@ namespace EditorDatabase.Storage
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
 		public LocalizationSettingsSerializable LocalizationSettings { get; private set; }
 		public MusicPlaylistSerializable MusicPlaylist { get; private set; }
+		public RuinsSettingsSerializable RuinsSettings { get; private set; }
 		public ShipModSettingsSerializable ShipModSettings { get; private set; }
 		public ShipSettingsSerializable ShipSettings { get; private set; }
 		public SkillSettingsSerializable SkillSettings { get; private set; }

@@ -17,6 +17,7 @@ namespace EditorDatabase.Serializable
 	public class LootItemSerializable
 	{
 		public float Weight;
+		public RequirementSerializable Requirement;
 		public LootContentSerializable Loot;
 	}
 }
