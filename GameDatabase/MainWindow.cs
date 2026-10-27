@@ -47,7 +47,10 @@ namespace GameDatabase
                     var dialogResult = MessageBox.Show($"Database version is outdated - {storage.Version}. Do you want to upgrade it to {Database.VersionMajor}.{Database.VersionMinor}?",
                         "Warning", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
+                    {
+                        AskForBuiltinDatabase();
                         _database = UpgradeDatabase(storage, path);
+                    }
                 }
                 else
                 {
@@ -70,6 +73,22 @@ namespace GameDatabase
             database.Save(new DatabaseStorage(path));
             Console.WriteLine($"Database upgraded - {database.DatabaseSettings.DatabaseVersion}.{database.DatabaseSettings.DatabaseVersionMinor}");
             return database;
+        }
+
+        // Migration 1.8 builds the satellite exclusion lists from the built-in catalog.
+        // A packaged editor has no game checkout next to it, so ask for the catalog
+        // folder when discovery fails. Declining leaves the path empty and the
+        // migration refuses to upgrade a partial mod.
+        private static void AskForBuiltinDatabase()
+        {
+            if (!string.IsNullOrEmpty(DatabaseMigration.MigrationResources.BuiltinDatabasePath)) return;
+
+            using var dialog = new FolderBrowserDialog
+            {
+                Description = "Migration 1.8 needs the built-in Database folder, the one that contains a Satellite folder.",
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+                DatabaseMigration.MigrationResources.BuiltinDatabasePath = dialog.SelectedPath;
         }
 
         private void BuildFilesTree(string path, TreeNodeCollection nodeCollection)

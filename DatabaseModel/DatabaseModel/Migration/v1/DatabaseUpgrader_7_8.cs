@@ -48,16 +48,22 @@ namespace DatabaseMigration.v1
 			if (Content.DatabaseSettings != null && Content.DatabaseSettings.UnloadOriginalDatabase)
 				return;
 
+			// An empty exclusion list replaces the built-in settings, so a partial mod
+			// upgraded without the catalog would sell its Titans in black markets. The
+			// caller saves only after the whole upgrade returns, so throwing here leaves
+			// the source folder on version 1.7.
 			var path = DatabaseMigration.MigrationResources.BuiltinDatabasePath;
-			if (string.IsNullOrEmpty(path))
-			{
-				Console.WriteLine("Database migration: built-in catalog not found, inheriting no satellite exclusions");
-				return;
-			}
+			if (string.IsNullOrEmpty(path) || !System.IO.Directory.Exists(path))
+				throw new InvalidOperationException(
+					"Database migration: the built-in Database folder was not found. Select it before upgrading a partial mod.");
+
+			var builtin = new Storage.DatabaseContent(new JsonSerializer(), new DatabaseStorage(path));
+			if (!builtin.SatelliteList.Any())
+				throw new InvalidOperationException(
+					$"Database migration: the built-in catalog at {path} has no satellite records.");
 
 			var overridden = new HashSet<int>(Content.SatelliteList.Select(item => item.Id));
 
-			var builtin = new Storage.DatabaseContent(new JsonSerializer(), new DatabaseStorage(path));
 			foreach (var satellite in builtin.SatelliteList)
 			{
 				if (overridden.Contains(satellite.Id)) continue;
