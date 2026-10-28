@@ -48,7 +48,7 @@ namespace GameDatabase
                         "Warning", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        AskForBuiltinDatabase();
+                        AskForBuiltinDatabase(path);
                         _database = UpgradeDatabase(storage, path);
                     }
                 }
@@ -79,7 +79,7 @@ namespace GameDatabase
         // A packaged editor has no game checkout next to it, so ask for the catalog
         // folder when discovery fails. Declining leaves the path empty and the
         // migration refuses to upgrade a partial mod.
-        private static void AskForBuiltinDatabase()
+        private static void AskForBuiltinDatabase(string openedPath)
         {
             if (!string.IsNullOrEmpty(DatabaseMigration.MigrationResources.BuiltinDatabasePath)) return;
 
@@ -88,7 +88,19 @@ namespace GameDatabase
                 Description = "Migration 1.8 needs the built-in Database folder, the one that contains a Satellite folder.",
             };
             if (dialog.ShowDialog() == DialogResult.OK)
-                DatabaseMigration.MigrationResources.BuiltinDatabasePath = dialog.SelectedPath;
+            {
+                var selected = dialog.SelectedPath;
+                // Reject if the selected folder is the opened mod itself.
+                if (string.Equals(
+                        DatabaseMigration.MigrationResources.NormalizePath(selected),
+                        DatabaseMigration.MigrationResources.OpenedDatabasePath,
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("The selected folder is the opened mod itself. Please select the built-in catalog folder.");
+                    return;
+                }
+                DatabaseMigration.MigrationResources.BuiltinDatabasePath = selected;
+            }
         }
 
         private void BuildFilesTree(string path, TreeNodeCollection nodeCollection)
