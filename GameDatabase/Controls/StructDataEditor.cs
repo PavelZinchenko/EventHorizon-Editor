@@ -446,7 +446,7 @@ namespace GameDatabase
 
             var button = (Button)sender;
 
-            var colorDialog = new ColorPickerDialog();
+            using var colorDialog = new ColorPickerDialog();
             colorDialog.Color = button.BackColor;
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {

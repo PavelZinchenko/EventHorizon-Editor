@@ -37,6 +37,9 @@ namespace Cyotek.Windows.Forms
     public ColorPickerDialog()
     {
       this.InitializeComponent();
+      this.loadPaletteButton.Image = LoadBitmap(Properties.Resources.LoadPalette);
+      this.savePaletteButton.Image = LoadBitmap(Properties.Resources.SavePalette);
+      this.screenColorPicker.Image = LoadBitmap(Properties.Resources.eyedropper);
       this.ShowAlphaChannel = true;
       this.Font = SystemFonts.DialogFont;
     }
@@ -70,6 +73,16 @@ namespace Cyotek.Windows.Forms
 
     #region Methods
 
+    private static Bitmap LoadBitmap(byte[] png)
+    {
+      using (var stream = new MemoryStream(png))
+      using (var image = Image.FromStream(stream))
+      {
+        // Copy the pixels so the bitmap does not depend on the disposed stream.
+        return new Bitmap(image);
+      }
+    }
+
     /// <summary>
     /// Clean up any resources being used.
     /// </summary>
@@ -78,6 +91,10 @@ namespace Cyotek.Windows.Forms
     {
       if (disposing)
       {
+        loadPaletteButton?.Image?.Dispose();
+        savePaletteButton?.Image?.Dispose();
+        screenColorPicker?.Image?.Dispose();
+
         if (components != null)
         {
           components.Dispose();
