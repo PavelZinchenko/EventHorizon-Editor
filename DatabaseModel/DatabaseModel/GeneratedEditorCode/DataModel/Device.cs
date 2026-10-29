@@ -29,6 +29,7 @@ namespace EditorDatabase.DataModel
 			try
 			{
 				Id = new ItemId<Device>(serializable.Id, serializable.FileName);
+				Name = serializable.Name;
 				DeviceClass = serializable.DeviceClass;
 				EnergyConsumption = new NumericValue<float>(serializable.EnergyConsumption, 0f, 1E+09f);
 				PassiveEnergyConsumption = new NumericValue<float>(serializable.PassiveEnergyConsumption, 0f, 1E+09f);
@@ -58,6 +59,7 @@ namespace EditorDatabase.DataModel
 
 		public void Save(DeviceSerializable serializable)
 		{
+			serializable.Name = Name;
 			serializable.DeviceClass = DeviceClass;
 			serializable.EnergyConsumption = EnergyConsumption.Value;
 			serializable.PassiveEnergyConsumption = PassiveEnergyConsumption.Value;
@@ -82,6 +84,7 @@ namespace EditorDatabase.DataModel
 
 		public readonly ItemId<Device> Id;
 
+		public string Name;
 		public DeviceClass DeviceClass;
 		public NumericValue<float> EnergyConsumption = new NumericValue<float>(0, 0f, 1E+09f);
 		public NumericValue<float> PassiveEnergyConsumption = new NumericValue<float>(0, 0f, 1E+09f);

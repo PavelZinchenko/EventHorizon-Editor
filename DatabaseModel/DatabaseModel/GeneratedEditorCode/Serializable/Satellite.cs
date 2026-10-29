@@ -22,6 +22,7 @@ namespace EditorDatabase.Serializable
 		public string ModelImage;
 		public float ModelScale;
 		public SizeClass SizeClass;
+		public bool NotAvailableInBlackMarket;
 		[DefaultValue("")]
 		public string Layout;
 		public BarrelSerializable[] Barrels;

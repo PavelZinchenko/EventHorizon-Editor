@@ -19,7 +19,7 @@ namespace EditorDatabase
     public partial class Database
     {
 		public const int VersionMajor = 1;
-		public const int VersionMinor = 7;
+		public const int VersionMinor = 8;
 
 		public Database(IDataStorage storage)
 		{
@@ -56,6 +56,7 @@ namespace EditorDatabase
             foreach (var item in _bulletPrefabMap) item.Value.Save(_content.GetBulletPrefab(item.Key));
             foreach (var item in _visualEffectMap) item.Value.Save(_content.GetVisualEffect(item.Key));
             foreach (var item in _weaponMap) item.Value.Save(_content.GetWeapon(item.Key));
+			_blackMarketSettings?.Save(_content.BlackMarketSettings);
 			_combatSettings?.Save(_content.CombatSettings);
 			_databaseSettings?.Save(_content.DatabaseSettings);
 			_debugSettings?.Save(_content.DebugSettings);
@@ -64,6 +65,7 @@ namespace EditorDatabase
 			_galaxySettings?.Save(_content.GalaxySettings);
 			_localizationSettings?.Save(_content.LocalizationSettings);
 			_musicPlaylist?.Save(_content.MusicPlaylist);
+			_ruinsSettings?.Save(_content.RuinsSettings);
 			_shipModSettings?.Save(_content.ShipModSettings);
 			_shipSettings?.Save(_content.ShipSettings);
 			_skillSettings?.Save(_content.SkillSettings);
@@ -162,6 +164,8 @@ namespace EditorDatabase
                 yield return GetVisualEffect(item.Id);
             foreach (var item in _content.WeaponList)
                 yield return GetWeapon(item.Id);
+            if (_content.BlackMarketSettings != null)
+				yield return BlackMarketSettings;
             if (_content.CombatSettings != null)
 				yield return CombatSettings;
             if (_content.DatabaseSettings != null)
@@ -178,6 +182,8 @@ namespace EditorDatabase
 				yield return LocalizationSettings;
             if (_content.MusicPlaylist != null)
 				yield return MusicPlaylist;
+            if (_content.RuinsSettings != null)
+				yield return RuinsSettings;
             if (_content.ShipModSettings != null)
 				yield return ShipModSettings;
             if (_content.ShipSettings != null)
@@ -255,6 +261,7 @@ namespace EditorDatabase
 				case ItemType.BulletPrefab: return GetBulletPrefab(id);
 				case ItemType.VisualEffect: return GetVisualEffect(id);
 				case ItemType.Weapon: return GetWeapon(id);
+				case ItemType.BlackMarketSettings: return BlackMarketSettings;
 				case ItemType.CombatSettings: return CombatSettings;
 				case ItemType.DatabaseSettings: return DatabaseSettings;
 				case ItemType.DebugSettings: return DebugSettings;
@@ -263,6 +270,7 @@ namespace EditorDatabase
 				case ItemType.GalaxySettings: return GalaxySettings;
 				case ItemType.LocalizationSettings: return LocalizationSettings;
 				case ItemType.MusicPlaylist: return MusicPlaylist;
+				case ItemType.RuinsSettings: return RuinsSettings;
 				case ItemType.ShipModSettings: return ShipModSettings;
 				case ItemType.ShipSettings: return ShipSettings;
 				case ItemType.SkillSettings: return SkillSettings;
@@ -274,6 +282,7 @@ namespace EditorDatabase
         }
 
 
+		public BlackMarketSettings BlackMarketSettings => _blackMarketSettings ?? (_blackMarketSettings = BlackMarketSettings.Create(_content.BlackMarketSettings, this));
 		public CombatSettings CombatSettings => _combatSettings ?? (_combatSettings = CombatSettings.Create(_content.CombatSettings, this));
 		public DatabaseSettings DatabaseSettings => _databaseSettings ?? (_databaseSettings = DatabaseSettings.Create(_content.DatabaseSettings, this));
 		public DebugSettings DebugSettings => _debugSettings ?? (_debugSettings = DebugSettings.Create(_content.DebugSettings, this));
@@ -282,6 +291,7 @@ namespace EditorDatabase
 		public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = GalaxySettings.Create(_content.GalaxySettings, this));
 		public LocalizationSettings LocalizationSettings => _localizationSettings ?? (_localizationSettings = LocalizationSettings.Create(_content.LocalizationSettings, this));
 		public MusicPlaylist MusicPlaylist => _musicPlaylist ?? (_musicPlaylist = MusicPlaylist.Create(_content.MusicPlaylist, this));
+		public RuinsSettings RuinsSettings => _ruinsSettings ?? (_ruinsSettings = RuinsSettings.Create(_content.RuinsSettings, this));
 		public ShipModSettings ShipModSettings => _shipModSettings ?? (_shipModSettings = ShipModSettings.Create(_content.ShipModSettings, this));
 		public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = ShipSettings.Create(_content.ShipSettings, this));
 		public SkillSettings SkillSettings => _skillSettings ?? (_skillSettings = SkillSettings.Create(_content.SkillSettings, this));
@@ -646,6 +656,7 @@ namespace EditorDatabase
 			_visualEffectMap.Clear();
 			_weaponMap.Clear();
 
+			_blackMarketSettings = null;
 			_combatSettings = null;
 			_databaseSettings = null;
 			_debugSettings = null;
@@ -654,6 +665,7 @@ namespace EditorDatabase
 			_galaxySettings = null;
 			_localizationSettings = null;
 			_musicPlaylist = null;
+			_ruinsSettings = null;
 			_shipModSettings = null;
 			_shipSettings = null;
 			_skillSettings = null;
@@ -690,6 +702,7 @@ namespace EditorDatabase
 		private readonly Dictionary<int, VisualEffect> _visualEffectMap = new Dictionary<int, VisualEffect>();
 		private readonly Dictionary<int, Weapon> _weaponMap = new Dictionary<int, Weapon>();
 
+		private BlackMarketSettings _blackMarketSettings;
 		private CombatSettings _combatSettings;
 		private DatabaseSettings _databaseSettings;
 		private DebugSettings _debugSettings;
@@ -698,6 +711,7 @@ namespace EditorDatabase
 		private GalaxySettings _galaxySettings;
 		private LocalizationSettings _localizationSettings;
 		private MusicPlaylist _musicPlaylist;
+		private RuinsSettings _ruinsSettings;
 		private ShipModSettings _shipModSettings;
 		private ShipSettings _shipSettings;
 		private SkillSettings _skillSettings;

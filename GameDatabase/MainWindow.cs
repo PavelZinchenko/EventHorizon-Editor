@@ -35,6 +35,7 @@ namespace GameDatabase
         {
             try
             {
+                DatabaseMigration.MigrationResources.LocateBuiltinDatabase(path, AppDomain.CurrentDomain.BaseDirectory);
                 DatabaseTreeView.Nodes.Clear();
                 var storage = new DatabaseStorage(path);
                 storage.LoadDatabaseVersion();
@@ -46,7 +47,10 @@ namespace GameDatabase
                     var dialogResult = MessageBox.Show($"Database version is outdated - {storage.Version}. Do you want to upgrade it to {Database.VersionMajor}.{Database.VersionMinor}?",
                         "Warning", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
+                    {
+                        AskForBuiltinDatabase(path);
                         _database = UpgradeDatabase(storage, path);
+                    }
                 }
                 else
                 {
@@ -69,6 +73,34 @@ namespace GameDatabase
             database.Save(new DatabaseStorage(path));
             Console.WriteLine($"Database upgraded - {database.DatabaseSettings.DatabaseVersion}.{database.DatabaseSettings.DatabaseVersionMinor}");
             return database;
+        }
+
+        // Migration 1.8 builds the satellite exclusion lists from the built-in catalog.
+        // A packaged editor has no game checkout next to it, so ask for the catalog
+        // folder when discovery fails. Declining leaves the path empty and the
+        // migration refuses to upgrade a partial mod.
+        private static void AskForBuiltinDatabase(string openedPath)
+        {
+            if (!string.IsNullOrEmpty(DatabaseMigration.MigrationResources.BuiltinDatabasePath)) return;
+
+            using var dialog = new FolderBrowserDialog
+            {
+                Description = "Migration 1.8 needs the built-in Database folder, the one that contains a Satellite folder.",
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var selected = dialog.SelectedPath;
+                // Reject if the selected folder is the opened mod itself.
+                if (string.Equals(
+                        DatabaseMigration.MigrationResources.NormalizePath(selected),
+                        DatabaseMigration.MigrationResources.OpenedDatabasePath,
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("The selected folder is the opened mod itself. Please select the built-in catalog folder.");
+                    return;
+                }
+                DatabaseMigration.MigrationResources.BuiltinDatabasePath = selected;
+            }
         }
 
         private void BuildFilesTree(string path, TreeNodeCollection nodeCollection)
