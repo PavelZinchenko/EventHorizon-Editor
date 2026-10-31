@@ -47,6 +47,7 @@ namespace EditorDatabase.DataModel
 				VisualEffects.Value = DataModel.ShipVisualEffects.Create(serializable.VisualEffects, database);
 				CellsExpansions = serializable.CellsExpansions;
 				ColliderTolerance = new NumericValue<float>(serializable.ColliderTolerance, 0f, 1f);
+				Collider = serializable.Collider?.Select(item => ColliderShape.Create(item, database)).ToArray();
 			}
 			catch (DatabaseException e)
 			{
@@ -81,6 +82,10 @@ namespace EditorDatabase.DataModel
 			serializable.VisualEffects = VisualEffects.Value?.Serialize();
 			serializable.CellsExpansions = CellsExpansions;
 			serializable.ColliderTolerance = ColliderTolerance.Value;
+			if (Collider == null || Collider.Length == 0)
+			    serializable.Collider = null;
+			else
+			    serializable.Collider = Collider.Select(item => item.Serialize()).ToArray();
 			OnDataSerialized(ref serializable);
 		}
 
@@ -104,6 +109,7 @@ namespace EditorDatabase.DataModel
 		public ObjectWrapper<ShipVisualEffects> VisualEffects = new(DataModel.ShipVisualEffects.DefaultValue);
 		public ToggleState CellsExpansions;
 		public NumericValue<float> ColliderTolerance = new NumericValue<float>(0, 0f, 1f);
+		public ColliderShape[] Collider;
 
 		public static Ship DefaultValue { get; private set; }
 	}

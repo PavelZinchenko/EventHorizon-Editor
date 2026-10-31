@@ -35,7 +35,7 @@ namespace EditorDatabase.DataModel
 				case BulletControllerType.Homing:
 					return new BulletController_Homing();
 				case BulletControllerType.Beam:
-					return new BulletControllerEmptyContent();
+					return new BulletController_Beam();
 				case BulletControllerType.Parametric:
 					return new BulletController_Parametric();
 				case BulletControllerType.Harpoon:
@@ -44,6 +44,8 @@ namespace EditorDatabase.DataModel
 					return new BulletControllerEmptyContent();
 				case BulletControllerType.StickyMine:
 					return new BulletController_StickyMine();
+				case BulletControllerType.Rocket:
+					return new BulletController_Rocket();
 				default:
 					throw new DatabaseException("BulletController: Invalid content type - " + type);
 			}
@@ -76,6 +78,7 @@ namespace EditorDatabase.DataModel
 			serializable.IgnoreRotation = false;
 			serializable.SmartAim = false;
 			serializable.Lifetime = 0f;
+			serializable.TrackingAngle = 0f;
 			serializable.X = "0";
 			serializable.Y = "0";
 			serializable.Rotation = "0";
@@ -149,6 +152,28 @@ namespace EditorDatabase.DataModel
 		public bool SmartAim;
 	}
 
+	public partial class BulletController_Beam : IBulletControllerContent
+	{
+		partial void OnDataDeserialized(BulletControllerSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BulletControllerSerializable serializable);
+
+		public void Load(BulletControllerSerializable serializable, Database database)
+		{
+			TrackingAngle = new NumericValue<float>(serializable.TrackingAngle, 0f, 180f);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BulletControllerSerializable serializable)
+		{
+			serializable.TrackingAngle = TrackingAngle.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		[TooltipText("Maximum turn toward the touched target, in degrees. 0 means no tracking")]
+		public NumericValue<float> TrackingAngle = new NumericValue<float>(0, 0f, 180f);
+	}
+
 	public partial class BulletController_Parametric : IBulletControllerContent
 	{
 		partial void OnDataDeserialized(BulletControllerSerializable serializable, Database database);
@@ -201,6 +226,27 @@ namespace EditorDatabase.DataModel
 		}
 
 		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 3.402823E+38f);
+	}
+
+	public partial class BulletController_Rocket : IBulletControllerContent
+	{
+		partial void OnDataDeserialized(BulletControllerSerializable serializable, Database database);
+		partial void OnDataSerialized(ref BulletControllerSerializable serializable);
+
+		public void Load(BulletControllerSerializable serializable, Database database)
+		{
+			StartingVelocityModifier = new NumericValue<float>(serializable.StartingVelocityModifier, 0f, 1000f);
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref BulletControllerSerializable serializable)
+		{
+			serializable.StartingVelocityModifier = StartingVelocityModifier.Value;
+			OnDataSerialized(ref serializable);
+		}
+
+		public NumericValue<float> StartingVelocityModifier = new NumericValue<float>(0, 0f, 1000f);
 	}
 
 }

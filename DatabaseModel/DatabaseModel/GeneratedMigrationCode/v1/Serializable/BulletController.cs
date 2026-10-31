@@ -22,6 +22,7 @@ namespace DatabaseMigration.v1.Serializable
 		public bool IgnoreRotation;
 		public bool SmartAim;
 		public float Lifetime;
+		public float TrackingAngle;
 		[DefaultValue("0")]
 		public string X = "0";
 		[DefaultValue("0")]
