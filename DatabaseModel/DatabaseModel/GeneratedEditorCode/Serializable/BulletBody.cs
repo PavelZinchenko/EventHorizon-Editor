@@ -25,6 +25,7 @@ namespace EditorDatabase.Serializable
 		public float Range;
 		public float Lifetime;
 		public float Weight;
+		public float Recoil;
 		public int HitPoints;
 		[DefaultValue("")]
 		public string Color;

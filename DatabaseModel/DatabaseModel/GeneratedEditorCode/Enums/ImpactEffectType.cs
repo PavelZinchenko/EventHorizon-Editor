@@ -29,6 +29,9 @@ namespace EditorDatabase.Enums
 		ProgressiveDamage,
 		PushFromCenter,
 		PullToCenter,
+		Roll,
+		DamageWithFalloff,
+		PushFromCenterWithFalloff,
 		Impulse,
 	}
 }

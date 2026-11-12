@@ -20,5 +20,6 @@ namespace EditorDatabase.Enums
 		Lightning,
 		LightningStrike,
 		Sprite,
+		Laser,
 	}
 }

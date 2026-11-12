@@ -47,6 +47,7 @@ namespace DatabaseMigration.v1.Serializable
 		public ToggleState CellsExpansions;
 		[DefaultValue(0.02f)]
 		public float ColliderTolerance = 0.02f;
+		public ColliderShapeSerializable[] Collider;
 		public Vector2 EnginePosition;
 		public float EngineSize;
 		public int ShipCategory;
