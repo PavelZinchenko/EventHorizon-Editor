@@ -32,5 +32,6 @@ namespace EditorDatabase.Enums
 		Roll,
 		DamageWithFalloff,
 		PushFromCenterWithFalloff,
+		Impulse,
 	}
 }
