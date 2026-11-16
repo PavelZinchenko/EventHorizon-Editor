@@ -94,8 +94,6 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(LocalizationSettings.FileName, jsonSerializer.ToJson(LocalizationSettings));            
             if (MusicPlaylist != null)
                 storage.SaveJson(MusicPlaylist.FileName, jsonSerializer.ToJson(MusicPlaylist));            
-            if (RuinsSettings != null)
-                storage.SaveJson(RuinsSettings.FileName, jsonSerializer.ToJson(RuinsSettings));            
             if (ShipModSettings != null)
                 storage.SaveJson(ShipModSettings.FileName, jsonSerializer.ToJson(ShipModSettings));            
             if (ShipSettings != null)
@@ -376,15 +374,6 @@ namespace EditorDatabase.Storage
                     throw new DatabaseException("Duplicate MusicPlaylist file found - " + name);
                 MusicPlaylist = data;
             }
-            else if (type == ItemType.RuinsSettings)
-            {
-                var data = _serializer.FromJson<RuinsSettingsSerializable>(content);
-                data.FileName = name;
-
-				if (RuinsSettings != null)
-                    throw new DatabaseException("Duplicate RuinsSettings file found - " + name);
-                RuinsSettings = data;
-            }
             else if (type == ItemType.ShipModSettings)
             {
                 var data = _serializer.FromJson<ShipModSettingsSerializable>(content);
@@ -467,7 +456,6 @@ namespace EditorDatabase.Storage
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
 		public LocalizationSettingsSerializable LocalizationSettings { get; private set; }
 		public MusicPlaylistSerializable MusicPlaylist { get; private set; }
-		public RuinsSettingsSerializable RuinsSettings { get; private set; }
 		public ShipModSettingsSerializable ShipModSettings { get; private set; }
 		public ShipSettingsSerializable ShipSettings { get; private set; }
 		public SkillSettingsSerializable SkillSettings { get; private set; }

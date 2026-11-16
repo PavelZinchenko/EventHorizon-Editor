@@ -64,7 +64,6 @@ namespace EditorDatabase
 			_galaxySettings?.Save(_content.GalaxySettings);
 			_localizationSettings?.Save(_content.LocalizationSettings);
 			_musicPlaylist?.Save(_content.MusicPlaylist);
-			_ruinsSettings?.Save(_content.RuinsSettings);
 			_shipModSettings?.Save(_content.ShipModSettings);
 			_shipSettings?.Save(_content.ShipSettings);
 			_skillSettings?.Save(_content.SkillSettings);
@@ -179,8 +178,6 @@ namespace EditorDatabase
 				yield return LocalizationSettings;
             if (_content.MusicPlaylist != null)
 				yield return MusicPlaylist;
-            if (_content.RuinsSettings != null)
-				yield return RuinsSettings;
             if (_content.ShipModSettings != null)
 				yield return ShipModSettings;
             if (_content.ShipSettings != null)
@@ -266,7 +263,6 @@ namespace EditorDatabase
 				case ItemType.GalaxySettings: return GalaxySettings;
 				case ItemType.LocalizationSettings: return LocalizationSettings;
 				case ItemType.MusicPlaylist: return MusicPlaylist;
-				case ItemType.RuinsSettings: return RuinsSettings;
 				case ItemType.ShipModSettings: return ShipModSettings;
 				case ItemType.ShipSettings: return ShipSettings;
 				case ItemType.SkillSettings: return SkillSettings;
@@ -286,7 +282,6 @@ namespace EditorDatabase
 		public GalaxySettings GalaxySettings => _galaxySettings ?? (_galaxySettings = GalaxySettings.Create(_content.GalaxySettings, this));
 		public LocalizationSettings LocalizationSettings => _localizationSettings ?? (_localizationSettings = LocalizationSettings.Create(_content.LocalizationSettings, this));
 		public MusicPlaylist MusicPlaylist => _musicPlaylist ?? (_musicPlaylist = MusicPlaylist.Create(_content.MusicPlaylist, this));
-		public RuinsSettings RuinsSettings => _ruinsSettings ?? (_ruinsSettings = RuinsSettings.Create(_content.RuinsSettings, this));
 		public ShipModSettings ShipModSettings => _shipModSettings ?? (_shipModSettings = ShipModSettings.Create(_content.ShipModSettings, this));
 		public ShipSettings ShipSettings => _shipSettings ?? (_shipSettings = ShipSettings.Create(_content.ShipSettings, this));
 		public SkillSettings SkillSettings => _skillSettings ?? (_skillSettings = SkillSettings.Create(_content.SkillSettings, this));
@@ -659,7 +654,6 @@ namespace EditorDatabase
 			_galaxySettings = null;
 			_localizationSettings = null;
 			_musicPlaylist = null;
-			_ruinsSettings = null;
 			_shipModSettings = null;
 			_shipSettings = null;
 			_skillSettings = null;
@@ -704,7 +698,6 @@ namespace EditorDatabase
 		private GalaxySettings _galaxySettings;
 		private LocalizationSettings _localizationSettings;
 		private MusicPlaylist _musicPlaylist;
-		private RuinsSettings _ruinsSettings;
 		private ShipModSettings _shipModSettings;
 		private ShipSettings _shipSettings;
 		private SkillSettings _skillSettings;
