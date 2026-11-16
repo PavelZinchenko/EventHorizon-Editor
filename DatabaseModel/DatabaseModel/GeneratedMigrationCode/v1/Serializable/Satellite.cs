@@ -30,6 +30,7 @@ namespace DatabaseMigration.v1.Serializable
 		public SizeClass SizeClass;
 		public bool NotAvailableInBlackMarket;
 		public bool NotAvailableInRuin;
+		public bool IgnoreRuinSizeLimit;
 		[DefaultValue("")]
 		public string Layout;
 		public BarrelSerializable[] Barrels;

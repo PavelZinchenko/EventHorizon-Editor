@@ -35,6 +35,7 @@ namespace EditorDatabase.DataModel
 				SizeClass = serializable.SizeClass;
 				NotAvailableInBlackMarket = serializable.NotAvailableInBlackMarket;
 				NotAvailableInRuin = serializable.NotAvailableInRuin;
+				IgnoreRuinSizeLimit = serializable.IgnoreRuinSizeLimit;
 				Layout = new Layout(serializable.Layout);
 				Barrels = serializable.Barrels?.Select(item => Barrel.Create(item, database)).ToArray();
 			}
@@ -53,6 +54,7 @@ namespace EditorDatabase.DataModel
 			serializable.SizeClass = SizeClass;
 			serializable.NotAvailableInBlackMarket = NotAvailableInBlackMarket;
 			serializable.NotAvailableInRuin = NotAvailableInRuin;
+			serializable.IgnoreRuinSizeLimit = IgnoreRuinSizeLimit;
 			serializable.Layout = Layout.Data;
 			if (Barrels == null || Barrels.Length == 0)
 			    serializable.Barrels = null;
@@ -69,6 +71,7 @@ namespace EditorDatabase.DataModel
 		public SizeClass SizeClass;
 		public bool NotAvailableInBlackMarket;
 		public bool NotAvailableInRuin;
+		public bool IgnoreRuinSizeLimit;
 		public Layout Layout;
 		public Barrel[] Barrels;
 
