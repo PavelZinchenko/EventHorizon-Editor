@@ -33,6 +33,9 @@ namespace EditorDatabase.DataModel
 				ModelImage = serializable.ModelImage;
 				ModelScale = new NumericValue<float>(serializable.ModelScale, 0.1f, 100f);
 				SizeClass = serializable.SizeClass;
+				NotAvailableInBlackMarket = serializable.NotAvailableInBlackMarket;
+				NotAvailableInRuin = serializable.NotAvailableInRuin;
+				IgnoreRuinSizeLimit = serializable.IgnoreRuinSizeLimit;
 				Layout = new Layout(serializable.Layout);
 				Barrels = serializable.Barrels?.Select(item => Barrel.Create(item, database)).ToArray();
 			}
@@ -49,6 +52,9 @@ namespace EditorDatabase.DataModel
 			serializable.ModelImage = ModelImage;
 			serializable.ModelScale = ModelScale.Value;
 			serializable.SizeClass = SizeClass;
+			serializable.NotAvailableInBlackMarket = NotAvailableInBlackMarket;
+			serializable.NotAvailableInRuin = NotAvailableInRuin;
+			serializable.IgnoreRuinSizeLimit = IgnoreRuinSizeLimit;
 			serializable.Layout = Layout.Data;
 			if (Barrels == null || Barrels.Length == 0)
 			    serializable.Barrels = null;
@@ -63,6 +69,9 @@ namespace EditorDatabase.DataModel
 		public string ModelImage;
 		public NumericValue<float> ModelScale = new NumericValue<float>(0, 0.1f, 100f);
 		public SizeClass SizeClass;
+		public bool NotAvailableInBlackMarket;
+		public bool NotAvailableInRuin;
+		public bool IgnoreRuinSizeLimit;
 		public Layout Layout;
 		public Barrel[] Barrels;
 
