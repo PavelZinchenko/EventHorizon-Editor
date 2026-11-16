@@ -78,8 +78,6 @@ namespace EditorDatabase.Storage
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
             foreach (var item in _weaponMap.Values)
                 storage.SaveJson(item.FileName, jsonSerializer.ToJson(item));
-            if (BlackMarketSettings != null)
-                storage.SaveJson(BlackMarketSettings.FileName, jsonSerializer.ToJson(BlackMarketSettings));            
             if (CombatSettings != null)
                 storage.SaveJson(CombatSettings.FileName, jsonSerializer.ToJson(CombatSettings));            
             if (DatabaseSettings != null)
@@ -306,15 +304,6 @@ namespace EditorDatabase.Storage
                 data.FileName = name;
                 _weaponMap.Add(data.Id, data);
             }
-            else if (type == ItemType.BlackMarketSettings)
-            {
-                var data = _serializer.FromJson<BlackMarketSettingsSerializable>(content);
-                data.FileName = name;
-
-				if (BlackMarketSettings != null)
-                    throw new DatabaseException("Duplicate BlackMarketSettings file found - " + name);
-                BlackMarketSettings = data;
-            }
             else if (type == ItemType.CombatSettings)
             {
                 var data = _serializer.FromJson<CombatSettingsSerializable>(content);
@@ -470,7 +459,6 @@ namespace EditorDatabase.Storage
         {
             _audioClips.Add(name, audioClip);
         }
-		public BlackMarketSettingsSerializable BlackMarketSettings { get; private set; }
 		public CombatSettingsSerializable CombatSettings { get; private set; }
 		public DatabaseSettingsSerializable DatabaseSettings { get; private set; }
 		public DebugSettingsSerializable DebugSettings { get; private set; }

@@ -56,7 +56,6 @@ namespace EditorDatabase
             foreach (var item in _bulletPrefabMap) item.Value.Save(_content.GetBulletPrefab(item.Key));
             foreach (var item in _visualEffectMap) item.Value.Save(_content.GetVisualEffect(item.Key));
             foreach (var item in _weaponMap) item.Value.Save(_content.GetWeapon(item.Key));
-			_blackMarketSettings?.Save(_content.BlackMarketSettings);
 			_combatSettings?.Save(_content.CombatSettings);
 			_databaseSettings?.Save(_content.DatabaseSettings);
 			_debugSettings?.Save(_content.DebugSettings);
@@ -164,8 +163,6 @@ namespace EditorDatabase
                 yield return GetVisualEffect(item.Id);
             foreach (var item in _content.WeaponList)
                 yield return GetWeapon(item.Id);
-            if (_content.BlackMarketSettings != null)
-				yield return BlackMarketSettings;
             if (_content.CombatSettings != null)
 				yield return CombatSettings;
             if (_content.DatabaseSettings != null)
@@ -261,7 +258,6 @@ namespace EditorDatabase
 				case ItemType.BulletPrefab: return GetBulletPrefab(id);
 				case ItemType.VisualEffect: return GetVisualEffect(id);
 				case ItemType.Weapon: return GetWeapon(id);
-				case ItemType.BlackMarketSettings: return BlackMarketSettings;
 				case ItemType.CombatSettings: return CombatSettings;
 				case ItemType.DatabaseSettings: return DatabaseSettings;
 				case ItemType.DebugSettings: return DebugSettings;
@@ -282,7 +278,6 @@ namespace EditorDatabase
         }
 
 
-		public BlackMarketSettings BlackMarketSettings => _blackMarketSettings ?? (_blackMarketSettings = BlackMarketSettings.Create(_content.BlackMarketSettings, this));
 		public CombatSettings CombatSettings => _combatSettings ?? (_combatSettings = CombatSettings.Create(_content.CombatSettings, this));
 		public DatabaseSettings DatabaseSettings => _databaseSettings ?? (_databaseSettings = DatabaseSettings.Create(_content.DatabaseSettings, this));
 		public DebugSettings DebugSettings => _debugSettings ?? (_debugSettings = DebugSettings.Create(_content.DebugSettings, this));
@@ -656,7 +651,6 @@ namespace EditorDatabase
 			_visualEffectMap.Clear();
 			_weaponMap.Clear();
 
-			_blackMarketSettings = null;
 			_combatSettings = null;
 			_databaseSettings = null;
 			_debugSettings = null;
@@ -702,7 +696,6 @@ namespace EditorDatabase
 		private readonly Dictionary<int, VisualEffect> _visualEffectMap = new Dictionary<int, VisualEffect>();
 		private readonly Dictionary<int, Weapon> _weaponMap = new Dictionary<int, Weapon>();
 
-		private BlackMarketSettings _blackMarketSettings;
 		private CombatSettings _combatSettings;
 		private DatabaseSettings _databaseSettings;
 		private DebugSettings _debugSettings;

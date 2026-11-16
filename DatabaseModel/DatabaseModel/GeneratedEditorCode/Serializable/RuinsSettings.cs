@@ -16,7 +16,6 @@ namespace EditorDatabase.Serializable
 	[Serializable]
 	public class RuinsSettingsSerializable : SerializableItem
 	{
-		public int[] ExcludedSatellites;
 		[DefaultValue("MAX(6, FLOOR(level/2))")]
 		public string MaxSatelliteCells = "MAX(6, FLOOR(level/2))";
 	}
