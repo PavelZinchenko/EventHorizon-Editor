@@ -40,6 +40,7 @@ namespace EditorDatabase.DataModel
 			OffensiveMercenaryAI = database.GetBehaviorTreeId(serializable.OffensiveMercenaryAI);
 			ProvocatorAssistantAI = database.GetBehaviorTreeId(serializable.ProvocatorAssistantAI);
 			DefaultCombatRules = database.GetCombatRulesId(serializable.DefaultCombatRules);
+			UseNewCombatSimulator = serializable.UseNewCombatSimulator;
 			OnDataDeserialized(serializable, database);
 		}
 
@@ -59,6 +60,7 @@ namespace EditorDatabase.DataModel
 			serializable.OffensiveMercenaryAI = OffensiveMercenaryAI.Value;
 			serializable.ProvocatorAssistantAI = ProvocatorAssistantAI.Value;
 			serializable.DefaultCombatRules = DefaultCombatRules.Value;
+			serializable.UseNewCombatSimulator = UseNewCombatSimulator;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -76,6 +78,7 @@ namespace EditorDatabase.DataModel
 		public ItemId<BehaviorTreeModel> OffensiveMercenaryAI = ItemId<BehaviorTreeModel>.Empty;
 		public ItemId<BehaviorTreeModel> ProvocatorAssistantAI = ItemId<BehaviorTreeModel>.Empty;
 		public ItemId<CombatRules> DefaultCombatRules = ItemId<CombatRules>.Empty;
+		public bool UseNewCombatSimulator;
 
 		public static CombatSettings DefaultValue { get; private set; }
 	}

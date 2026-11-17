@@ -30,5 +30,6 @@ namespace EditorDatabase.Serializable
 		public int OffensiveMercenaryAI;
 		public int ProvocatorAssistantAI;
 		public int DefaultCombatRules;
+		public bool UseNewCombatSimulator;
 	}
 }

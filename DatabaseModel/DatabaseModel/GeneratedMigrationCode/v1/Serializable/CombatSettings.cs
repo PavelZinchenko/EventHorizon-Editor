@@ -36,5 +36,6 @@ namespace DatabaseMigration.v1.Serializable
 		public int OffensiveMercenaryAI;
 		public int ProvocatorAssistantAI;
 		public int DefaultCombatRules;
+		public bool UseNewCombatSimulator;
 	}
 }
