@@ -152,6 +152,8 @@ namespace EditorDatabase.DataModel
 					return new BehaviorTreeNodeEmptyContent();
 				case BehaviorNodeType.FindDamagedAlly:
 					return new BehaviorTreeNode_FindDamagedAlly();
+				case BehaviorNodeType.KeepAoeActive:
+					return new BehaviorTreeNodeEmptyContent();
 				case BehaviorNodeType.EnginePropulsionForce:
 					return new BehaviorTreeNode_EnginePropulsionForce();
 				case BehaviorNodeType.MotherShipRetreated:

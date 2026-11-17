@@ -17,7 +17,6 @@ namespace DatabaseMigration.v1.Serializable
 	public class LootItemSerializable
 	{
 		public float Weight;
-		public RequirementSerializable Requirement;
 		public LootContentSerializable Loot;
 	}
 }

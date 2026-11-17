@@ -41,6 +41,7 @@ namespace EditorDatabase.Enums
 		FrontierLevel = 33,
 		FrontierCommonLevel = 34,
 		ComponentGroupTag = 35,
+		FrontierPredefinedLevel = 36,
 		ShipSettings = 100,
 		GalaxySettings = 101,
 		DatabaseSettings = 102,
@@ -60,7 +61,5 @@ namespace EditorDatabase.Enums
 		FrontierLevelSettings = 116,
 		LocalizationSettings = 117,
 		WeaponSlots = 118,
-		BlackMarketSettings = 119,
-		RuinsSettings = 120,
 	}
 }

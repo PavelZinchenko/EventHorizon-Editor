@@ -46,36 +46,6 @@ namespace DatabaseMigration.v1.Storage
                 data.FileName = name;
                 AmmunitionObsoleteList.Add(data);
             }
-            else if (type == ItemType.Component)
-            {
-                var data = _serializer.FromJson<ComponentSerializable>(content);
-                data.FileName = name;
-                ComponentList.Add(data);
-            }
-            else if (type == ItemType.ComponentGroupTag)
-            {
-                var data = _serializer.FromJson<ComponentGroupTagSerializable>(content);
-                data.FileName = name;
-                ComponentGroupTagList.Add(data);
-            }
-            else if (type == ItemType.ComponentMod)
-            {
-                var data = _serializer.FromJson<ComponentModSerializable>(content);
-                data.FileName = name;
-                ComponentModList.Add(data);
-            }
-            else if (type == ItemType.ComponentStats)
-            {
-                var data = _serializer.FromJson<ComponentStatsSerializable>(content);
-                data.FileName = name;
-                ComponentStatsList.Add(data);
-            }
-            else if (type == ItemType.ComponentStatUpgrade)
-            {
-                var data = _serializer.FromJson<ComponentStatUpgradeSerializable>(content);
-                data.FileName = name;
-                ComponentStatUpgradeList.Add(data);
-            }
             else if (type == ItemType.Device)
             {
                 var data = _serializer.FromJson<DeviceSerializable>(content);
@@ -112,23 +82,11 @@ namespace DatabaseMigration.v1.Storage
                 data.FileName = name;
                 SatelliteBuildList.Add(data);
             }
-            else if (type == ItemType.Ship)
+            else if (type == ItemType.Skill)
             {
-                var data = _serializer.FromJson<ShipSerializable>(content);
+                var data = _serializer.FromJson<SkillSerializable>(content);
                 data.FileName = name;
-                ShipList.Add(data);
-            }
-            else if (type == ItemType.ShipBuild)
-            {
-                var data = _serializer.FromJson<ShipBuildSerializable>(content);
-                data.FileName = name;
-                ShipBuildList.Add(data);
-            }
-            else if (type == ItemType.StatUpgradeTemplate)
-            {
-                var data = _serializer.FromJson<StatUpgradeTemplateSerializable>(content);
-                data.FileName = name;
-                StatUpgradeTemplateList.Add(data);
+                SkillList.Add(data);
             }
             else if (type == ItemType.Technology)
             {
@@ -141,6 +99,60 @@ namespace DatabaseMigration.v1.Storage
                 var data = _serializer.FromJson<BehaviorTreeSerializable>(content);
                 data.FileName = name;
                 BehaviorTreeList.Add(data);
+            }
+            else if (type == ItemType.Component)
+            {
+                var data = _serializer.FromJson<ComponentSerializable>(content);
+                data.FileName = name;
+                ComponentList.Add(data);
+            }
+            else if (type == ItemType.ComponentGroupTag)
+            {
+                var data = _serializer.FromJson<ComponentGroupTagSerializable>(content);
+                data.FileName = name;
+                ComponentGroupTagList.Add(data);
+            }
+            else if (type == ItemType.ComponentMod)
+            {
+                var data = _serializer.FromJson<ComponentModSerializable>(content);
+                data.FileName = name;
+                ComponentModList.Add(data);
+            }
+            else if (type == ItemType.ComponentStats)
+            {
+                var data = _serializer.FromJson<ComponentStatsSerializable>(content);
+                data.FileName = name;
+                ComponentStatsList.Add(data);
+            }
+            else if (type == ItemType.ComponentStatUpgrade)
+            {
+                var data = _serializer.FromJson<ComponentStatUpgradeSerializable>(content);
+                data.FileName = name;
+                ComponentStatUpgradeList.Add(data);
+            }
+            else if (type == ItemType.StatUpgradeTemplate)
+            {
+                var data = _serializer.FromJson<StatUpgradeTemplateSerializable>(content);
+                data.FileName = name;
+                StatUpgradeTemplateList.Add(data);
+            }
+            else if (type == ItemType.FrontierCommonLevel)
+            {
+                var data = _serializer.FromJson<FrontierCommonLevelSerializable>(content);
+                data.FileName = name;
+                FrontierCommonLevelList.Add(data);
+            }
+            else if (type == ItemType.FrontierLevel)
+            {
+                var data = _serializer.FromJson<FrontierLevelSerializable>(content);
+                data.FileName = name;
+                FrontierLevelList.Add(data);
+            }
+            else if (type == ItemType.FrontierPredefinedLevel)
+            {
+                var data = _serializer.FromJson<FrontierPredefinedLevelSerializable>(content);
+                data.FileName = name;
+                FrontierPredefinedLevelList.Add(data);
             }
             else if (type == ItemType.Character)
             {
@@ -178,6 +190,18 @@ namespace DatabaseMigration.v1.Storage
                 data.FileName = name;
                 QuestItemList.Add(data);
             }
+            else if (type == ItemType.Ship)
+            {
+                var data = _serializer.FromJson<ShipSerializable>(content);
+                data.FileName = name;
+                ShipList.Add(data);
+            }
+            else if (type == ItemType.ShipBuild)
+            {
+                var data = _serializer.FromJson<ShipBuildSerializable>(content);
+                data.FileName = name;
+                ShipBuildList.Add(data);
+            }
             else if (type == ItemType.Ammunition)
             {
                 var data = _serializer.FromJson<AmmunitionSerializable>(content);
@@ -201,12 +225,6 @@ namespace DatabaseMigration.v1.Storage
                 var data = _serializer.FromJson<WeaponSerializable>(content);
                 data.FileName = name;
                 WeaponList.Add(data);
-            }
-            else if (type == ItemType.BlackMarketSettings)
-            {
-                var data = _serializer.FromJson<BlackMarketSettingsSerializable>(content);
-                data.FileName = name;
-                BlackMarketSettings = data;
             }
             else if (type == ItemType.CombatSettings)
             {
@@ -238,6 +256,24 @@ namespace DatabaseMigration.v1.Storage
                 data.FileName = name;
                 FactionsSettings = data;
             }
+            else if (type == ItemType.FrontierLevelSettings)
+            {
+                var data = _serializer.FromJson<FrontierLevelSettingsSerializable>(content);
+                data.FileName = name;
+                FrontierLevelSettings = data;
+            }
+            else if (type == ItemType.FrontierNpcSettings)
+            {
+                var data = _serializer.FromJson<FrontierNpcSettingsSerializable>(content);
+                data.FileName = name;
+                FrontierNpcSettings = data;
+            }
+            else if (type == ItemType.FrontierSettings)
+            {
+                var data = _serializer.FromJson<FrontierSettingsSerializable>(content);
+                data.FileName = name;
+                FrontierSettings = data;
+            }
             else if (type == ItemType.GalaxySettings)
             {
                 var data = _serializer.FromJson<GalaxySettingsSerializable>(content);
@@ -250,17 +286,17 @@ namespace DatabaseMigration.v1.Storage
                 data.FileName = name;
                 LocalizationSettings = data;
             }
-            else if (type == ItemType.MusicPlaylist)
+            else if (type == ItemType.PvpSettings)
             {
-                var data = _serializer.FromJson<MusicPlaylistSerializable>(content);
+                var data = _serializer.FromJson<PvpSettingsSerializable>(content);
                 data.FileName = name;
-                MusicPlaylist = data;
+                PvpSettings = data;
             }
-            else if (type == ItemType.RuinsSettings)
+            else if (type == ItemType.ResearchSetting)
             {
-                var data = _serializer.FromJson<RuinsSettingsSerializable>(content);
+                var data = _serializer.FromJson<ResearchSettingSerializable>(content);
                 data.FileName = name;
-                RuinsSettings = data;
+                ResearchSetting = data;
             }
             else if (type == ItemType.ShipModSettings)
             {
@@ -308,16 +344,6 @@ namespace DatabaseMigration.v1.Storage
         {
             foreach (var item in AmmunitionObsoleteList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
-            foreach (var item in ComponentList)
-                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
-            foreach (var item in ComponentGroupTagList)
-                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
-            foreach (var item in ComponentModList)
-                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
-            foreach (var item in ComponentStatsList)
-                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
-            foreach (var item in ComponentStatUpgradeList)
-                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in DeviceList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in DroneBayList)
@@ -330,15 +356,29 @@ namespace DatabaseMigration.v1.Storage
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in SatelliteBuildList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
-            foreach (var item in ShipList)
-                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
-            foreach (var item in ShipBuildList)
-                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
-            foreach (var item in StatUpgradeTemplateList)
+            foreach (var item in SkillList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in TechnologyList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in BehaviorTreeList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in ComponentList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in ComponentGroupTagList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in ComponentModList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in ComponentStatsList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in ComponentStatUpgradeList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in StatUpgradeTemplateList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in FrontierCommonLevelList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in FrontierLevelList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in FrontierPredefinedLevelList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in CharacterList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
@@ -352,6 +392,10 @@ namespace DatabaseMigration.v1.Storage
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in QuestItemList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in ShipList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
+            foreach (var item in ShipBuildList)
+                contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in AmmunitionList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in BulletPrefabList)
@@ -360,8 +404,6 @@ namespace DatabaseMigration.v1.Storage
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
             foreach (var item in WeaponList)
                 contentLoader.LoadJson(item.FileName, _serializer.ToJson(item));
-            if (BlackMarketSettings != null)
-                contentLoader.LoadJson(BlackMarketSettings.FileName, _serializer.ToJson(BlackMarketSettings));
             if (CombatSettings != null)
                 contentLoader.LoadJson(CombatSettings.FileName, _serializer.ToJson(CombatSettings));
             if (DatabaseSettings != null)
@@ -372,14 +414,20 @@ namespace DatabaseMigration.v1.Storage
                 contentLoader.LoadJson(ExplorationSettings.FileName, _serializer.ToJson(ExplorationSettings));
             if (FactionsSettings != null)
                 contentLoader.LoadJson(FactionsSettings.FileName, _serializer.ToJson(FactionsSettings));
+            if (FrontierLevelSettings != null)
+                contentLoader.LoadJson(FrontierLevelSettings.FileName, _serializer.ToJson(FrontierLevelSettings));
+            if (FrontierNpcSettings != null)
+                contentLoader.LoadJson(FrontierNpcSettings.FileName, _serializer.ToJson(FrontierNpcSettings));
+            if (FrontierSettings != null)
+                contentLoader.LoadJson(FrontierSettings.FileName, _serializer.ToJson(FrontierSettings));
             if (GalaxySettings != null)
                 contentLoader.LoadJson(GalaxySettings.FileName, _serializer.ToJson(GalaxySettings));
             if (LocalizationSettings != null)
                 contentLoader.LoadJson(LocalizationSettings.FileName, _serializer.ToJson(LocalizationSettings));
-            if (MusicPlaylist != null)
-                contentLoader.LoadJson(MusicPlaylist.FileName, _serializer.ToJson(MusicPlaylist));
-            if (RuinsSettings != null)
-                contentLoader.LoadJson(RuinsSettings.FileName, _serializer.ToJson(RuinsSettings));
+            if (PvpSettings != null)
+                contentLoader.LoadJson(PvpSettings.FileName, _serializer.ToJson(PvpSettings));
+            if (ResearchSetting != null)
+                contentLoader.LoadJson(ResearchSetting.FileName, _serializer.ToJson(ResearchSetting));
             if (ShipModSettings != null)
                 contentLoader.LoadJson(ShipModSettings.FileName, _serializer.ToJson(ShipModSettings));
             if (ShipSettings != null)
@@ -415,16 +463,18 @@ namespace DatabaseMigration.v1.Storage
             _audioClips.Add(name, audioClip);
         }
 
-		public BlackMarketSettingsSerializable BlackMarketSettings { get; private set; }
 		public CombatSettingsSerializable CombatSettings { get; private set; }
 		public DatabaseSettingsSerializable DatabaseSettings { get; private set; }
 		public DebugSettingsSerializable DebugSettings { get; private set; }
 		public ExplorationSettingsSerializable ExplorationSettings { get; private set; }
 		public FactionsSettingsSerializable FactionsSettings { get; private set; }
+		public FrontierLevelSettingsSerializable FrontierLevelSettings { get; private set; }
+		public FrontierNpcSettingsSerializable FrontierNpcSettings { get; private set; }
+		public FrontierSettingsSerializable FrontierSettings { get; private set; }
 		public GalaxySettingsSerializable GalaxySettings { get; private set; }
 		public LocalizationSettingsSerializable LocalizationSettings { get; private set; }
-		public MusicPlaylistSerializable MusicPlaylist { get; private set; }
-		public RuinsSettingsSerializable RuinsSettings { get; private set; }
+		public PvpSettingsSerializable PvpSettings { get; private set; }
+		public ResearchSettingSerializable ResearchSetting { get; private set; }
 		public ShipModSettingsSerializable ShipModSettings { get; private set; }
 		public ShipSettingsSerializable ShipSettings { get; private set; }
 		public SkillSettingsSerializable SkillSettings { get; private set; }
@@ -432,16 +482,18 @@ namespace DatabaseMigration.v1.Storage
 		public UiSettingsSerializable UiSettings { get; private set; }
 		public WeaponSlotsSerializable WeaponSlots { get; private set; }
 
-		public BlackMarketSettingsSerializable CreateBlackMarketSettings() => BlackMarketSettings ?? (BlackMarketSettings = new BlackMarketSettingsSerializable());
 		public CombatSettingsSerializable CreateCombatSettings() => CombatSettings ?? (CombatSettings = new CombatSettingsSerializable());
 		public DatabaseSettingsSerializable CreateDatabaseSettings() => DatabaseSettings ?? (DatabaseSettings = new DatabaseSettingsSerializable());
 		public DebugSettingsSerializable CreateDebugSettings() => DebugSettings ?? (DebugSettings = new DebugSettingsSerializable());
 		public ExplorationSettingsSerializable CreateExplorationSettings() => ExplorationSettings ?? (ExplorationSettings = new ExplorationSettingsSerializable());
 		public FactionsSettingsSerializable CreateFactionsSettings() => FactionsSettings ?? (FactionsSettings = new FactionsSettingsSerializable());
+		public FrontierLevelSettingsSerializable CreateFrontierLevelSettings() => FrontierLevelSettings ?? (FrontierLevelSettings = new FrontierLevelSettingsSerializable());
+		public FrontierNpcSettingsSerializable CreateFrontierNpcSettings() => FrontierNpcSettings ?? (FrontierNpcSettings = new FrontierNpcSettingsSerializable());
+		public FrontierSettingsSerializable CreateFrontierSettings() => FrontierSettings ?? (FrontierSettings = new FrontierSettingsSerializable());
 		public GalaxySettingsSerializable CreateGalaxySettings() => GalaxySettings ?? (GalaxySettings = new GalaxySettingsSerializable());
 		public LocalizationSettingsSerializable CreateLocalizationSettings() => LocalizationSettings ?? (LocalizationSettings = new LocalizationSettingsSerializable());
-		public MusicPlaylistSerializable CreateMusicPlaylist() => MusicPlaylist ?? (MusicPlaylist = new MusicPlaylistSerializable());
-		public RuinsSettingsSerializable CreateRuinsSettings() => RuinsSettings ?? (RuinsSettings = new RuinsSettingsSerializable());
+		public PvpSettingsSerializable CreatePvpSettings() => PvpSettings ?? (PvpSettings = new PvpSettingsSerializable());
+		public ResearchSettingSerializable CreateResearchSetting() => ResearchSetting ?? (ResearchSetting = new ResearchSettingSerializable());
 		public ShipModSettingsSerializable CreateShipModSettings() => ShipModSettings ?? (ShipModSettings = new ShipModSettingsSerializable());
 		public ShipSettingsSerializable CreateShipSettings() => ShipSettings ?? (ShipSettings = new ShipSettingsSerializable());
 		public SkillSettingsSerializable CreateSkillSettings() => SkillSettings ?? (SkillSettings = new SkillSettingsSerializable());
@@ -450,28 +502,32 @@ namespace DatabaseMigration.v1.Storage
 		public WeaponSlotsSerializable CreateWeaponSlots() => WeaponSlots ?? (WeaponSlots = new WeaponSlotsSerializable());
 
 		public List<AmmunitionObsoleteSerializable> AmmunitionObsoleteList { get; } = new List<AmmunitionObsoleteSerializable>();
-		public List<ComponentSerializable> ComponentList { get; } = new List<ComponentSerializable>();
-		public List<ComponentGroupTagSerializable> ComponentGroupTagList { get; } = new List<ComponentGroupTagSerializable>();
-		public List<ComponentModSerializable> ComponentModList { get; } = new List<ComponentModSerializable>();
-		public List<ComponentStatsSerializable> ComponentStatsList { get; } = new List<ComponentStatsSerializable>();
-		public List<ComponentStatUpgradeSerializable> ComponentStatUpgradeList { get; } = new List<ComponentStatUpgradeSerializable>();
 		public List<DeviceSerializable> DeviceList { get; } = new List<DeviceSerializable>();
 		public List<DroneBaySerializable> DroneBayList { get; } = new List<DroneBaySerializable>();
 		public List<FactionSerializable> FactionList { get; } = new List<FactionSerializable>();
 		public List<GameObjectPrefabSerializable> GameObjectPrefabList { get; } = new List<GameObjectPrefabSerializable>();
 		public List<SatelliteSerializable> SatelliteList { get; } = new List<SatelliteSerializable>();
 		public List<SatelliteBuildSerializable> SatelliteBuildList { get; } = new List<SatelliteBuildSerializable>();
-		public List<ShipSerializable> ShipList { get; } = new List<ShipSerializable>();
-		public List<ShipBuildSerializable> ShipBuildList { get; } = new List<ShipBuildSerializable>();
-		public List<StatUpgradeTemplateSerializable> StatUpgradeTemplateList { get; } = new List<StatUpgradeTemplateSerializable>();
+		public List<SkillSerializable> SkillList { get; } = new List<SkillSerializable>();
 		public List<TechnologySerializable> TechnologyList { get; } = new List<TechnologySerializable>();
 		public List<BehaviorTreeSerializable> BehaviorTreeList { get; } = new List<BehaviorTreeSerializable>();
+		public List<ComponentSerializable> ComponentList { get; } = new List<ComponentSerializable>();
+		public List<ComponentGroupTagSerializable> ComponentGroupTagList { get; } = new List<ComponentGroupTagSerializable>();
+		public List<ComponentModSerializable> ComponentModList { get; } = new List<ComponentModSerializable>();
+		public List<ComponentStatsSerializable> ComponentStatsList { get; } = new List<ComponentStatsSerializable>();
+		public List<ComponentStatUpgradeSerializable> ComponentStatUpgradeList { get; } = new List<ComponentStatUpgradeSerializable>();
+		public List<StatUpgradeTemplateSerializable> StatUpgradeTemplateList { get; } = new List<StatUpgradeTemplateSerializable>();
+		public List<FrontierCommonLevelSerializable> FrontierCommonLevelList { get; } = new List<FrontierCommonLevelSerializable>();
+		public List<FrontierLevelSerializable> FrontierLevelList { get; } = new List<FrontierLevelSerializable>();
+		public List<FrontierPredefinedLevelSerializable> FrontierPredefinedLevelList { get; } = new List<FrontierPredefinedLevelSerializable>();
 		public List<CharacterSerializable> CharacterList { get; } = new List<CharacterSerializable>();
 		public List<CombatRulesSerializable> CombatRulesList { get; } = new List<CombatRulesSerializable>();
 		public List<FleetSerializable> FleetList { get; } = new List<FleetSerializable>();
 		public List<LootSerializable> LootList { get; } = new List<LootSerializable>();
 		public List<QuestSerializable> QuestList { get; } = new List<QuestSerializable>();
 		public List<QuestItemSerializable> QuestItemList { get; } = new List<QuestItemSerializable>();
+		public List<ShipSerializable> ShipList { get; } = new List<ShipSerializable>();
+		public List<ShipBuildSerializable> ShipBuildList { get; } = new List<ShipBuildSerializable>();
 		public List<AmmunitionSerializable> AmmunitionList { get; } = new List<AmmunitionSerializable>();
 		public List<BulletPrefabSerializable> BulletPrefabList { get; } = new List<BulletPrefabSerializable>();
 		public List<VisualEffectSerializable> VisualEffectList { get; } = new List<VisualEffectSerializable>();

@@ -42,5 +42,6 @@ namespace EditorDatabase.Serializable
 		public int DroneId;
 		public ComponentRestrictionsSerializable Restrictions;
 		public int[] PossibleModifications;
+		public int[] Upgrades;
 	}
 }

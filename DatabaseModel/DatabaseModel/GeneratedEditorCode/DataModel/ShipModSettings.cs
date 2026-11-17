@@ -28,9 +28,6 @@ namespace EditorDatabase.DataModel
 		{
 			RemoveWeaponSlotMod = serializable.RemoveWeaponSlotMod;
 			RemoveUnlimitedRespawnMod = serializable.RemoveUnlimitedRespawnMod;
-			RemoveEnergyRechargeCdMod = serializable.RemoveEnergyRechargeCdMod;
-			RemoveShieldRechargeCdMod = serializable.RemoveShieldRechargeCdMod;
-			RemoveBiggerSatellitesMod = serializable.RemoveBiggerSatellitesMod;
 			HeatDefenseValue = new NumericValue<float>(serializable.HeatDefenseValue, 0f, 10f);
 			KineticDefenseValue = new NumericValue<float>(serializable.KineticDefenseValue, 0f, 10f);
 			EnergyDefenseValue = new NumericValue<float>(serializable.EnergyDefenseValue, 0f, 10f);
@@ -47,9 +44,6 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.RemoveWeaponSlotMod = RemoveWeaponSlotMod;
 			serializable.RemoveUnlimitedRespawnMod = RemoveUnlimitedRespawnMod;
-			serializable.RemoveEnergyRechargeCdMod = RemoveEnergyRechargeCdMod;
-			serializable.RemoveShieldRechargeCdMod = RemoveShieldRechargeCdMod;
-			serializable.RemoveBiggerSatellitesMod = RemoveBiggerSatellitesMod;
 			serializable.HeatDefenseValue = HeatDefenseValue.Value;
 			serializable.KineticDefenseValue = KineticDefenseValue.Value;
 			serializable.EnergyDefenseValue = EnergyDefenseValue.Value;
@@ -64,9 +58,6 @@ namespace EditorDatabase.DataModel
 
 		public bool RemoveWeaponSlotMod;
 		public bool RemoveUnlimitedRespawnMod;
-		public bool RemoveEnergyRechargeCdMod;
-		public bool RemoveShieldRechargeCdMod;
-		public bool RemoveBiggerSatellitesMod;
 		public NumericValue<float> HeatDefenseValue = new NumericValue<float>(0, 0f, 10f);
 		public NumericValue<float> KineticDefenseValue = new NumericValue<float>(0, 0f, 10f);
 		public NumericValue<float> EnergyDefenseValue = new NumericValue<float>(0, 0f, 10f);

@@ -30,24 +30,23 @@ namespace EditorDatabase.DataModel
 			{
 				Id = new ItemId<Ship>(serializable.Id, serializable.FileName);
 				ShipType = serializable.ShipType;
+				WayToGetShip = serializable.WayToGetShip;
 				ShipRarity = serializable.ShipRarity;
 				SizeClass = serializable.SizeClass;
 				Name = serializable.Name;
-				Description = serializable.Description;
 				Faction = database.GetFactionId(serializable.Faction);
 				IconImage = serializable.IconImage;
 				IconScale = new NumericValue<float>(serializable.IconScale, 0.1f, 100f);
 				ModelImage = serializable.ModelImage;
-				ModelScale = new NumericValue<float>(serializable.ModelScale, 0.1f, 500f);
+				ModelScale = new NumericValue<float>(serializable.ModelScale, 0.1f, 100f);
 				EngineColor = Helpers.ColorFromString(serializable.EngineColor);
 				Engines = serializable.Engines?.Select(item => Engine.Create(item, database)).ToArray();
 				Layout = new Layout(serializable.Layout);
 				Barrels = serializable.Barrels?.Select(item => Barrel.Create(item, database)).ToArray();
 				Features.Value = DataModel.ShipFeatures.Create(serializable.Features, database);
 				VisualEffects.Value = DataModel.ShipVisualEffects.Create(serializable.VisualEffects, database);
-				CellsExpansions = serializable.CellsExpansions;
+				Satellites = serializable.Satellites?.Select(item => SatelliteMountPoint.Create(item, database)).ToArray();
 				ColliderTolerance = new NumericValue<float>(serializable.ColliderTolerance, 0f, 1f);
-				Collider = serializable.Collider?.Select(item => ColliderShape.Create(item, database)).ToArray();
 			}
 			catch (DatabaseException e)
 			{
@@ -59,10 +58,10 @@ namespace EditorDatabase.DataModel
 		public void Save(ShipSerializable serializable)
 		{
 			serializable.ShipType = ShipType;
+			serializable.WayToGetShip = WayToGetShip;
 			serializable.ShipRarity = ShipRarity;
 			serializable.SizeClass = SizeClass;
 			serializable.Name = Name;
-			serializable.Description = Description;
 			serializable.Faction = Faction.Value;
 			serializable.IconImage = IconImage;
 			serializable.IconScale = IconScale.Value;
@@ -80,36 +79,34 @@ namespace EditorDatabase.DataModel
 			    serializable.Barrels = Barrels.Select(item => item.Serialize()).ToArray();
 			serializable.Features = Features.Value?.Serialize();
 			serializable.VisualEffects = VisualEffects.Value?.Serialize();
-			serializable.CellsExpansions = CellsExpansions;
-			serializable.ColliderTolerance = ColliderTolerance.Value;
-			if (Collider == null || Collider.Length == 0)
-			    serializable.Collider = null;
+			if (Satellites == null || Satellites.Length == 0)
+			    serializable.Satellites = null;
 			else
-			    serializable.Collider = Collider.Select(item => item.Serialize()).ToArray();
+			    serializable.Satellites = Satellites.Select(item => item.Serialize()).ToArray();
+			serializable.ColliderTolerance = ColliderTolerance.Value;
 			OnDataSerialized(ref serializable);
 		}
 
 		public readonly ItemId<Ship> Id;
 
 		public ShipType ShipType;
+		public WayToGetShip WayToGetShip;
 		public ShipRarity ShipRarity;
 		public SizeClass SizeClass;
 		public string Name;
-		public string Description;
 		public ItemId<Faction> Faction = ItemId<Faction>.Empty;
 		public string IconImage;
 		public NumericValue<float> IconScale = new NumericValue<float>(0, 0.1f, 100f);
 		public string ModelImage;
-		public NumericValue<float> ModelScale = new NumericValue<float>(0, 0.1f, 500f);
+		public NumericValue<float> ModelScale = new NumericValue<float>(0, 0.1f, 100f);
 		public System.Drawing.Color EngineColor;
 		public Engine[] Engines;
 		public Layout Layout;
 		public Barrel[] Barrels;
 		public ObjectWrapper<ShipFeatures> Features = new(DataModel.ShipFeatures.DefaultValue);
 		public ObjectWrapper<ShipVisualEffects> VisualEffects = new(DataModel.ShipVisualEffects.DefaultValue);
-		public ToggleState CellsExpansions;
+		public SatelliteMountPoint[] Satellites;
 		public NumericValue<float> ColliderTolerance = new NumericValue<float>(0, 0f, 1f);
-		public ColliderShape[] Collider;
 
 		public static Ship DefaultValue { get; private set; }
 	}

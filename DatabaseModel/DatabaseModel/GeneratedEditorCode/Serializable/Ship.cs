@@ -17,12 +17,11 @@ namespace EditorDatabase.Serializable
 	public class ShipSerializable : SerializableItem
 	{
 		public ShipType ShipType;
+		public WayToGetShip WayToGetShip;
 		public ShipRarity ShipRarity;
 		public SizeClass SizeClass;
 		[DefaultValue("")]
 		public string Name;
-		[DefaultValue("")]
-		public string Description;
 		public int Faction;
 		[DefaultValue("")]
 		public string IconImage;
@@ -38,10 +37,9 @@ namespace EditorDatabase.Serializable
 		public BarrelSerializable[] Barrels;
 		public ShipFeaturesSerializable Features;
 		public ShipVisualEffectsSerializable VisualEffects;
-		public ToggleState CellsExpansions;
+		public SatelliteMountPointSerializable[] Satellites;
 		[DefaultValue(0.02f)]
 		public float ColliderTolerance = 0.02f;
-		public ColliderShapeSerializable[] Collider;
 		public Vector2 EnginePosition;
 		public float EngineSize;
 		public int ShipCategory;

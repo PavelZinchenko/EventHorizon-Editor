@@ -32,27 +32,27 @@ namespace Analyzer.Analyzer
                 return Enumerable.Repeat(e.Message + "\n" + e.InnerException?.Message, 1);
             }
 
-            return list.SelectMany(item => LookForDeadLinks(item)).Concat(LookForFrontalShieldFallbacks()).Append("done");
+            return list.SelectMany(item => LookForDeadLinks(item))/*.Concat(LookForFrontalShieldFallbacks()).Append("done")*/;
         }
 
         // The new combat simulator takes the frontal shield's shape from the first collider outline (3 or more points) of
         // its ColliderSpriteObject record. A circle, a capsule or an empty list falls back to the built-in polygon.
-        private IEnumerable<string> LookForFrontalShieldFallbacks()
-        {
-            foreach (var id in _database.GetItemList(typeof(Device)))
-            {
-                var device = _database.GetDevice(id.Value);
-                if (device.DeviceClass != DeviceClass.PartialShield || device.Prefab.IsNull) continue;
+        //private IEnumerable<string> LookForFrontalShieldFallbacks()
+        //{
+        //    foreach (var id in _database.GetItemList(typeof(Device)))
+        //    {
+        //        var device = _database.GetDevice(id.Value);
+        //        if (device.DeviceClass != DeviceClass.PartialShield || device.Prefab.IsNull) continue;
 
-                var prefab = new GameObjectPrefabSerializable();
-                _database.GetGameObjectPrefab(device.Prefab.Value).Save(prefab);
-                if (prefab.Type != ObjectPrefabType.ColliderSpriteObject) continue;
-                if (prefab.Collider?.FirstOrDefault(shape => shape.Points?.Length >= 3) != null) continue;
+        //        var prefab = new GameObjectPrefabSerializable();
+        //        _database.GetGameObjectPrefab(device.Prefab.Value).Save(prefab);
+        //        if (prefab.Type != ObjectPrefabType.ColliderSpriteObject) continue;
+        //        if (prefab.Collider?.FirstOrDefault(shape => shape.Points?.Length >= 3) != null) continue;
 
-                yield return $"frontal shield fallback - device {device.Id.Value} uses the built-in polygon: prefab " +
-                    $"{device.Prefab.Value} has no collider outline with 3 or more points";
-            }
-        }
+        //        yield return $"frontal shield fallback - device {device.Id.Value} uses the built-in polygon: prefab " +
+        //            $"{device.Prefab.Value} has no collider outline with 3 or more points";
+        //    }
+        //}
 
         private IEnumerable<string> LookForDeadLinks(object data, int depth = 50)
         {

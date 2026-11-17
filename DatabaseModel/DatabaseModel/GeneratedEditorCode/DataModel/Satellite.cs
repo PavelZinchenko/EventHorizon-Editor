@@ -34,7 +34,11 @@ namespace EditorDatabase.DataModel
 				ModelScale = new NumericValue<float>(serializable.ModelScale, 0.1f, 100f);
 				SizeClass = serializable.SizeClass;
 				Layout = new Layout(serializable.Layout);
+				Hidden = serializable.Hidden;
 				Barrels = serializable.Barrels?.Select(item => Barrel.Create(item, database)).ToArray();
+				Steadiness = new NumericValue<float>(serializable.Steadiness, 0.1f, 10f);
+				HitPoints = serializable.HitPoints;
+				RespawnTime = new NumericValue<int>(serializable.RespawnTime, 0, 2147483647);
 			}
 			catch (DatabaseException e)
 			{
@@ -50,10 +54,14 @@ namespace EditorDatabase.DataModel
 			serializable.ModelScale = ModelScale.Value;
 			serializable.SizeClass = SizeClass;
 			serializable.Layout = Layout.Data;
+			serializable.Hidden = Hidden;
 			if (Barrels == null || Barrels.Length == 0)
 			    serializable.Barrels = null;
 			else
 			    serializable.Barrels = Barrels.Select(item => item.Serialize()).ToArray();
+			serializable.Steadiness = Steadiness.Value;
+			serializable.HitPoints = HitPoints;
+			serializable.RespawnTime = RespawnTime.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -64,7 +72,11 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> ModelScale = new NumericValue<float>(0, 0.1f, 100f);
 		public SizeClass SizeClass;
 		public Layout Layout;
+		public bool Hidden;
 		public Barrel[] Barrels;
+		public NumericValue<float> Steadiness = new NumericValue<float>(0, 0.1f, 10f);
+		public string HitPoints;
+		public NumericValue<int> RespawnTime = new NumericValue<int>(0, 0, 2147483647);
 
 		public static Satellite DefaultValue { get; private set; }
 	}

@@ -37,10 +37,6 @@ namespace EditorDatabase.Serializable
 		public float MaxAcceleration = 300f;
 		[DefaultValue(300f)]
 		public float MaxAngularAcceleration = 300f;
-		[DefaultValue(2f)]
-		public float SatelliteModelScaleMultiplier = 2f;
-		[DefaultValue(true)]
-		public bool SatelliteRequireModelScaleWithSizeClass = true;
 		public bool DisableCellsExpansions;
 		public int ShipExplosionEffect;
 		[DefaultValue("")]

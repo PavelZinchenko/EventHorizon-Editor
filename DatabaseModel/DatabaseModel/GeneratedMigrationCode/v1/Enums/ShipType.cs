@@ -10,10 +10,11 @@ namespace DatabaseMigration.v1.Enums
 {
 	public enum ShipType
 	{
-		Common = 0,
-		Drone = 1,
-		Starbase = 2,
-		Special = 3,
-		Flagship = 4,
+		Normal,
+		Rare,
+		Hidden,
+		Special,
+		Unique,
+		Starbase,
 	}
 }

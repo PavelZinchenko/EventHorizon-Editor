@@ -122,6 +122,8 @@ namespace EditorDatabase.Enums
 		HoldHarpoon = 132,
 		[TooltipText("Looks for nearest damaged ally. Changes target every MaxCooldown sec if it's defined. SUCCESS if found, FAILURE otherwise")]
 		FindDamagedAlly = 133,
+		[TooltipText("Keep any Aura/Beam weapon active if it is activated and doesn't require additional energy. Return RUNNING if any are active, FAILURE otherwise")]
+		KeepAoeActive = 134,
 		[TooltipText("Returns SUCCESS when [forward acceleration]/[max acceleration] > MinValue")]
 		EnginePropulsionForce = 150,
 		MotherShipRetreated = 200,

@@ -21,5 +21,8 @@ namespace DatabaseMigration.v1.Enums
 		CommandPoints = 8,
 		SalvageDrones = 9,
 		Engineer = 10,
+		MercenaryAttack = 11,
+		MercenaryDefense = 12,
+		Recycler = 13,
 	}
 }

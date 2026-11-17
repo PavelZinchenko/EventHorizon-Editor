@@ -451,20 +451,20 @@ namespace EditorDatabase.DataModel
 
 		public void Load(LootContentSerializable serializable, Database database)
 		{
-			Blueprint = database.GetTechnologyId(serializable.ItemId);
-			if (Blueprint.IsNull)
-			    throw new DatabaseException(this.GetType().Name + ": Blueprint cannot be null");
+			Component = database.GetComponentId(serializable.ItemId);
+			if (Component.IsNull)
+			    throw new DatabaseException(this.GetType().Name + ": Component cannot be null");
 
 			OnDataDeserialized(serializable, database);
 		}
 
 		public void Save(ref LootContentSerializable serializable)
 		{
-			serializable.ItemId = Blueprint.Value;
+			serializable.ItemId = Component.Value;
 			OnDataSerialized(ref serializable);
 		}
 
-		public ItemId<Technology> Blueprint = ItemId<Technology>.Empty;
+		public ItemId<Component> Component = ItemId<Component>.Empty;
 	}
 
 	public partial class LootContent_ResearchPoints : ILootContentContent

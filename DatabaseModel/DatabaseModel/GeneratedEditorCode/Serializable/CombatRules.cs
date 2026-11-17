@@ -35,6 +35,5 @@ namespace EditorDatabase.Serializable
 		[DefaultValue(true)]
 		public bool NextEnemyButton = true;
 		public bool KillThemAllButton;
-		public SoundTrackSerializable[] CustomSoundtrack;
 	}
 }

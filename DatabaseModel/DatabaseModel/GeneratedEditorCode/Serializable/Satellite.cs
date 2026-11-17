@@ -22,9 +22,14 @@ namespace EditorDatabase.Serializable
 		public string ModelImage;
 		public float ModelScale;
 		public SizeClass SizeClass;
-		public bool NotAvailableInBlackMarket;
 		[DefaultValue("")]
 		public string Layout;
+		public bool Hidden;
 		public BarrelSerializable[] Barrels;
+		[DefaultValue(0.75f)]
+		public float Steadiness = 0.75f;
+		[DefaultValue("")]
+		public string HitPoints;
+		public int RespawnTime;
 	}
 }

@@ -61,7 +61,6 @@ namespace EditorDatabase.DataModel
 			Hidden = serializable.Hidden;
 			Special = serializable.Special;
 			Dependencies = serializable.Dependencies?.Select(id => new Wrapper<Technology> { Item = database.GetTechnologyId(id) }).ToArray();
-			CustomCraftingLevel = new NumericValue<int>(serializable.CustomCraftingLevel, 0, 2147483647);
 			_content = CreateContent(serializable.Type);
 			_content.Load(serializable, database);
 
@@ -72,7 +71,6 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.ItemId = 0;
 			serializable.Faction = 0;
-			serializable.DoesnPreventUnlocking = false;
 			_content.Save(ref serializable);
 			serializable.Type = Type;
 			serializable.Price = Price.Value;
@@ -82,7 +80,6 @@ namespace EditorDatabase.DataModel
 			    serializable.Dependencies = null;
 			else
 			    serializable.Dependencies = Dependencies.Select(wrapper => wrapper.Item.Value).ToArray();
-			serializable.CustomCraftingLevel = CustomCraftingLevel.Value;
 			OnDataSerialized(ref serializable);
 		}
 
@@ -100,7 +97,6 @@ namespace EditorDatabase.DataModel
 				yield return new Property(this, type.GetField("Hidden"), DataChangedEvent);
 				yield return new Property(this, type.GetField("Special"), DataChangedEvent);
 				yield return new Property(this, type.GetField("Dependencies"), DataChangedEvent);
-				yield return new Property(this, type.GetField("CustomCraftingLevel"), DataChangedEvent);
 
 				foreach (var item in _content.GetType().GetFields().Where(f => f.IsPublic && !f.IsStatic))
 					yield return new Property(_content, item, DataChangedEvent);
@@ -122,7 +118,6 @@ namespace EditorDatabase.DataModel
 		public bool Hidden;
 		public bool Special;
 		public Wrapper<Technology>[] Dependencies;
-		public NumericValue<int> CustomCraftingLevel = new NumericValue<int>(0, 0, 2147483647);
 
 		public static Technology DefaultValue { get; private set; }
 	}
@@ -144,7 +139,6 @@ namespace EditorDatabase.DataModel
 			if (Component.IsNull)
 			    throw new DatabaseException(this.GetType().Name + " (" + serializable.Id + "): Component cannot be null");
 			Faction = database.GetFactionId(serializable.Faction);
-			DoesnPreventUnlocking = serializable.DoesnPreventUnlocking;
 
 			OnDataDeserialized(serializable, database);
 		}
@@ -153,14 +147,11 @@ namespace EditorDatabase.DataModel
 		{
 			serializable.ItemId = Component.Value;
 			serializable.Faction = Faction.Value;
-			serializable.DoesnPreventUnlocking = DoesnPreventUnlocking;
 			OnDataSerialized(ref serializable);
 		}
 
 		public ItemId<Component> Component = ItemId<Component>.Empty;
 		public ItemId<Faction> Faction = ItemId<Faction>.Empty;
-		[TooltipText("If this flag is set, locked components on ships can be unlocked even if the technology has not yet been researched.")]
-		public bool DoesnPreventUnlocking;
 	}
 
 	public partial class Technology_Ship : ITechnologyContent

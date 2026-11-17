@@ -28,8 +28,6 @@ namespace DatabaseMigration.v1.Serializable
 		public int Price;
 		public bool Hidden;
 		public bool Special;
-		public bool DoesnPreventUnlocking;
 		public int[] Dependencies;
-		public int CustomCraftingLevel;
 	}
 }

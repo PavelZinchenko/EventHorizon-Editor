@@ -41,8 +41,7 @@ namespace EditorDatabase.DataModel
 				Perks.Value = DataModel.ShipBuildPerks.Create(serializable.Perks, database);
 				ExtendedLayout = serializable.ExtendedLayout;
 				RandomColor = serializable.RandomColor;
-				LeftSatelliteBuild = database.GetSatelliteBuildId(serializable.LeftSatelliteBuild);
-				RightSatelliteBuild = database.GetSatelliteBuildId(serializable.RightSatelliteBuild);
+				Satellites = serializable.Satellites?.Select(id => new Wrapper<SatelliteBuild> { Item = database.GetSatelliteBuildId(id) }).ToArray();
 			}
 			catch (DatabaseException e)
 			{
@@ -66,8 +65,10 @@ namespace EditorDatabase.DataModel
 			serializable.Perks = Perks.Value?.Serialize();
 			serializable.ExtendedLayout = ExtendedLayout;
 			serializable.RandomColor = RandomColor;
-			serializable.LeftSatelliteBuild = LeftSatelliteBuild.Value;
-			serializable.RightSatelliteBuild = RightSatelliteBuild.Value;
+			if (Satellites == null || Satellites.Length == 0)
+			    serializable.Satellites = null;
+			else
+			    serializable.Satellites = Satellites.Select(wrapper => wrapper.Item.Value).ToArray();
 			OnDataSerialized(ref serializable);
 		}
 
@@ -83,8 +84,7 @@ namespace EditorDatabase.DataModel
 		public ObjectWrapper<ShipBuildPerks> Perks = new(DataModel.ShipBuildPerks.DefaultValue);
 		public bool ExtendedLayout;
 		public bool RandomColor;
-		public ItemId<SatelliteBuild> LeftSatelliteBuild = ItemId<SatelliteBuild>.Empty;
-		public ItemId<SatelliteBuild> RightSatelliteBuild = ItemId<SatelliteBuild>.Empty;
+		public Wrapper<SatelliteBuild>[] Satellites;
 
 		public static ShipBuild DefaultValue { get; private set; }
 	}

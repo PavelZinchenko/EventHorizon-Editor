@@ -25,7 +25,6 @@ namespace DatabaseMigration.v1.Serializable
 		public float Range;
 		public float Lifetime;
 		public float Weight;
-		public float Recoil;
 		public int HitPoints;
 		[DefaultValue("")]
 		public string Color;
@@ -36,6 +35,5 @@ namespace DatabaseMigration.v1.Serializable
 		[DefaultValue(true)]
 		public bool DetonateWhenDestroyed = true;
 		public AiBulletBehavior AiBulletBehavior;
-		public BulletTypeObsolete Type;
 	}
 }

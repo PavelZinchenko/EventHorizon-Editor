@@ -21,7 +21,5 @@ namespace DatabaseMigration.v1.Serializable
 		public bool NotForMechanicShips;
 		public int MaxComponentAmount;
 		public int ComponentGroupTag;
-		[DefaultValue("")]
-		public string UniqueComponentTag;
 	}
 }

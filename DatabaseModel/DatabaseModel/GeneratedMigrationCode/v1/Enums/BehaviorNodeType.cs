@@ -71,6 +71,7 @@ namespace DatabaseMigration.v1.Enums
 		AttackTurretTargets = 131,
 		HoldHarpoon = 132,
 		FindDamagedAlly = 133,
+		KeepAoeActive = 134,
 		EnginePropulsionForce = 150,
 		MotherShipRetreated = 200,
 		MotherShipDestroyed = 201,

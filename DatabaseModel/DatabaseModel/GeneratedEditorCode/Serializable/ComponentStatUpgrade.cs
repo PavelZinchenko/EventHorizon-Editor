@@ -16,5 +16,15 @@ namespace EditorDatabase.Serializable
 	[Serializable]
 	public class ComponentStatUpgradeSerializable : SerializableItem
 	{
+		public StatUpgradeType Type;
+		[DefaultValue("")]
+		public string Name;
+		[DefaultValue("")]
+		public string Icon;
+		public StatValueType ValueType;
+		[DefaultValue("level*0.05")]
+		public string Value = "level*0.05";
+		public int Resource;
+		public int Template;
 	}
 }

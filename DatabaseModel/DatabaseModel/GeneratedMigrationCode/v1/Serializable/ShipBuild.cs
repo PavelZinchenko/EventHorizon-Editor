@@ -35,7 +35,6 @@ namespace DatabaseMigration.v1.Serializable
 		public ShipBuildPerksSerializable Perks;
 		public bool ExtendedLayout;
 		public bool RandomColor;
-		public int LeftSatelliteBuild;
-		public int RightSatelliteBuild;
+		public int[] Satellites;
 	}
 }

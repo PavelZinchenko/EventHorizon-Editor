@@ -43,7 +43,6 @@ namespace EditorDatabase.DataModel
 				DisablePlanet = serializable.DisablePlanet;
 				NextEnemyButton = serializable.NextEnemyButton;
 				KillThemAllButton = serializable.KillThemAllButton;
-				CustomSoundtrack = serializable.CustomSoundtrack?.Select(item => SoundTrack.Create(item, database)).ToArray();
 			}
 			catch (DatabaseException e)
 			{
@@ -68,10 +67,6 @@ namespace EditorDatabase.DataModel
 			serializable.DisablePlanet = DisablePlanet;
 			serializable.NextEnemyButton = NextEnemyButton;
 			serializable.KillThemAllButton = KillThemAllButton;
-			if (CustomSoundtrack == null || CustomSoundtrack.Length == 0)
-			    serializable.CustomSoundtrack = null;
-			else
-			    serializable.CustomSoundtrack = CustomSoundtrack.Select(item => item.Serialize()).ToArray();
 			OnDataSerialized(ref serializable);
 		}
 
@@ -92,7 +87,6 @@ namespace EditorDatabase.DataModel
 		public bool NextEnemyButton;
 		[TooltipText("For debug purposes")]
 		public bool KillThemAllButton;
-		public SoundTrack[] CustomSoundtrack;
 
 		public static CombatRules DefaultValue { get; private set; }
 	}

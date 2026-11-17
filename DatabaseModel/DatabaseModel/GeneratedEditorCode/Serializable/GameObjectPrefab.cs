@@ -33,6 +33,5 @@ namespace EditorDatabase.Serializable
 		public float Offset2;
 		public float Angle1;
 		public float Angle2;
-		public ColliderShapeSerializable[] Collider;
 	}
 }

@@ -24,9 +24,6 @@ namespace DatabaseMigration.v1.Serializable
 
 		public bool RemoveWeaponSlotMod;
 		public bool RemoveUnlimitedRespawnMod;
-		public bool RemoveEnergyRechargeCdMod;
-		public bool RemoveShieldRechargeCdMod;
-		public bool RemoveBiggerSatellitesMod;
 		[DefaultValue(0.5f)]
 		public float HeatDefenseValue = 0.5f;
 		[DefaultValue(0.5f)]
