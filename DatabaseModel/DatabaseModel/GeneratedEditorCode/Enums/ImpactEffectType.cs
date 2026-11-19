@@ -30,5 +30,7 @@ namespace EditorDatabase.Enums
 		PushFromCenter,
 		PullToCenter,
 		DamageWithFalloff,
+		Roll,
+		PushFromCenterWithFalloff,
 	}
 }

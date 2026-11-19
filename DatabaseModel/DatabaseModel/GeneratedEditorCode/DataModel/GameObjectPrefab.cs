@@ -38,6 +38,8 @@ namespace EditorDatabase.DataModel
 					return new GameObjectPrefab_CircularSpriteObject();
 				case ObjectPrefabType.CircularOutlineObject:
 					return new GameObjectPrefab_CircularOutlineObject();
+				case ObjectPrefabType.ColliderSpriteObject:
+					return new GameObjectPrefab_ColliderSpriteObject();
 				default:
 					throw new DatabaseException("GameObjectPrefab: Invalid content type - " + type);
 			}
@@ -78,6 +80,7 @@ namespace EditorDatabase.DataModel
 			serializable.Offset2 = 0f;
 			serializable.Angle1 = 0f;
 			serializable.Angle2 = 0f;
+			serializable.Collider = null;
 			_content.Save(ref serializable);
 			serializable.Type = Type;
 			OnDataSerialized(ref serializable);
@@ -217,6 +220,33 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> ImageScale = new NumericValue<float>(0, 0f, 10f);
 		public NumericValue<float> Thickness = new NumericValue<float>(0, 0f, 1f);
 		public NumericValue<float> AspectRatio = new NumericValue<float>(0, 0f, 100f);
+	}
+
+	public partial class GameObjectPrefab_ColliderSpriteObject : IGameObjectPrefabContent
+	{
+		partial void OnDataDeserialized(GameObjectPrefabSerializable serializable, Database database);
+		partial void OnDataSerialized(ref GameObjectPrefabSerializable serializable);
+
+		public void Load(GameObjectPrefabSerializable serializable, Database database)
+		{
+			Image = serializable.Image1;
+			Collider = serializable.Collider?.Select(item => ColliderShape.Create(item, database)).ToArray();
+
+			OnDataDeserialized(serializable, database);
+		}
+
+		public void Save(ref GameObjectPrefabSerializable serializable)
+		{
+			serializable.Image1 = Image;
+			if (Collider == null || Collider.Length == 0)
+			    serializable.Collider = null;
+			else
+			    serializable.Collider = Collider.Select(item => item.Serialize()).ToArray();
+			OnDataSerialized(ref serializable);
+		}
+
+		public string Image;
+		public ColliderShape[] Collider;
 	}
 
 }

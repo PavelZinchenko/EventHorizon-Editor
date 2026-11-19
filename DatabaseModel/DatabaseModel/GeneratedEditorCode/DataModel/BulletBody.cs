@@ -36,6 +36,7 @@ namespace EditorDatabase.DataModel
 			Range = new NumericValue<float>(serializable.Range, 0f, 1E+09f);
 			Lifetime = new NumericValue<float>(serializable.Lifetime, 0f, 1E+09f);
 			Weight = new NumericValue<float>(serializable.Weight, 0f, 1E+09f);
+			Recoil = new NumericValue<float>(serializable.Recoil, 0f, 1E+09f);
 			HitPoints = new NumericValue<int>(serializable.HitPoints, 0, 999999999);
 			Color = Helpers.ColorFromString(serializable.Color);
 			BulletPrefab = database.GetBulletPrefabId(serializable.BulletPrefab);
@@ -58,6 +59,7 @@ namespace EditorDatabase.DataModel
 			serializable.Range = Range.Value;
 			serializable.Lifetime = Lifetime.Value;
 			serializable.Weight = Weight.Value;
+			serializable.Recoil = Recoil.Value;
 			serializable.HitPoints = HitPoints.Value;
 			serializable.Color = Helpers.ColorToString(Color);
 			serializable.BulletPrefab = BulletPrefab.Value;
@@ -80,6 +82,8 @@ namespace EditorDatabase.DataModel
 		public NumericValue<float> Range = new NumericValue<float>(0, 0f, 1E+09f);
 		public NumericValue<float> Lifetime = new NumericValue<float>(0, 0f, 1E+09f);
 		public NumericValue<float> Weight = new NumericValue<float>(0, 0f, 1E+09f);
+		[TooltipText("Impulse on the parent per shot: Recoil * bullet speed relative to the parent. Not applied when attached to the parent")]
+		public NumericValue<float> Recoil = new NumericValue<float>(0, 0f, 1E+09f);
 		public NumericValue<int> HitPoints = new NumericValue<int>(0, 0, 999999999);
 		public System.Drawing.Color Color;
 		public ItemId<BulletPrefab> BulletPrefab = ItemId<BulletPrefab>.Empty;

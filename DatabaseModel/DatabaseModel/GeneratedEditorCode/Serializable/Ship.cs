@@ -40,6 +40,7 @@ namespace EditorDatabase.Serializable
 		public SatelliteMountPointSerializable[] Satellites;
 		[DefaultValue(0.02f)]
 		public float ColliderTolerance = 0.02f;
+		public ColliderShapeSerializable[] Collider;
 		public Vector2 EnginePosition;
 		public float EngineSize;
 		public int ShipCategory;
